@@ -95,8 +95,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #24: RP-213 update wiki and knowledge app (nordwind/atlas-data)",
-      "text": "Marta Riva ha aperto la pull request #24 «RP-213 update wiki and knowledge app» in nordwind/atlas-data.\n\nVisualizza: https://repohub.esempio.it/nordwind/atlas-data/pull-requests/24",
+      "subject": "[Repohub] Pull request #24: RP-213 refresh onboarding guide (fornoverde/ricettario)",
+      "text": "Marta Riva ha aperto la pull request #24 «RP-213 refresh onboarding guide» in fornoverde/ricettario.\n\nVisualizza: https://repohub.esempio.it/fornoverde/ricettario/pull-requests/24",
       "html": null,
       "messageId": "<case-servizi-1@esempio.it>",
       "references": [],
@@ -104,7 +104,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #24: RP-213 update wiki and knowledge app (nordwind/atlas-data)"
+          "[Repohub] Pull request #24: RP-213 refresh onboarding guide (fornoverde/ricettario)"
         ],
         [
           "X-Repohub-Event",
@@ -116,7 +116,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/atlas-data24",
+        "threadId": "case-servizi-pr-fornoverde/ricettario24",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -138,8 +138,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #24: RP-213 update wiki and knowledge app (nordwind/atlas-data)",
-      "text": "Davide Greco ha commentato la pull request #24 «RP-213 update wiki and knowledge app» in nordwind/atlas-data.\n\nVisualizza: https://repohub.esempio.it/nordwind/atlas-data/pull-requests/24\n\nCommento:\n> Rinominerei questa variabile.",
+      "subject": "[Repohub] Pull request #24: RP-213 refresh onboarding guide (fornoverde/ricettario)",
+      "text": "Davide Greco ha commentato la pull request #24 «RP-213 refresh onboarding guide» in fornoverde/ricettario.\n\nVisualizza: https://repohub.esempio.it/fornoverde/ricettario/pull-requests/24\n\nCommento:\n> Rinominerei questa variabile.",
       "html": null,
       "messageId": "<case-servizi-2@esempio.it>",
       "references": [],
@@ -147,7 +147,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #24: RP-213 update wiki and knowledge app (nordwind/atlas-data)"
+          "[Repohub] Pull request #24: RP-213 refresh onboarding guide (fornoverde/ricettario)"
         ],
         [
           "X-Repohub-Event",
@@ -159,7 +159,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/atlas-data24",
+        "threadId": "case-servizi-pr-fornoverde/ricettario24",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -181,8 +181,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #16: RP-199: production-list specification (nordwind/planner-platform)",
-      "text": "Davide Greco ha aperto la pull request #16 «RP-199: production-list specification» in nordwind/planner-platform.\n\nVisualizza: https://repohub.esempio.it/nordwind/planner-platform/pull-requests/16",
+      "subject": "[Repohub] Pull request #16: RP-199: opening-hours specification (fornoverde/turni)",
+      "text": "Davide Greco ha aperto la pull request #16 «RP-199: opening-hours specification» in fornoverde/turni.\n\nVisualizza: https://repohub.esempio.it/fornoverde/turni/pull-requests/16",
       "html": null,
       "messageId": "<case-servizi-4@esempio.it>",
       "references": [],
@@ -190,7 +190,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #16: RP-199: production-list specification (nordwind/planner-platform)"
+          "[Repohub] Pull request #16: RP-199: opening-hours specification (fornoverde/turni)"
         ],
         [
           "X-Repohub-Event",
@@ -202,7 +202,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/planner-platform16",
+        "threadId": "case-servizi-pr-fornoverde/turni16",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -224,8 +224,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #24: RP-213 update wiki and knowledge app (nordwind/atlas-data)",
-      "text": "Sofia Ricci ha approvato la pull request #24 «RP-213 update wiki and knowledge app» in nordwind/atlas-data.\n\nVisualizza: https://repohub.esempio.it/nordwind/atlas-data/pull-requests/24",
+      "subject": "[Repohub] Pull request #24: RP-213 refresh onboarding guide (fornoverde/ricettario)",
+      "text": "Sofia Ricci ha approvato la pull request #24 «RP-213 refresh onboarding guide» in fornoverde/ricettario.\n\nVisualizza: https://repohub.esempio.it/fornoverde/ricettario/pull-requests/24",
       "html": null,
       "messageId": "<case-servizi-3@esempio.it>",
       "references": [],
@@ -233,7 +233,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #24: RP-213 update wiki and knowledge app (nordwind/atlas-data)"
+          "[Repohub] Pull request #24: RP-213 refresh onboarding guide (fornoverde/ricettario)"
         ],
         [
           "X-Repohub-Event",
@@ -245,7 +245,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/atlas-data24",
+        "threadId": "case-servizi-pr-fornoverde/ricettario24",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -267,8 +267,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #380: WS-207 data leakage v3 - STAGE 1 (rebase) (nordwind/shopfront)",
-      "text": "Sofia Ricci ha aperto la pull request #380 «WS-207 data leakage v3 - STAGE 1 (rebase)» in nordwind/shopfront.\n\nVisualizza: https://repohub.esempio.it/nordwind/shopfront/pull-requests/380",
+      "subject": "[Repohub] Pull request #380: WS-207 checkout cleanup v3 - step 1 (rebase) (fornoverde/negozio)",
+      "text": "Sofia Ricci ha aperto la pull request #380 «WS-207 checkout cleanup v3 - step 1 (rebase)» in fornoverde/negozio.\n\nVisualizza: https://repohub.esempio.it/fornoverde/negozio/pull-requests/380",
       "html": null,
       "messageId": "<case-servizi-5@esempio.it>",
       "references": [],
@@ -276,7 +276,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #380: WS-207 data leakage v3 - STAGE 1 (rebase) (nordwind/shopfront)"
+          "[Repohub] Pull request #380: WS-207 checkout cleanup v3 - step 1 (rebase) (fornoverde/negozio)"
         ],
         [
           "X-Repohub-Event",
@@ -288,7 +288,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/shopfront380",
+        "threadId": "case-servizi-pr-fornoverde/negozio380",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -349,8 +349,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #380: WS-207 data leakage v3 - STAGE 1 (rebase) (nordwind/shopfront)",
-      "text": "Luca Fontana ha commentato la pull request #380 «WS-207 data leakage v3 - STAGE 1 (rebase)» in nordwind/shopfront.\n\nVisualizza: https://repohub.esempio.it/nordwind/shopfront/pull-requests/380\n\nCommento:\n> Rinominerei questa variabile.",
+      "subject": "[Repohub] Pull request #380: WS-207 checkout cleanup v3 - step 1 (rebase) (fornoverde/negozio)",
+      "text": "Luca Fontana ha commentato la pull request #380 «WS-207 checkout cleanup v3 - step 1 (rebase)» in fornoverde/negozio.\n\nVisualizza: https://repohub.esempio.it/fornoverde/negozio/pull-requests/380\n\nCommento:\n> Rinominerei questa variabile.",
       "html": null,
       "messageId": "<case-servizi-6@esempio.it>",
       "references": [],
@@ -358,7 +358,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #380: WS-207 data leakage v3 - STAGE 1 (rebase) (nordwind/shopfront)"
+          "[Repohub] Pull request #380: WS-207 checkout cleanup v3 - step 1 (rebase) (fornoverde/negozio)"
         ],
         [
           "X-Repohub-Event",
@@ -370,7 +370,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/shopfront380",
+        "threadId": "case-servizi-pr-fornoverde/negozio380",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -435,8 +435,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #21: RP-203 research planning payload for article creation (nordwind/atlas-data)",
-      "text": "Luca Fontana ha aperto la pull request #21 «RP-203 research planning payload for article creation» in nordwind/atlas-data.\n\nVisualizza: https://repohub.esempio.it/nordwind/atlas-data/pull-requests/21",
+      "subject": "[Repohub] Pull request #21: RP-203 recipe import from spreadsheet (fornoverde/ricettario)",
+      "text": "Luca Fontana ha aperto la pull request #21 «RP-203 recipe import from spreadsheet» in fornoverde/ricettario.\n\nVisualizza: https://repohub.esempio.it/fornoverde/ricettario/pull-requests/21",
       "html": null,
       "messageId": "<case-servizi-8@esempio.it>",
       "references": [],
@@ -444,7 +444,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #21: RP-203 research planning payload for article creation (nordwind/atlas-data)"
+          "[Repohub] Pull request #21: RP-203 recipe import from spreadsheet (fornoverde/ricettario)"
         ],
         [
           "X-Repohub-Event",
@@ -456,7 +456,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/atlas-data21",
+        "threadId": "case-servizi-pr-fornoverde/ricettario21",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -469,7 +469,7 @@
       "date": "2026-09-14T10:17:00.000Z",
       "from": {
         "name": "Tracker",
-        "address": "tracker@nordwind.esempio.it"
+        "address": "tracker@fornoverde.esempio.it"
       },
       "to": [
         {
@@ -478,8 +478,8 @@
         }
       ],
       "cc": [],
-      "subject": "[TRACKER] (RP-177) Frontend: strap from engine proposals",
-      "text": "Creata da Marta Riva\n\nhttps://nordwind.tracker.esempio.it/browse/RP-177",
+      "subject": "[TRACKER] (RP-177) Frontend: menu from planner proposals",
+      "text": "Creata da Marta Riva\n\nhttps://fornoverde.tracker.esempio.it/browse/RP-177",
       "html": null,
       "messageId": "<case-servizi-29@esempio.it>",
       "references": [],
@@ -487,11 +487,11 @@
       "headers": [
         [
           "Subject",
-          "[TRACKER] (RP-177) Frontend: strap from engine proposals"
+          "[TRACKER] (RP-177) Frontend: menu from planner proposals"
         ],
         [
           "List-Unsubscribe",
-          "<https://nordwind.esempio.it/unsubscribe>"
+          "<https://fornoverde.esempio.it/unsubscribe>"
         ]
       ],
       "flags": {
@@ -521,8 +521,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #380: WS-207 data leakage v3 - STAGE 1 (rebase) (nordwind/shopfront)",
-      "text": "Marta Riva ha commentato la pull request #380 «WS-207 data leakage v3 - STAGE 1 (rebase)» in nordwind/shopfront.\n\nVisualizza: https://repohub.esempio.it/nordwind/shopfront/pull-requests/380\n\nCommento:\n> Ok per me, solo un dubbio sul nome della colonna.",
+      "subject": "[Repohub] Pull request #380: WS-207 checkout cleanup v3 - step 1 (rebase) (fornoverde/negozio)",
+      "text": "Marta Riva ha commentato la pull request #380 «WS-207 checkout cleanup v3 - step 1 (rebase)» in fornoverde/negozio.\n\nVisualizza: https://repohub.esempio.it/fornoverde/negozio/pull-requests/380\n\nCommento:\n> Ok per me, solo un dubbio sul nome della colonna.",
       "html": null,
       "messageId": "<case-servizi-7@esempio.it>",
       "references": [],
@@ -530,7 +530,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #380: WS-207 data leakage v3 - STAGE 1 (rebase) (nordwind/shopfront)"
+          "[Repohub] Pull request #380: WS-207 checkout cleanup v3 - step 1 (rebase) (fornoverde/negozio)"
         ],
         [
           "X-Repohub-Event",
@@ -542,7 +542,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/shopfront380",
+        "threadId": "case-servizi-pr-fornoverde/negozio380",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -564,8 +564,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #54: RP-206 add 35 mm (nordwind/route-planner)",
-      "text": "Marta Riva ha aperto la pull request #54 «RP-206 add 35 mm» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/54",
+      "subject": "[Repohub] Pull request #54: RP-206 add half-size loaf (fornoverde/giri)",
+      "text": "Marta Riva ha aperto la pull request #54 «RP-206 add half-size loaf» in fornoverde/giri.\n\nVisualizza: https://repohub.esempio.it/fornoverde/giri/pull-requests/54",
       "html": null,
       "messageId": "<case-servizi-9@esempio.it>",
       "references": [],
@@ -573,7 +573,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #54: RP-206 add 35 mm (nordwind/route-planner)"
+          "[Repohub] Pull request #54: RP-206 add half-size loaf (fornoverde/giri)"
         ],
         [
           "X-Repohub-Event",
@@ -585,7 +585,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/route-planner54",
+        "threadId": "case-servizi-pr-fornoverde/giri54",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -646,8 +646,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #54: RP-206 add 35 mm (nordwind/route-planner)",
-      "text": "Davide Greco ha commentato la pull request #54 «RP-206 add 35 mm» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/54\n\nCommento:\n> Rinominerei questa variabile.",
+      "subject": "[Repohub] Pull request #54: RP-206 add half-size loaf (fornoverde/giri)",
+      "text": "Davide Greco ha commentato la pull request #54 «RP-206 add half-size loaf» in fornoverde/giri.\n\nVisualizza: https://repohub.esempio.it/fornoverde/giri/pull-requests/54\n\nCommento:\n> Rinominerei questa variabile.",
       "html": null,
       "messageId": "<case-servizi-10@esempio.it>",
       "references": [],
@@ -655,7 +655,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #54: RP-206 add 35 mm (nordwind/route-planner)"
+          "[Repohub] Pull request #54: RP-206 add half-size loaf (fornoverde/giri)"
         ],
         [
           "X-Repohub-Event",
@@ -667,7 +667,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/route-planner54",
+        "threadId": "case-servizi-pr-fornoverde/giri54",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -680,7 +680,7 @@
       "date": "2026-09-19T10:25:00.000Z",
       "from": {
         "name": "Tracker",
-        "address": "tracker@nordwind.esempio.it"
+        "address": "tracker@fornoverde.esempio.it"
       },
       "to": [
         {
@@ -689,8 +689,8 @@
         }
       ],
       "cc": [],
-      "subject": "[TRACKER] (RP-177) Frontend: strap from engine proposals",
-      "text": "Stato: Da fare → In corso\n\nhttps://nordwind.tracker.esempio.it/browse/RP-177",
+      "subject": "[TRACKER] (RP-177) Frontend: menu from planner proposals",
+      "text": "Stato: Da fare → In corso\n\nhttps://fornoverde.tracker.esempio.it/browse/RP-177",
       "html": null,
       "messageId": "<case-servizi-30@esempio.it>",
       "references": [],
@@ -698,11 +698,11 @@
       "headers": [
         [
           "Subject",
-          "[TRACKER] (RP-177) Frontend: strap from engine proposals"
+          "[TRACKER] (RP-177) Frontend: menu from planner proposals"
         ],
         [
           "List-Unsubscribe",
-          "<https://nordwind.esempio.it/unsubscribe>"
+          "<https://fornoverde.esempio.it/unsubscribe>"
         ]
       ],
       "flags": {
@@ -732,8 +732,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #53: feat: a colour with only one strap chooses that strap (nordwind/route-planner)",
-      "text": "Davide Greco ha aperto la pull request #53 «feat: a colour with only one strap chooses that strap» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/53",
+      "subject": "[Repohub] Pull request #53: feat: a shop with only one oven picks that oven (fornoverde/giri)",
+      "text": "Davide Greco ha aperto la pull request #53 «feat: a shop with only one oven picks that oven» in fornoverde/giri.\n\nVisualizza: https://repohub.esempio.it/fornoverde/giri/pull-requests/53",
       "html": null,
       "messageId": "<case-servizi-13@esempio.it>",
       "references": [],
@@ -741,7 +741,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #53: feat: a colour with only one strap chooses that strap (nordwind/route-planner)"
+          "[Repohub] Pull request #53: feat: a shop with only one oven picks that oven (fornoverde/giri)"
         ],
         [
           "X-Repohub-Event",
@@ -753,7 +753,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/route-planner53",
+        "threadId": "case-servizi-pr-fornoverde/giri53",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -775,8 +775,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #54: RP-206 add 35 mm (nordwind/route-planner)",
-      "text": "Sofia Ricci ha approvato la pull request #54 «RP-206 add 35 mm» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/54",
+      "subject": "[Repohub] Pull request #54: RP-206 add half-size loaf (fornoverde/giri)",
+      "text": "Sofia Ricci ha approvato la pull request #54 «RP-206 add half-size loaf» in fornoverde/giri.\n\nVisualizza: https://repohub.esempio.it/fornoverde/giri/pull-requests/54",
       "html": null,
       "messageId": "<case-servizi-11@esempio.it>",
       "references": [],
@@ -784,7 +784,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #54: RP-206 add 35 mm (nordwind/route-planner)"
+          "[Repohub] Pull request #54: RP-206 add half-size loaf (fornoverde/giri)"
         ],
         [
           "X-Repohub-Event",
@@ -796,7 +796,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/route-planner54",
+        "threadId": "case-servizi-pr-fornoverde/giri54",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -818,8 +818,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #53: feat: a colour with only one strap chooses that strap (nordwind/route-planner)",
-      "text": "Sofia Ricci ha commentato la pull request #53 «feat: a colour with only one strap chooses that strap» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/53\n\nCommento:\n> Rinominerei questa variabile.",
+      "subject": "[Repohub] Pull request #53: feat: a shop with only one oven picks that oven (fornoverde/giri)",
+      "text": "Sofia Ricci ha commentato la pull request #53 «feat: a shop with only one oven picks that oven» in fornoverde/giri.\n\nVisualizza: https://repohub.esempio.it/fornoverde/giri/pull-requests/53\n\nCommento:\n> Rinominerei questa variabile.",
       "html": null,
       "messageId": "<case-servizi-14@esempio.it>",
       "references": [],
@@ -827,7 +827,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #53: feat: a colour with only one strap chooses that strap (nordwind/route-planner)"
+          "[Repohub] Pull request #53: feat: a shop with only one oven picks that oven (fornoverde/giri)"
         ],
         [
           "X-Repohub-Event",
@@ -839,7 +839,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/route-planner53",
+        "threadId": "case-servizi-pr-fornoverde/giri53",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -904,8 +904,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #54: RP-206 add 35 mm (nordwind/route-planner)",
-      "text": "Luca Fontana ha unito la pull request #54 «RP-206 add 35 mm» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/54",
+      "subject": "[Repohub] Pull request #54: RP-206 add half-size loaf (fornoverde/giri)",
+      "text": "Luca Fontana ha unito la pull request #54 «RP-206 add half-size loaf» in fornoverde/giri.\n\nVisualizza: https://repohub.esempio.it/fornoverde/giri/pull-requests/54",
       "html": null,
       "messageId": "<case-servizi-12@esempio.it>",
       "references": [],
@@ -913,7 +913,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #54: RP-206 add 35 mm (nordwind/route-planner)"
+          "[Repohub] Pull request #54: RP-206 add half-size loaf (fornoverde/giri)"
         ],
         [
           "X-Repohub-Event",
@@ -925,7 +925,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/route-planner54",
+        "threadId": "case-servizi-pr-fornoverde/giri54",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -990,8 +990,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #46: RP-206 add 35 mm (nordwind/planner-backend)",
-      "text": "Sofia Ricci ha aperto la pull request #46 «RP-206 add 35 mm» in nordwind/planner-backend.\n\nVisualizza: https://repohub.esempio.it/nordwind/planner-backend/pull-requests/46",
+      "subject": "[Repohub] Pull request #46: RP-206 add half-size loaf (fornoverde/turni-api)",
+      "text": "Sofia Ricci ha aperto la pull request #46 «RP-206 add half-size loaf» in fornoverde/turni-api.\n\nVisualizza: https://repohub.esempio.it/fornoverde/turni-api/pull-requests/46",
       "html": null,
       "messageId": "<case-servizi-17@esempio.it>",
       "references": [],
@@ -999,7 +999,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #46: RP-206 add 35 mm (nordwind/planner-backend)"
+          "[Repohub] Pull request #46: RP-206 add half-size loaf (fornoverde/turni-api)"
         ],
         [
           "X-Repohub-Event",
@@ -1011,7 +1011,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/planner-backend46",
+        "threadId": "case-servizi-pr-fornoverde/turni-api46",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -1033,8 +1033,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #53: feat: a colour with only one strap chooses that strap (nordwind/route-planner)",
-      "text": "Luca Fontana ha approvato la pull request #53 «feat: a colour with only one strap chooses that strap» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/53",
+      "subject": "[Repohub] Pull request #53: feat: a shop with only one oven picks that oven (fornoverde/giri)",
+      "text": "Luca Fontana ha approvato la pull request #53 «feat: a shop with only one oven picks that oven» in fornoverde/giri.\n\nVisualizza: https://repohub.esempio.it/fornoverde/giri/pull-requests/53",
       "html": null,
       "messageId": "<case-servizi-15@esempio.it>",
       "references": [],
@@ -1042,7 +1042,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #53: feat: a colour with only one strap chooses that strap (nordwind/route-planner)"
+          "[Repohub] Pull request #53: feat: a shop with only one oven picks that oven (fornoverde/giri)"
         ],
         [
           "X-Repohub-Event",
@@ -1054,7 +1054,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/route-planner53",
+        "threadId": "case-servizi-pr-fornoverde/giri53",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -1076,8 +1076,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #46: RP-206 add 35 mm (nordwind/planner-backend)",
-      "text": "Luca Fontana ha approvato la pull request #46 «RP-206 add 35 mm» in nordwind/planner-backend.\n\nVisualizza: https://repohub.esempio.it/nordwind/planner-backend/pull-requests/46",
+      "subject": "[Repohub] Pull request #46: RP-206 add half-size loaf (fornoverde/turni-api)",
+      "text": "Luca Fontana ha approvato la pull request #46 «RP-206 add half-size loaf» in fornoverde/turni-api.\n\nVisualizza: https://repohub.esempio.it/fornoverde/turni-api/pull-requests/46",
       "html": null,
       "messageId": "<case-servizi-18@esempio.it>",
       "references": [],
@@ -1085,7 +1085,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #46: RP-206 add 35 mm (nordwind/planner-backend)"
+          "[Repohub] Pull request #46: RP-206 add half-size loaf (fornoverde/turni-api)"
         ],
         [
           "X-Repohub-Event",
@@ -1097,7 +1097,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/planner-backend46",
+        "threadId": "case-servizi-pr-fornoverde/turni-api46",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -1110,7 +1110,7 @@
       "date": "2026-09-24T09:31:00.000Z",
       "from": {
         "name": "Tracker",
-        "address": "tracker@nordwind.esempio.it"
+        "address": "tracker@fornoverde.esempio.it"
       },
       "to": [
         {
@@ -1119,8 +1119,8 @@
         }
       ],
       "cc": [],
-      "subject": "[TRACKER] (RP-177) Frontend: strap from engine proposals",
-      "text": "Commento di Sofia Ricci: le proposte arrivano già ordinate dal motore.\n\nhttps://nordwind.tracker.esempio.it/browse/RP-177",
+      "subject": "[TRACKER] (RP-177) Frontend: menu from planner proposals",
+      "text": "Commento di Sofia Ricci: le proposte arrivano già ordinate dal pianificatore.\n\nhttps://fornoverde.tracker.esempio.it/browse/RP-177",
       "html": null,
       "messageId": "<case-servizi-31@esempio.it>",
       "references": [],
@@ -1128,11 +1128,11 @@
       "headers": [
         [
           "Subject",
-          "[TRACKER] (RP-177) Frontend: strap from engine proposals"
+          "[TRACKER] (RP-177) Frontend: menu from planner proposals"
         ],
         [
           "List-Unsubscribe",
-          "<https://nordwind.esempio.it/unsubscribe>"
+          "<https://fornoverde.esempio.it/unsubscribe>"
         ]
       ],
       "flags": {
@@ -1153,7 +1153,7 @@
       "date": "2026-09-24T17:38:00.000Z",
       "from": {
         "name": "Tracker",
-        "address": "tracker@nordwind.esempio.it"
+        "address": "tracker@fornoverde.esempio.it"
       },
       "to": [
         {
@@ -1162,8 +1162,8 @@
         }
       ],
       "cc": [],
-      "subject": "[TRACKER] (RP-205) Data quality fields",
-      "text": "Creata da Davide Greco\n\nhttps://nordwind.tracker.esempio.it/browse/RP-205",
+      "subject": "[TRACKER] (RP-205) Allergen fields",
+      "text": "Creata da Davide Greco\n\nhttps://fornoverde.tracker.esempio.it/browse/RP-205",
       "html": null,
       "messageId": "<case-servizi-34@esempio.it>",
       "references": [],
@@ -1171,11 +1171,11 @@
       "headers": [
         [
           "Subject",
-          "[TRACKER] (RP-205) Data quality fields"
+          "[TRACKER] (RP-205) Allergen fields"
         ],
         [
           "List-Unsubscribe",
-          "<https://nordwind.esempio.it/unsubscribe>"
+          "<https://fornoverde.esempio.it/unsubscribe>"
         ]
       ],
       "flags": {
@@ -1244,8 +1244,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #53: feat: a colour with only one strap chooses that strap (nordwind/route-planner)",
-      "text": "Marta Riva ha unito la pull request #53 «feat: a colour with only one strap chooses that strap» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/53",
+      "subject": "[Repohub] Pull request #53: feat: a shop with only one oven picks that oven (fornoverde/giri)",
+      "text": "Marta Riva ha unito la pull request #53 «feat: a shop with only one oven picks that oven» in fornoverde/giri.\n\nVisualizza: https://repohub.esempio.it/fornoverde/giri/pull-requests/53",
       "html": null,
       "messageId": "<case-servizi-16@esempio.it>",
       "references": [],
@@ -1253,7 +1253,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #53: feat: a colour with only one strap chooses that strap (nordwind/route-planner)"
+          "[Repohub] Pull request #53: feat: a shop with only one oven picks that oven (fornoverde/giri)"
         ],
         [
           "X-Repohub-Event",
@@ -1265,7 +1265,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/route-planner53",
+        "threadId": "case-servizi-pr-fornoverde/giri53",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -1287,8 +1287,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #45: RP-205 add data quality fields (nordwind/planner-backend)",
-      "text": "Luca Fontana ha aperto la pull request #45 «RP-205 add data quality fields» in nordwind/planner-backend.\n\nVisualizza: https://repohub.esempio.it/nordwind/planner-backend/pull-requests/45",
+      "subject": "[Repohub] Pull request #45: RP-205 add allergen fields (fornoverde/turni-api)",
+      "text": "Luca Fontana ha aperto la pull request #45 «RP-205 add allergen fields» in fornoverde/turni-api.\n\nVisualizza: https://repohub.esempio.it/fornoverde/turni-api/pull-requests/45",
       "html": null,
       "messageId": "<case-servizi-21@esempio.it>",
       "references": [],
@@ -1296,7 +1296,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #45: RP-205 add data quality fields (nordwind/planner-backend)"
+          "[Repohub] Pull request #45: RP-205 add allergen fields (fornoverde/turni-api)"
         ],
         [
           "X-Repohub-Event",
@@ -1308,7 +1308,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/planner-backend45",
+        "threadId": "case-servizi-pr-fornoverde/turni-api45",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -1380,8 +1380,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #46: RP-206 add 35 mm (nordwind/planner-backend)",
-      "text": "Marta Riva ha commentato la pull request #46 «RP-206 add 35 mm» in nordwind/planner-backend.\n\nVisualizza: https://repohub.esempio.it/nordwind/planner-backend/pull-requests/46\n\nCommento:\n> Ok per me, solo un dubbio sul nome della colonna.",
+      "subject": "[Repohub] Pull request #46: RP-206 add half-size loaf (fornoverde/turni-api)",
+      "text": "Marta Riva ha commentato la pull request #46 «RP-206 add half-size loaf» in fornoverde/turni-api.\n\nVisualizza: https://repohub.esempio.it/fornoverde/turni-api/pull-requests/46\n\nCommento:\n> Ok per me, solo un dubbio sul nome della colonna.",
       "html": null,
       "messageId": "<case-servizi-19@esempio.it>",
       "references": [],
@@ -1389,7 +1389,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #46: RP-206 add 35 mm (nordwind/planner-backend)"
+          "[Repohub] Pull request #46: RP-206 add half-size loaf (fornoverde/turni-api)"
         ],
         [
           "X-Repohub-Event",
@@ -1401,7 +1401,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/planner-backend46",
+        "threadId": "case-servizi-pr-fornoverde/turni-api46",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -1423,8 +1423,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #45: RP-205 add data quality fields (nordwind/planner-backend)",
-      "text": "Marta Riva ha unito la pull request #45 «RP-205 add data quality fields» in nordwind/planner-backend.\n\nVisualizza: https://repohub.esempio.it/nordwind/planner-backend/pull-requests/45",
+      "subject": "[Repohub] Pull request #45: RP-205 add allergen fields (fornoverde/turni-api)",
+      "text": "Marta Riva ha unito la pull request #45 «RP-205 add allergen fields» in fornoverde/turni-api.\n\nVisualizza: https://repohub.esempio.it/fornoverde/turni-api/pull-requests/45",
       "html": null,
       "messageId": "<case-servizi-22@esempio.it>",
       "references": [],
@@ -1432,7 +1432,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #45: RP-205 add data quality fields (nordwind/planner-backend)"
+          "[Repohub] Pull request #45: RP-205 add allergen fields (fornoverde/turni-api)"
         ],
         [
           "X-Repohub-Event",
@@ -1444,7 +1444,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/planner-backend45",
+        "threadId": "case-servizi-pr-fornoverde/turni-api45",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -1509,8 +1509,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #52: RP-205 add data quality fields (nordwind/route-planner)",
-      "text": "Marta Riva ha aperto la pull request #52 «RP-205 add data quality fields» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/52",
+      "subject": "[Repohub] Pull request #52: RP-205 add allergen fields (fornoverde/giri)",
+      "text": "Marta Riva ha aperto la pull request #52 «RP-205 add allergen fields» in fornoverde/giri.\n\nVisualizza: https://repohub.esempio.it/fornoverde/giri/pull-requests/52",
       "html": null,
       "messageId": "<case-servizi-23@esempio.it>",
       "references": [],
@@ -1518,7 +1518,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #52: RP-205 add data quality fields (nordwind/route-planner)"
+          "[Repohub] Pull request #52: RP-205 add allergen fields (fornoverde/giri)"
         ],
         [
           "X-Repohub-Event",
@@ -1530,7 +1530,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/route-planner52",
+        "threadId": "case-servizi-pr-fornoverde/giri52",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -1552,8 +1552,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #46: RP-206 add 35 mm (nordwind/planner-backend)",
-      "text": "Davide Greco ha unito la pull request #46 «RP-206 add 35 mm» in nordwind/planner-backend.\n\nVisualizza: https://repohub.esempio.it/nordwind/planner-backend/pull-requests/46",
+      "subject": "[Repohub] Pull request #46: RP-206 add half-size loaf (fornoverde/turni-api)",
+      "text": "Davide Greco ha unito la pull request #46 «RP-206 add half-size loaf» in fornoverde/turni-api.\n\nVisualizza: https://repohub.esempio.it/fornoverde/turni-api/pull-requests/46",
       "html": null,
       "messageId": "<case-servizi-20@esempio.it>",
       "references": [],
@@ -1561,7 +1561,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #46: RP-206 add 35 mm (nordwind/planner-backend)"
+          "[Repohub] Pull request #46: RP-206 add half-size loaf (fornoverde/turni-api)"
         ],
         [
           "X-Repohub-Event",
@@ -1573,7 +1573,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/planner-backend46",
+        "threadId": "case-servizi-pr-fornoverde/turni-api46",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -1586,7 +1586,7 @@
       "date": "2026-09-29T13:13:00.000Z",
       "from": {
         "name": "Tracker",
-        "address": "tracker@nordwind.esempio.it"
+        "address": "tracker@fornoverde.esempio.it"
       },
       "to": [
         {
@@ -1595,8 +1595,8 @@
         }
       ],
       "cc": [],
-      "subject": "[TRACKER] (RP-177) Frontend: strap from engine proposals",
-      "text": "Stato: In corso → In revisione\n\nhttps://nordwind.tracker.esempio.it/browse/RP-177",
+      "subject": "[TRACKER] (RP-177) Frontend: menu from planner proposals",
+      "text": "Stato: In corso → In revisione\n\nhttps://fornoverde.tracker.esempio.it/browse/RP-177",
       "html": null,
       "messageId": "<case-servizi-32@esempio.it>",
       "references": [],
@@ -1604,11 +1604,11 @@
       "headers": [
         [
           "Subject",
-          "[TRACKER] (RP-177) Frontend: strap from engine proposals"
+          "[TRACKER] (RP-177) Frontend: menu from planner proposals"
         ],
         [
           "List-Unsubscribe",
-          "<https://nordwind.esempio.it/unsubscribe>"
+          "<https://fornoverde.esempio.it/unsubscribe>"
         ]
       ],
       "flags": {
@@ -1681,8 +1681,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #52: RP-205 add data quality fields (nordwind/route-planner)",
-      "text": "Davide Greco ha approvato la pull request #52 «RP-205 add data quality fields» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/52",
+      "subject": "[Repohub] Pull request #52: RP-205 add allergen fields (fornoverde/giri)",
+      "text": "Davide Greco ha approvato la pull request #52 «RP-205 add allergen fields» in fornoverde/giri.\n\nVisualizza: https://repohub.esempio.it/fornoverde/giri/pull-requests/52",
       "html": null,
       "messageId": "<case-servizi-24@esempio.it>",
       "references": [],
@@ -1690,7 +1690,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #52: RP-205 add data quality fields (nordwind/route-planner)"
+          "[Repohub] Pull request #52: RP-205 add allergen fields (fornoverde/giri)"
         ],
         [
           "X-Repohub-Event",
@@ -1702,7 +1702,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/route-planner52",
+        "threadId": "case-servizi-pr-fornoverde/giri52",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -1715,7 +1715,7 @@
       "date": "2026-09-30T13:30:00.000Z",
       "from": {
         "name": "Tracker",
-        "address": "tracker@nordwind.esempio.it"
+        "address": "tracker@fornoverde.esempio.it"
       },
       "to": [
         {
@@ -1724,8 +1724,8 @@
         }
       ],
       "cc": [],
-      "subject": "[TRACKER] (RP-205) Data quality fields",
-      "text": "Stato: Da fare → In corso\n\nhttps://nordwind.tracker.esempio.it/browse/RP-205",
+      "subject": "[TRACKER] (RP-205) Allergen fields",
+      "text": "Stato: Da fare → In corso\n\nhttps://fornoverde.tracker.esempio.it/browse/RP-205",
       "html": null,
       "messageId": "<case-servizi-35@esempio.it>",
       "references": [],
@@ -1733,11 +1733,11 @@
       "headers": [
         [
           "Subject",
-          "[TRACKER] (RP-205) Data quality fields"
+          "[TRACKER] (RP-205) Allergen fields"
         ],
         [
           "List-Unsubscribe",
-          "<https://nordwind.esempio.it/unsubscribe>"
+          "<https://fornoverde.esempio.it/unsubscribe>"
         ]
       ],
       "flags": {
@@ -1810,8 +1810,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #50: RP-177 frontend strap from engine proposals (nordwind/route-planner)",
-      "text": "Davide Greco ha aperto la pull request #50 «RP-177 frontend strap from engine proposals» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/50",
+      "subject": "[Repohub] Pull request #50: RP-177 frontend menu from planner proposals (fornoverde/giri)",
+      "text": "Davide Greco ha aperto la pull request #50 «RP-177 frontend menu from planner proposals» in fornoverde/giri.\n\nVisualizza: https://repohub.esempio.it/fornoverde/giri/pull-requests/50",
       "html": null,
       "messageId": "<case-servizi-25@esempio.it>",
       "references": [],
@@ -1819,7 +1819,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #50: RP-177 frontend strap from engine proposals (nordwind/route-planner)"
+          "[Repohub] Pull request #50: RP-177 frontend menu from planner proposals (fornoverde/giri)"
         ],
         [
           "X-Repohub-Event",
@@ -1831,7 +1831,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/route-planner50",
+        "threadId": "case-servizi-pr-fornoverde/giri50",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -1931,8 +1931,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #50: RP-177 frontend strap from engine proposals (nordwind/route-planner)",
-      "text": "Sofia Ricci ha commentato la pull request #50 «RP-177 frontend strap from engine proposals» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/50\n\nCommento:\n> Rinominerei questa variabile.",
+      "subject": "[Repohub] Pull request #50: RP-177 frontend menu from planner proposals (fornoverde/giri)",
+      "text": "Sofia Ricci ha commentato la pull request #50 «RP-177 frontend menu from planner proposals» in fornoverde/giri.\n\nVisualizza: https://repohub.esempio.it/fornoverde/giri/pull-requests/50\n\nCommento:\n> Rinominerei questa variabile.",
       "html": null,
       "messageId": "<case-servizi-26@esempio.it>",
       "references": [],
@@ -1940,7 +1940,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #50: RP-177 frontend strap from engine proposals (nordwind/route-planner)"
+          "[Repohub] Pull request #50: RP-177 frontend menu from planner proposals (fornoverde/giri)"
         ],
         [
           "X-Repohub-Event",
@@ -1952,7 +1952,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/route-planner50",
+        "threadId": "case-servizi-pr-fornoverde/giri50",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -2051,7 +2051,7 @@
       "date": "2026-10-04T17:27:00.000Z",
       "from": {
         "name": "Tracker",
-        "address": "tracker@nordwind.esempio.it"
+        "address": "tracker@fornoverde.esempio.it"
       },
       "to": [
         {
@@ -2060,8 +2060,8 @@
         }
       ],
       "cc": [],
-      "subject": "[TRACKER] (RP-177) Frontend: strap from engine proposals",
-      "text": "Collegata alla pull request #50\n\nhttps://nordwind.tracker.esempio.it/browse/RP-177",
+      "subject": "[TRACKER] (RP-177) Frontend: menu from planner proposals",
+      "text": "Collegata alla pull request #50\n\nhttps://fornoverde.tracker.esempio.it/browse/RP-177",
       "html": null,
       "messageId": "<case-servizi-33@esempio.it>",
       "references": [],
@@ -2069,11 +2069,11 @@
       "headers": [
         [
           "Subject",
-          "[TRACKER] (RP-177) Frontend: strap from engine proposals"
+          "[TRACKER] (RP-177) Frontend: menu from planner proposals"
         ],
         [
           "List-Unsubscribe",
-          "<https://nordwind.esempio.it/unsubscribe>"
+          "<https://fornoverde.esempio.it/unsubscribe>"
         ]
       ],
       "flags": {
@@ -2142,8 +2142,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pull request #50: RP-177 frontend strap from engine proposals (nordwind/route-planner)",
-      "text": "Luca Fontana ha approvato la pull request #50 «RP-177 frontend strap from engine proposals» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/50",
+      "subject": "[Repohub] Pull request #50: RP-177 frontend menu from planner proposals (fornoverde/giri)",
+      "text": "Luca Fontana ha approvato la pull request #50 «RP-177 frontend menu from planner proposals» in fornoverde/giri.\n\nVisualizza: https://repohub.esempio.it/fornoverde/giri/pull-requests/50",
       "html": null,
       "messageId": "<case-servizi-27@esempio.it>",
       "references": [],
@@ -2151,7 +2151,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pull request #50: RP-177 frontend strap from engine proposals (nordwind/route-planner)"
+          "[Repohub] Pull request #50: RP-177 frontend menu from planner proposals (fornoverde/giri)"
         ],
         [
           "X-Repohub-Event",
@@ -2163,7 +2163,7 @@
         "flagged": false
       },
       "gmail": {
-        "threadId": "case-servizi-pr-nordwind/route-planner50",
+        "threadId": "case-servizi-pr-fornoverde/giri50",
         "labels": [
           "\\Inbox",
           "CATEGORY_UPDATES"
@@ -2317,8 +2317,8 @@
         }
       ],
       "cc": [],
-      "subject": "[Repohub] Pipeline for main failed on ae83fe6 (nordwind/atlas-data)",
-      "text": "La pipeline di main è fallita al passo «test».\n\nCommit ae83fe6 di Marta Riva.\nhttps://repohub.esempio.it/nordwind/atlas-data/pipelines/812",
+      "subject": "[Repohub] Pipeline for main failed on ae83fe6 (fornoverde/ricettario)",
+      "text": "La pipeline di main è fallita al passo «test».\n\nCommit ae83fe6 di Marta Riva.\nhttps://repohub.esempio.it/fornoverde/ricettario/pipelines/812",
       "html": null,
       "messageId": "<case-servizi-28@esempio.it>",
       "references": [],
@@ -2326,7 +2326,7 @@
       "headers": [
         [
           "Subject",
-          "[Repohub] Pipeline for main failed on ae83fe6 (nordwind/atlas-data)"
+          "[Repohub] Pipeline for main failed on ae83fe6 (fornoverde/ricettario)"
         ],
         [
           "List-Unsubscribe",
@@ -2442,8 +2442,8 @@
         }
       ],
       "cc": [],
-      "subject": "[alexmoro/hourglass] PR run failed: Build - takeaway (0118015)",
-      "text": "Build fallita sul ramo takeaway.\nCommit 0118015.",
+      "subject": "[alexmoro/orto] PR run failed: Build - semina (0118015)",
+      "text": "Build fallita sul ramo semina.\nCommit 0118015.",
       "html": null,
       "messageId": "<case-servizi-36@esempio.it>",
       "references": [],
@@ -2451,7 +2451,7 @@
       "headers": [
         [
           "Subject",
-          "[alexmoro/hourglass] PR run failed: Build - takeaway (0118015)"
+          "[alexmoro/orto] PR run failed: Build - semina (0118015)"
         ],
         [
           "List-Unsubscribe",
@@ -2485,8 +2485,8 @@
         }
       ],
       "cc": [],
-      "subject": "[alexmoro/hourglass] PR run failed: QA - takeaway (0118015)",
-      "text": "QA fallito sul ramo takeaway.\nCommit 0118015.",
+      "subject": "[alexmoro/orto] PR run failed: QA - semina (0118015)",
+      "text": "QA fallito sul ramo semina.\nCommit 0118015.",
       "html": null,
       "messageId": "<case-servizi-37@esempio.it>",
       "references": [],
@@ -2494,7 +2494,7 @@
       "headers": [
         [
           "Subject",
-          "[alexmoro/hourglass] PR run failed: QA - takeaway (0118015)"
+          "[alexmoro/orto] PR run failed: QA - semina (0118015)"
         ],
         [
           "List-Unsubscribe",
@@ -2571,8 +2571,8 @@
         }
       ],
       "cc": [],
-      "subject": "[alexmoro/hourglass] Run failed: QA - qa/contract-suite (0118015)",
-      "text": "Esecuzione fallita: qa/contract-suite.\nCommit 0118015.",
+      "subject": "[alexmoro/orto] Run failed: QA - qa/prove-base (0118015)",
+      "text": "Esecuzione fallita: qa/prove-base.\nCommit 0118015.",
       "html": null,
       "messageId": "<case-servizi-38@esempio.it>",
       "references": [],
@@ -2580,7 +2580,7 @@
       "headers": [
         [
           "Subject",
-          "[alexmoro/hourglass] Run failed: QA - qa/contract-suite (0118015)"
+          "[alexmoro/orto] Run failed: QA - qa/prove-base (0118015)"
         ],
         [
           "List-Unsubscribe",

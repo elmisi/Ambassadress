@@ -19,8 +19,8 @@ python3 tools/gmail-export.py --limit 1000          # scrive mockups/data/privat
 python3 tools/gmail-export.py --mbox takeout.mbox   # in alternativa, da Google Takeout
 ```
 
-Poi apri il prototipo con `?data=real`, per esempio
-`file:///home/alessandro/elmisi/Ambassadress/mockups/v3/project/Main.dc.html?data=real`.
+Poi apri il prototipo aggiungendo `?data=real` all’indirizzo, per esempio
+`mockups/v9/project/Main.dc.html?data=real`.
 In alto compare «Dati veri, solo in locale». Se il file manca il prototipo non mostra niente invece di ripiegare sui dati sintetici.
 
 ## Quando trovi un bug con i dati veri

@@ -32,12 +32,12 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Faro",
-      "text": "Ciao Alex, prima di giovedì ti mando due righe su Faro: ci serve qualcuno che metta ordine nei processi operativi prima di scegliere gli strumenti. Ne parliamo con calma.",
+      "subject": "Lanterna",
+      "text": "Ciao Alex, prima di giovedì ti mando due righe su Lanterna: ci serve qualcuno che metta ordine nei processi operativi prima di scegliere gli strumenti. Ne parliamo con calma.",
       "headers": [
         [
           "Subject",
-          "Faro"
+          "Lanterna"
         ]
       ]
     },
@@ -87,9 +87,9 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Invito: Faro - gio 10 set 2026 09:15 - 10:00 (CEST) (alex.moro@esempio.it)",
-      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nFaro\ngiovedì 10 settembre 2026 ⋅ 09:15 – 10:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=RmFybw==\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
-      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Faro</h2><p>giovedì 10 settembre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "subject": "Invito: Lanterna - gio 10 set 2026 09:15 - 10:00 (CEST) (alex.moro@esempio.it)",
+      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nLanterna\ngiovedì 10 settembre 2026 ⋅ 09:15 – 10:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=TGFudGVybmE=\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Lanterna</h2><p>giovedì 10 settembre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
       "headers": [
         [
           "Sender",
@@ -105,7 +105,7 @@
         ],
         [
           "Subject",
-          "Invito: Faro - gio 10 set 2026 09:15 - 10:00 (CEST) (alex.moro@esempio.it)"
+          "Invito: Lanterna - gio 10 set 2026 09:15 - 10:00 (CEST) (alex.moro@esempio.it)"
         ]
       ]
     },
@@ -142,8 +142,8 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Record della riunione: \"Faro\" 10 set 2026",
-      "text": "La registrazione della riunione «Faro» del giovedì 10 settembre 2026 è pronta.\n\nLa trovi nella cartella Registrazioni di Meet su Drive dell’organizzatore.\nhttps://drive.google.com/file/d/1AbCdEfGhIjKlMnOp/view\n\nTrascrizione e note automatiche sono nella stessa cartella.",
+      "subject": "Record della riunione: \"Lanterna\" 10 set 2026",
+      "text": "La registrazione della riunione «Lanterna» del giovedì 10 settembre 2026 è pronta.\n\nLa trovi nella cartella Registrazioni di Meet su Drive dell’organizzatore.\nhttps://drive.google.com/file/d/1AbCdEfGhIjKlMnOp/view\n\nTrascrizione e note automatiche sono nella stessa cartella.",
       "headers": [
         [
           "Sender",
@@ -151,7 +151,7 @@
         ],
         [
           "Subject",
-          "Record della riunione: \"Faro\" 10 set 2026"
+          "Record della riunione: \"Lanterna\" 10 set 2026"
         ]
       ]
     },
@@ -201,9 +201,9 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Invito: Faro (placeholder) - gio 17 set 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)",
-      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nFaro (placeholder)\ngiovedì 17 settembre 2026 ⋅ 11:00 – 12:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=RmFybyAocGxhY2Vob2xkZXIp\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
-      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Faro (placeholder)</h2><p>giovedì 17 settembre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "subject": "Invito: Lanterna (placeholder) - gio 17 set 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)",
+      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nLanterna (placeholder)\ngiovedì 17 settembre 2026 ⋅ 11:00 – 12:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=TGFudGVybmEgKHBsYWNlaG9s\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Lanterna (placeholder)</h2><p>giovedì 17 settembre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
       "headers": [
         [
           "Sender",
@@ -219,7 +219,7 @@
         ],
         [
           "Subject",
-          "Invito: Faro (placeholder) - gio 17 set 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)"
+          "Invito: Lanterna (placeholder) - gio 17 set 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)"
         ]
       ]
     },
@@ -269,9 +269,9 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Invito: Brief Faro con Alex - mar 15 set 2026 09:00 - 09:30 (CEST) (alex.moro@esempio.it)",
-      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nBrief Faro con Alex\nmartedì 15 settembre 2026 ⋅ 09:00 – 09:30\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=QnJpZWYgRmFybyBjb24gQWxl\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
-      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Brief Faro con Alex</h2><p>martedì 15 settembre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "subject": "Invito: Brief Lanterna con Alex - mar 15 set 2026 09:00 - 09:30 (CEST) (alex.moro@esempio.it)",
+      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nBrief Lanterna con Alex\nmartedì 15 settembre 2026 ⋅ 09:00 – 09:30\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=QnJpZWYgTGFudGVybmEgY29u\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Brief Lanterna con Alex</h2><p>martedì 15 settembre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
       "headers": [
         [
           "Sender",
@@ -287,7 +287,7 @@
         ],
         [
           "Subject",
-          "Invito: Brief Faro con Alex - mar 15 set 2026 09:00 - 09:30 (CEST) (alex.moro@esempio.it)"
+          "Invito: Brief Lanterna con Alex - mar 15 set 2026 09:00 - 09:30 (CEST) (alex.moro@esempio.it)"
         ]
       ]
     },
@@ -324,8 +324,8 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Record della riunione: \"Brief Faro con Alex\" 15 set 2026",
-      "text": "La registrazione della riunione «Brief Faro con Alex» del martedì 15 settembre 2026 è pronta.\n\nLa trovi nella cartella Registrazioni di Meet su Drive dell’organizzatore.\nhttps://drive.google.com/file/d/1AbCdEfGhIjKlMnOp/view\n\nTrascrizione e note automatiche sono nella stessa cartella.",
+      "subject": "Record della riunione: \"Brief Lanterna con Alex\" 15 set 2026",
+      "text": "La registrazione della riunione «Brief Lanterna con Alex» del martedì 15 settembre 2026 è pronta.\n\nLa trovi nella cartella Registrazioni di Meet su Drive dell’organizzatore.\nhttps://drive.google.com/file/d/1AbCdEfGhIjKlMnOp/view\n\nTrascrizione e note automatiche sono nella stessa cartella.",
       "headers": [
         [
           "Sender",
@@ -333,7 +333,7 @@
         ],
         [
           "Subject",
-          "Record della riunione: \"Brief Faro con Alex\" 15 set 2026"
+          "Record della riunione: \"Brief Lanterna con Alex\" 15 set 2026"
         ]
       ]
     },
@@ -349,7 +349,7 @@
       "references": [],
       "attachments": [
         {
-          "filename": "Contratto Faro - Selva Holding v1.pdf",
+          "filename": "Contratto Lanterna - Pineta Forniture v1.pdf",
           "mimeType": "application/pdf",
           "size": 312000,
           "inline": false
@@ -373,12 +373,12 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Faro, contratto Selva Holding",
-      "text": "Ti giro la bozza del contratto con Selva Holding. Guardala con calma, soprattutto l’articolo 4 sulle tempistiche.",
+      "subject": "Lanterna, contratto Pineta Forniture",
+      "text": "Ti giro la bozza del contratto con Pineta Forniture. Guardala con calma, soprattutto l’articolo 4 sulle tempistiche.",
       "headers": [
         [
           "Subject",
-          "Faro, contratto Selva Holding"
+          "Lanterna, contratto Pineta Forniture"
         ]
       ]
     },
@@ -411,12 +411,12 @@
         "name": "Alex Moro",
         "address": "alex.moro@esempio.it"
       },
-      "subject": "Re: Faro, contratto Selva Holding",
-      "text": "Letta. Sull’articolo 4 proporrei 60 giorni invece di 30, il resto mi torna.\n\nIl giorno mer 16 set 2026 alle ore 11:05 Lorenzo Bellini <lorenzo@bellini.esempio.it> ha scritto:\n> Ti giro la bozza del contratto con Selva Holding.",
+      "subject": "Re: Lanterna, contratto Pineta Forniture",
+      "text": "Letta. Sull’articolo 4 proporrei 60 giorni invece di 30, il resto mi torna.\n\nIl giorno mer 16 set 2026 alle ore 11:05 Lorenzo Bellini <lorenzo@bellini.esempio.it> ha scritto:\n> Ti giro la bozza del contratto con Pineta Forniture.",
       "headers": [
         [
           "Subject",
-          "Re: Faro, contratto Selva Holding"
+          "Re: Lanterna, contratto Pineta Forniture"
         ]
       ]
     },
@@ -432,7 +432,7 @@
       "references": [],
       "attachments": [
         {
-          "filename": "Contratto Faro - Selva Holding v2.pdf",
+          "filename": "Contratto Lanterna - Pineta Forniture v2.pdf",
           "mimeType": "application/pdf",
           "size": 318000,
           "inline": false
@@ -456,12 +456,12 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Re: Faro, contratto Selva Holding",
+      "subject": "Re: Lanterna, contratto Pineta Forniture",
       "text": "Accettato, ecco la versione aggiornata.",
       "headers": [
         [
           "Subject",
-          "Re: Faro, contratto Selva Holding"
+          "Re: Lanterna, contratto Pineta Forniture"
         ]
       ]
     },
@@ -511,9 +511,9 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Invito: Sviluppo Alpino | Faro - gio 24 set 2026 11:30 - 12:30 (CEST) (alex.moro@esempio.it)",
-      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nSviluppo Alpino | Faro\ngiovedì 24 settembre 2026 ⋅ 11:30 – 12:30\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=U3ZpbHVwcG8gQWxwaW5vIHwg\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
-      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Sviluppo Alpino | Faro</h2><p>giovedì 24 settembre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "subject": "Invito: Orto Comune | Lanterna - gio 24 set 2026 11:30 - 12:30 (CEST) (alex.moro@esempio.it)",
+      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nOrto Comune | Lanterna\ngiovedì 24 settembre 2026 ⋅ 11:30 – 12:30\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=T3J0byBDb211bmUgfCBMYW50\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Orto Comune | Lanterna</h2><p>giovedì 24 settembre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
       "headers": [
         [
           "Sender",
@@ -529,7 +529,7 @@
         ],
         [
           "Subject",
-          "Invito: Sviluppo Alpino | Faro - gio 24 set 2026 11:30 - 12:30 (CEST) (alex.moro@esempio.it)"
+          "Invito: Orto Comune | Lanterna - gio 24 set 2026 11:30 - 12:30 (CEST) (alex.moro@esempio.it)"
         ]
       ]
     },
@@ -613,7 +613,7 @@
       "references": [],
       "attachments": [
         {
-          "filename": "Contratto Faro - Selva Holding firmato.pdf",
+          "filename": "Contratto Lanterna - Pineta Forniture firmato.pdf",
           "mimeType": "application/pdf",
           "size": 402000,
           "inline": false
@@ -637,12 +637,12 @@
         "name": "Alex Moro",
         "address": "alex.moro@esempio.it"
       },
-      "subject": "Re: Faro, contratto Selva Holding",
+      "subject": "Re: Lanterna, contratto Pineta Forniture",
       "text": "Firmato, te lo rimando.",
       "headers": [
         [
           "Subject",
-          "Re: Faro, contratto Selva Holding"
+          "Re: Lanterna, contratto Pineta Forniture"
         ]
       ]
     },
@@ -680,7 +680,7 @@
         "address": "lorenzo@bellini.esempio.it"
       },
       "subject": "Analisi cruscotti",
-      "text": "Pietro ha preparato i primi cruscotti sui tempi delle pratiche. Riesci a darci un’occhiata prima di venerdì?",
+      "text": "Pietro ha preparato i primi cruscotti sui tempi delle consegne. Riesci a darci un’occhiata prima di venerdì?",
       "headers": [
         [
           "Subject",
@@ -722,7 +722,7 @@
         "address": "alex.moro@esempio.it"
       },
       "subject": "Re: Analisi cruscotti",
-      "text": "Visti. Il tempo medio è falsato dalle pratiche sospese: andrebbero escluse o mostrate a parte.",
+      "text": "Visti. Il tempo medio è falsato dalle consegne in sospeso: andrebbero escluse o mostrate a parte.",
       "headers": [
         [
           "Subject",
@@ -776,9 +776,9 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Invito: Faro | Ciclo di vita della pratica: dalla domanda alla rendicontazione - ven 2 ott 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)",
-      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nFaro | Ciclo di vita della pratica: dalla domanda alla rendicontazione\nvenerdì 2 ottobre 2026 ⋅ 11:00 – 12:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=RmFybyB8IENpY2xvIGRpIHZp\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
-      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Faro | Ciclo di vita della pratica: dalla domanda alla rendicontazione</h2><p>venerdì 2 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "subject": "Invito: Lanterna | Giro delle consegne: dall’ordine al saldo - ven 2 ott 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)",
+      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nLanterna | Giro delle consegne: dall’ordine al saldo\nvenerdì 2 ottobre 2026 ⋅ 11:00 – 12:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=TGFudGVybmEgfCBHaXJvIGRl\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Lanterna | Giro delle consegne: dall’ordine al saldo</h2><p>venerdì 2 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
       "headers": [
         [
           "Sender",
@@ -794,7 +794,7 @@
         ],
         [
           "Subject",
-          "Invito: Faro | Ciclo di vita della pratica: dalla domanda alla rendicontazione - ven 2 ott 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)"
+          "Invito: Lanterna | Giro delle consegne: dall’ordine al saldo - ven 2 ott 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)"
         ]
       ]
     },
@@ -831,12 +831,12 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "FARO / Onboard Slack",
-      "text": "Vi ho invitati nello spazio Slack di Faro. Canali principali: #operations, #ingegneria, #contratti.",
+      "subject": "LANTERNA / Onboard Slack",
+      "text": "Vi ho invitati nello spazio Slack di Lanterna. Canali principali: #operations, #magazzino, #contratti.",
       "headers": [
         [
           "Subject",
-          "FARO / Onboard Slack"
+          "LANTERNA / Onboard Slack"
         ]
       ]
     },
@@ -874,12 +874,12 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Re: FARO / Onboard Slack",
-      "text": "Ilaria mi dice che il canale #ingegneria non lo vede, ci guardo.",
+      "subject": "Re: LANTERNA / Onboard Slack",
+      "text": "Ilaria mi dice che il canale #magazzino non lo vede, ci guardo.",
       "headers": [
         [
           "Subject",
-          "Re: FARO / Onboard Slack"
+          "Re: LANTERNA / Onboard Slack"
         ]
       ]
     },
@@ -916,12 +916,12 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Re: FARO / Onboard Slack",
+      "subject": "Re: LANTERNA / Onboard Slack",
       "text": "Sistemato, era privato.",
       "headers": [
         [
           "Subject",
-          "Re: FARO / Onboard Slack"
+          "Re: LANTERNA / Onboard Slack"
         ]
       ]
     },
@@ -971,9 +971,9 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Invito: Faro | Perizie, lavoro degli ingegneri e app no-code - gio 1 ott 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)",
-      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nFaro | Perizie, lavoro degli ingegneri e app no-code\ngiovedì 1 ottobre 2026 ⋅ 11:00 – 12:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=RmFybyB8IFBlcml6aWUsIGxh\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
-      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Faro | Perizie, lavoro degli ingegneri e app no-code</h2><p>giovedì 1 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "subject": "Invito: Lanterna | Furgoni, turni dei corrieri e fogli condivisi - gio 1 ott 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)",
+      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nLanterna | Furgoni, turni dei corrieri e fogli condivisi\ngiovedì 1 ottobre 2026 ⋅ 11:00 – 12:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=TGFudGVybmEgfCBGdXJnb25p\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Lanterna | Furgoni, turni dei corrieri e fogli condivisi</h2><p>giovedì 1 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
       "headers": [
         [
           "Sender",
@@ -989,7 +989,7 @@
         ],
         [
           "Subject",
-          "Invito: Faro | Perizie, lavoro degli ingegneri e app no-code - gio 1 ott 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)"
+          "Invito: Lanterna | Furgoni, turni dei corrieri e fogli condivisi - gio 1 ott 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)"
         ]
       ]
     },
@@ -1039,9 +1039,9 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Invito aggiornato: Faro | Ciclo di gestione della pratica: dalla domanda a... - ven 2 ott 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)",
-      "text": "Questo evento è stato modificato.\n\nFaro | Ciclo di gestione della pratica: dalla domanda alla rendicontazione\nvenerdì 2 ottobre 2026 ⋅ 11:00 – 12:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=RmFybyB8IENpY2xvIGRpIGdl\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
-      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Faro | Ciclo di gestione della pratica: dalla domanda alla rendicontazione</h2><p>venerdì 2 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "subject": "Invito aggiornato: Lanterna | Giro delle consegne: dall’ordine alla fattur... - ven 2 ott 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)",
+      "text": "Questo evento è stato modificato.\n\nLanterna | Giro delle consegne: dall’ordine alla fattura\nvenerdì 2 ottobre 2026 ⋅ 11:00 – 12:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=TGFudGVybmEgfCBHaXJvIGRl\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Lanterna | Giro delle consegne: dall’ordine alla fattura</h2><p>venerdì 2 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
       "headers": [
         [
           "Sender",
@@ -1057,7 +1057,7 @@
         ],
         [
           "Subject",
-          "Invito aggiornato: Faro | Ciclo di gestione della pratica: dalla domanda a... - ven 2 ott 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)"
+          "Invito aggiornato: Lanterna | Giro delle consegne: dall’ordine alla fattur... - ven 2 ott 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)"
         ]
       ]
     },
@@ -1094,12 +1094,12 @@
         "name": "Alex Moro",
         "address": "alex.moro@esempio.it"
       },
-      "subject": "Re: FARO / Onboard Slack",
+      "subject": "Re: LANTERNA / Onboard Slack",
       "text": "Tutto ok anche per me.",
       "headers": [
         [
           "Subject",
-          "Re: FARO / Onboard Slack"
+          "Re: LANTERNA / Onboard Slack"
         ]
       ]
     },
@@ -1149,9 +1149,9 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Invito: Approfondimenti CEF - ven 2 ott 2026 16:30 - 17:30 (CEST) (alex.moro@esempio.it)",
-      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nApprofondimenti CEF\nvenerdì 2 ottobre 2026 ⋅ 16:30 – 17:30\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=QXBwcm9mb25kaW1lbnRpIENF\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
-      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Approfondimenti CEF</h2><p>venerdì 2 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "subject": "Invito: Approfondimenti sul magazzino - ven 2 ott 2026 16:30 - 17:30 (CEST) (alex.moro@esempio.it)",
+      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nApprofondimenti sul magazzino\nvenerdì 2 ottobre 2026 ⋅ 16:30 – 17:30\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=QXBwcm9mb25kaW1lbnRpIHN1\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Approfondimenti sul magazzino</h2><p>venerdì 2 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
       "headers": [
         [
           "Sender",
@@ -1167,7 +1167,7 @@
         ],
         [
           "Subject",
-          "Invito: Approfondimenti CEF - ven 2 ott 2026 16:30 - 17:30 (CEST) (alex.moro@esempio.it)"
+          "Invito: Approfondimenti sul magazzino - ven 2 ott 2026 16:30 - 17:30 (CEST) (alex.moro@esempio.it)"
         ]
       ]
     },
@@ -1210,7 +1210,7 @@
         "address": "lorenzo@bellini.esempio.it"
       },
       "subject": "Operations",
-      "text": "Apro questo filo per le cose operative della settimana, così non si perdono tra le riunioni.\n\n1) chi segue le pratiche sospese\n2) modello unico per le perizie\n3) chiusura mensile",
+      "text": "Apro questo filo per le cose operative della settimana, così non si perdono tra le riunioni.\n\n1) chi segue le consegne in sospeso\n2) foglio unico per i turni\n3) chiusura mensile",
       "headers": [
         [
           "Subject",
@@ -1257,7 +1257,7 @@
         "address": "alex.moro@esempio.it"
       },
       "subject": "Re: Operations",
-      "text": "Sulle pratiche sospese posso fare io una prima ricognizione entro lunedì.\n\nIl giorno mer 30 set 2026 alle ore 18:00 Lorenzo Bellini <lorenzo@bellini.esempio.it> ha scritto:\n> Apro questo filo per le cose operative della settimana, così non si perdono tra le riunioni.\n> \n> 1) chi segue le pratiche sospese\n> 2) modello unico per le perizie\n> 3) chiusura mensile",
+      "text": "Sulle consegne in sospeso posso fare io una prima ricognizione entro lunedì.\n\nIl giorno mer 30 set 2026 alle ore 18:00 Lorenzo Bellini <lorenzo@bellini.esempio.it> ha scritto:\n> Apro questo filo per le cose operative della settimana, così non si perdono tra le riunioni.\n> \n> 1) chi segue le consegne in sospeso\n> 2) foglio unico per i turni\n> 3) chiusura mensile",
       "headers": [
         [
           "Subject",
@@ -1294,12 +1294,12 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Riassutno call Nebula AI",
-      "text": "Riassunto veloce della call di stamattina con Nebula AI: possono integrare la lettura automatica dei documenti, preventivo entro due settimane, serve un caso pilota su 50 pratiche.",
+      "subject": "Riassutno call Cometa Dati",
+      "text": "Riassunto veloce della call di stamattina con Cometa Dati: possono integrare la lettura automatica delle bolle, preventivo entro due settimane, serve un caso pilota su 50 consegne.",
       "headers": [
         [
           "Subject",
-          "Riassutno call Nebula AI"
+          "Riassutno call Cometa Dati"
         ]
       ]
     },
@@ -1342,7 +1342,7 @@
         "address": "lorenzo@bellini.esempio.it"
       },
       "subject": "Re: Operations",
-      "text": "Per le perizie Ilaria ha un modello che usano da due anni, lo condivide su Slack.\n\nIl giorno gio 1 ott 2026 alle ore 08:30 Alex Moro <alex.moro@esempio.it> ha scritto:\n> Sulle pratiche sospese posso fare io una prima ricognizione entro lunedì.",
+      "text": "Per i turni Ilaria ha un foglio che usano da due anni, lo condivide su Slack.\n\nIl giorno gio 1 ott 2026 alle ore 08:30 Alex Moro <alex.moro@esempio.it> ha scritto:\n> Sulle consegne in sospeso posso fare io una prima ricognizione entro lunedì.",
       "headers": [
         [
           "Subject",
@@ -1366,7 +1366,7 @@
       "references": [],
       "attachments": [
         {
-          "filename": "Mappa Ufficio Ingegneria.pdf",
+          "filename": "Mappa Magazzino.pdf",
           "mimeType": "application/pdf",
           "size": 1240000,
           "inline": false
@@ -1390,12 +1390,12 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Faro, Ufficio Ingegneria: prima mappa",
-      "text": "Vi mando la prima mappa dell’Ufficio Ingegneria: chi fa cosa, quali strumenti usano, dove si blocca il lavoro.",
+      "subject": "Lanterna, Magazzino: prima mappa",
+      "text": "Vi mando la prima mappa dell’Magazzino: chi fa cosa, quali strumenti usano, dove si blocca il lavoro.",
       "headers": [
         [
           "Subject",
-          "Faro, Ufficio Ingegneria: prima mappa"
+          "Lanterna, Magazzino: prima mappa"
         ]
       ]
     },
@@ -1445,9 +1445,9 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Invito: Faro | Punto della settimana sulle priorità operations - ven 2 ott 2026 17:30 - 18:00 (CEST) (alex.moro@esempio.it)",
-      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nFaro | Punto della settimana sulle priorità operations\nvenerdì 2 ottobre 2026 ⋅ 17:30 – 18:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=RmFybyB8IFB1bnRvIGRlbGxh\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
-      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Faro | Punto della settimana sulle priorità operations</h2><p>venerdì 2 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "subject": "Invito: Lanterna | Punto della settimana sulle priorità operations - ven 2 ott 2026 17:30 - 18:00 (CEST) (alex.moro@esempio.it)",
+      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nLanterna | Punto della settimana sulle priorità operations\nvenerdì 2 ottobre 2026 ⋅ 17:30 – 18:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=TGFudGVybmEgfCBQdW50byBk\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Lanterna | Punto della settimana sulle priorità operations</h2><p>venerdì 2 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
       "headers": [
         [
           "Sender",
@@ -1463,7 +1463,7 @@
         ],
         [
           "Subject",
-          "Invito: Faro | Punto della settimana sulle priorità operations - ven 2 ott 2026 17:30 - 18:00 (CEST) (alex.moro@esempio.it)"
+          "Invito: Lanterna | Punto della settimana sulle priorità operations - ven 2 ott 2026 17:30 - 18:00 (CEST) (alex.moro@esempio.it)"
         ]
       ]
     },
@@ -1496,12 +1496,12 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Due side event di Onda a Torino, 8 e 9 ottobre: vi aspetto",
-      "text": "Ciao a tutti, l’8 e il 9 ottobre a Torino ci sono due side event di Onda dedicati all’innovazione nella pubblica amministrazione. Io ci sarò entrambi i giorni: se passate scrivetemi.\n\nProgramma e iscrizioni: https://onda.esempio.it/torino",
+      "subject": "Due incontri di Marea a Bologna, 8 e 9 ottobre: vi aspetto",
+      "text": "Ciao a tutti, l’8 e il 9 ottobre a Bologna ci sono due incontri di Marea dedicati all’innovazione nella pubblica amministrazione. Io ci sarò entrambi i giorni: se passate scrivetemi.\n\nProgramma e iscrizioni: https://marea.esempio.it/bologna",
       "headers": [
         [
           "Subject",
-          "Due side event di Onda a Torino, 8 e 9 ottobre: vi aspetto"
+          "Due incontri di Marea a Bologna, 8 e 9 ottobre: vi aspetto"
         ]
       ],
       "bcc": []
@@ -1545,7 +1545,7 @@
         "address": "lorenzo@bellini.esempio.it"
       },
       "subject": "Re: Operations",
-      "text": "Perfetto. Alex, la ricognizione mettila nel documento condiviso.\n\nIl giorno gio 1 ott 2026 alle ore 12:15 Lorenzo Bellini <lorenzo@bellini.esempio.it> ha scritto:\n> Per le perizie Ilaria ha un modello che usano da due anni, lo condivide su Slack.",
+      "text": "Perfetto. Alex, la ricognizione mettila nel documento condiviso.\n\nIl giorno gio 1 ott 2026 alle ore 12:15 Lorenzo Bellini <lorenzo@bellini.esempio.it> ha scritto:\n> Per i turni Ilaria ha un foglio che usano da due anni, lo condivide su Slack.",
       "headers": [
         [
           "Subject",
@@ -1599,9 +1599,9 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Invito aggiornato: Faro | Ciclo di gestione della pratica: dalla domanda a... - mar 6 ott 2026 16:30 - 17:30 (CEST) (alex.moro@esempio.it)",
-      "text": "Questo evento è stato modificato.\n\nFaro | Ciclo di gestione della pratica: dalla domanda alla rendicontazione\nmartedì 6 ottobre 2026 ⋅ 16:30 – 17:30\nOra dell’Europa centrale - Roma\n(modificato: prima era venerdì 2 ottobre 2026 ⋅ 11:00 – 12:00)\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=RmFybyB8IENpY2xvIGRpIGdl\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
-      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Faro | Ciclo di gestione della pratica: dalla domanda alla rendicontazione</h2><p>martedì 6 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "subject": "Invito aggiornato: Lanterna | Giro delle consegne: dall’ordine alla fattur... - mar 6 ott 2026 16:30 - 17:30 (CEST) (alex.moro@esempio.it)",
+      "text": "Questo evento è stato modificato.\n\nLanterna | Giro delle consegne: dall’ordine alla fattura\nmartedì 6 ottobre 2026 ⋅ 16:30 – 17:30\nOra dell’Europa centrale - Roma\n(modificato: prima era venerdì 2 ottobre 2026 ⋅ 11:00 – 12:00)\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=TGFudGVybmEgfCBHaXJvIGRl\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Lanterna | Giro delle consegne: dall’ordine alla fattura</h2><p>martedì 6 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
       "headers": [
         [
           "Sender",
@@ -1617,7 +1617,7 @@
         ],
         [
           "Subject",
-          "Invito aggiornato: Faro | Ciclo di gestione della pratica: dalla domanda a... - mar 6 ott 2026 16:30 - 17:30 (CEST) (alex.moro@esempio.it)"
+          "Invito aggiornato: Lanterna | Giro delle consegne: dall’ordine alla fattur... - mar 6 ott 2026 16:30 - 17:30 (CEST) (alex.moro@esempio.it)"
         ]
       ]
     },
@@ -1641,7 +1641,7 @@
       "references": [],
       "attachments": [
         {
-          "filename": "Ciclo di gestione della pratica.pdf",
+          "filename": "Giro delle consegne.pdf",
           "mimeType": "application/pdf",
           "size": 680000,
           "inline": false
@@ -1665,12 +1665,12 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Faro | Ciclo di gestione della pratica: dalla domanda alla rendicontazione",
-      "text": "In vista di martedì vi mando lo schema del ciclo di gestione della pratica, dalla domanda alla rendicontazione. Segnate dove secondo voi si perde più tempo.",
+      "subject": "Lanterna | Giro delle consegne: dall’ordine alla fattura",
+      "text": "In vista di martedì vi mando lo schema del giro delle consegne, dall’ordine alla fattura. Segnate dove secondo voi si perde più tempo.",
       "headers": [
         [
           "Subject",
-          "Faro | Ciclo di gestione della pratica: dalla domanda alla rendicontazione"
+          "Lanterna | Giro delle consegne: dall’ordine alla fattura"
         ]
       ]
     },
@@ -1713,7 +1713,7 @@
         "address": "alex.moro@esempio.it"
       },
       "subject": "Re: Operations",
-      "text": "Fatto: 42 pratiche sospese, 30 per documenti mancanti, 12 in attesa di perizia.\n\nIl giorno ven 2 ott 2026 alle ore 09:00 Lorenzo Bellini <lorenzo@bellini.esempio.it> ha scritto:\n> Perfetto. Alex, la ricognizione mettila nel documento condiviso.",
+      "text": "Fatto: 42 consegne in sospeso, 30 per indirizzi incompleti, 12 in attesa del furgone.\n\nIl giorno ven 2 ott 2026 alle ore 09:00 Lorenzo Bellini <lorenzo@bellini.esempio.it> ha scritto:\n> Perfetto. Alex, la ricognizione mettila nel documento condiviso.",
       "headers": [
         [
           "Subject",
@@ -1760,7 +1760,7 @@
         "address": "alex.moro@esempio.it"
       },
       "subject": "Re: Operations",
-      "text": "Le 12 in attesa di perizia secondo Pietro si chiudono entro fine mese, se arrivano le nomine.\n\nIl giorno lun 5 ott 2026 alle ore 17:45 Alex Moro <alex.moro@esempio.it> ha scritto:\n> Fatto: 42 pratiche sospese, 30 per documenti mancanti, 12 in attesa di perizia.",
+      "text": "Le 12 in attesa del furgone secondo Pietro si chiudono entro fine mese, se arriva il secondo furgone.\n\nIl giorno lun 5 ott 2026 alle ore 17:45 Alex Moro <alex.moro@esempio.it> ha scritto:\n> Fatto: 42 consegne in sospeso, 30 per indirizzi incompleti, 12 in attesa del furgone.",
       "headers": [
         [
           "Subject",
@@ -1814,9 +1814,9 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Invito aggiornato: Faro | Ciclo di gestione della pratica: dalla domanda a... - mar 13 ott 2026 16:30 - 17:30 (CEST) (alex.moro@esempio.it)",
-      "text": "Questo evento è stato modificato.\n\nFaro | Ciclo di gestione della pratica: dalla domanda alla rendicontazione\nmartedì 13 ottobre 2026 ⋅ 16:30 – 17:30\nOra dell’Europa centrale - Roma\n(modificato: prima era martedì 6 ottobre 2026 ⋅ 16:30 – 17:30)\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=RmFybyB8IENpY2xvIGRpIGdl\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
-      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Faro | Ciclo di gestione della pratica: dalla domanda alla rendicontazione</h2><p>martedì 13 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "subject": "Invito aggiornato: Lanterna | Giro delle consegne: dall’ordine alla fattur... - mar 13 ott 2026 16:30 - 17:30 (CEST) (alex.moro@esempio.it)",
+      "text": "Questo evento è stato modificato.\n\nLanterna | Giro delle consegne: dall’ordine alla fattura\nmartedì 13 ottobre 2026 ⋅ 16:30 – 17:30\nOra dell’Europa centrale - Roma\n(modificato: prima era martedì 6 ottobre 2026 ⋅ 16:30 – 17:30)\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=TGFudGVybmEgfCBHaXJvIGRl\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Lanterna | Giro delle consegne: dall’ordine alla fattura</h2><p>martedì 13 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
       "headers": [
         [
           "Sender",
@@ -1832,7 +1832,7 @@
         ],
         [
           "Subject",
-          "Invito aggiornato: Faro | Ciclo di gestione della pratica: dalla domanda a... - mar 13 ott 2026 16:30 - 17:30 (CEST) (alex.moro@esempio.it)"
+          "Invito aggiornato: Lanterna | Giro delle consegne: dall’ordine alla fattur... - mar 13 ott 2026 16:30 - 17:30 (CEST) (alex.moro@esempio.it)"
         ]
       ]
     },
@@ -1933,12 +1933,12 @@
         "name": "Lorenzo Bellini",
         "address": "lorenzo@bellini.esempio.it"
       },
-      "subject": "Spazio agenti, il tuo accesso al tenant Faro",
-      "text": "Ti ho dato accesso allo Spazio agenti nel tenant Faro. Al primo accesso ti chiede di impostare la verifica in due passaggi.\n\nhttps://agenti.faro.esempio.it/accesso",
+      "subject": "Area soci, il tuo accesso a Lanterna",
+      "text": "Ti ho dato accesso all’Area soci di Lanterna. Al primo accesso ti chiede di impostare la verifica in due passaggi.\n\nhttps://soci.lanterna.esempio.it/accesso",
       "headers": [
         [
           "Subject",
-          "Spazio agenti, il tuo accesso al tenant Faro"
+          "Area soci, il tuo accesso a Lanterna"
         ]
       ]
     },
@@ -1981,7 +1981,7 @@
         "address": "lorenzo@bellini.esempio.it"
       },
       "subject": "Re: Operations",
-      "text": "Ottimo, ne parliamo giovedì all’allineamento. Intanto mettete tutto in #operations.\n\nIl giorno mar 6 ott 2026 alle ore 10:10 Alex Moro <alex.moro@esempio.it> ha scritto:\n> Le 12 in attesa di perizia secondo Pietro si chiudono entro fine mese, se arrivano le nomine.",
+      "text": "Ottimo, ne parliamo giovedì all’allineamento. Intanto mettete tutto in #operations.\n\nIl giorno mar 6 ott 2026 alle ore 10:10 Alex Moro <alex.moro@esempio.it> ha scritto:\n> Le 12 in attesa del furgone secondo Pietro si chiudono entro fine mese, se arriva il secondo furgone.",
       "headers": [
         [
           "Subject",

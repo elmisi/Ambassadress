@@ -6,7 +6,7 @@ BEGIN:VEVENT
 UID:075@esempio.it
 DTSTART:20260912T144000Z
 DTEND:20260912T154000Z
-SUMMARY:Brief Faro con Alex
+SUMMARY:Brief Lanterna con Alex
 ORGANIZER;CN=Lorenzo Bellini:mailto:lorenzo@bellini.esempio.it
 END:VEVENT
 END:VCALENDAR

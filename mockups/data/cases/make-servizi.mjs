@@ -38,16 +38,16 @@ function note(from, subject, text, d, opts = {}) {
 const REPOHUB = { name: 'Repohub', address: 'notifications-noreply@repohub.esempio.it' };
 const PEOPLE = ['Marta Riva', 'Davide Greco', 'Sofia Ricci', 'Luca Fontana'];
 const PRS = [
-  ['nordwind/atlas-data', 24, 'RP-213 update wiki and knowledge app', ['opened', 'commented', 'approved']],
-  ['nordwind/planner-platform', 16, 'RP-199: production-list specification', ['opened']],
-  ['nordwind/shopfront', 380, 'WS-207 data leakage v3 - STAGE 1 (rebase)', ['opened', 'commented', 'commented']],
-  ['nordwind/atlas-data', 21, 'RP-203 research planning payload for article creation', ['opened']],
-  ['nordwind/route-planner', 54, 'RP-206 add 35 mm', ['opened', 'commented', 'approved', 'merged']],
-  ['nordwind/route-planner', 53, 'feat: a colour with only one strap chooses that strap', ['opened', 'commented', 'approved', 'merged']],
-  ['nordwind/planner-backend', 46, 'RP-206 add 35 mm', ['opened', 'approved', 'commented', 'merged']],
-  ['nordwind/planner-backend', 45, 'RP-205 add data quality fields', ['opened', 'merged']],
-  ['nordwind/route-planner', 52, 'RP-205 add data quality fields', ['opened', 'approved']],
-  ['nordwind/route-planner', 50, 'RP-177 frontend strap from engine proposals', ['opened', 'commented', 'approved']]
+  ['fornoverde/ricettario', 24, 'RP-213 refresh onboarding guide', ['opened', 'commented', 'approved']],
+  ['fornoverde/turni', 16, 'RP-199: opening-hours specification', ['opened']],
+  ['fornoverde/negozio', 380, 'WS-207 checkout cleanup v3 - step 1 (rebase)', ['opened', 'commented', 'commented']],
+  ['fornoverde/ricettario', 21, 'RP-203 recipe import from spreadsheet', ['opened']],
+  ['fornoverde/giri', 54, 'RP-206 add half-size loaf', ['opened', 'commented', 'approved', 'merged']],
+  ['fornoverde/giri', 53, 'feat: a shop with only one oven picks that oven', ['opened', 'commented', 'approved', 'merged']],
+  ['fornoverde/turni-api', 46, 'RP-206 add half-size loaf', ['opened', 'approved', 'commented', 'merged']],
+  ['fornoverde/turni-api', 45, 'RP-205 add allergen fields', ['opened', 'merged']],
+  ['fornoverde/giri', 52, 'RP-205 add allergen fields', ['opened', 'approved']],
+  ['fornoverde/giri', 50, 'RP-177 frontend menu from planner proposals', ['opened', 'commented', 'approved']]
 ];
 const VERB = { opened: 'ha aperto la pull request', commented: 'ha commentato la pull request', approved: 'ha approvato la pull request', merged: 'ha unito la pull request' };
 PRS.forEach(([repo, num, title, events], i) => {
@@ -60,22 +60,22 @@ PRS.forEach(([repo, num, title, events], i) => {
     note(REPOHUB, subject, text, Math.max(0, start - j * 2), { thread: 'pr-' + repo + num, headers: [['X-Repohub-Event', 'pullrequest:' + ev]] });
   });
 });
-note(REPOHUB, '[Repohub] Pipeline for main failed on ae83fe6 (nordwind/atlas-data)', 'La pipeline di main è fallita al passo «test».\n\nCommit ae83fe6 di Marta Riva.\nhttps://repohub.esempio.it/nordwind/atlas-data/pipelines/812', 6);
+note(REPOHUB, '[Repohub] Pipeline for main failed on ae83fe6 (fornoverde/ricettario)', 'La pipeline di main è fallita al passo «test».\n\nCommit ae83fe6 di Marta Riva.\nhttps://repohub.esempio.it/fornoverde/ricettario/pipelines/812', 6);
 
 // Issue tracker: one issue with five updates, one with two.
-const TRACKER = { name: 'Tracker', address: 'tracker@nordwind.esempio.it' };
-['Creata da Marta Riva', 'Stato: Da fare → In corso', 'Commento di Sofia Ricci: le proposte arrivano già ordinate dal motore.', 'Stato: In corso → In revisione', 'Collegata alla pull request #50'].forEach((t, j) => {
-  note(TRACKER, '[TRACKER] (RP-177) Frontend: strap from engine proposals', t + '\n\nhttps://nordwind.tracker.esempio.it/browse/RP-177', 30 - j * 5, { thread: 'rp177' });
+const TRACKER = { name: 'Tracker', address: 'tracker@fornoverde.esempio.it' };
+['Creata da Marta Riva', 'Stato: Da fare → In corso', 'Commento di Sofia Ricci: le proposte arrivano già ordinate dal pianificatore.', 'Stato: In corso → In revisione', 'Collegata alla pull request #50'].forEach((t, j) => {
+  note(TRACKER, '[TRACKER] (RP-177) Frontend: menu from planner proposals', t + '\n\nhttps://fornoverde.tracker.esempio.it/browse/RP-177', 30 - j * 5, { thread: 'rp177' });
 });
 ['Creata da Davide Greco', 'Stato: Da fare → In corso'].forEach((t, j) => {
-  note(TRACKER, '[TRACKER] (RP-205) Data quality fields', t + '\n\nhttps://nordwind.tracker.esempio.it/browse/RP-205', 20 - j * 6, { thread: 'rp205' });
+  note(TRACKER, '[TRACKER] (RP-205) Allergen fields', t + '\n\nhttps://fornoverde.tracker.esempio.it/browse/RP-205', 20 - j * 6, { thread: 'rp205' });
 });
 
 // CI runs on a personal project.
 const FORGE = { name: 'Gitforge', address: 'noreply@gitforge.esempio.it' };
-note(FORGE, '[alexmoro/hourglass] PR run failed: Build - takeaway (0118015)', 'Build fallita sul ramo takeaway.\nCommit 0118015.', 4);
-note(FORGE, '[alexmoro/hourglass] PR run failed: QA - takeaway (0118015)', 'QA fallito sul ramo takeaway.\nCommit 0118015.', 4);
-note(FORGE, '[alexmoro/hourglass] Run failed: QA - qa/contract-suite (0118015)', 'Esecuzione fallita: qa/contract-suite.\nCommit 0118015.', 3);
+note(FORGE, '[alexmoro/orto] PR run failed: Build - semina (0118015)', 'Build fallita sul ramo semina.\nCommit 0118015.', 4);
+note(FORGE, '[alexmoro/orto] PR run failed: QA - semina (0118015)', 'QA fallito sul ramo semina.\nCommit 0118015.', 4);
+note(FORGE, '[alexmoro/orto] Run failed: QA - qa/prove-base (0118015)', 'Esecuzione fallita: qa/prove-base.\nCommit 0118015.', 3);
 note(FORGE, '[Gitforge] A new SSH authentication public key was added to your account', 'A new SSH key was added to your account. If you did not add it, remove it now.', 26, { headers: [], labels: ['CATEGORY_UPDATES'] });
 note(FORGE, '[Gitforge] A new SSH authentication public key was added to your account', 'A new SSH key was added to your account. If you did not add it, remove it now.', 9, { headers: [], unread: true });
 
