@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Conversazioni</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#F3F4F6}
+a{color:#2F45D8}a:hover{color:#1E2E9E}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #2F45D8;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; font-family: 'Instrument Sans', system-ui, sans-serif; color: #15171C; background: #F3F4F6; display: flex; flex-direction: column">
+
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; padding: 14px 24px; background: #FFFFFF; border-bottom: 1px solid #E2E4EA">
+    <div style="display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; letter-spacing: -0.01em">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l9 6 9-6"></path><rect x="3" y="5" width="18" height="14" rx="3"></rect></svg>
+      Ambassadress
+    </div>
+    <nav aria-label="Viste" style="display: flex; flex-wrap: wrap; gap: 4px">
+      <a href="Main.dc.html" aria-current="page" style="padding: 8px 12px; border-radius: 8px; background: #E8EBFB; color: #1E2E9E; font-weight: 600; text-decoration: none">Conversazioni</a>
+      <a href="Today.dc.html" style="padding: 8px 12px; border-radius: 8px; color: #3D4250; text-decoration: none">Oggi</a>
+      <a href="Search.dc.html" style="padding: 8px 12px; border-radius: 8px; color: #3D4250; text-decoration: none">Cerca</a>
+      <a href="Attachments.dc.html" style="padding: 8px 12px; border-radius: 8px; color: #3D4250; text-decoration: none">Allegati</a>
+    </nav>
+    <div style="flex: 1 1 260px; display: flex; align-items: center; gap: 8px; padding: 0 12px; height: 40px; border: 1px solid #D5D8E0; border-radius: 10px; background: #F8F9FB">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5A6070" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M16.5 16.5L21 21"></path></svg>
+      <label for="q" class="sr-only">Cerca</label>
+      <input id="q" type="search" placeholder="Chi, cosa, quando, quale allegato…" style="flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; font-size: 14px; color: #15171C; outline: none">
+      <kbd style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070; border: 1px solid #D5D8E0; border-radius: 4px; padding: 1px 6px">/</kbd>
+    </div>
+    <button type="button" style="display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 16px; border: 0; border-radius: 10px; background: {{accent}}; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>
+      Scrivi
+    </button>
+  </header>
+
+  <div style="flex: 1; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 16px; padding: 16px">
+
+    <section aria-label="Elenco conversazioni" style="flex: 1 1 300px; max-width: 380px; min-width: 0; background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 14px; overflow: hidden">
+      <h2 style="margin: 0; padding: 14px 16px 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5A6070">Aspettano te</h2>
+      <a href="#thread" style="display: flex; gap: 12px; padding: 12px 16px; background: #E8EBFB; color: inherit; text-decoration: none; border-top: 1px solid #E2E4EA">
+        <span aria-hidden="true" style="flex: none; width: 36px; height: 36px; border-radius: 50%; background: #2F45D8; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px">AC</span>
+        <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+          <span style="display: flex; justify-content: space-between; gap: 8px"><strong style="font-size: 14px">Amministrazione condominio</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">09:42</span></span>
+          <span style="font-size: 14px; font-weight: 600">Assemblea del 12 ottobre</span>
+          <span style="font-size: 13px; color: #5A6070; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Lucia: allego la delega firmata, la porta Marco</span>
+          <span style="display: flex; gap: 10px; font-size: 12px; color: #3D4250"><span>6 messaggi</span><span>3 allegati</span><span>4 persone</span></span>
+        </span>
+      </a>
+      <a href="#thread" style="display: flex; gap: 12px; padding: 12px 16px; color: inherit; text-decoration: none; border-top: 1px solid #E2E4EA">
+        <span aria-hidden="true" style="flex: none; width: 36px; height: 36px; border-radius: 50%; background: #F3D9C6; color: #6B3410; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px">GR</span>
+        <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+          <span style="display: flex; justify-content: space-between; gap: 8px"><strong style="font-size: 14px">Giulia Rinaldi</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">ieri</span></span>
+          <span style="font-size: 14px">Preventivo cucina</span>
+          <span style="font-size: 13px; color: #5A6070; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Ti va bene se passo giovedì per le misure?</span>
+        </span>
+      </a>
+      <h2 style="margin: 0; padding: 18px 16px 8px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5A6070; border-top: 1px solid #E2E4EA">Le altre</h2>
+      <a href="#thread" style="display: flex; gap: 12px; padding: 12px 16px; color: inherit; text-decoration: none; border-top: 1px solid #E2E4EA">
+        <span aria-hidden="true" style="flex: none; width: 36px; height: 36px; border-radius: 50%; background: #D9E7DA; color: #24502A; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px">SM</span>
+        <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+          <span style="display: flex; justify-content: space-between; gap: 8px"><span style="font-size: 14px">Studio Martini</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">lun</span></span>
+          <span style="font-size: 14px">Dichiarazione dei redditi</span>
+          <span style="font-size: 13px; color: #5A6070; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Ricevuto tutto, vi aggiorno a fine mese.</span>
+        </span>
+      </a>
+      <a href="#thread" style="display: flex; gap: 12px; padding: 12px 16px; color: inherit; text-decoration: none; border-top: 1px solid #E2E4EA">
+        <span aria-hidden="true" style="flex: none; width: 36px; height: 36px; border-radius: 50%; background: #E4E0F2; color: #3E2F7A; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px">FP</span>
+        <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+          <span style="display: flex; justify-content: space-between; gap: 8px"><span style="font-size: 14px">Famiglia · gruppo</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">sab</span></span>
+          <span style="font-size: 14px">Pranzo di domenica</span>
+          <span style="font-size: 13px; color: #5A6070; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Paolo: porto io il dolce</span>
+        </span>
+      </a>
+      <a href="#thread" style="display: flex; gap: 12px; padding: 12px 16px; color: inherit; text-decoration: none; border-top: 1px solid #E2E4EA">
+        <span aria-hidden="true" style="flex: none; width: 36px; height: 36px; border-radius: 50%; background: #E2E4EA; color: #3D4250; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px">7</span>
+        <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+          <span style="display: flex; justify-content: space-between; gap: 8px"><span style="font-size: 14px">Ricevute e notifiche</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">settimana</span></span>
+          <span style="font-size: 13px; color: #5A6070">Raccolte in una riga, si aprono solo se servono</span>
+        </span>
+      </a>
+    </section>
+
+    <article id="thread" aria-label="Conversazione" style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+      <div style="background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 14px; padding: 20px 24px; display: flex; flex-direction: column; gap: 12px">
+        <h1 style="margin: 0; font-size: 26px; line-height: 1.2; letter-spacing: -0.01em">Assemblea del 12 ottobre</h1>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px">
+          <span style="padding: 4px 10px; border-radius: 999px; background: #F3F4F6">Amministrazione condominio</span>
+          <span style="padding: 4px 10px; border-radius: 999px; background: #F3F4F6">Lucia Ferri</span>
+          <span style="padding: 4px 10px; border-radius: 999px; background: #F3F4F6">Marco Bassi</span>
+          <span style="padding: 4px 10px; border-radius: 999px; background: #F3F4F6">tu</span>
+        </div>
+      </div>
+
+      <button type="button" onClick="{{toggleOlder}}" aria-expanded="{{olderOpen}}" style="align-self: stretch; display: flex; align-items: center; gap: 10px; padding: 12px 16px; border: 1px dashed #C3C7D2; border-radius: 12px; background: transparent; font: inherit; font-size: 14px; color: #3D4250; cursor: pointer; text-align: left">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+        {{olderLabel}}
+      </button>
+
+      <sc-if value="{{olderOpen}}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <div style="background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 12px; padding: 12px 16px; display: flex; gap: 12px; font-size: 14px"><strong style="flex: none; width: 140px">Marco Bassi</strong><span style="flex: 1; color: #3D4250">Io ci sono, posso portare anche la delega di qualcun altro.</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">2 ott</span></div>
+          <div style="background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 12px; padding: 12px 16px; display: flex; gap: 12px; font-size: 14px"><strong style="flex: none; width: 140px">Lucia Ferri</strong><span style="flex: 1; color: #3D4250">Io quel giorno sono fuori. Il modulo della delega dove lo trovo?</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">2 ott</span></div>
+          <div style="background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 12px; padding: 12px 16px; display: flex; gap: 12px; font-size: 14px"><strong style="flex: none; width: 140px">tu</strong><span style="flex: 1; color: #3D4250">È in fondo alla convocazione, pagina 3.</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">3 ott</span></div>
+        </div>
+      </sc-if>
+
+      <div style="background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 14px; padding: 18px 24px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px"><strong>Amministrazione condominio</strong><span style="font-size: 13px; color: #5A6070">a tutti i condomini</span><span style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">1 ott · 16:05</span></div>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6">Gentili condomini, è convocata l'assemblea ordinaria per <mark style="background: #FFF1C2; color: inherit; padding: 0 2px; border-radius: 3px">sabato 12 ottobre alle 18:00</mark> presso la sala comune. In allegato l'ordine del giorno e il modulo di delega.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px">
+          <a href="Attachments.dc.html" style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #E2E4EA; border-radius: 10px; color: inherit; text-decoration: none; min-width: 220px">
+            <span aria-hidden="true" style="width: 34px; height: 42px; border-radius: 4px; background: #FBE3E0; color: #9A2A1C; display: flex; align-items: flex-end; justify-content: center; font-size: 10px; font-weight: 700; padding-bottom: 4px; box-sizing: border-box">PDF</span>
+            <span style="display: flex; flex-direction: column"><span style="font-size: 14px; font-weight: 600">Convocazione 12-10.pdf</span><span style="font-size: 12px; color: #5A6070">3 pagine · ordine del giorno</span></span>
+          </a>
+          <a href="Attachments.dc.html" style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #E2E4EA; border-radius: 10px; color: inherit; text-decoration: none; min-width: 220px">
+            <span aria-hidden="true" style="width: 34px; height: 42px; border-radius: 4px; background: #DDE6FA; color: #1E3E8A; display: flex; align-items: flex-end; justify-content: center; font-size: 10px; font-weight: 700; padding-bottom: 4px; box-sizing: border-box">DOC</span>
+            <span style="display: flex; flex-direction: column"><span style="font-size: 14px; font-weight: 600">Modulo delega.docx</span><span style="font-size: 12px; color: #5A6070">da compilare</span></span>
+          </a>
+        </div>
+      </div>
+
+      <div style="background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 14px; padding: 18px 24px; display: flex; flex-direction: column; gap: 12px">
+        <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 12px"><strong>Lucia Ferri</strong><span style="font-size: 13px; color: #5A6070">risponde a te</span><span style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">oggi · 09:42</span></div>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6">Grazie! Allego la delega firmata, la porta Marco.</p>
+        <span style="align-self: flex-start; font-size: 12px; color: #5A6070; padding: 3px 8px; border-radius: 6px; background: #F3F4F6">testo citato nascosto · 14 righe</span>
+        <a href="Attachments.dc.html" style="align-self: flex-start; display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #E2E4EA; border-radius: 10px; color: inherit; text-decoration: none; min-width: 220px">
+          <span aria-hidden="true" style="width: 34px; height: 42px; border-radius: 4px; background: #FBE3E0; color: #9A2A1C; display: flex; align-items: flex-end; justify-content: center; font-size: 10px; font-weight: 700; padding-bottom: 4px; box-sizing: border-box">PDF</span>
+          <span style="display: flex; flex-direction: column"><span style="font-size: 14px; font-weight: 600">Delega Ferri firmata.pdf</span><span style="font-size: 12px; color: #5A6070">versione compilata del modulo delega</span></span>
+        </a>
+      </div>
+
+      <form style="background: #FFFFFF; border: 1px solid #C3C7D2; border-radius: 14px; padding: 16px 20px; display: flex; flex-direction: column; gap: 10px">
+        <label for="reply" style="font-size: 13px; color: #5A6070">Rispondi a tutti · una sola bozza per conversazione, salvata qui</label>
+        <textarea id="reply" rows="3" placeholder="Scrivi…" style="border: 0; resize: vertical; font: inherit; font-size: 15px; line-height: 1.5; color: #15171C; outline: none; background: transparent"></textarea>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+          <button type="button" aria-label="Allega file" style="width: 44px; height: 44px; border: 1px solid #E2E4EA; border-radius: 10px; background: #FFFFFF; color: #3D4250; cursor: pointer; display: flex; align-items: center; justify-content: center">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5l-8.6 8.6a5.2 5.2 0 0 1-7.4-7.4l8.6-8.6a3.5 3.5 0 0 1 4.9 4.9l-8.6 8.6a1.7 1.7 0 0 1-2.5-2.5l7.9-7.9"></path></svg>
+          </button>
+          <span style="font-size: 12px; color: #5A6070">bozza salvata · 09:51</span>
+          <button type="submit" style="margin-left: auto; height: 44px; padding: 0 20px; border: 0; border-radius: 10px; background: {{accent}}; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer">Invia</button>
+        </div>
+      </form>
+    </article>
+
+    <aside aria-label="Contesto della conversazione" style="flex: 1 1 260px; max-width: 320px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+      <section style="background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+        <h2 style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5A6070">Date</h2>
+        <div style="display: flex; align-items: center; gap: 10px">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3D4250" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"></rect><path d="M16 3v4M8 3v4M3 10h18"></path></svg>
+          <span style="flex: 1; font-size: 14px"><strong>Sab 12 ott, 18:00</strong><br><span style="color: #5A6070">Assemblea · sala comune</span></span>
+        </div>
+        <button type="button" style="height: 44px; border: 1px solid #C3C7D2; border-radius: 10px; background: #FFFFFF; font: inherit; font-size: 14px; color: #15171C; cursor: pointer">Aggiungi al calendario</button>
+      </section>
+      <section style="background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+        <h2 style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5A6070">Allegati della conversazione</h2>
+        <a href="Attachments.dc.html" style="display: flex; justify-content: space-between; gap: 8px; font-size: 14px; color: inherit; text-decoration: none"><span>Convocazione 12-10.pdf</span><span style="color: #5A6070">1 ott</span></a>
+        <a href="Attachments.dc.html" style="display: flex; justify-content: space-between; gap: 8px; font-size: 14px; color: inherit; text-decoration: none"><span>Delega <span style="font-size: 12px; padding: 1px 6px; border-radius: 4px; background: #E8EBFB; color: #1E2E9E">2 versioni</span></span><span style="color: #5A6070">oggi</span></a>
+      </section>
+      <section style="background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+        <h2 style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5A6070">Collegate</h2>
+        <a href="#thread" style="font-size: 14px">Verbale assemblea di aprile</a>
+        <a href="#thread" style="font-size: 14px">Lavori facciata · preventivi</a>
+      </section>
+    </aside>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2F45D8","options":["#2F45D8","#0F6E5C","#9A3412","#15171C"]},"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { olderOpen: false };
+  }
+  renderVals() {
+    const olderOpen = this.state.olderOpen;
+    return {
+      accent: this.props.accent ?? '#2F45D8',
+      olderOpen: olderOpen,
+      olderLabel: olderOpen ? 'Nascondi i messaggi precedenti' : '3 messaggi precedenti · Marco, Lucia, tu',
+      toggleOlder: () => this.setState({ olderOpen: !olderOpen })
+    };
+  }
+}
+</script>
+</body>
+</html>

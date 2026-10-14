@@ -1,4 +1,4 @@
-# Ambrassadress
+# Ambassadress
 Software per la gestione della posta elettronica come nessuno lo ha mai fatto
 
 ## Motivazione

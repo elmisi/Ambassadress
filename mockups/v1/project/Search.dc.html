@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Cerca</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#F3F4F6}
+a{color:#2F45D8}a:hover{color:#1E2E9E}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #2F45D8;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; font-family: 'Instrument Sans', system-ui, sans-serif; color: #15171C; background: #F3F4F6; display: flex; flex-direction: column">
+
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; padding: 14px 24px; background: #FFFFFF; border-bottom: 1px solid #E2E4EA">
+    <div style="display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; letter-spacing: -0.01em">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l9 6 9-6"></path><rect x="3" y="5" width="18" height="14" rx="3"></rect></svg>
+      Ambassadress
+    </div>
+    <nav aria-label="Viste" style="display: flex; flex-wrap: wrap; gap: 4px">
+      <a href="Main.dc.html" style="padding: 8px 12px; border-radius: 8px; color: #3D4250; text-decoration: none">Conversazioni</a>
+      <a href="Today.dc.html" style="padding: 8px 12px; border-radius: 8px; color: #3D4250; text-decoration: none">Oggi</a>
+      <a href="Search.dc.html" aria-current="page" style="padding: 8px 12px; border-radius: 8px; background: #E8EBFB; color: #1E2E9E; font-weight: 600; text-decoration: none">Cerca</a>
+      <a href="Attachments.dc.html" style="padding: 8px 12px; border-radius: 8px; color: #3D4250; text-decoration: none">Allegati</a>
+    </nav>
+  </header>
+
+  <main style="flex: 1; width: 100%; max-width: 1160px; margin: 0 auto; box-sizing: border-box; padding: 32px 24px 48px; display: flex; flex-direction: column; gap: 20px">
+
+    <div style="display: flex; flex-direction: column; gap: 12px">
+      <div style="display: flex; align-items: center; gap: 12px; padding: 0 18px; height: 60px; border: 2px solid {{accent}}; border-radius: 14px; background: #FFFFFF">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M16.5 16.5L21 21"></path></svg>
+        <label for="big-q" class="sr-only">Cerca nella posta</label>
+        <input id="big-q" type="search" value="la convocazione all'assemblea del 12 ottobre con la delega" style="flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; font-size: 20px; color: #15171C; outline: none">
+        <kbd style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070; border: 1px solid #D5D8E0; border-radius: 4px; padding: 2px 6px">esc</kbd>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+        <span style="font-size: 13px; color: #5A6070">Ho capito:</span>
+        <sc-for list="{{chips}}" as="chip" hint-placeholder-count="3">
+          <button type="button" onClick="{{chip.toggle}}" aria-pressed="{{chip.on}}" style="{{chip.style}}">
+            <span style="font-size: 12px; opacity: 0.8">{{chip.kind}}</span>
+            <span style="font-weight: 600">{{chip.label}}</span>
+          </button>
+        </sc-for>
+        <span style="font-size: 13px; color: #5A6070">· tocca per togliere un criterio</span>
+      </div>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px">
+
+      <section aria-label="Risultati" style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+        <p style="margin: 0; font-size: 14px; color: #3D4250">{{countLabel}}</p>
+
+        <a href="Main.dc.html" style="display: flex; flex-wrap: wrap; gap: 20px; padding: 20px; background: #FFFFFF; border: 2px solid {{accent}}; border-radius: 16px; color: inherit; text-decoration: none">
+          <span aria-hidden="true" style="flex: none; width: 132px; height: 170px; border-radius: 8px; border: 1px solid #E2E4EA; background: #FAFAFB; box-sizing: border-box; padding: 14px 12px; display: flex; flex-direction: column; gap: 6px">
+            <span style="font-size: 9px; font-weight: 700; color: #15171C">DELEGA</span>
+            <span style="height: 4px; border-radius: 2px; background: #D5D8E0; width: 90%"></span>
+            <span style="height: 4px; border-radius: 2px; background: #D5D8E0; width: 75%"></span>
+            <span style="height: 4px; border-radius: 2px; background: #D5D8E0; width: 85%"></span>
+            <span style="height: 4px; border-radius: 2px; background: #D5D8E0; width: 60%"></span>
+            <span style="margin-top: auto; height: 18px; border-bottom: 1px solid #3D4250; width: 70%; font-family: 'IBM Plex Mono', monospace; font-size: 8px; color: #3D4250">firma</span>
+          </span>
+          <span style="flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+            <span style="display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: baseline"><strong style="font-size: 18px">Assemblea del 12 ottobre</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">1 ott · Amministrazione condominio</span></span>
+            <span style="font-size: 15px; line-height: 1.55; color: #3D4250">«…è convocata l'assemblea ordinaria per <mark style="background: #FFF1C2; color: #15171C; padding: 0 2px; border-radius: 3px">sabato 12 ottobre</mark> alle 18:00. In allegato l'ordine del giorno e il <mark style="background: #FFF1C2; color: #15171C; padding: 0 2px; border-radius: 3px">modulo di delega</mark>.»</span>
+            <span style="display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; border-radius: 10px; background: #F3F4F6; font-size: 13px; color: #3D4250">
+              <strong style="font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: #5A6070">Perché è qui</strong>
+              <span>È una convocazione, l'assemblea è il 12 ottobre</span>
+              <span>Allegati: Modulo delega.docx e la delega firmata da Lucia (stessa conversazione)</span>
+            </span>
+          </span>
+        </a>
+
+        <a href="Main.dc.html" style="display: flex; flex-direction: column; gap: 4px; padding: 14px 20px; background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 14px; color: inherit; text-decoration: none">
+          <span style="display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: baseline"><strong style="font-size: 15px">Re: Assemblea del 12 ottobre</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">oggi · Lucia Ferri</span></span>
+          <span style="font-size: 14px; color: #3D4250">Delega Ferri firmata.pdf · la versione compilata del modulo</span>
+        </a>
+        <sc-if value="{{showLoose}}" hint-placeholder-val="{{ false }}">
+          <a href="Main.dc.html" style="display: flex; flex-direction: column; gap: 4px; padding: 14px 20px; background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 14px; color: inherit; text-decoration: none">
+            <span style="display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: baseline"><strong style="font-size: 15px">Convocazione assemblea straordinaria</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">12 apr · Amministrazione condominio</span></span>
+            <span style="font-size: 14px; color: #3D4250">Assemblea di aprile, anche questa con modulo di delega</span>
+          </a>
+          <a href="Main.dc.html" style="display: flex; flex-direction: column; gap: 4px; padding: 14px 20px; background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 14px; color: inherit; text-decoration: none">
+            <span style="display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: baseline"><strong style="font-size: 15px">Associazione quartiere · convocazione soci</strong><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">3 mar · Associazione quartiere</span></span>
+            <span style="font-size: 14px; color: #3D4250">Delega per il voto in allegato</span>
+          </a>
+        </sc-if>
+      </section>
+
+      <aside aria-label="Restringi" style="flex: 1 1 260px; max-width: 320px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+        <section style="background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+          <h2 style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5A6070">Chi</h2>
+          <label style="display: flex; align-items: center; gap: 10px; font-size: 14px; min-height: 32px"><input type="checkbox" checked style="width: 18px; height: 18px; accent-color: {{accent}}"> Amministrazione condominio</label>
+          <label style="display: flex; align-items: center; gap: 10px; font-size: 14px; min-height: 32px"><input type="checkbox" style="width: 18px; height: 18px; accent-color: {{accent}}"> Lucia Ferri</label>
+          <label style="display: flex; align-items: center; gap: 10px; font-size: 14px; min-height: 32px"><input type="checkbox" style="width: 18px; height: 18px; accent-color: {{accent}}"> Associazione quartiere</label>
+        </section>
+        <section style="background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 10px">
+          <h2 style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5A6070">Ricerche recenti</h2>
+          <a href="Search.dc.html" style="font-size: 14px">fattura caldaia 2025</a>
+          <a href="Search.dc.html" style="font-size: 14px">foto che mi ha mandato Paolo a settembre</a>
+          <a href="Search.dc.html" style="font-size: 14px">pdf dello Studio Martini</a>
+        </section>
+      </aside>
+
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2F45D8","options":["#2F45D8","#0F6E5C","#9A3412","#15171C"]},"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { off: {} };
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#2F45D8';
+    const off = this.state.off;
+    const base = 'display: flex; align-items: baseline; gap: 6px; min-height: 36px; padding: 6px 12px; border-radius: 999px; font: inherit; font-size: 14px; cursor: pointer; ';
+    const chips = [
+      { id: 'kind', kind: 'tipo', label: 'convocazione' },
+      { id: 'date', kind: 'data citata', label: '12 ottobre' },
+      { id: 'att', kind: 'allegato', label: 'delega' }
+    ].map((c) => {
+      const on = !off[c.id];
+      return Object.assign({}, c, {
+        on: on,
+        style: base + (on ? 'border: 1px solid ' + accent + '; background: #E8EBFB; color: #1E2E9E;' : 'border: 1px dashed #C3C7D2; background: #FFFFFF; color: #5A6070; text-decoration: line-through;'),
+        toggle: () => this.setState({ off: Object.assign({}, off, { [c.id]: on }) })
+      });
+    });
+    const loose = Object.keys(off).some((k) => off[k]);
+    return {
+      accent: accent,
+      chips: chips,
+      showLoose: loose,
+      countLabel: loose ? '4 risultati, i più vicini in alto' : '2 risultati, stessa conversazione'
+    };
+  }
+}
+</script>
+</body>
+</html>

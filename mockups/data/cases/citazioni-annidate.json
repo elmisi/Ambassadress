@@ -1,0 +1,17 @@
+{
+  "id": "citazioni-annidate",
+  "title": "Risposta in cima a tre livelli di citazione, con firma in mezzo",
+  "report": "esempio iniziale, non nasce da una segnalazione",
+  "messages": [
+    {
+      "date": "2026-10-09T17:20:00.000Z",
+      "from": { "name": "Roberto Testa", "address": "roberto.testa@esempio.it" },
+      "to": [{ "name": "Alex Moro", "address": "alex.moro@esempio.it" }],
+      "subject": "Re: R: Re: Trasloco del 31",
+      "text": "Va bene, allora il furgone lo prenoto io.\n\n-- \nRoberto\n\nIl giorno gio 8 ott 2026 alle ore 21:10 Alex Moro <alex.moro@esempio.it> ha scritto:\n> Per me il 31 va benissimo.\n>\n> Il giorno gio 8 ott 2026 alle ore 19:02 Roberto Testa <roberto.testa@esempio.it> ha scritto:\n> > Che ne dici del 31?\n> >\n> > Da: Alex Moro\n> > Inviato: mercoledì 7 ottobre 2026 10:00\n> > Oggetto: Trasloco del 31\n> >\n> > > Quando ti serve una mano per il trasloco?",
+      "html": null,
+      "attachments": [],
+      "gmail": { "threadId": "case-citazioni-annidate", "labels": ["\\Inbox"] }
+    }
+  ]
+}

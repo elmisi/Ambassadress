@@ -1,0 +1,53 @@
+{
+  "id": "indirizzi-multipli",
+  "title": "Una persona con due indirizzi: quello vecchio non si usa da due anni, quello nuovo è attivo",
+  "report": "richiesta del 2026-10-14: nel nuovo messaggio mostrare sempre l’indirizzo e quando lo si è usato l’ultima volta, perché le persone hanno più indirizzi e alcuni sono in disuso",
+  "messages": [
+    {
+      "date": "2024-03-12T08:40:00.000Z",
+      "from": { "name": "Teresa Galvani", "address": "teresa.galvani@vecchiaditta.esempio.it" },
+      "to": [{ "name": "Alex Moro", "address": "alex.moro@esempio.it" }],
+      "subject": "Preventivo per il bagno",
+      "text": "Buongiorno Alex,\n\nle mando il preventivo per il rifacimento del bagno, come d’accordo al sopralluogo. I tempi sono di circa tre settimane.\n\nTeresa Galvani",
+      "attachments": [{ "filename": "Preventivo bagno.pdf", "mimeType": "application/pdf", "size": 182000, "inline": false }],
+      "gmail": { "threadId": "case-indirizzi-preventivo", "labels": ["\\Inbox"] },
+      "flags": { "seen": true, "flagged": false }
+    },
+    {
+      "date": "2024-03-13T17:05:00.000Z",
+      "from": { "name": "Alex Moro", "address": "alex.moro@esempio.it" },
+      "to": [{ "name": "Teresa Galvani", "address": "teresa.galvani@vecchiaditta.esempio.it" }],
+      "subject": "Re: Preventivo per il bagno",
+      "text": "Grazie Teresa, va bene. Possiamo partire dopo Pasqua?",
+      "gmail": { "threadId": "case-indirizzi-preventivo", "labels": ["\\Sent"] },
+      "flags": { "seen": true, "flagged": false }
+    },
+    {
+      "date": "2024-06-20T09:15:00.000Z",
+      "from": { "name": "Teresa Galvani", "address": "teresa.galvani@vecchiaditta.esempio.it" },
+      "to": [{ "name": "Alex Moro", "address": "alex.moro@esempio.it" }],
+      "subject": "Cambio di indirizzo",
+      "text": "Buongiorno,\n\nda luglio lavoro in proprio e questo indirizzo resterà attivo ancora per poco. Il nuovo è t.galvani@studiogalvani.esempio.it.\n\nTeresa",
+      "gmail": { "threadId": "case-indirizzi-cambio", "labels": ["\\Inbox"] },
+      "flags": { "seen": true, "flagged": false }
+    },
+    {
+      "date": "2026-09-29T10:20:00.000Z",
+      "from": { "name": "Teresa Galvani", "address": "t.galvani@studiogalvani.esempio.it" },
+      "to": [{ "name": "Alex Moro", "address": "alex.moro@esempio.it" }],
+      "subject": "Sopralluogo in cantina",
+      "text": "Ciao Alex, per l’umidità in cantina posso passare giovedì mattina. Ti va bene verso le 9?\n\nTeresa",
+      "gmail": { "threadId": "case-indirizzi-cantina", "labels": ["\\Inbox"] },
+      "flags": { "seen": true, "flagged": false }
+    },
+    {
+      "date": "2026-09-29T18:42:00.000Z",
+      "from": { "name": "Alex Moro", "address": "alex.moro@esempio.it" },
+      "to": [{ "name": "Teresa Galvani", "address": "t.galvani@studiogalvani.esempio.it" }],
+      "subject": "Re: Sopralluogo in cantina",
+      "text": "Perfetto, giovedì alle 9. Ti lascio le chiavi della cantina dal portiere.",
+      "gmail": { "threadId": "case-indirizzi-cantina", "labels": ["\\Sent"] },
+      "flags": { "seen": true, "flagged": false }
+    }
+  ]
+}

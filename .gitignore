@@ -1,0 +1,3 @@
+# Real mailbox exports: they stay on this machine, never in git
+mockups/data/private/
+__pycache__/

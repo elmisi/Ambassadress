@@ -1,0 +1,17 @@
+{
+  "id": "nome-breve-del-caso",
+  "title": "Cosa riproduce, in una riga",
+  "report": "riferimento alla segnalazione da cui nasce (data e tipo)",
+  "messages": [
+    {
+      "date": "2026-10-10T09:00:00.000Z",
+      "from": { "name": "Persona Finta", "address": "persona.finta@esempio.it" },
+      "to": [{ "name": "Alex Moro", "address": "alex.moro@esempio.it" }],
+      "subject": "Oggetto del caso",
+      "text": "Testo che riproduce la forma del problema.",
+      "html": null,
+      "attachments": [],
+      "gmail": { "threadId": "case-nome-breve-del-caso", "labels": ["\\Inbox"] }
+    }
+  ]
+}

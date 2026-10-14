@@ -1,0 +1,12 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Ambassadress//sintetico//IT
+METHOD:REQUEST
+BEGIN:VEVENT
+UID:086@esempio.it
+DTSTART:20261001T150000Z
+DTEND:20261001T160000Z
+SUMMARY:Faro | Punto della settimana sulle priorità operations
+ORGANIZER;CN=Lorenzo Bellini:mailto:lorenzo@bellini.esempio.it
+END:VEVENT
+END:VCALENDAR

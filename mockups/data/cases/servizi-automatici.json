@@ -1,0 +1,2725 @@
+{
+  "id": "servizi-automatici",
+  "title": "Tante notifiche automatiche di tipo diverso: revisione codice, issue, build, sicurezza, ricevute, pacchi, newsletter, social",
+  "report": "segnalazione del 2026-10-14 sulla voce Servizi e notifiche (forma descritta dall’utente)",
+  "messages": [
+    {
+      "id": "case-servizi-41",
+      "date": "2026-08-23T16:52:00.000Z",
+      "from": {
+        "name": "Account Esempio",
+        "address": "no-reply@accounts.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Avviso di sicurezza",
+      "text": "È stato effettuato un nuovo accesso al tuo account da Chrome su Linux. Se sei stato tu, non devi fare nulla.",
+      "html": null,
+      "messageId": "<case-servizi-41@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Avviso di sicurezza"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-41",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-42",
+      "date": "2026-09-03T06:49:00.000Z",
+      "from": {
+        "name": "Account Esempio",
+        "address": "no-reply@accounts.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Avviso di sicurezza",
+      "text": "È stato effettuato un nuovo accesso al tuo account da un iPhone. Se sei stato tu, non devi fare nulla.",
+      "html": null,
+      "messageId": "<case-servizi-42@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Avviso di sicurezza"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-42",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-1",
+      "date": "2026-09-04T05:55:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #24: RP-213 update wiki and knowledge app (nordwind/atlas-data)",
+      "text": "Marta Riva ha aperto la pull request #24 «RP-213 update wiki and knowledge app» in nordwind/atlas-data.\n\nVisualizza: https://repohub.esempio.it/nordwind/atlas-data/pull-requests/24",
+      "html": null,
+      "messageId": "<case-servizi-1@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #24: RP-213 update wiki and knowledge app (nordwind/atlas-data)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:opened"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/atlas-data24",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-2",
+      "date": "2026-09-06T09:12:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #24: RP-213 update wiki and knowledge app (nordwind/atlas-data)",
+      "text": "Davide Greco ha commentato la pull request #24 «RP-213 update wiki and knowledge app» in nordwind/atlas-data.\n\nVisualizza: https://repohub.esempio.it/nordwind/atlas-data/pull-requests/24\n\nCommento:\n> Rinominerei questa variabile.",
+      "html": null,
+      "messageId": "<case-servizi-2@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #24: RP-213 update wiki and knowledge app (nordwind/atlas-data)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:commented"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/atlas-data24",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-4",
+      "date": "2026-09-07T09:45:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #16: RP-199: production-list specification (nordwind/planner-platform)",
+      "text": "Davide Greco ha aperto la pull request #16 «RP-199: production-list specification» in nordwind/planner-platform.\n\nVisualizza: https://repohub.esempio.it/nordwind/planner-platform/pull-requests/16",
+      "html": null,
+      "messageId": "<case-servizi-4@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #16: RP-199: production-list specification (nordwind/planner-platform)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:opened"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/planner-platform16",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-3",
+      "date": "2026-09-08T15:31:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #24: RP-213 update wiki and knowledge app (nordwind/atlas-data)",
+      "text": "Sofia Ricci ha approvato la pull request #24 «RP-213 update wiki and knowledge app» in nordwind/atlas-data.\n\nVisualizza: https://repohub.esempio.it/nordwind/atlas-data/pull-requests/24",
+      "html": null,
+      "messageId": "<case-servizi-3@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #24: RP-213 update wiki and knowledge app (nordwind/atlas-data)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:approved"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/atlas-data24",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-5",
+      "date": "2026-09-10T15:32:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #380: WS-207 data leakage v3 - STAGE 1 (rebase) (nordwind/shopfront)",
+      "text": "Sofia Ricci ha aperto la pull request #380 «WS-207 data leakage v3 - STAGE 1 (rebase)» in nordwind/shopfront.\n\nVisualizza: https://repohub.esempio.it/nordwind/shopfront/pull-requests/380",
+      "html": null,
+      "messageId": "<case-servizi-5@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #380: WS-207 data leakage v3 - STAGE 1 (rebase) (nordwind/shopfront)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:opened"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/shopfront380",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-43",
+      "date": "2026-09-11T06:24:00.000Z",
+      "from": {
+        "name": "Account Esempio",
+        "address": "no-reply@accounts.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Avviso di sicurezza",
+      "text": "È stato effettuato un nuovo accesso al tuo account da Firefox su Windows. Se sei stato tu, non devi fare nulla.",
+      "html": null,
+      "messageId": "<case-servizi-43@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Avviso di sicurezza"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-43",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-6",
+      "date": "2026-09-12T14:38:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #380: WS-207 data leakage v3 - STAGE 1 (rebase) (nordwind/shopfront)",
+      "text": "Luca Fontana ha commentato la pull request #380 «WS-207 data leakage v3 - STAGE 1 (rebase)» in nordwind/shopfront.\n\nVisualizza: https://repohub.esempio.it/nordwind/shopfront/pull-requests/380\n\nCommento:\n> Rinominerei questa variabile.",
+      "html": null,
+      "messageId": "<case-servizi-6@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #380: WS-207 data leakage v3 - STAGE 1 (rebase) (nordwind/shopfront)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:commented"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/shopfront380",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-62",
+      "date": "2026-09-13T05:54:00.000Z",
+      "from": {
+        "name": "Nova AI",
+        "address": "news@nova.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "What’s new in Nova this month",
+      "text": null,
+      "html": "<html><body><h1>What’s new in Nova this month</h1><p>Le novità di questa settimana, in breve.</p><ul><li>Primo punto</li><li>Secondo punto</li></ul><a href=\"https://nova.esempio.it/leggi\">Leggi</a></body></html>",
+      "messageId": "<case-servizi-62@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "What’s new in Nova this month"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://nova.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-62",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_PROMOTIONS"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-8",
+      "date": "2026-09-13T10:42:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #21: RP-203 research planning payload for article creation (nordwind/atlas-data)",
+      "text": "Luca Fontana ha aperto la pull request #21 «RP-203 research planning payload for article creation» in nordwind/atlas-data.\n\nVisualizza: https://repohub.esempio.it/nordwind/atlas-data/pull-requests/21",
+      "html": null,
+      "messageId": "<case-servizi-8@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #21: RP-203 research planning payload for article creation (nordwind/atlas-data)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:opened"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/atlas-data21",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-29",
+      "date": "2026-09-14T10:17:00.000Z",
+      "from": {
+        "name": "Tracker",
+        "address": "tracker@nordwind.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[TRACKER] (RP-177) Frontend: strap from engine proposals",
+      "text": "Creata da Marta Riva\n\nhttps://nordwind.tracker.esempio.it/browse/RP-177",
+      "html": null,
+      "messageId": "<case-servizi-29@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[TRACKER] (RP-177) Frontend: strap from engine proposals"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://nordwind.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-rp177",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-7",
+      "date": "2026-09-14T16:14:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #380: WS-207 data leakage v3 - STAGE 1 (rebase) (nordwind/shopfront)",
+      "text": "Marta Riva ha commentato la pull request #380 «WS-207 data leakage v3 - STAGE 1 (rebase)» in nordwind/shopfront.\n\nVisualizza: https://repohub.esempio.it/nordwind/shopfront/pull-requests/380\n\nCommento:\n> Ok per me, solo un dubbio sul nome della colonna.",
+      "html": null,
+      "messageId": "<case-servizi-7@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #380: WS-207 data leakage v3 - STAGE 1 (rebase) (nordwind/shopfront)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:commented"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/shopfront380",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-9",
+      "date": "2026-09-16T14:03:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #54: RP-206 add 35 mm (nordwind/route-planner)",
+      "text": "Marta Riva ha aperto la pull request #54 «RP-206 add 35 mm» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/54",
+      "html": null,
+      "messageId": "<case-servizi-9@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #54: RP-206 add 35 mm (nordwind/route-planner)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:opened"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/route-planner54",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-39",
+      "date": "2026-09-18T13:21:00.000Z",
+      "from": {
+        "name": "Gitforge",
+        "address": "noreply@gitforge.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Gitforge] A new SSH authentication public key was added to your account",
+      "text": "A new SSH key was added to your account. If you did not add it, remove it now.",
+      "html": null,
+      "messageId": "<case-servizi-39@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Gitforge] A new SSH authentication public key was added to your account"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-39",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-10",
+      "date": "2026-09-18T14:28:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #54: RP-206 add 35 mm (nordwind/route-planner)",
+      "text": "Davide Greco ha commentato la pull request #54 «RP-206 add 35 mm» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/54\n\nCommento:\n> Rinominerei questa variabile.",
+      "html": null,
+      "messageId": "<case-servizi-10@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #54: RP-206 add 35 mm (nordwind/route-planner)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:commented"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/route-planner54",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-30",
+      "date": "2026-09-19T10:25:00.000Z",
+      "from": {
+        "name": "Tracker",
+        "address": "tracker@nordwind.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[TRACKER] (RP-177) Frontend: strap from engine proposals",
+      "text": "Stato: Da fare → In corso\n\nhttps://nordwind.tracker.esempio.it/browse/RP-177",
+      "html": null,
+      "messageId": "<case-servizi-30@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[TRACKER] (RP-177) Frontend: strap from engine proposals"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://nordwind.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-rp177",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-13",
+      "date": "2026-09-19T17:41:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #53: feat: a colour with only one strap chooses that strap (nordwind/route-planner)",
+      "text": "Davide Greco ha aperto la pull request #53 «feat: a colour with only one strap chooses that strap» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/53",
+      "html": null,
+      "messageId": "<case-servizi-13@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #53: feat: a colour with only one strap chooses that strap (nordwind/route-planner)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:opened"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/route-planner53",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-11",
+      "date": "2026-09-20T17:48:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #54: RP-206 add 35 mm (nordwind/route-planner)",
+      "text": "Sofia Ricci ha approvato la pull request #54 «RP-206 add 35 mm» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/54",
+      "html": null,
+      "messageId": "<case-servizi-11@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #54: RP-206 add 35 mm (nordwind/route-planner)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:approved"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/route-planner54",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-14",
+      "date": "2026-09-21T14:34:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #53: feat: a colour with only one strap chooses that strap (nordwind/route-planner)",
+      "text": "Sofia Ricci ha commentato la pull request #53 «feat: a colour with only one strap chooses that strap» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/53\n\nCommento:\n> Rinominerei questa variabile.",
+      "html": null,
+      "messageId": "<case-servizi-14@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #53: feat: a colour with only one strap chooses that strap (nordwind/route-planner)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:commented"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/route-planner53",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-57",
+      "date": "2026-09-21T17:14:00.000Z",
+      "from": {
+        "name": "Servizio Esempio",
+        "address": "hello@servizio.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Confirm Your Signup",
+      "text": "Follow this link to confirm your user: https://servizio.esempio.it/confirm/7d1e",
+      "html": null,
+      "messageId": "<case-servizi-57@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Confirm Your Signup"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://servizio.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-57",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-12",
+      "date": "2026-09-22T06:30:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #54: RP-206 add 35 mm (nordwind/route-planner)",
+      "text": "Luca Fontana ha unito la pull request #54 «RP-206 add 35 mm» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/54",
+      "html": null,
+      "messageId": "<case-servizi-12@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #54: RP-206 add 35 mm (nordwind/route-planner)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:merged"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/route-planner54",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-61",
+      "date": "2026-09-22T13:55:00.000Z",
+      "from": {
+        "name": "Toolkit Weekly",
+        "address": "weekly@toolkit.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "toolkit 1.9: faster builds",
+      "text": null,
+      "html": "<html><body><h1>toolkit 1.9: faster builds</h1><p>Le novità di questa settimana, in breve.</p><ul><li>Primo punto</li><li>Secondo punto</li></ul><a href=\"https://toolkit.esempio.it/leggi\">Leggi</a></body></html>",
+      "messageId": "<case-servizi-61@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "toolkit 1.9: faster builds"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://toolkit.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-61",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_PROMOTIONS"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-17",
+      "date": "2026-09-22T16:19:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #46: RP-206 add 35 mm (nordwind/planner-backend)",
+      "text": "Sofia Ricci ha aperto la pull request #46 «RP-206 add 35 mm» in nordwind/planner-backend.\n\nVisualizza: https://repohub.esempio.it/nordwind/planner-backend/pull-requests/46",
+      "html": null,
+      "messageId": "<case-servizi-17@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #46: RP-206 add 35 mm (nordwind/planner-backend)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:opened"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/planner-backend46",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-15",
+      "date": "2026-09-23T17:54:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #53: feat: a colour with only one strap chooses that strap (nordwind/route-planner)",
+      "text": "Luca Fontana ha approvato la pull request #53 «feat: a colour with only one strap chooses that strap» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/53",
+      "html": null,
+      "messageId": "<case-servizi-15@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #53: feat: a colour with only one strap chooses that strap (nordwind/route-planner)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:approved"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/route-planner53",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-18",
+      "date": "2026-09-24T07:17:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #46: RP-206 add 35 mm (nordwind/planner-backend)",
+      "text": "Luca Fontana ha approvato la pull request #46 «RP-206 add 35 mm» in nordwind/planner-backend.\n\nVisualizza: https://repohub.esempio.it/nordwind/planner-backend/pull-requests/46",
+      "html": null,
+      "messageId": "<case-servizi-18@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #46: RP-206 add 35 mm (nordwind/planner-backend)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:approved"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/planner-backend46",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-31",
+      "date": "2026-09-24T09:31:00.000Z",
+      "from": {
+        "name": "Tracker",
+        "address": "tracker@nordwind.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[TRACKER] (RP-177) Frontend: strap from engine proposals",
+      "text": "Commento di Sofia Ricci: le proposte arrivano già ordinate dal motore.\n\nhttps://nordwind.tracker.esempio.it/browse/RP-177",
+      "html": null,
+      "messageId": "<case-servizi-31@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[TRACKER] (RP-177) Frontend: strap from engine proposals"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://nordwind.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-rp177",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-34",
+      "date": "2026-09-24T17:38:00.000Z",
+      "from": {
+        "name": "Tracker",
+        "address": "tracker@nordwind.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[TRACKER] (RP-205) Data quality fields",
+      "text": "Creata da Davide Greco\n\nhttps://nordwind.tracker.esempio.it/browse/RP-205",
+      "html": null,
+      "messageId": "<case-servizi-34@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[TRACKER] (RP-205) Data quality fields"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://nordwind.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-rp205",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-44",
+      "date": "2026-09-25T07:04:00.000Z",
+      "from": {
+        "name": "Account Esempio",
+        "address": "no-reply@accounts.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Avviso di sicurezza",
+      "text": "È stato effettuato un nuovo accesso al tuo account da Chrome su Linux. Se sei stato tu, non devi fare nulla.",
+      "html": null,
+      "messageId": "<case-servizi-44@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Avviso di sicurezza"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-44",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-16",
+      "date": "2026-09-25T10:20:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #53: feat: a colour with only one strap chooses that strap (nordwind/route-planner)",
+      "text": "Marta Riva ha unito la pull request #53 «feat: a colour with only one strap chooses that strap» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/53",
+      "html": null,
+      "messageId": "<case-servizi-16@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #53: feat: a colour with only one strap chooses that strap (nordwind/route-planner)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:merged"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/route-planner53",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-21",
+      "date": "2026-09-25T15:52:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #45: RP-205 add data quality fields (nordwind/planner-backend)",
+      "text": "Luca Fontana ha aperto la pull request #45 «RP-205 add data quality fields» in nordwind/planner-backend.\n\nVisualizza: https://repohub.esempio.it/nordwind/planner-backend/pull-requests/45",
+      "html": null,
+      "messageId": "<case-servizi-21@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #45: RP-205 add data quality fields (nordwind/planner-backend)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:opened"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/planner-backend45",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-52",
+      "date": "2026-09-26T05:14:00.000Z",
+      "from": {
+        "name": "PagaFacile",
+        "address": "ricevute@pagafacile.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Ricevuta transazione PagaFacile",
+      "text": "Pagamento di 24,90 € a Ferramenta Centrale. Carta **** 4821.",
+      "html": null,
+      "messageId": "<case-servizi-52@esempio.it>",
+      "references": [],
+      "attachments": [
+        {
+          "filename": "Ricevuta 0918.pdf",
+          "mimeType": "application/pdf",
+          "size": 42000,
+          "inline": false
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Ricevuta transazione PagaFacile"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://pagafacile.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-52",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-19",
+      "date": "2026-09-26T10:17:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #46: RP-206 add 35 mm (nordwind/planner-backend)",
+      "text": "Marta Riva ha commentato la pull request #46 «RP-206 add 35 mm» in nordwind/planner-backend.\n\nVisualizza: https://repohub.esempio.it/nordwind/planner-backend/pull-requests/46\n\nCommento:\n> Ok per me, solo un dubbio sul nome della colonna.",
+      "html": null,
+      "messageId": "<case-servizi-19@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #46: RP-206 add 35 mm (nordwind/planner-backend)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:commented"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/planner-backend46",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-22",
+      "date": "2026-09-27T05:16:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #45: RP-205 add data quality fields (nordwind/planner-backend)",
+      "text": "Marta Riva ha unito la pull request #45 «RP-205 add data quality fields» in nordwind/planner-backend.\n\nVisualizza: https://repohub.esempio.it/nordwind/planner-backend/pull-requests/45",
+      "html": null,
+      "messageId": "<case-servizi-22@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #45: RP-205 add data quality fields (nordwind/planner-backend)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:merged"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/planner-backend45",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-64",
+      "date": "2026-09-27T12:40:00.000Z",
+      "from": {
+        "name": "Rete Pro",
+        "address": "notifiche@retepro.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Hai 3 nuove richieste di collegamento",
+      "text": "Marta Riva e altre 2 persone vogliono collegarsi con te.",
+      "html": null,
+      "messageId": "<case-servizi-64@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Hai 3 nuove richieste di collegamento"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://retepro.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-64",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_SOCIAL"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-23",
+      "date": "2026-09-28T12:30:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #52: RP-205 add data quality fields (nordwind/route-planner)",
+      "text": "Marta Riva ha aperto la pull request #52 «RP-205 add data quality fields» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/52",
+      "html": null,
+      "messageId": "<case-servizi-23@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #52: RP-205 add data quality fields (nordwind/route-planner)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:opened"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/route-planner52",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-20",
+      "date": "2026-09-28T18:33:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #46: RP-206 add 35 mm (nordwind/planner-backend)",
+      "text": "Davide Greco ha unito la pull request #46 «RP-206 add 35 mm» in nordwind/planner-backend.\n\nVisualizza: https://repohub.esempio.it/nordwind/planner-backend/pull-requests/46",
+      "html": null,
+      "messageId": "<case-servizi-20@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #46: RP-206 add 35 mm (nordwind/planner-backend)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:merged"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/planner-backend46",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-32",
+      "date": "2026-09-29T13:13:00.000Z",
+      "from": {
+        "name": "Tracker",
+        "address": "tracker@nordwind.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[TRACKER] (RP-177) Frontend: strap from engine proposals",
+      "text": "Stato: In corso → In revisione\n\nhttps://nordwind.tracker.esempio.it/browse/RP-177",
+      "html": null,
+      "messageId": "<case-servizi-32@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[TRACKER] (RP-177) Frontend: strap from engine proposals"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://nordwind.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-rp177",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-50",
+      "date": "2026-09-29T17:54:00.000Z",
+      "from": {
+        "name": "Assistente",
+        "address": "no-reply@assistente.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "$100 USD in API credits was added",
+      "text": "Your organization received $100 USD in API credits.",
+      "html": null,
+      "messageId": "<case-servizi-50@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "$100 USD in API credits was added"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://assistente.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-50",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-24",
+      "date": "2026-09-30T10:11:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #52: RP-205 add data quality fields (nordwind/route-planner)",
+      "text": "Davide Greco ha approvato la pull request #52 «RP-205 add data quality fields» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/52",
+      "html": null,
+      "messageId": "<case-servizi-24@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #52: RP-205 add data quality fields (nordwind/route-planner)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:approved"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/route-planner52",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-35",
+      "date": "2026-09-30T13:30:00.000Z",
+      "from": {
+        "name": "Tracker",
+        "address": "tracker@nordwind.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[TRACKER] (RP-205) Data quality fields",
+      "text": "Stato: Da fare → In corso\n\nhttps://nordwind.tracker.esempio.it/browse/RP-205",
+      "html": null,
+      "messageId": "<case-servizi-35@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[TRACKER] (RP-205) Data quality fields"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://nordwind.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-rp205",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-60",
+      "date": "2026-10-01T05:54:00.000Z",
+      "from": {
+        "name": "Toolkit Weekly",
+        "address": "weekly@toolkit.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "toolkit 2.0 + operation deepcode phase 3",
+      "text": null,
+      "html": "<html><body><h1>toolkit 2.0 + operation deepcode phase 3</h1><p>Le novità di questa settimana, in breve.</p><ul><li>Primo punto</li><li>Secondo punto</li></ul><a href=\"https://toolkit.esempio.it/leggi\">Leggi</a></body></html>",
+      "messageId": "<case-servizi-60@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "toolkit 2.0 + operation deepcode phase 3"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://toolkit.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-60",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_PROMOTIONS"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-25",
+      "date": "2026-10-01T17:03:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #50: RP-177 frontend strap from engine proposals (nordwind/route-planner)",
+      "text": "Davide Greco ha aperto la pull request #50 «RP-177 frontend strap from engine proposals» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/50",
+      "html": null,
+      "messageId": "<case-servizi-25@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #50: RP-177 frontend strap from engine proposals (nordwind/route-planner)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:opened"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/route-planner50",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-48",
+      "date": "2026-10-02T06:55:00.000Z",
+      "from": {
+        "name": "Assistente",
+        "address": "no-reply@assistente.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Security alert: new trusted device added to your Assistente account",
+      "text": "A new trusted device was added to your account.",
+      "html": null,
+      "messageId": "<case-servizi-48@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Security alert: new trusted device added to your Assistente account"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-48",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-47",
+      "date": "2026-10-02T11:35:00.000Z",
+      "from": {
+        "name": "Assistente",
+        "address": "no-reply@assistente.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Security alert: new passkey added to your Assistente account",
+      "text": "A new passkey was added to your account. If this wasn’t you, secure your account now.",
+      "html": null,
+      "messageId": "<case-servizi-47@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Security alert: new passkey added to your Assistente account"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-47",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-26",
+      "date": "2026-10-03T10:20:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #50: RP-177 frontend strap from engine proposals (nordwind/route-planner)",
+      "text": "Sofia Ricci ha commentato la pull request #50 «RP-177 frontend strap from engine proposals» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/50\n\nCommento:\n> Rinominerei questa variabile.",
+      "html": null,
+      "messageId": "<case-servizi-26@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #50: RP-177 frontend strap from engine proposals (nordwind/route-planner)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:commented"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/route-planner50",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-56",
+      "date": "2026-10-03T14:14:00.000Z",
+      "from": {
+        "name": "Borsa Esempio",
+        "address": "comunicazioni@borsa.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Aggiornamento dei termini e condizioni del sito Borsa Esempio",
+      "text": "Dal 1° novembre entrano in vigore i nuovi termini e condizioni del sito.",
+      "html": null,
+      "messageId": "<case-servizi-56@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Aggiornamento dei termini e condizioni del sito Borsa Esempio"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://borsa.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-56",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-63",
+      "date": "2026-10-04T07:58:00.000Z",
+      "from": {
+        "name": "Rete Pro",
+        "address": "notifiche@retepro.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Visualizza il post di Sara Arrighi e i tuoi prossimi passi",
+      "text": "Sara Arrighi ha pubblicato un post che potrebbe interessarti.",
+      "html": null,
+      "messageId": "<case-servizi-63@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Visualizza il post di Sara Arrighi e i tuoi prossimi passi"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://retepro.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-63",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_SOCIAL"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-33",
+      "date": "2026-10-04T17:27:00.000Z",
+      "from": {
+        "name": "Tracker",
+        "address": "tracker@nordwind.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[TRACKER] (RP-177) Frontend: strap from engine proposals",
+      "text": "Collegata alla pull request #50\n\nhttps://nordwind.tracker.esempio.it/browse/RP-177",
+      "html": null,
+      "messageId": "<case-servizi-33@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[TRACKER] (RP-177) Frontend: strap from engine proposals"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://nordwind.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-rp177",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-40",
+      "date": "2026-10-05T09:23:00.000Z",
+      "from": {
+        "name": "Gitforge",
+        "address": "noreply@gitforge.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Gitforge] A new SSH authentication public key was added to your account",
+      "text": "A new SSH key was added to your account. If you did not add it, remove it now.",
+      "html": null,
+      "messageId": "<case-servizi-40@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Gitforge] A new SSH authentication public key was added to your account"
+        ]
+      ],
+      "flags": {
+        "seen": false,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-40",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-27",
+      "date": "2026-10-05T14:55:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pull request #50: RP-177 frontend strap from engine proposals (nordwind/route-planner)",
+      "text": "Luca Fontana ha approvato la pull request #50 «RP-177 frontend strap from engine proposals» in nordwind/route-planner.\n\nVisualizza: https://repohub.esempio.it/nordwind/route-planner/pull-requests/50",
+      "html": null,
+      "messageId": "<case-servizi-27@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pull request #50: RP-177 frontend strap from engine proposals (nordwind/route-planner)"
+        ],
+        [
+          "X-Repohub-Event",
+          "pullrequest:approved"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-pr-nordwind/route-planner50",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-45",
+      "date": "2026-10-06T18:13:00.000Z",
+      "from": {
+        "name": "Account Esempio",
+        "address": "no-reply@accounts.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Avviso di sicurezza",
+      "text": "È stato effettuato un nuovo accesso al tuo account da un telefono Android. Se sei stato tu, non devi fare nulla.",
+      "html": null,
+      "messageId": "<case-servizi-45@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Avviso di sicurezza"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-45",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-58",
+      "date": "2026-10-07T10:53:00.000Z",
+      "from": {
+        "name": "Dott.ssa Elisa Marchi",
+        "address": "segreteria@studiomarchi.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Dott.ssa Elisa Marchi: informazioni dallo studio",
+      "text": "Lo studio resterà chiuso dal 2 al 6 novembre. Per urgenze chiamare la guardia medica.",
+      "html": null,
+      "messageId": "<case-servizi-58@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Dott.ssa Elisa Marchi: informazioni dallo studio"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://studiomarchi.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-58",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-53",
+      "date": "2026-10-08T06:00:00.000Z",
+      "from": {
+        "name": "PagaFacile",
+        "address": "ricevute@pagafacile.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Ricevuta transazione PagaFacile",
+      "text": "Pagamento di 7,50 € a Bar Stazione. Carta **** 4821.",
+      "html": null,
+      "messageId": "<case-servizi-53@esempio.it>",
+      "references": [],
+      "attachments": [
+        {
+          "filename": "Ricevuta 1008.pdf",
+          "mimeType": "application/pdf",
+          "size": 41000,
+          "inline": false
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Ricevuta transazione PagaFacile"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://pagafacile.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-53",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-28",
+      "date": "2026-10-08T12:09:00.000Z",
+      "from": {
+        "name": "Repohub",
+        "address": "notifications-noreply@repohub.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[Repohub] Pipeline for main failed on ae83fe6 (nordwind/atlas-data)",
+      "text": "La pipeline di main è fallita al passo «test».\n\nCommit ae83fe6 di Marta Riva.\nhttps://repohub.esempio.it/nordwind/atlas-data/pipelines/812",
+      "html": null,
+      "messageId": "<case-servizi-28@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[Repohub] Pipeline for main failed on ae83fe6 (nordwind/atlas-data)"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://repohub.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-28",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-51",
+      "date": "2026-10-09T15:16:00.000Z",
+      "from": {
+        "name": "Studio Immobiliare Esempio",
+        "address": "verify@identicheck.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Studio Immobiliare Esempio is inviting you to complete an Identity Check",
+      "text": "Studio Immobiliare Esempio has requested that you verify your identity. Click below to start.\n\nhttps://identicheck.esempio.it/start/8f2c",
+      "html": null,
+      "messageId": "<case-servizi-51@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Studio Immobiliare Esempio is inviting you to complete an Identity Check"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-51",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-59",
+      "date": "2026-10-10T06:29:00.000Z",
+      "from": {
+        "name": "Nova AI",
+        "address": "news@nova.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Early access: Try Nova 4 Argon today",
+      "text": null,
+      "html": "<html><body><h1>Early access: Try Nova 4 Argon today</h1><p>Le novità di questa settimana, in breve.</p><ul><li>Primo punto</li><li>Secondo punto</li></ul><a href=\"https://nova.esempio.it/leggi\">Leggi</a></body></html>",
+      "messageId": "<case-servizi-59@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Early access: Try Nova 4 Argon today"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://nova.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-59",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_PROMOTIONS"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-36",
+      "date": "2026-10-10T12:41:00.000Z",
+      "from": {
+        "name": "Gitforge",
+        "address": "noreply@gitforge.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[alexmoro/hourglass] PR run failed: Build - takeaway (0118015)",
+      "text": "Build fallita sul ramo takeaway.\nCommit 0118015.",
+      "html": null,
+      "messageId": "<case-servizi-36@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[alexmoro/hourglass] PR run failed: Build - takeaway (0118015)"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://gitforge.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-36",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-37",
+      "date": "2026-10-10T18:23:00.000Z",
+      "from": {
+        "name": "Gitforge",
+        "address": "noreply@gitforge.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[alexmoro/hourglass] PR run failed: QA - takeaway (0118015)",
+      "text": "QA fallito sul ramo takeaway.\nCommit 0118015.",
+      "html": null,
+      "messageId": "<case-servizi-37@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[alexmoro/hourglass] PR run failed: QA - takeaway (0118015)"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://gitforge.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-37",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-54",
+      "date": "2026-10-11T13:13:00.000Z",
+      "from": {
+        "name": "Negozio Esempio",
+        "address": "spedizioni@negozio.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Pacco pronto per il ritiro: Locker Esempio - Lavanderia Rapida Via [indirizzo] TO, ritiro entro il 14 ottobre",
+      "text": "Il tuo pacco è nel locker. Codice di ritiro: 482 913. Ritira entro il 14 ottobre.",
+      "html": null,
+      "messageId": "<case-servizi-54@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Pacco pronto per il ritiro: Locker Esempio - Lavanderia Rapida Via [indirizzo] TO, ritiro entro il 14 ottobre"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://negozio.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": false,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-54",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-38",
+      "date": "2026-10-11T14:15:00.000Z",
+      "from": {
+        "name": "Gitforge",
+        "address": "noreply@gitforge.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "[alexmoro/hourglass] Run failed: QA - qa/contract-suite (0118015)",
+      "text": "Esecuzione fallita: qa/contract-suite.\nCommit 0118015.",
+      "html": null,
+      "messageId": "<case-servizi-38@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[alexmoro/hourglass] Run failed: QA - qa/contract-suite (0118015)"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://gitforge.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-38",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-55",
+      "date": "2026-10-12T15:29:00.000Z",
+      "from": {
+        "name": "Negozio Esempio",
+        "address": "spedizioni@negozio.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Ritirato: Batterie a bottone al litio CR2032 (Confe...",
+      "text": "Hai ritirato il pacco. Grazie!",
+      "html": null,
+      "messageId": "<case-servizi-55@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Ritirato: Batterie a bottone al litio CR2032 (Confe..."
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://negozio.esempio.it/unsubscribe>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-55",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-49",
+      "date": "2026-10-12T17:53:00.000Z",
+      "from": {
+        "name": "Assistente",
+        "address": "no-reply@assistente.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Security alert: new trusted device added to your Assistente account",
+      "text": "A new trusted device was added to your account.",
+      "html": null,
+      "messageId": "<case-servizi-49@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Security alert: new trusted device added to your Assistente account"
+        ]
+      ],
+      "flags": {
+        "seen": false,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-49",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    },
+    {
+      "id": "case-servizi-46",
+      "date": "2026-10-13T13:08:00.000Z",
+      "from": {
+        "name": "Account Esempio",
+        "address": "no-reply@accounts.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Avviso di sicurezza",
+      "text": "È stato effettuato un nuovo accesso al tuo account da Safari su Mac. Se sei stato tu, non devi fare nulla.",
+      "html": null,
+      "messageId": "<case-servizi-46@esempio.it>",
+      "references": [],
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Avviso di sicurezza"
+        ]
+      ],
+      "flags": {
+        "seen": false,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-servizi-46",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      },
+      "problems": []
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "v": 3,
+  "createdOnFiles": {"v": 1, "at": "2026-10-14T10:00:00Z"},
+  "title": "Ambassadress mockups v1",
+  "launch": {"view": "canvas"},
+  "pages": [],
+  "boards": {
+    "Main.dc.html": {"x": 0, "y": 0, "w": 1440, "h": 960, "title": "A · Conversazioni", "expand": "fill", "is_interactive": true},
+    "Today.dc.html": {"x": 1520, "y": 0, "w": 1440, "h": 960, "title": "B · Oggi", "expand": "fill", "is_interactive": true},
+    "Search.dc.html": {"x": 0, "y": 1080, "w": 1440, "h": 960, "title": "C · Cerca", "expand": "fill", "is_interactive": true},
+    "Attachments.dc.html": {"x": 1520, "y": 1080, "w": 1440, "h": 960, "title": "D · Allegati", "expand": "fill", "is_interactive": true}
+  },
+  "order": ["Main.dc.html", "Today.dc.html", "Search.dc.html", "Attachments.dc.html"],
+  "notes": {
+    "intro": {"x": 0, "y": -300, "text": "Ambassadress — prime direzioni, in ampiezza", "kind": "title1", "maxW": 2960}
+  },
+  "designSystems": []
+}

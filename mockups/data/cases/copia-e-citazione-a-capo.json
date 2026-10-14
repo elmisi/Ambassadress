@@ -1,0 +1,49 @@
+{
+  "id": "copia-e-citazione-a-capo",
+  "title": "Messaggi dove sei solo in copia, con tanti destinatari, e intestazione di citazione spezzata su più righe",
+  "report": "segnalazione del 2026-10-14: «Mostra testo citato» a volte lascia visibile la riga «Il giorno … ha scritto:»; troppi dati ripetuti tra argomento e destinatari (forma descritta dall’utente)",
+  "messages": [
+    {
+      "date": "2026-10-06T14:10:00.000Z",
+      "from": { "name": "Piero Lanza", "address": "piero.lanza@esempio.it" },
+      "to": [{ "name": "Associazione Quartiere Vivo", "address": "info@quartierevivo.esempio.it" }],
+      "cc": [
+        { "name": "Marta Gallo", "address": "marta.gallo@esempio.it" },
+        { "name": "Alex Moro", "address": "alex.moro@esempio.it" },
+        { "name": "Bea", "address": "bea.r@esempio.it" },
+        { "name": "", "address": "tommaso.v@esempio.it" },
+        { "name": "Circolo Lettori - Sara Pozzi", "address": "sara.pozzi@circolo.esempio.it" }
+      ],
+      "subject": "Programma festa di quartiere 25° condiviso",
+      "text": "Ciao a tutti, vi giro il programma aggiornato della festa: si parte alle 15 con i laboratori, alle 17 il palco, alle 20 la cena.\n\nIl documento condiviso è qui: https://docs.esempio.it/d/festa-25-programma/edit\n\nPiero",
+      "attachments": [{ "filename": "Programma festa 25.pdf", "mimeType": "application/pdf", "size": 230000, "inline": false }],
+      "gmail": { "threadId": "case-copia-festa", "labels": ["\\Inbox"] },
+      "flags": { "seen": false, "flagged": false }
+    },
+    {
+      "date": "2026-10-07T13:58:00.000Z",
+      "from": { "name": "Marta Gallo", "address": "marta.gallo@esempio.it" },
+      "to": [{ "name": "Piero Lanza", "address": "piero.lanza@esempio.it" }],
+      "cc": [
+        { "name": "Associazione Quartiere Vivo", "address": "info@quartierevivo.esempio.it" },
+        { "name": "Alex Moro", "address": "alex.moro@esempio.it" },
+        { "name": "Bea", "address": "bea.r@esempio.it" },
+        { "name": "", "address": "tommaso.v@esempio.it" },
+        { "name": "Circolo Lettori - Sara Pozzi", "address": "sara.pozzi@circolo.esempio.it" }
+      ],
+      "subject": "Re: Programma festa di quartiere 25° condiviso",
+      "text": "Perfetto, allora confermo il palco per le 17. Porto io le prolunghe.\n\nIl giorno 6 ott 2026, alle ore 16:10, Piero Lanza <\npiero.lanza@esempio.it> ha scritto:\n\n> Ciao a tutti, vi giro il programma aggiornato della festa: si parte alle 15\n> con i laboratori, alle 17 il palco, alle 20 la cena.\n>\n> Piero",
+      "gmail": { "threadId": "case-copia-festa", "labels": ["\\Inbox"] },
+      "flags": { "seen": false, "flagged": false }
+    },
+    {
+      "date": "2026-10-08T07:30:00.000Z",
+      "from": { "name": "Piero Lanza", "address": "piero.lanza@esempio.it" },
+      "to": [{ "name": "Alex Moro", "address": "alex.moro@esempio.it" }],
+      "subject": "Re: Programma festa di quartiere 25° condiviso",
+      "text": "Alex, ti scrivo solo a te: riesci a fare le foto durante il palco?\n\nIl giorno\nmer 7 ott 2026 alle ore 15:58 Marta Gallo <marta.gallo@esempio.it>\nha scritto:\n> Perfetto, allora confermo il palco per le 17. Porto io le prolunghe.",
+      "gmail": { "threadId": "case-copia-festa", "labels": ["\\Inbox"] },
+      "flags": { "seen": false, "flagged": false }
+    }
+  ]
+}

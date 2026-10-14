@@ -1,0 +1,1121 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Persone</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#F3F4F6}
+a{color:#2F45D8}a:hover{color:#1E2E9E}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,label:focus-within{outline:2px solid #2F45D8;outline-offset:2px}
+button:disabled{opacity:.45;cursor:not-allowed}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; font-family: 'Instrument Sans', system-ui, sans-serif; color: #15171C; background: #F3F4F6; display: flex; flex-direction: column">
+
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding: 12px 24px; background: #FFFFFF; border-bottom: 1px solid #E2E4EA">
+    <div style="display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; letter-spacing: -0.01em">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l9 6 9-6"></path><rect x="3" y="5" width="18" height="14" rx="3"></rect></svg>
+      Ambassadress
+    </div>
+    <nav aria-label="Viste" style="display: flex; flex-wrap: wrap; gap: 4px">
+      <sc-for list="{{tabs}}" as="t" hint-placeholder-count="3">
+        <button type="button" onClick="{{t.pick}}" aria-pressed="{{t.on}}" style="{{t.style}}">{{t.label}}</button>
+      </sc-for>
+    </nav>
+    <div style="flex: 1 1 280px; display: flex; align-items: center; gap: 8px; padding: 0 12px; height: 42px; border: 1px solid #D5D8E0; border-radius: 10px; background: #F8F9FB">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5A6070" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M16.5 16.5L21 21"></path></svg>
+      <label for="q" class="sr-only">Cerca nella posta</label>
+      <input id="q" type="search" value="{{q}}" onChange="{{onQuery}}" autocomplete="off" placeholder="Cerca come lo diresti: «la delega di Lucia», «foto di Paolo»…" style="flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; font-size: 14px; color: #15171C; outline: none">
+    </div>
+    <button type="button" onClick="{{startCompose}}" style="display: flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px; border: 0; border-radius: 10px; background: {{accent}}; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>
+      Nuovo messaggio
+    </button>
+  </header>
+
+  <sc-if value="{{isPeople}}" hint-placeholder-val="{{ true }}">
+  <div style="flex: 1; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 16px; padding: 16px">
+
+    <nav aria-label="Persone" style="flex: 1 1 300px; max-width: 380px; min-width: 0; background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 14px; overflow: hidden; display: flex; flex-direction: column">
+      <div style="padding: 12px; border-bottom: 1px solid #E2E4EA; display: flex; flex-direction: column; gap: 8px">
+        <div style="display: flex; align-items: center; gap: 8px; padding: 0 12px; height: 44px; border: 1px solid #D5D8E0; border-radius: 10px; background: #F8F9FB">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5A6070" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M16.5 16.5L21 21"></path></svg>
+          <label for="people-q" class="sr-only">Filtra le persone</label>
+          <input id="people-q" type="search" value="{{pq}}" onChange="{{onPeopleQuery}}" placeholder="Filtra le persone…" autocomplete="off" style="flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; font-size: 15px; color: #15171C; outline: none">
+        </div>
+        <span style="font-size: 12px; color: #5A6070">{{peopleCount}}</span>
+      </div>
+
+      <div id="people-list" style="max-height: 760px; overflow-y: auto">
+        <sc-for list="{{list}}" as="p" hint-placeholder-count="8">
+          <button type="button" onClick="{{p.select}}" aria-current="{{p.current}}" style="{{p.itemStyle}}">
+            <span aria-hidden="true" style="{{p.avatarStyle}}">{{p.initials}}</span>
+            <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+              <span style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px">
+                <span style="{{p.nameStyle}}">{{p.name}}</span>
+                <span style="flex: none; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">{{p.time}}</span>
+              </span>
+              <span style="display: flex; align-items: center; gap: 8px">
+                <span style="flex: 1; min-width: 0; font-size: 13px; color: #3D4250; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{p.preview}}</span>
+                <sc-if value="{{p.hasAtt}}" hint-placeholder-val="{{ false }}">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#5A6070" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="con allegato"><path d="M21 11.5l-8.6 8.6a5.2 5.2 0 0 1-7.4-7.4l8.6-8.6a3.5 3.5 0 0 1 4.9 4.9l-8.6 8.6a1.7 1.7 0 0 1-2.5-2.5l7.9-7.9"></path></svg>
+                </sc-if>
+                <sc-if value="{{p.hasUnread}}" hint-placeholder-val="{{ false }}">
+                  <span style="flex: none; min-width: 20px; height: 20px; padding: 0 6px; box-sizing: border-box; border-radius: 999px; background: {{accent}}; color: #FFFFFF; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center">{{p.unread}}<span class="sr-only"> non letti</span></span>
+                </sc-if>
+              </span>
+            </span>
+          </button>
+        </sc-for>
+        <sc-if value="{{noMatch}}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 0; padding: 20px 16px; font-size: 14px; color: #3D4250">Nessuna persona con «{{pq}}».</p>
+        </sc-if>
+      </div>
+
+      <button type="button" onClick="{{services.select}}" aria-current="{{services.current}}" style="{{services.itemStyle}}">
+        <span aria-hidden="true" style="flex: none; width: 40px; height: 40px; border-radius: 12px; background: #E2E4EA; color: #3D4250; display: flex; align-items: center; justify-content: center">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"></path><path d="M4 9h16M9 9v11"></path></svg>
+        </span>
+        <span style="flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px">
+          <span style="display: flex; justify-content: space-between; gap: 8px"><span style="font-size: 15px">Servizi e notifiche</span><span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">{{services.count}}</span></span>
+          <span style="font-size: 13px; color: #3D4250">Ricevute, banca, spedizioni, newsletter</span>
+        </span>
+      </button>
+    </nav>
+
+    <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+
+      <sc-if value="{{isCompose}}" hint-placeholder-val="{{ false }}">
+        <section aria-label="Nuovo messaggio" style="background: #FFFFFF; border: 1px solid #C3C7D2; border-radius: 14px; padding: 20px 22px; display: flex; flex-direction: column; gap: 14px">
+          <h1 style="margin: 0; font-size: 24px">Nuovo messaggio</h1>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <label for="to" style="font-size: 13px; color: #3D4250">A</label>
+            <sc-if value="{{compose.hasPick}}" hint-placeholder-val="{{ false }}">
+              <span style="align-self: flex-start; display: flex; align-items: center; gap: 6px; padding: 4px 4px 4px 12px; border-radius: 999px; background: #E8EBFB; color: #1E2E9E; font-size: 14px; font-weight: 600">{{compose.pickName}}
+                <button type="button" onClick="{{compose.clearPick}}" aria-label="Togli il destinatario" style="width: 28px; height: 28px; border: 0; border-radius: 50%; background: transparent; color: #1E2E9E; cursor: pointer; font: inherit">×</button>
+              </span>
+            </sc-if>
+            <sc-if value="{{compose.noPick}}" hint-placeholder-val="{{ true }}">
+              <input id="to" type="text" value="{{compose.to}}" onChange="{{compose.onTo}}" autocomplete="off" placeholder="Nome o indirizzo" style="height: 44px; padding: 0 12px; border: 1px solid #D5D8E0; border-radius: 10px; font: inherit; font-size: 15px; color: #15171C">
+              <sc-if value="{{compose.hasSugg}}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; flex-wrap: wrap; gap: 6px">
+                  <sc-for list="{{compose.sugg}}" as="c" hint-placeholder-count="3">
+                    <button type="button" onClick="{{c.pick}}" style="min-height: 36px; padding: 0 12px; border: 1px solid #C3C7D2; border-radius: 999px; background: #FFFFFF; font: inherit; font-size: 14px; color: #15171C; cursor: pointer">{{c.name}}</button>
+                  </sc-for>
+                </div>
+              </sc-if>
+            </sc-if>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <label for="ctopic" style="font-size: 13px; color: #3D4250">Argomento</label>
+            <input id="ctopic" type="text" value="{{topicDraft}}" onChange="{{onTopicDraft}}" placeholder="Di cosa parli?" style="height: 44px; padding: 0 12px; border: 1px solid #D5D8E0; border-radius: 10px; font: inherit; font-size: 15px; font-weight: 600; color: #15171C">
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <label for="cmsg" style="font-size: 13px; color: #3D4250">Messaggio</label>
+            <textarea id="cmsg" rows="5" value="{{draft}}" onChange="{{onDraft}}" onKeyDown="{{onDraftKey}}" placeholder="Scrivi…" style="padding: 10px 12px; border: 1px solid #D5D8E0; border-radius: 10px; resize: vertical; font: inherit; font-size: 15px; line-height: 1.5; color: #15171C"></textarea>
+          </div>
+          <sc-if value="{{hasPending}}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <sc-for list="{{pending}}" as="f" hint-placeholder-count="1">
+                <span style="display: flex; align-items: center; gap: 6px; padding: 2px 2px 2px 4px; border: 1px solid #E2E4EA; border-radius: 8px; font-size: 13px"><span aria-hidden="true" style="{{f.badgeStyle}}">{{f.ext}}</span>{{f.name}} <span style="color: #5A6070">{{f.size}}</span><button type="button" onClick="{{f.remove}}" aria-label="Togli {{f.name}}" style="width: 28px; height: 28px; border: 0; background: transparent; cursor: pointer; font: inherit; color: #3D4250">×</button></span>
+              </sc-for>
+            </div>
+          </sc-if>
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+            <label for="cfile" style="display: flex; align-items: center; gap: 8px; height: 44px; padding: 0 14px; border: 1px solid #C3C7D2; border-radius: 10px; background: #FFFFFF; color: #15171C; font-size: 14px; cursor: pointer">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5l-8.6 8.6a5.2 5.2 0 0 1-7.4-7.4l8.6-8.6a3.5 3.5 0 0 1 4.9 4.9l-8.6 8.6a1.7 1.7 0 0 1-2.5-2.5l7.9-7.9"></path></svg>
+              Allega file
+            </label>
+            <input id="cfile" type="file" multiple onChange="{{onFiles}}" class="sr-only">
+            <span style="font-size: 12px; color: #5A6070">Ctrl+Invio per inviare</span>
+            <button type="button" onClick="{{cancelCompose}}" style="margin-left: auto; height: 44px; padding: 0 16px; border: 1px solid #C3C7D2; border-radius: 10px; background: #FFFFFF; font: inherit; color: #15171C; cursor: pointer">Annulla</button>
+            <button type="button" onClick="{{send}}" disabled="{{cantSendNew}}" style="height: 44px; padding: 0 20px; border: 0; border-radius: 10px; background: {{accent}}; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer">Invia</button>
+          </div>
+        </section>
+      </sc-if>
+
+      <sc-if value="{{isPerson}}" hint-placeholder-val="{{ true }}">
+        <section aria-label="Persona" style="background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 14px; padding: 18px 22px; display: flex; flex-direction: column; gap: 14px">
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px">
+            <span aria-hidden="true" style="{{cur.bigAvatarStyle}}">{{cur.initials}}</span>
+            <div style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 2px">
+              <h1 style="margin: 0; font-size: 24px; line-height: 1.2; letter-spacing: -0.01em">{{cur.name}}</h1>
+              <span style="font-size: 13px; color: #3D4250">{{cur.email}} · {{cur.stats}}</span>
+            </div>
+            <sc-if value="{{cur.hasFiles}}" hint-placeholder-val="{{ true }}">
+              <button type="button" onClick="{{cur.openFiles}}" style="height: 40px; padding: 0 14px; border: 1px solid #C3C7D2; border-radius: 10px; background: #FFFFFF; font: inherit; font-size: 14px; color: #15171C; cursor: pointer">{{cur.filesLabel}}</button>
+            </sc-if>
+          </div>
+          <sc-if value="{{cur.manyTopics}}" hint-placeholder-val="{{ true }}">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px">
+              <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5A6070; margin-right: 4px">Argomenti</span>
+              <sc-for list="{{cur.topics}}" as="t" hint-placeholder-count="4">
+                <button type="button" onClick="{{t.pick}}" aria-pressed="{{t.on}}" style="{{t.style}}">{{t.title}} <span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px">{{t.count}}</span></button>
+              </sc-for>
+            </div>
+          </sc-if>
+        </section>
+
+        <section aria-label="Messaggi" style="background: #FAFAFB; border: 1px solid #E2E4EA; border-radius: 14px; padding: 18px 22px; display: flex; flex-direction: column; gap: 10px">
+          <sc-if value="{{thread.filtered}}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 14px">
+              <span>Solo l’argomento <strong>{{thread.filterName}}</strong></span>
+              <button type="button" onClick="{{thread.clearFilter}}" style="min-height: 32px; padding: 0 12px; border: 1px solid #C3C7D2; border-radius: 999px; background: #FFFFFF; font: inherit; font-size: 13px; color: #15171C; cursor: pointer">Mostra tutti gli argomenti</button>
+            </div>
+          </sc-if>
+          <sc-if value="{{thread.hasMore}}" hint-placeholder-val="{{ true }}">
+            <button type="button" onClick="{{thread.loadMore}}" style="align-self: center; min-height: 40px; padding: 0 16px; border: 1px dashed #C3C7D2; border-radius: 999px; background: #FFFFFF; font: inherit; font-size: 14px; color: #15171C; cursor: pointer">{{thread.moreLabel}}</button>
+          </sc-if>
+          <sc-for list="{{thread.rows}}" as="r" hint-placeholder-count="5">
+            <sc-if value="{{r.isDay}}" hint-placeholder-val="{{ false }}">
+              <div style="align-self: center; margin-top: 6px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">{{r.label}}</div>
+            </sc-if>
+            <sc-if value="{{r.isTopic}}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-top: 4px; padding-top: 12px; border-top: 1px solid #E2E4EA">
+                <span style="font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5A6070">Argomento</span>
+                <strong style="font-size: 15px">{{r.label}}</strong>
+                <sc-if value="{{r.hasCc}}" hint-placeholder-val="{{ false }}"><span style="font-size: 13px; color: #3D4250">anche con {{r.cc}}</span></sc-if>
+              </div>
+            </sc-if>
+            <sc-if value="{{r.isMsg}}" hint-placeholder-val="{{ true }}">
+              <div style="{{r.wrapStyle}}">
+                <div style="{{r.bubbleStyle}}">
+                  <sc-if value="{{r.hasFrom}}" hint-placeholder-val="{{ false }}"><strong style="font-size: 13px">{{r.from}}</strong></sc-if>
+                  <span style="font-size: 15px; line-height: 1.55; white-space: pre-line">{{r.text}}</span>
+                  <sc-if value="{{r.isLong}}" hint-placeholder-val="{{ false }}">
+                    <button type="button" onClick="{{r.toggle}}" aria-expanded="{{r.expanded}}" style="align-self: flex-start; min-height: 32px; padding: 0; border: 0; background: transparent; font: inherit; font-size: 14px; font-weight: 600; color: #1E2E9E; cursor: pointer">{{r.moreLabel}}</button>
+                  </sc-if>
+                  <sc-for list="{{r.att}}" as="a" hint-placeholder-count="1">
+                    <button type="button" onClick="{{a.open}}" style="display: flex; align-items: center; gap: 10px; padding: 8px 10px; border: 1px solid #E2E4EA; border-radius: 10px; background: #FFFFFF; color: #15171C; font: inherit; text-align: left; cursor: pointer">
+                      <span aria-hidden="true" style="{{a.thumbStyle}}">{{a.ext}}</span>
+                      <span style="display: flex; flex-direction: column"><span style="font-size: 14px; font-weight: 600">{{a.name}}</span><span style="font-size: 12px; color: #5A6070">{{a.meta}}</span></span>
+                    </button>
+                  </sc-for>
+                  <span style="align-self: flex-end; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #5A6070">{{r.time}}</span>
+                </div>
+              </div>
+            </sc-if>
+          </sc-for>
+        </section>
+
+        <sc-if value="{{canReply}}" hint-placeholder-val="{{ true }}">
+          <section aria-label="Rispondi" style="background: #FFFFFF; border: 1px solid #C3C7D2; border-radius: 14px; padding: 14px 18px; display: flex; flex-direction: column; gap: 10px">
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+              <span style="font-size: 13px; color: #3D4250">Scrivi a {{cur.first}}:</span>
+              <button type="button" onClick="{{continueTopic}}" aria-pressed="{{continuing}}" style="{{continueStyle}}">continua «{{replyTopic}}»</button>
+              <button type="button" onClick="{{startTopic}}" aria-pressed="{{newTopic}}" style="{{newStyle}}">nuovo argomento</button>
+            </div>
+            <sc-if value="{{newTopic}}" hint-placeholder-val="{{ false }}">
+              <label for="topic" class="sr-only">Argomento</label>
+              <input id="topic" type="text" value="{{topicDraft}}" onChange="{{onTopicDraft}}" placeholder="Di cosa parli?" style="border: 0; border-bottom: 1px solid #E2E4EA; padding: 6px 0; font: inherit; font-size: 15px; font-weight: 600; color: #15171C; outline: none; background: transparent">
+            </sc-if>
+            <label for="msg" class="sr-only">Messaggio</label>
+            <textarea id="msg" rows="3" value="{{draft}}" onChange="{{onDraft}}" onKeyDown="{{onDraftKey}}" placeholder="Scrivi…" style="border: 0; resize: vertical; font: inherit; font-size: 15px; line-height: 1.5; color: #15171C; outline: none; background: transparent"></textarea>
+            <sc-if value="{{hasPending}}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; flex-wrap: wrap; gap: 6px">
+                <sc-for list="{{pending}}" as="f" hint-placeholder-count="1">
+                  <span style="display: flex; align-items: center; gap: 6px; padding: 2px 2px 2px 4px; border: 1px solid #E2E4EA; border-radius: 8px; font-size: 13px"><span aria-hidden="true" style="{{f.badgeStyle}}">{{f.ext}}</span>{{f.name}} <span style="color: #5A6070">{{f.size}}</span><button type="button" onClick="{{f.remove}}" aria-label="Togli {{f.name}}" style="width: 28px; height: 28px; border: 0; background: transparent; cursor: pointer; font: inherit; color: #3D4250">×</button></span>
+                </sc-for>
+              </div>
+            </sc-if>
+            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+              <label for="file" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #E2E4EA; border-radius: 10px; background: #FFFFFF; color: #3D4250; cursor: pointer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5l-8.6 8.6a5.2 5.2 0 0 1-7.4-7.4l8.6-8.6a3.5 3.5 0 0 1 4.9 4.9l-8.6 8.6a1.7 1.7 0 0 1-2.5-2.5l7.9-7.9"></path></svg>
+                <span class="sr-only">Allega file</span>
+              </label>
+              <input id="file" type="file" multiple onChange="{{onFiles}}" class="sr-only">
+              <span style="font-size: 12px; color: #5A6070">Ctrl+Invio per inviare</span>
+              <button type="button" onClick="{{send}}" disabled="{{cantSend}}" style="margin-left: auto; height: 44px; padding: 0 20px; border: 0; border-radius: 10px; background: {{accent}}; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer">Invia</button>
+            </div>
+          </section>
+        </sc-if>
+      </sc-if>
+    </main>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{isSearch}}" hint-placeholder-val="{{ false }}">
+    <main style="flex: 1; width: 100%; max-width: 1040px; margin: 0 auto; box-sizing: border-box; padding: 28px 24px 48px; display: flex; flex-direction: column; gap: 16px">
+      <sc-if value="{{search.empty}}" hint-placeholder-val="{{ false }}">
+        <h1 style="margin: 0; font-size: 28px; letter-spacing: -0.02em">Cerca come lo diresti</h1>
+        <p style="margin: 0; font-size: 15px; color: #3D4250">Scrivi nella barra in alto. Persone, date, tipi di allegato e parole diventano criteri che puoi togliere uno per uno.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px">
+          <sc-for list="{{search.examples}}" as="x" hint-placeholder-count="4">
+            <button type="button" onClick="{{x.pick}}" style="min-height: 40px; padding: 0 14px; border: 1px solid #C3C7D2; border-radius: 999px; background: #FFFFFF; font: inherit; font-size: 14px; color: #15171C; cursor: pointer">{{x.label}}</button>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{search.active}}" hint-placeholder-val="{{ true }}">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+          <span style="font-size: 13px; color: #5A6070">Ho capito:</span>
+          <sc-for list="{{search.chips}}" as="c" hint-placeholder-count="3">
+            <button type="button" onClick="{{c.toggle}}" aria-pressed="{{c.on}}" style="{{c.style}}"><span style="font-size: 12px">{{c.kind}}</span> <strong>{{c.label}}</strong></button>
+          </sc-for>
+          <span style="font-size: 13px; color: #5A6070">· tocca un criterio per toglierlo</span>
+        </div>
+        <p style="margin: 0; font-size: 14px; color: #3D4250">{{search.countLabel}}</p>
+        <sc-for list="{{search.results}}" as="r" hint-placeholder-count="4">
+          <button type="button" onClick="{{r.open}}" style="{{r.cardStyle}}">
+            <span style="display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline">
+              <strong style="font-size: 16px">{{r.who}}</strong>
+              <span style="font-size: 14px; color: #3D4250">{{r.topic}}</span>
+              <span style="margin-left: auto; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">{{r.date}}</span>
+            </span>
+            <span style="font-size: 15px; line-height: 1.55; color: #15171C"><sc-for list="{{r.segs}}" as="sg" hint-placeholder-count="1"><sc-if value="{{sg.hit}}" hint-placeholder-val="{{ false }}"><mark style="background: #FFE7A3; color: #15171C; padding: 0 2px; border-radius: 3px">{{sg.t}}</mark></sc-if><sc-if value="{{sg.plain}}" hint-placeholder-val="{{ true }}">{{sg.t}}</sc-if></sc-for></span>
+            <sc-if value="{{r.hasAtt}}" hint-placeholder-val="{{ false }}">
+              <span style="display: flex; flex-wrap: wrap; gap: 6px">
+                <sc-for list="{{r.att}}" as="a" hint-placeholder-count="1">
+                  <span style="display: flex; align-items: center; gap: 6px; padding: 2px 8px 2px 2px; border: 1px solid #E2E4EA; border-radius: 6px; font-size: 13px"><span aria-hidden="true" style="{{a.badgeStyle}}">{{a.ext}}</span>{{a.name}}</span>
+                </sc-for>
+              </span>
+            </sc-if>
+            <span style="font-size: 13px; color: #3D4250"><strong style="font-weight: 600">Perché è qui:</strong> {{r.why}}</span>
+          </button>
+        </sc-for>
+        <sc-if value="{{search.none}}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 0; padding: 20px; background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 14px; font-size: 15px">Niente con tutti questi criteri. Prova a toglierne uno.</p>
+        </sc-if>
+      </sc-if>
+    </main>
+  </sc-if>
+
+  <sc-if value="{{isFiles}}" hint-placeholder-val="{{ false }}">
+    <div style="flex: 1; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 20px; padding: 24px 24px 48px; box-sizing: border-box; width: 100%; max-width: 1400px; margin: 0 auto">
+      <main style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+        <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 14px">
+          <h1 style="margin: 0; font-size: 28px; letter-spacing: -0.02em">Allegati</h1>
+          <span style="font-size: 14px; color: #3D4250">{{files.countLabel}}</span>
+          <sc-if value="{{files.hasPerson}}" hint-placeholder-val="{{ false }}">
+            <span style="display: flex; align-items: center; gap: 6px; padding: 2px 4px 2px 12px; border-radius: 999px; background: #E8EBFB; color: #1E2E9E; font-size: 14px; font-weight: 600">solo {{files.personName}}
+              <button type="button" onClick="{{files.clearPerson}}" aria-label="Mostra gli allegati di tutti" style="width: 28px; height: 28px; border: 0; border-radius: 50%; background: transparent; color: #1E2E9E; cursor: pointer; font: inherit">×</button>
+            </span>
+          </sc-if>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+          <div role="group" aria-label="Raggruppa per" style="display: flex; flex-wrap: wrap; padding: 4px; border-radius: 12px; background: #E2E4EA; gap: 4px">
+            <sc-for list="{{files.modes}}" as="m" hint-placeholder-count="4">
+              <button type="button" onClick="{{m.pick}}" aria-pressed="{{m.on}}" style="{{m.style}}">{{m.label}}</button>
+            </sc-for>
+          </div>
+          <div role="group" aria-label="Tipo di file" style="display: flex; flex-wrap: wrap; gap: 6px">
+            <sc-for list="{{files.exts}}" as="x" hint-placeholder-count="5">
+              <button type="button" onClick="{{x.pick}}" aria-pressed="{{x.on}}" style="{{x.style}}">{{x.label}}</button>
+            </sc-for>
+          </div>
+        </div>
+        <sc-for list="{{files.groups}}" as="g" hint-placeholder-count="2">
+          <section style="display: flex; flex-direction: column; gap: 10px">
+            <h2 style="margin: 0; display: flex; align-items: baseline; gap: 10px; font-size: 16px">{{g.title}} <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 400; color: #5A6070">{{g.count}}</span></h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px">
+              <sc-for list="{{g.items}}" as="d" hint-placeholder-count="4">
+                <button type="button" onClick="{{d.select}}" aria-pressed="{{d.selected}}" style="{{d.cardStyle}}">
+                  <span aria-hidden="true" style="{{d.thumbStyle}}">{{d.ext}}</span>
+                  <span style="font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{d.name}}</span>
+                  <span style="font-size: 12px; color: #3D4250; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{d.meta}}</span>
+                  <sc-if value="{{d.hasVersions}}" hint-placeholder-val="{{ false }}">
+                    <span style="align-self: flex-start; font-size: 12px; padding: 2px 8px; border-radius: 6px; background: #E8EBFB; color: #1E2E9E">{{d.versions}} versioni</span>
+                  </sc-if>
+                </button>
+              </sc-for>
+            </div>
+          </section>
+        </sc-for>
+      </main>
+      <aside aria-label="Dettaglio allegato" style="flex: 1 1 300px; max-width: 380px; min-width: 0; background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+        <sc-if value="{{files.noSel}}" hint-placeholder-val="{{ false }}">
+          <p style="margin: 0; font-size: 15px; color: #3D4250">Scegli un allegato per vederne le versioni e la conversazione da cui arriva.</p>
+        </sc-if>
+        <sc-if value="{{files.hasSel}}" hint-placeholder-val="{{ true }}">
+          <div aria-hidden="true" style="{{files.sel.previewStyle}}">
+            <span style="font-size: 11px; font-weight: 700">{{files.sel.ext}} · anteprima</span>
+            <span style="height: 5px; border-radius: 3px; background: #C9CDD6; width: 90%"></span>
+            <span style="height: 5px; border-radius: 3px; background: #C9CDD6; width: 70%"></span>
+            <span style="height: 5px; border-radius: 3px; background: #C9CDD6; width: 82%"></span>
+            <span style="height: 5px; border-radius: 3px; background: #C9CDD6; width: 55%"></span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 4px">
+            <h2 style="margin: 0; font-size: 18px">{{files.sel.name}}</h2>
+            <span style="font-size: 13px; color: #3D4250">{{files.sel.meta}}</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 6px">
+            <h3 style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5A6070">{{files.sel.historyTitle}}</h3>
+            <sc-for list="{{files.sel.versions}}" as="v" hint-placeholder-count="2">
+              <button type="button" onClick="{{v.open}}" style="display: flex; gap: 10px; align-items: baseline; padding: 8px 0; border: 0; border-top: 1px solid #EEF0F3; background: transparent; font: inherit; text-align: left; color: #15171C; cursor: pointer">
+                <span style="flex: none; width: 64px; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070">{{v.date}}</span>
+                <span style="flex: 1; display: flex; flex-direction: column"><span style="font-size: 14px">{{v.name}}</span><span style="font-size: 12px; color: #3D4250">{{v.who}} · apri nella conversazione</span></span>
+              </button>
+            </sc-for>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px">
+            <button type="button" style="flex: 1; height: 44px; border: 0; border-radius: 10px; background: {{accent}}; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer">Apri</button>
+            <button type="button" style="flex: 1; height: 44px; border: 1px solid #C3C7D2; border-radius: 10px; background: #FFFFFF; color: #15171C; font: inherit; cursor: pointer">Inoltra</button>
+            <button type="button" style="flex: 1; height: 44px; border: 1px solid #C3C7D2; border-radius: 10px; background: #FFFFFF; color: #15171C; font: inherit; cursor: pointer">Salva</button>
+          </div>
+        </sc-if>
+      </aside>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2F45D8","options":["#2F45D8","#0F6E5C","#9A3412","#15171C"]},"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.db = this.build();
+    this.state = {
+      view: 'people', sel: 'lucia', pq: '', q: '', read: {}, more: {}, expanded: {}, topicFilter: '',
+      sent: [], extraPeople: [], draft: '', newTopic: false, topicDraft: '', pending: [],
+      compose: false, toDraft: '', toPick: '', off: {}, fmode: 'recent', fext: 'all', fsel: '', fperson: '', focusMsg: ''
+    };
+  }
+
+  /* ---------- tempo ---------- */
+  at(daysAgo, h, m) {
+    const n = new Date();
+    return new Date(n.getFullYear(), n.getMonth(), n.getDate() - daysAgo, h, m).getTime();
+  }
+  dayStart(ts) {
+    const d = new Date(ts);
+    return new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+  }
+  ago(ts) {
+    return Math.round((this.dayStart(Date.now()) - this.dayStart(ts)) / 86400000);
+  }
+  hhmm(ts) {
+    const d = new Date(ts);
+    return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+  }
+  months() { return ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre']; }
+  weekdays() { return ['domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato']; }
+  shortDate(ts) {
+    const d = new Date(ts);
+    const a = this.ago(ts);
+    if (a === 0) return this.hhmm(ts);
+    if (a === 1) return 'ieri';
+    if (a > 1 && a < 7) return this.weekdays()[d.getDay()].slice(0, 3);
+    const s = d.getDate() + ' ' + this.months()[d.getMonth()].slice(0, 3);
+    return d.getFullYear() === new Date().getFullYear() ? s : s + ' ' + String(d.getFullYear()).slice(2);
+  }
+  longDay(ts) {
+    const d = new Date(ts);
+    const a = this.ago(ts);
+    if (a === 0) return 'oggi';
+    if (a === 1) return 'ieri';
+    const s = this.weekdays()[d.getDay()] + ' ' + d.getDate() + ' ' + this.months()[d.getMonth()];
+    return d.getFullYear() === new Date().getFullYear() ? s : s + ' ' + d.getFullYear();
+  }
+
+  /* ---------- dati di esempio ---------- */
+  rng(seed) {
+    let a = seed;
+    return function () {
+      a |= 0; a = a + 0x6D2B79F5 | 0;
+      let t = Math.imul(a ^ a >>> 15, 1 | a);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+
+  build() {
+    const at = (d, h, m) => this.at(d, h, m);
+    const people = [];
+    const tintsList = [['#2F45D8', '#FFFFFF'], ['#F3D9C6', '#6B3410'], ['#D9E7DA', '#24502A'], ['#E4E0F2', '#3E2F7A'], ['#DDE6FA', '#1E3E8A'], ['#F3E6C8', '#6B4A0E'], ['#FBE3E0', '#8A2618'], ['#D7EEF0', '#145158'], ['#15171C', '#FFFFFF']];
+    const initialsOf = (name) => name.replace(/^(Arch\.|Dott\.|Maestra)\s+/, '').split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
+    const add = (p, msgs) => {
+      p.initials = p.initials || initialsOf(p.name);
+      const tint = tintsList[people.length % tintsList.length];
+      p.tint = p.tint || tint[0];
+      p.ink = p.ink || tint[1];
+      p.unread = p.unread || 0;
+      p.msgs = msgs.map((m, i) => {
+        const id = p.id + '-' + i;
+        return Object.assign({ pid: p.id, cc: '', from: '' }, m, {
+          id: id,
+          att: (m.att || []).map((a, j) => ({ id: id + '-' + j, name: a[0], ext: a[1], size: a[2] || '', doc: a[3] || (id + '-' + j) }))
+        });
+      });
+      people.push(p);
+    };
+
+    const asm = this.longDay(at(-4, 18, 0));
+
+    add({ id: 'lucia', name: 'Lucia Ferri', email: 'lucia.ferri@esempio.it', unread: 1 }, [
+      { ts: at(48, 19, 10), topic: 'Cena di fine estate', text: 'Allora sabato da noi? Il vino lo porto io.' },
+      { ts: at(48, 19, 32), me: true, topic: 'Cena di fine estate', text: 'Perfetto, a che ora?' },
+      { ts: at(47, 8, 15), topic: 'Cena di fine estate', text: 'Alle 20. Ti allego il menù.', att: [['Menu cena.jpg', 'JPG', '1,2 MB']] },
+      { ts: at(11, 21, 4), topic: 'Assemblea di condominio', cc: 'Amministrazione condominio, Marco Bassi', text: 'Io quel giorno sono fuori. Il modulo della delega dove lo trovo?' },
+      { ts: at(10, 7, 50), me: true, topic: 'Assemblea di condominio', cc: 'Amministrazione condominio, Marco Bassi', text: 'È allegato alla convocazione, l’ultima pagina.' },
+      { ts: at(0, 9, 42), topic: 'Assemblea di condominio', cc: 'Amministrazione condominio, Marco Bassi', text: 'Grazie! Allego la delega firmata, la porta Marco.', att: [['Delega Ferri firmata.pdf', 'PDF', '240 KB', 'delega']] }
+    ]);
+
+    add({ id: 'marco', name: 'Marco Bassi', email: 'marco.bassi@esempio.it', unread: 1 }, [
+      { ts: at(11, 20, 12), topic: 'Assemblea di condominio', cc: 'Amministrazione condominio, Lucia Ferri', text: 'Io ci sono, posso portare anche una delega.' },
+      { ts: at(10, 7, 52), me: true, topic: 'Assemblea di condominio', cc: 'Amministrazione condominio, Lucia Ferri', text: 'Grazie, porta quella di Lucia.' },
+      { ts: at(0, 8, 55), topic: 'Assemblea di condominio', cc: 'Lucia Ferri', text: 'Ricevuta la delega di Lucia, la porto io ' + asm + '.' }
+    ]);
+
+    const E = [
+      [0, 'Sopralluogo', 'Buongiorno, sono Elena Sartori, mi ha dato il suo contatto Giulia Rinaldi. Possiamo fissare un sopralluogo per il bagno?'],
+      [1, 'Sopralluogo', 'Buongiorno! Volentieri. Martedì pomeriggio le va bene?'],
+      [0, 'Sopralluogo', 'Martedì alle 15 perfetto. Mi servirebbe la planimetria, se ce l’ha.'],
+      [1, 'Sopralluogo', 'Eccola, è quella del rogito.', [['Planimetria appartamento.pdf', 'PDF', '880 KB']]],
+      [0, 'Sopralluogo', 'Grazie, a martedì.'],
+      [0, 'Sopralluogo', 'Sopralluogo fatto, le mando a giorni una prima proposta. Intanto ci pensi: doccia o vasca?'],
+      [1, 'Progetto bagno', 'Abbiamo deciso: doccia grande, niente vasca.'],
+      [0, 'Progetto bagno', 'Ottimo. Ecco la prima proposta, con doccia a filo pavimento.', [['Progetto bagno v1.pdf', 'PDF', '2,4 MB', 'progetto-bagno']]],
+      [1, 'Progetto bagno', 'Bella! Si può spostare il lavabo sotto la finestra?'],
+      [0, 'Progetto bagno', 'Si può fare, ma le spiego le conseguenze. Spostare il lavabo sotto la finestra vuol dire portare lo scarico sulla parete opposta rispetto alla colonna attuale: servono circa tre metri di tubazione con la giusta pendenza, quindi il massetto va rialzato di qualche centimetro, oppure bisogna passare nel controsoffitto del vicino, cosa che sconsiglio.\n\nIn alternativa possiamo lasciare lo scarico dov’è e spostare solo lo specchio, con quasi lo stesso effetto di luce. Le preparo entrambe le varianti così le confrontiamo con calma, anche sui costi, che nel primo caso salgono di circa il 15%.'],
+      [1, 'Progetto bagno', 'Grazie della spiegazione, vediamo le due varianti.'],
+      [0, 'Progetto bagno', 'Ecco la versione 2 con le due varianti, A e B.', [['Progetto bagno v2.pdf', 'PDF', '2,7 MB', 'progetto-bagno']]],
+      [1, 'Progetto bagno', 'Preferiamo la B.'],
+      [0, 'Progetto bagno', 'Bene. Le faccio sapere i costi della B.'],
+      [0, 'Progetto bagno', 'Ho aggiornato la B con le misure del sopralluogo.', [['Progetto bagno v3.pdf', 'PDF', '2,8 MB', 'progetto-bagno']]],
+      [1, 'Progetto bagno', 'Perfetto, approviamo questa.'],
+      [0, 'Progetto bagno', 'Allora procedo con il computo metrico.'],
+      [1, 'Progetto bagno', 'Grazie!'],
+      [0, 'Computo metrico', 'Ecco il computo metrico, prima stesura.', [['Computo metrico v1.xlsx', 'XLS', '96 KB', 'computo']]],
+      [1, 'Computo metrico', 'La voce dei sanitari mi sembra alta, è possibile?'],
+      [0, 'Computo metrico', 'Ho messo una linea di fascia alta, posso proporne una media.'],
+      [1, 'Computo metrico', 'Sì, meglio la media.'],
+      [0, 'Computo metrico', 'Computo aggiornato con sanitari di fascia media.', [['Computo metrico v2.xlsx', 'XLS', '98 KB', 'computo']]],
+      [1, 'Computo metrico', 'Molto meglio. La manodopera è compresa?'],
+      [0, 'Computo metrico', 'Sì, tutto compreso tranne lo smaltimento delle macerie, che è a parte.'],
+      [0, 'Computo metrico', 'Versione definitiva con lo smaltimento incluso.', [['Computo metrico v3.xlsx', 'XLS', '101 KB', 'computo']]],
+      [0, 'Piastrelle', 'Passiamo alle piastrelle: le mando tre proposte.', [['Piastrelle, 3 proposte.jpg', 'JPG', '4,1 MB']]],
+      [1, 'Piastrelle', 'Ci piace la seconda, quella grigio chiaro.'],
+      [0, 'Piastrelle', 'Ottima scelta. Formato 60x120 o 30x60?'],
+      [1, 'Piastrelle', 'Cosa consiglia?'],
+      [0, 'Piastrelle', 'Per un bagno di queste dimensioni il 60x120: meno fughe, più facile da pulire.'],
+      [1, 'Piastrelle', 'Allora 60x120.'],
+      [0, 'Piastrelle', 'Ho chiesto la disponibilità: arrivano in tre settimane.'],
+      [1, 'Piastrelle', 'Va bene, non abbiamo fretta.'],
+      [0, 'Piastrelle', 'Le mando le foto del campione in luce naturale.', [['Campione grigio, foto.jpg', 'JPG', '3,3 MB']]],
+      [1, 'Piastrelle', 'Dal vivo è ancora meglio!'],
+      [0, 'Inizio lavori', 'L’impresa può iniziare lunedì. Le va bene?'],
+      [1, 'Inizio lavori', 'Sì, lasciamo le chiavi in portineria.'],
+      [0, 'Inizio lavori', 'Perfetto. Il primo giorno è demolizione: ci sarà rumore dalle 8 alle 13.'],
+      [1, 'Inizio lavori', 'Avviso i vicini.'],
+      [0, 'Inizio lavori', 'Ecco il cronoprogramma dei lavori.', [['Cronoprogramma lavori.pdf', 'PDF', '310 KB']]],
+      [1, 'Inizio lavori', 'Tre settimane in tutto, giusto?'],
+      [0, 'Inizio lavori', 'Sì, salvo imprevisti.'],
+      [0, 'Inizio lavori', 'Demolizione finita, tutto secondo i piani.', [['Cantiere giorno 1.jpg', 'JPG', '2,2 MB']]],
+      [0, 'Imprevisti in cantiere', 'Le scrivo per un imprevisto. Togliendo il vecchio rivestimento abbiamo trovato la tubazione dell’acqua calda in ferro zincato, molto corrosa in due punti.\n\nNon perde, ma chiudere tutto senza sostituirla sarebbe un errore: tra qualche anno rischieremmo di dover rompere le piastrelle nuove. La sostituzione costa circa 650 euro più IVA e allunga i lavori di due giorni. Le allego le foto dei due punti e la variante al computo, così può decidere con calma, ma entro venerdì se possibile.', [['Tubo corroso, foto.jpg', 'JPG', '1,8 MB'], ['Variante computo.pdf', 'PDF', '140 KB', 'computo']]],
+      [1, 'Imprevisti in cantiere', 'Grazie per avercelo detto subito. Procediamo con la sostituzione.'],
+      [0, 'Imprevisti in cantiere', 'Bene, l’idraulico viene domani mattina.'],
+      [1, 'Imprevisti in cantiere', 'Ok, ci sarà mia moglie ad aprire.'],
+      [0, 'Imprevisti in cantiere', 'Tubazione sostituita. Si riparte con i massetti.'],
+      [0, 'Imprevisti in cantiere', 'Domani passo a controllare le pendenze della doccia. Se vuole esserci, sono lì alle 18.']
+    ];
+    add({ id: 'elena', name: 'Arch. Elena Sartori', email: 'elena.sartori@studiosartori.esempio.it', initials: 'ES', unread: 2 }, E.map((e, i) => {
+      const d = Math.round(112 - i * 111 / (E.length - 1));
+      const last = i === E.length - 1;
+      return { ts: last ? at(1, 18, 20) : at(d, 8 + (i * 7) % 12, (i * 13) % 60), me: !!e[0], topic: e[1], text: e[2], att: e[3] };
+    }));
+
+    add({ id: 'anna', name: 'Maestra Anna Ricci', email: 'anna.ricci@scuolacollodi.esempio.it', initials: 'AR', unread: 1 }, [
+      { ts: at(9, 13, 30), topic: 'Uscita al museo', text: 'Gentili genitori, giovedì prossimo la classe visiterà il museo di scienze naturali. In allegato la circolare e l’autorizzazione da riconsegnare firmata entro lunedì.', att: [['Circolare uscita museo.pdf', 'PDF', '180 KB'], ['Autorizzazione uscita.pdf', 'PDF', '90 KB', 'autorizzazione']] },
+      { ts: at(8, 21, 0), me: true, topic: 'Uscita al museo', text: 'Ecco l’autorizzazione firmata. Grazie!', att: [['Autorizzazione uscita firmata.pdf', 'PDF', '230 KB', 'autorizzazione']] },
+      { ts: at(1, 16, 45), topic: 'Colloqui individuali', text: 'I colloqui individuali si terranno martedì e mercoledì dalle 16:30 alle 18:30. Può indicarmi una fascia oraria che preferisce?' }
+    ]);
+
+    add({ id: 'martini', name: 'Studio Martini', email: 'segreteria@studiomartini.esempio.it' }, [
+      { ts: at(25, 16, 0), me: true, topic: 'Dichiarazione dei redditi', text: 'Vi mando la certificazione unica.', att: [['Certificazione unica 2026.pdf', 'PDF', '420 KB']] },
+      { ts: at(20, 11, 30), topic: 'Dichiarazione dei redditi', text: 'Abbiamo ricevuto la documentazione. Dall’esame risulta che mancano ancora: le spese mediche del secondo semestre, la ricevuta del pagamento dell’asilo nido e il contratto di locazione registrato.\n\nUna volta ricevuti prepareremo il modello 730 e ve lo invieremo per la firma. Vi ricordiamo inoltre che il saldo IMU va versato entro il 16 dicembre: in allegato trovate il modello F24 già compilato con gli importi calcolati sulle rendite catastali in nostro possesso. Se nel frattempo ci sono state variazioni, segnalatecele.', att: [['F24 saldo IMU.pdf', 'PDF', '160 KB']] },
+      { ts: at(19, 22, 10), me: true, topic: 'Dichiarazione dei redditi', text: 'Vi mando le spese mediche e la ricevuta dell’asilo. Il contratto lo cerco nel weekend.', att: [['Spese mediche 2° semestre.pdf', 'PDF', '1,1 MB'], ['Ricevuta asilo nido.pdf', 'PDF', '200 KB']] },
+      { ts: at(2, 11, 5), topic: 'Dichiarazione dei redditi', text: 'Ricevuto tutto, vi aggiorno a fine mese.' },
+      { ts: at(2, 11, 7), topic: 'Scadenze di novembre', text: 'Vi ricordiamo le scadenze di novembre, in allegato il riepilogo.', att: [['Scadenze novembre.pdf', 'PDF', '75 KB']] }
+    ]);
+
+    add({ id: 'admin', name: 'Amministrazione condominio', email: 'amministrazione@condominio.esempio.it', initials: 'AC' }, [
+      { ts: at(70, 10, 0), topic: 'Rendiconto 2025', cc: 'tutti i condomini', text: 'In allegato il rendiconto consuntivo 2025, che sarà portato in approvazione alla prossima assemblea.', att: [['Rendiconto 2025.xlsx', 'XLS', '210 KB']] },
+      { ts: at(40, 9, 0), topic: 'Lavori in facciata', cc: 'tutti i condomini', text: 'Trasmettiamo i tre preventivi per il rifacimento della facciata.', att: [['Preventivi facciata, 3 ditte.pdf', 'PDF', '3,4 MB']] },
+      { ts: at(13, 16, 5), topic: 'Assemblea di condominio', cc: 'tutti i condomini', text: 'Gentili condomini, è convocata l’assemblea ordinaria per ' + asm + ' alle 18:00 presso la sala comune, in seconda convocazione.\n\nOrdine del giorno:\n1) approvazione del rendiconto 2025;\n2) preventivo di gestione 2026;\n3) rifacimento della facciata, scelta della ditta tra le tre proposte ricevute;\n4) regolamento per l’uso del cortile e delle biciclette;\n5) varie ed eventuali.\n\nChi non potesse partecipare può delegare un altro condomino compilando il modulo allegato. Ogni condomino può rappresentare al massimo due deleghe.', att: [['Convocazione assemblea.pdf', 'PDF', '520 KB'], ['Modulo delega.docx', 'DOC', '45 KB', 'delega']] },
+      { ts: at(2, 9, 0), topic: 'Assemblea di condominio', cc: 'tutti i condomini', text: 'Promemoria: l’assemblea è ' + asm + ' alle 18:00. Portate le deleghe firmate.' }
+    ]);
+
+    add({ id: 'paolo', name: 'Paolo Conti', email: 'paolo.conti@esempio.it' }, [
+      { ts: at(30, 20, 0), topic: 'Regalo per la mamma', text: 'Per il compleanno della mamma pensavo a un weekend alle terme. Facciamo a metà?' },
+      { ts: at(30, 21, 15), me: true, topic: 'Regalo per la mamma', text: 'Ottima idea, ci sto.' },
+      { ts: at(8, 22, 10), topic: 'Foto del lago', text: 'Ecco le foto del weekend.', att: [['Lago, 24 foto.zip', 'JPG', '86 MB']] },
+      { ts: at(8, 22, 31), me: true, topic: 'Foto del lago', text: 'Bellissime, quella col pontile è da stampare.' },
+      { ts: at(3, 12, 45), topic: 'Pranzo di domenica', cc: 'Famiglia', text: 'Porto io il dolce.' },
+      { ts: at(2, 13, 0), me: true, topic: 'Pranzo di domenica', cc: 'Famiglia', text: 'E io il vino. A che ora?' }
+    ]);
+
+    add({ id: 'giulia', name: 'Giulia Rinaldi', email: 'giulia@cucinerinaldi.esempio.it' }, [
+      { ts: at(26, 10, 2), topic: 'Preventivo cucina', text: 'Ecco la prima proposta con la pianta.', att: [['Preventivo cucina v1.pdf', 'PDF', '640 KB', 'prev-cucina'], ['Pianta cucina.jpg', 'JPG', '900 KB']] },
+      { ts: at(25, 18, 40), me: true, topic: 'Preventivo cucina', text: 'Bella! Si può togliere il piano in quarzo?' },
+      { ts: at(14, 11, 15), topic: 'Preventivo cucina', text: 'Fatto, nuova versione senza quarzo.', att: [['Preventivo cucina v2.pdf', 'PDF', '650 KB', 'prev-cucina']] },
+      { ts: at(5, 9, 30), me: true, topic: 'Preventivo cucina', text: 'Ok. Mancano solo le misure del lato finestra.' },
+      { ts: at(3, 18, 20), topic: 'Preventivo cucina', text: 'Misure prese, ecco la versione finale.', att: [['Preventivo cucina v3.pdf', 'PDF', '660 KB', 'prev-cucina']] }
+    ]);
+
+    add({ id: 'davide', name: 'Davide Greco', email: 'davide.greco@lavoro.esempio.it' }, [
+      { ts: at(16, 9, 10), topic: 'Report trimestrale', text: 'Ti giro la bozza del report del terzo trimestre, mi dai un’occhiata ai numeri della seconda tabella?', att: [['Report Q3 v1.xlsx', 'XLS', '340 KB', 'report-q3']] },
+      { ts: at(15, 17, 45), me: true, topic: 'Report trimestrale', text: 'Visto. Nella seconda tabella i totali di agosto non tornano: mancano le vendite online, che nel file sorgente stanno in un foglio separato. Ho corretto e aggiunto una riga di controllo in fondo, così se succede di nuovo si vede subito. Ti rimando il file.', att: [['Report Q3 v2.xlsx', 'XLS', '352 KB', 'report-q3']] },
+      { ts: at(15, 18, 2), topic: 'Report trimestrale', text: 'Grazie, mi hai salvato la presentazione.' },
+      { ts: at(5, 8, 30), topic: 'Riunione di lunedì', cc: 'Sara Neri, Luca Fontana', text: 'Spostiamo la riunione alle 11? Alle 9 ho il dentista.' },
+      { ts: at(5, 8, 41), me: true, topic: 'Riunione di lunedì', cc: 'Sara Neri, Luca Fontana', text: 'Per me va bene.' }
+    ]);
+
+    /* persone generate per avere una casella piena */
+    const rnd = this.rng(20261014);
+    const FIRST = ['Sara', 'Luca', 'Chiara', 'Andrea', 'Francesca', 'Matteo', 'Valentina', 'Simone', 'Martina', 'Alessio', 'Federica', 'Giorgio', 'Elisa', 'Stefano', 'Silvia', 'Roberto', 'Laura', 'Nicola', 'Ilaria', 'Fabio', 'Monica', 'Tommaso', 'Serena', 'Daniele', 'Beatrice', 'Riccardo', 'Camilla', 'Emanuele'];
+    const LAST = ['Neri', 'Fontana', 'Galli', 'Moretti', 'Barbieri', 'Lombardi', 'Mariani', 'Rizzo', 'Colombo', 'Santoro', 'Marino', 'Gentile', 'Caruso', 'Ferrara', 'Testa', 'Vitale', 'Serra', 'Pellegrini', 'Leone', 'Longo', 'Martinelli', 'Bianchi', 'Costa', 'Giordano', 'Bertolini', 'Benedetti', 'Grasso', 'Palumbo'];
+    const POOL = [
+      ['Calcetto del giovedì'], ['Regalo per Sara', ['Idee regalo.pdf', 'PDF', '120 KB']], ['Club del libro', ['Libri di novembre.docx', 'DOC', '30 KB']],
+      ['Vacanze in Puglia', ['Masseria, foto.jpg', 'JPG', '2,9 MB']], ['Trasloco', ['Inventario scatole.xlsx', 'XLS', '44 KB']], ['Revisione auto', ['Ricevuta revisione.pdf', 'PDF', '150 KB']],
+      ['Visita di controllo', ['Referto.pdf', 'PDF', '380 KB']], ['Fattura 2026/118', ['Fattura 2026-118.pdf', 'PDF', '95 KB']], ['Cena di classe'],
+      ['Trapano in prestito'], ['Concerto di sabato', ['Biglietti concerto.pdf', 'PDF', '210 KB']], ['Iscrizione in palestra', ['Modulo iscrizione palestra.pdf', 'PDF', '130 KB']],
+      ['Foto del matrimonio', ['Matrimonio, 120 foto.zip', 'JPG', '310 MB']], ['Riunione genitori', ['Verbale riunione genitori.docx', 'DOC', '60 KB']], ['Assicurazione casa', ['Polizza casa 2026.pdf', 'PDF', '1,3 MB']],
+      ['Casa al mare ad agosto', ['Contratto affitto estivo.pdf', 'PDF', '450 KB']], ['Corso di inglese'], ['Torneo di padel', ['Tabellone torneo.xlsx', 'XLS', '25 KB']],
+      ['Bici da sistemare'], ['Compleanno di Leo', ['Invito compleanno Leo.jpg', 'JPG', '700 KB']], ['Spese del gruppo vacanze', ['Spese condivise.xlsx', 'XLS', '33 KB']], ['Curriculum da rivedere', ['CV aggiornato.docx', 'DOC', '80 KB']]
+    ];
+    const THEM = ['Ciao! Per {t} ti va bene giovedì sera?', 'Ti giro le ultime novità su {t}.', 'Scusa il ritardo, ho visto solo ora il messaggio.', 'Allora confermiamo? Fammi sapere entro domani.', 'Ho sentito anche gli altri: per loro va bene.', 'Ti mando i dettagli, dimmi se torna tutto.', 'Ottimo, grazie mille!', 'Mi era sfuggito, ci penso io.', 'Ti ricordi a che ora avevamo detto?', 'Possiamo spostare di una settimana?'];
+    const ME = ['Ok per me.', 'Perfetto, grazie!', 'Facciamo la settimana prossima?', 'Ricevuto, ci guardo stasera.', 'Ci sono, segnato in agenda.', 'Mi sembra tutto giusto.', 'Ti richiamo dopo pranzo.', 'Va benissimo, a presto.'];
+    const LONG = 'Ti scrivo con calma perché la cosa si è un po’ complicata. Ho sentito tutti e ognuno ha una disponibilità diversa: chi può solo nel weekend, chi solo la sera, chi preferisce rimandare a dopo le feste.\n\nHo provato a mettere insieme le date, ma l’unica che va bene quasi a tutti è giovedì 23. Se per te è un problema dimmelo subito, così sento di nuovo gli altri prima di confermare. Nel frattempo ho chiesto anche un preventivo, ma non mi hanno ancora risposto: appena so qualcosa ti aggiorno.';
+    const pick = (arr) => arr[Math.floor(rnd() * arr.length)];
+    for (let k = 0; k < FIRST.length; k++) {
+      const name = FIRST[k] + ' ' + LAST[(k * 5 + 2) % LAST.length];
+      const entries = [];
+      const nTopics = 1 + Math.floor(rnd() * 3);
+      const used = {};
+      for (let t = 0; t < nTopics; t++) {
+        let tp = pick(POOL);
+        while (used[tp[0]]) tp = pick(POOL);
+        used[tp[0]] = true;
+        const lower = tp[0].charAt(0).toLowerCase() + tp[0].slice(1);
+        const cc = rnd() < 0.2 ? FIRST[(k + 3) % FIRST.length] + ' ' + LAST[(k * 3 + 1) % LAST.length] : '';
+        const n = 1 + Math.floor(rnd() * 5);
+        for (let i = 0; i < n; i++) {
+          const me = i > 0 && rnd() < 0.5;
+          let text = i === 0 ? THEM[Math.floor(rnd() * 2)].replace('{t}', lower) : (me ? pick(ME) : pick(THEM).replace('{t}', lower));
+          if (!me && i > 0 && rnd() < 0.15) text = LONG;
+          const e = { me: me, topic: tp[0], cc: cc, text: text };
+          if (i === 0 && tp[1] && rnd() < 0.75) e.att = [tp[1]];
+          entries.push(e);
+        }
+      }
+      const last = 3 + Math.floor(rnd() * 160);
+      const span = 4 + Math.floor(rnd() * 50);
+      entries.forEach((e, i) => {
+        const d = last + Math.round(span * (entries.length - 1 - i) / Math.max(1, entries.length - 1));
+        e.ts = at(d, 8 + Math.floor(rnd() * 14), Math.floor(rnd() * 60));
+      });
+      const lastE = entries[entries.length - 1];
+      add({ id: 'g' + k, name: name, email: name.toLowerCase().replace(/\s+/g, '.') + '@esempio.it', unread: !lastE.me && last < 6 ? 1 : 0 }, entries);
+    }
+
+    const services = { id: 'services', name: 'Servizi e notifiche', email: 'mittenti automatici, raccolti qui', initials: 'SN', tint: '#E2E4EA', ink: '#3D4250', unread: 0 };
+    const S = [
+      [60, 'Banca', 'Estratto conto di agosto disponibile.', ['Estratto conto agosto.pdf', 'PDF', '210 KB']],
+      [45, 'Comune', 'Avviso di pagamento TARI 2026, prima rata.', ['Avviso TARI 2026.pdf', 'PDF', '330 KB']],
+      [33, 'Fornitore luce', 'Bolletta di agosto disponibile.', ['Bolletta agosto.pdf', 'PDF', '180 KB']],
+      [30, 'Banca', 'Estratto conto di settembre disponibile.', ['Estratto conto settembre.pdf', 'PDF', '215 KB']],
+      [21, 'Newsletter · Libreria', 'Le novità di ottobre e gli incontri con gli autori.'],
+      [18, 'Biglietteria treni', 'Biglietto Roma–Milano, andata e ritorno.', ['Biglietto Roma-Milano.pdf', 'PDF', '120 KB']],
+      [14, 'Newsletter · Quotidiano', 'La settimana in dieci notizie.'],
+      [12, 'Corriere', 'Il tuo pacco è stato spedito.'],
+      [11, 'Corriere', 'Il tuo pacco è stato consegnato.'],
+      [9, 'Newsletter · Palestra', 'Nuovi corsi del mattino.'],
+      [7, 'Newsletter · Libreria', 'Tre libri per l’autunno.'],
+      [4, 'Fornitore luce', 'Bolletta di settembre disponibile, scade a fine mese.', ['Bolletta settembre.pdf', 'PDF', '182 KB']],
+      [3, 'Newsletter · Quotidiano', 'La settimana in dieci notizie.'],
+      [1, 'Banca', 'Accesso all’app da un nuovo dispositivo.'],
+      [0, 'Corriere', 'Il pacco arriva oggi tra le 14 e le 18.']
+    ];
+    const svcMsgs = S.map((x, i) => ({ ts: at(x[0], 7 + (i % 10), (i * 17) % 60), topic: x[1].split(' · ')[0], from: x[1], text: x[2], att: x[3] ? [x[3]] : [] }));
+    services.msgs = svcMsgs.map((m, i) => {
+      const id = 'services-' + i;
+      return Object.assign({ pid: 'services', cc: '', me: false }, m, { id: id, att: m.att.map((a, j) => ({ id: id + '-' + j, name: a[0], ext: a[1], size: a[2], doc: id + '-' + j })) });
+    });
+
+    return { people: people, services: services };
+  }
+
+  /* ---------- modello ---------- */
+  peopleNow(s) {
+    const extra = s.extraPeople.map((e) => Object.assign({ msgs: [] }, e));
+    return this.db.people.concat(extra).map((p) => {
+      const sent = s.sent.filter((m) => m.pid === p.id);
+      const msgs = sent.length ? p.msgs.concat(sent) : p.msgs;
+      return Object.assign({}, p, { msgs: msgs, lastTs: msgs.length ? msgs[msgs.length - 1].ts : p.created });
+    }).sort((a, b) => b.lastTs - a.lastTs);
+  }
+  personById(id, s) {
+    if (id === 'services') return this.db.services;
+    return this.peopleNow(s).find((p) => p.id === id);
+  }
+  extOf(name) {
+    const e = (name.split('.').pop() || '').toLowerCase();
+    if (e === 'pdf') return 'PDF';
+    if (['jpg', 'jpeg', 'png', 'gif', 'webp', 'heic', 'zip'].indexOf(e) >= 0) return 'JPG';
+    if (['doc', 'docx', 'odt', 'txt', 'md', 'rtf'].indexOf(e) >= 0) return 'DOC';
+    if (['xls', 'xlsx', 'ods', 'csv'].indexOf(e) >= 0) return 'XLS';
+    return 'FILE';
+  }
+  sizeOf(bytes) {
+    if (bytes < 1024 * 1024) return Math.max(1, Math.round(bytes / 1024)) + ' KB';
+    return (bytes / 1024 / 1024).toFixed(1).replace('.', ',') + ' MB';
+  }
+  tint(ext) {
+    return {
+      PDF: 'background: #FBE3E0; color: #8A2618;',
+      DOC: 'background: #DDE6FA; color: #1E3E8A;',
+      JPG: 'background: #F3E6C8; color: #6B4A0E;',
+      XLS: 'background: #DCEFE2; color: #1F5A33;',
+      FILE: 'background: #E2E4EA; color: #3D4250;'
+    }[ext] || 'background: #E2E4EA; color: #3D4250;';
+  }
+  badgeStyle(ext) {
+    return 'flex: none; width: 30px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; ' + this.tint(ext);
+  }
+  go(patch) {
+    this.setState(patch);
+    if (typeof window !== 'undefined' && window.scrollTo) window.scrollTo(0, 0);
+  }
+  openMsg(pid, id) {
+    const s = this.state;
+    const p = this.personById(pid, s);
+    const idx = p.msgs.findIndex((m) => m.id === id);
+    const fromEnd = p.msgs.length - idx;
+    this.go({
+      view: 'people', sel: pid, compose: false, topicFilter: '', focusMsg: id,
+      more: Object.assign({}, s.more, { [pid]: Math.max(0, Math.ceil((fromEnd - 3) / 3)) }),
+      read: Object.assign({}, s.read, { [pid]: true })
+    });
+  }
+  send() {
+    const s = this.state;
+    const text = s.draft.trim();
+    if (!text && !s.pending.length) return;
+    let pid = s.sel;
+    let extraPeople = s.extraPeople;
+    let topic;
+    if (s.compose) {
+      if (s.toPick) {
+        pid = s.toPick;
+      } else {
+        const name = s.toDraft.trim();
+        if (!name) return;
+        const found = this.peopleNow(s).find((p) => p.name.toLowerCase() === name.toLowerCase() || p.email.toLowerCase() === name.toLowerCase());
+        if (found) {
+          pid = found.id;
+        } else {
+          pid = 'new' + (extraPeople.length + 1);
+          const isMail = name.indexOf('@') >= 0;
+          extraPeople = extraPeople.concat([{
+            id: pid, name: name, email: isMail ? name : name.toLowerCase().replace(/\s+/g, '.') + '@esempio.it',
+            initials: name.split(/[\s@.]+/).filter(Boolean).map((w) => w[0]).join('').slice(0, 2).toUpperCase(),
+            tint: '#D7EEF0', ink: '#145158', unread: 0, created: Date.now()
+          }]);
+        }
+      }
+      topic = s.topicDraft.trim() || 'Senza argomento';
+    } else {
+      const p = this.personById(pid, s);
+      const last = p.msgs[p.msgs.length - 1];
+      topic = s.newTopic || !last ? (s.topicDraft.trim() || 'Senza argomento') : (s.topicFilter || last.topic);
+    }
+    const n = s.sent.length;
+    const id = 'sent-' + n;
+    const msg = {
+      id: id, pid: pid, ts: Date.now(), me: true, topic: topic, text: text, cc: '', from: '',
+      att: s.pending.map((f, j) => ({ id: id + '-' + j, name: f.name, ext: f.ext, size: f.size, doc: id + '-' + j }))
+    };
+    this.setState({
+      sent: s.sent.concat([msg]), extraPeople: extraPeople, sel: pid, compose: false, draft: '', topicDraft: '',
+      newTopic: false, pending: [], toDraft: '', toPick: '', view: 'people', focusMsg: id,
+      topicFilter: s.topicFilter && s.topicFilter === topic ? topic : '',
+      more: Object.assign({}, s.more, { [pid]: 0 })
+    });
+  }
+
+  thread(p, s) {
+    const LIMIT = 300;
+    let msgs = p.msgs;
+    if (s.topicFilter) msgs = msgs.filter((m) => m.topic === s.topicFilter);
+    const more = s.more[p.id] || 0;
+    const count = Math.min(msgs.length, 3 + 3 * more);
+    const shown = msgs.slice(msgs.length - count);
+    const remaining = msgs.length - count;
+    const rows = [];
+    let day = null;
+    let topic = null;
+    shown.forEach((m) => {
+      const dl = this.longDay(m.ts);
+      if (dl !== day) { day = dl; rows.push({ isDay: true, label: dl }); }
+      if (m.topic !== topic) { topic = m.topic; rows.push({ isTopic: true, label: m.topic, cc: m.cc, hasCc: !!m.cc }); }
+      const isLong = m.text.length > LIMIT;
+      const open = !!s.expanded[m.id];
+      const short = isLong && !open ? m.text.slice(0, 240).replace(/\s+\S*$/, '') + '…' : m.text;
+      const focus = s.focusMsg === m.id;
+      rows.push({
+        isMsg: true,
+        text: short,
+        isLong: isLong,
+        expanded: open,
+        moreLabel: open ? 'Riduci' : 'Leggi tutto',
+        toggle: () => this.setState({ expanded: Object.assign({}, this.state.expanded, { [m.id]: !open }) }),
+        time: this.hhmm(m.ts),
+        from: m.from,
+        hasFrom: !!m.from,
+        att: m.att.map((a) => ({
+          name: a.name, ext: a.ext, meta: [a.ext, a.size].filter(Boolean).join(' · '),
+          open: () => this.go({ view: 'files', fsel: a.doc, fperson: '', fext: 'all' }),
+          thumbStyle: 'flex: none; width: 32px; height: 40px; border-radius: 4px; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 4px; box-sizing: border-box; font-size: 10px; font-weight: 700; ' + this.tint(a.ext)
+        })),
+        wrapStyle: 'display: flex; justify-content: ' + (m.me ? 'flex-end' : 'flex-start') + ';',
+        bubbleStyle: 'max-width: 74%; min-width: 0; display: flex; flex-direction: column; gap: 8px; padding: 12px 16px; ' +
+          (m.me ? 'background: #E8EBFB; border: 1px solid #CBD2F6; border-radius: 16px 16px 4px 16px;' : 'background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 16px 16px 16px 4px;') +
+          (focus ? ' box-shadow: 0 0 0 3px #FFD666;' : '')
+      });
+    });
+    const next = Math.min(3, remaining);
+    return {
+      rows: rows,
+      hasMore: remaining > 0,
+      moreLabel: 'Carica ' + next + (next === 1 ? ' messaggio precedente' : ' messaggi precedenti') + ' · ne restano ' + remaining,
+      loadMore: () => this.setState({ more: Object.assign({}, this.state.more, { [p.id]: more + 1 }) }),
+      filtered: !!s.topicFilter,
+      filterName: s.topicFilter,
+      clearFilter: () => this.setState({ topicFilter: '' })
+    };
+  }
+
+  search(s, people) {
+    const q = s.q.trim();
+    const examples = ['la convocazione dell’assemblea con la delega', 'preventivo cucina pdf', 'foto di Paolo', 'Elena computo', 'bolletta settembre', 'colloqui'].map((x) => ({ label: x, pick: () => this.setState({ q: x, off: {} }) }));
+    if (!q) return { empty: true, active: false, examples: examples, chips: [], results: [], none: false, countLabel: '' };
+    const all = people.concat([this.db.services]);
+    const STOP = { il: 1, lo: 1, la: 1, i: 1, gli: 1, le: 1, di: 1, del: 1, dello: 1, della: 1, dei: 1, delle: 1, dell: 1, con: 1, che: 1, per: 1, a: 1, al: 1, all: 1, alla: 1, da: 1, dal: 1, in: 1, un: 1, una: 1, e: 1, mi: 1, ha: 1, ho: 1, mandato: 1, mandata: 1, quella: 1, quello: 1, email: 1, mail: 1, messaggio: 1, sul: 1, sulla: 1, su: 1, tra: 1, l: 1, cosa: 1 };
+    const MONTHS = this.months();
+    const ATT = { allegato: 'any', allegati: 'any', allegata: 'any', allegate: 'any', pdf: 'PDF', foto: 'JPG', immagine: 'JPG', immagini: 'JPG', jpg: 'JPG', doc: 'DOC', docx: 'DOC', word: 'DOC', excel: 'XLS', xls: 'XLS', xlsx: 'XLS', foglio: 'XLS' };
+    const ATT_LABEL = { any: 'qualsiasi', PDF: 'PDF', JPG: 'foto', DOC: 'documento', XLS: 'foglio di calcolo' };
+    const words = q.toLowerCase().replace(/[’']/g, ' ').replace(/[^\p{L}\p{N}\s]/gu, ' ').split(/\s+/).filter(Boolean);
+    const chips = [];
+    const addChip = (c) => { if (!chips.some((x) => x.key === c.key)) chips.push(c); };
+    for (let i = 0; i < words.length; i++) {
+      const w = words[i];
+      const mi = MONTHS.indexOf(w);
+      if (mi >= 0) {
+        const prev = Number(words[i - 1]);
+        const day = prev >= 1 && prev <= 31 ? prev : 0;
+        addChip({ key: 'date:' + day + ':' + mi, kind: 'data', label: (day ? day + ' ' : '') + w, day: day, month: mi, type: 'date' });
+        continue;
+      }
+      if (/^\d+$/.test(w) && MONTHS.indexOf(words[i + 1]) >= 0) continue;
+      if (ATT[w]) { addChip({ key: 'att:' + ATT[w], kind: 'allegato', label: ATT_LABEL[ATT[w]], ext: ATT[w], type: 'att' }); continue; }
+      if (STOP[w] || w.length < 3) continue;
+      const who = all.filter((p) => p.id !== 'services' && p.name.toLowerCase().split(/\s+/).some((part) => part === w || (w.length >= 4 && part.indexOf(w) === 0)));
+      if (who.length && who.length <= 3) {
+        addChip({ key: 'who:' + w, kind: 'persona', label: who.map((p) => p.name).join(', '), ids: who.map((p) => p.id), names: who.map((p) => p.name.toLowerCase()), type: 'who' });
+        continue;
+      }
+      addChip({ key: 'text:' + w, kind: 'parola', label: w, stem: w.slice(0, Math.max(4, Math.ceil(w.length * 0.55))), type: 'text' });
+    }
+    const active = chips.filter((c) => !s.off[c.key]);
+    const texts = active.filter((c) => c.type === 'text');
+    const results = [];
+    all.forEach((p) => p.msgs.forEach((m) => {
+      const why = [];
+      for (const c of active) {
+        if (c.type === 'who') {
+          const ok = c.ids.indexOf(p.id) >= 0 || c.names.some((n) => (m.cc || '').toLowerCase().indexOf(n) >= 0);
+          if (!ok) return;
+          why.push(c.ids.indexOf(p.id) >= 0 ? 'scambio con ' + p.name : p.name + ', con ' + c.label + ' in copia');
+        } else if (c.type === 'date') {
+          const d = new Date(m.ts);
+          const said = (c.day ? c.day + ' ' : '') + MONTHS[c.month];
+          const inText = m.text.toLowerCase().indexOf(said) >= 0;
+          const onDate = d.getMonth() === c.month && (!c.day || d.getDate() === c.day);
+          if (!inText && !onDate) return;
+          why.push(onDate ? 'scritto a ' + said : 'cita ' + said);
+        } else if (c.type === 'att') {
+          const hit = m.att.filter((a) => c.ext === 'any' || a.ext === c.ext);
+          if (!hit.length) return;
+          why.push('allegato ' + hit.map((a) => a.name).join(', '));
+        }
+      }
+      const hay = (m.text + ' ' + m.topic + ' ' + m.att.map((a) => a.name).join(' ')).toLowerCase();
+      const hits = texts.filter((c) => hay.indexOf(c.stem) >= 0);
+      const need = texts.length >= 3 ? texts.length - 1 : texts.length;
+      if (hits.length < need) return;
+      if (hits.length) why.push('contiene ' + hits.map((c) => c.label).join(', '));
+      results.push({ p: p, m: m, why: why, score: hits.length * 10 + why.length });
+    }));
+    results.sort((a, b) => b.score - a.score || b.m.ts - a.m.ts);
+    const stems = texts.map((c) => c.stem.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+    const re = stems.length ? new RegExp('(' + stems.map((x) => x + '\\p{L}*').join('|') + ')', 'giu') : null;
+    const shownResults = results.slice(0, 25).map((r) => {
+      const t = r.m.text.replace(/\n+/g, ' ');
+      let start = 0;
+      if (re) {
+        re.lastIndex = 0;
+        const f = re.exec(t);
+        if (f && f.index > 90) start = f.index - 70;
+      }
+      let snip = (start ? '…' : '') + t.slice(start, start + 260) + (t.length > start + 260 ? '…' : '');
+      const parts = re ? snip.split(re) : [snip];
+      return {
+        who: r.m.me ? 'tu → ' + r.p.name : (r.m.from || r.p.name),
+        topic: r.m.topic,
+        date: this.shortDate(r.m.ts),
+        segs: parts.filter((x) => x !== '').map((x, i) => {
+          const hit = !!re && new RegExp('^(' + stems.map((y) => y + '\\p{L}*').join('|') + ')$', 'iu').test(x);
+          return { t: x, hit: hit, plain: !hit };
+        }),
+        att: r.m.att.map((a) => ({ name: a.name, ext: a.ext, badgeStyle: this.badgeStyle(a.ext) })),
+        hasAtt: r.m.att.length > 0,
+        why: r.why.join(' · ') || 'corrisponde ai criteri',
+        open: () => this.openMsg(r.p.id, r.m.id),
+        cardStyle: 'display: flex; flex-direction: column; gap: 8px; padding: 16px 20px; background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 14px; font: inherit; text-align: left; color: inherit; cursor: pointer'
+      };
+    });
+    const accent = this.props.accent ?? '#2F45D8';
+    return {
+      empty: false, active: true, examples: examples,
+      chips: chips.map((c) => {
+        const on = !s.off[c.key];
+        return {
+          kind: c.kind, label: c.label, on: on,
+          toggle: () => this.setState({ off: Object.assign({}, this.state.off, { [c.key]: on }) }),
+          style: 'display: flex; align-items: baseline; gap: 6px; min-height: 36px; padding: 6px 12px; border-radius: 999px; font: inherit; font-size: 14px; cursor: pointer; ' +
+            (on ? 'border: 1px solid ' + accent + '; background: #E8EBFB; color: #1E2E9E;' : 'border: 1px dashed #C3C7D2; background: #FFFFFF; color: #5A6070; text-decoration: line-through;')
+        };
+      }),
+      results: shownResults,
+      none: results.length === 0,
+      countLabel: results.length === 0 ? '' : results.length > 25 ? results.length + ' messaggi, i primi 25 in ordine di pertinenza' : results.length + (results.length === 1 ? ' messaggio' : ' messaggi') + ', in ordine di pertinenza'
+    };
+  }
+
+  files(s, people) {
+    const accent = this.props.accent ?? '#2F45D8';
+    const all = people.concat([this.db.services]);
+    const docs = {};
+    const order = [];
+    all.forEach((p) => p.msgs.forEach((m) => m.att.forEach((a) => {
+      if (!docs[a.doc]) { docs[a.doc] = { doc: a.doc, versions: [] }; order.push(a.doc); }
+      docs[a.doc].versions.push({ a: a, m: m, p: p });
+    })));
+    let list = order.map((k) => {
+      const d = docs[k];
+      d.versions.sort((x, y) => x.m.ts - y.m.ts);
+      d.last = d.versions[d.versions.length - 1];
+      return d;
+    });
+    const total = list.length;
+    if (s.fperson) list = list.filter((d) => d.versions.some((v) => v.p.id === s.fperson));
+    if (s.fext !== 'all') list = list.filter((d) => d.last.a.ext === s.fext);
+    list.sort((x, y) => y.last.m.ts - x.last.m.ts);
+
+    const groupKey = (d) => {
+      if (s.fmode === 'person') return d.last.p.name;
+      if (s.fmode === 'topic') return d.last.m.topic;
+      if (s.fmode === 'type') return { PDF: 'PDF', JPG: 'Foto e immagini', DOC: 'Documenti', XLS: 'Fogli di calcolo', FILE: 'Altri file' }[d.last.a.ext];
+      const a = this.ago(d.last.m.ts);
+      return a < 7 ? 'Questa settimana' : a < 31 ? 'Questo mese' : a < 92 ? 'Ultimi tre mesi' : 'Prima';
+    };
+    const groups = [];
+    const byG = {};
+    list.forEach((d) => {
+      const k = groupKey(d);
+      if (!byG[k]) { byG[k] = { title: k, items: [] }; groups.push(byG[k]); }
+      const sel = d.doc === s.fsel;
+      const v = d.versions.length;
+      byG[k].items.push({
+        name: d.last.a.name, ext: d.last.a.ext,
+        meta: (d.last.m.me ? 'tu' : d.last.m.from || d.last.p.name) + ' · ' + this.shortDate(d.last.m.ts),
+        hasVersions: v > 1, versions: String(v), selected: sel,
+        select: () => this.setState({ fsel: d.doc }),
+        cardStyle: 'display: flex; flex-direction: column; gap: 6px; padding: 12px; border-radius: 12px; background: #FFFFFF; font: inherit; text-align: left; color: inherit; cursor: pointer; min-width: 0; ' + (sel ? 'border: 2px solid ' + accent + ';' : 'border: 1px solid #E2E4EA;'),
+        thumbStyle: 'height: 84px; border-radius: 8px; display: flex; align-items: flex-end; padding: 8px 10px; box-sizing: border-box; font-size: 12px; font-weight: 700; ' + this.tint(d.last.a.ext)
+      });
+    });
+    if (s.fmode === 'person' || s.fmode === 'topic') groups.sort((a, b) => b.items.length - a.items.length);
+    groups.forEach((g) => { g.count = String(g.items.length); });
+
+    const seg = (on) => 'min-height: 36px; padding: 0 14px; border: 0; border-radius: 8px; font: inherit; font-size: 14px; cursor: pointer; ' + (on ? 'background: #FFFFFF; color: #15171C; font-weight: 600;' : 'background: transparent; color: #3D4250;');
+    const pill = (on) => 'min-height: 36px; padding: 0 12px; border-radius: 999px; font: inherit; font-size: 13px; cursor: pointer; ' + (on ? 'border: 1px solid ' + accent + '; background: #E8EBFB; color: #1E2E9E; font-weight: 600;' : 'border: 1px solid #C3C7D2; background: #FFFFFF; color: #3D4250;');
+    const modes = [['recent', 'Recenti'], ['person', 'Persona'], ['topic', 'Argomento'], ['type', 'Tipo']].map((m) => ({
+      label: m[1], on: s.fmode === m[0], style: seg(s.fmode === m[0]), pick: () => this.setState({ fmode: m[0] })
+    }));
+    const exts = [['all', 'Tutti'], ['PDF', 'PDF'], ['JPG', 'Foto'], ['DOC', 'Documenti'], ['XLS', 'Fogli']].map((x) => ({
+      label: x[1], on: s.fext === x[0], style: pill(s.fext === x[0]), pick: () => this.setState({ fext: x[0] })
+    }));
+
+    const selDoc = docs[s.fsel];
+    let sel = null;
+    if (selDoc) {
+      const l = selDoc.last;
+      sel = {
+        name: l.a.name, ext: l.a.ext,
+        meta: [l.a.size, l.p.name, l.m.topic].filter(Boolean).join(' · '),
+        historyTitle: selDoc.versions.length > 1 ? selDoc.versions.length + ' versioni' : 'Da dove arriva',
+        previewStyle: 'height: 190px; border-radius: 10px; box-sizing: border-box; padding: 20px 24px; display: flex; flex-direction: column; gap: 8px; ' + this.tint(l.a.ext),
+        versions: selDoc.versions.slice().reverse().map((v) => ({
+          date: this.shortDate(v.m.ts), name: v.a.name,
+          who: v.m.me ? 'mandato da te a ' + v.p.name : 'da ' + (v.m.from || v.p.name),
+          open: () => this.openMsg(v.p.id, v.m.id)
+        }))
+      };
+    }
+    const fp = s.fperson ? all.find((p) => p.id === s.fperson) : null;
+    return {
+      countLabel: list.length === total ? total + ' file, le versioni dello stesso documento sono unite' : list.length + ' di ' + total + ' file',
+      hasPerson: !!fp, personName: fp ? fp.name : '',
+      clearPerson: () => this.setState({ fperson: '' }),
+      modes: modes, exts: exts, groups: groups,
+      hasSel: !!sel, noSel: !sel, sel: sel || { versions: [] }
+    };
+  }
+
+  renderVals() {
+    const accent = this.props.accent ?? '#2F45D8';
+    const s = this.state;
+    const people = this.peopleNow(s);
+
+    const tabStyle = (on) => 'min-height: 40px; padding: 0 14px; border: 0; border-radius: 8px; font: inherit; font-size: 15px; cursor: pointer; ' + (on ? 'background: #E8EBFB; color: #1E2E9E; font-weight: 600;' : 'background: transparent; color: #3D4250;');
+    const tabs = [['people', 'Persone'], ['search', 'Cerca'], ['files', 'Allegati']].map((t) => ({
+      label: t[1], on: s.view === t[0], style: tabStyle(s.view === t[0]), pick: () => this.go({ view: t[0], fperson: t[0] === 'files' ? '' : s.fperson })
+    }));
+
+    const itemBase = 'display: flex; gap: 12px; width: 100%; padding: 12px 16px; border: 0; border-top: 1px solid #E2E4EA; font: inherit; text-align: left; color: inherit; cursor: pointer; ';
+    const pick = (id) => () => this.setState({ sel: id, compose: false, read: Object.assign({}, this.state.read, { [id]: true }), newTopic: false, topicFilter: '', focusMsg: '' });
+    const pq = s.pq.trim().toLowerCase();
+    const list = people
+      .filter((p) => !pq || (p.name + ' ' + p.email).toLowerCase().indexOf(pq) >= 0)
+      .map((p) => {
+        const last = p.msgs[p.msgs.length - 1];
+        const isSel = !s.compose && p.id === s.sel;
+        const unread = isSel || s.read[p.id] ? 0 : p.unread;
+        return {
+          name: p.name, initials: p.initials,
+          time: last ? this.shortDate(last.ts) : '',
+          preview: last ? (last.me ? 'tu: ' : '') + last.text.replace(/\n+/g, ' ') : 'nessun messaggio',
+          hasAtt: !!(last && last.att.length),
+          hasUnread: unread > 0, unread: String(unread), current: isSel, select: pick(p.id),
+          itemStyle: itemBase + (isSel ? 'background: #E8EBFB;' : 'background: #FFFFFF;'),
+          nameStyle: 'font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; ' + (unread > 0 ? 'font-weight: 700;' : 'font-weight: 500;'),
+          avatarStyle: 'flex: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; background: ' + p.tint + '; color: ' + p.ink + ';'
+        };
+      });
+    const servicesSel = !s.compose && s.sel === 'services';
+    const services = {
+      current: servicesSel, select: pick('services'), count: String(this.db.services.msgs.length),
+      itemStyle: itemBase + (servicesSel ? 'background: #E8EBFB;' : 'background: #F8F9FB;')
+    };
+
+    const p = this.personById(s.sel, s) || people[0];
+    const topicsMap = {};
+    const topicOrder = [];
+    p.msgs.forEach((m) => {
+      if (!topicsMap[m.topic]) { topicsMap[m.topic] = { title: m.topic, n: 0, last: 0 }; topicOrder.push(m.topic); }
+      topicsMap[m.topic].n++;
+      topicsMap[m.topic].last = m.ts;
+    });
+    const chip = (on) => 'min-height: 32px; padding: 0 12px; border-radius: 999px; font: inherit; font-size: 13px; cursor: pointer; ' + (on ? 'border: 1px solid ' + accent + '; background: #E8EBFB; color: #1E2E9E; font-weight: 600;' : 'border: 1px solid #C3C7D2; background: #FFFFFF; color: #3D4250;');
+    const topics = topicOrder.map((k) => topicsMap[k]).sort((a, b) => b.last - a.last).map((t) => ({
+      title: t.title, count: String(t.n), on: s.topicFilter === t.title, style: chip(s.topicFilter === t.title),
+      pick: () => this.setState({ topicFilter: this.state.topicFilter === t.title ? '' : t.title, focusMsg: '' })
+    }));
+    const nFiles = p.msgs.reduce((n, m) => n + m.att.length, 0);
+    const last = p.msgs[p.msgs.length - 1];
+    const cur = {
+      name: p.name,
+      first: p.name.replace(/^(Arch\.|Dott\.|Maestra)\s+/, '').split(' ')[0],
+      email: p.email, initials: p.initials,
+      stats: p.msgs.length + (p.msgs.length === 1 ? ' messaggio' : ' messaggi') + ' · ' + topicOrder.length + (topicOrder.length === 1 ? ' argomento' : ' argomenti'),
+      topics: topics, manyTopics: topicOrder.length > 1,
+      hasFiles: nFiles > 0, filesLabel: nFiles + (nFiles === 1 ? ' allegato' : ' allegati'),
+      openFiles: () => this.go({ view: 'files', fperson: p.id, fsel: '' }),
+      bigAvatarStyle: 'flex: none; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 19px; background: ' + p.tint + '; color: ' + p.ink + ';'
+    };
+
+    const pending = s.pending.map((f, i) => ({
+      name: f.name, ext: f.ext, size: f.size, badgeStyle: this.badgeStyle(f.ext),
+      remove: () => this.setState({ pending: this.state.pending.filter((x, j) => j !== i) })
+    }));
+    const onFiles = (e) => {
+      const files = Array.prototype.slice.call((e.target && e.target.files) || []);
+      if (!files.length) return;
+      this.setState({ pending: this.state.pending.concat(files.map((f) => ({ name: f.name, ext: this.extOf(f.name), size: this.sizeOf(f.size) }))) });
+    };
+
+    const toQ = s.toDraft.trim().toLowerCase();
+    const sugg = toQ.length >= 2 ? people.filter((x) => (x.name + ' ' + x.email).toLowerCase().indexOf(toQ) >= 0).slice(0, 6) : [];
+    const picked = s.toPick ? people.find((x) => x.id === s.toPick) : null;
+    const compose = {
+      to: s.toDraft,
+      onTo: (e) => this.setState({ toDraft: e.target.value }),
+      sugg: sugg.map((x) => ({ name: x.name, pick: () => this.setState({ toPick: x.id, toDraft: x.name }) })),
+      hasSugg: sugg.length > 0,
+      hasPick: !!picked, noPick: !picked, pickName: picked ? picked.name : '',
+      clearPick: () => this.setState({ toPick: '', toDraft: '' })
+    };
+
+    const hasContent = s.draft.trim().length > 0 || s.pending.length > 0;
+    const replyTopic = s.topicFilter || (last ? last.topic : '');
+
+    return {
+      accent: accent,
+      tabs: tabs,
+      q: s.q,
+      onQuery: (e) => this.setState({ q: e.target.value, view: 'search', off: {} }),
+      startCompose: () => this.go({ view: 'people', compose: true, draft: '', topicDraft: '', pending: [], toDraft: '', toPick: '' }),
+      cancelCompose: () => this.setState({ compose: false, draft: '', topicDraft: '', pending: [], toDraft: '', toPick: '' }),
+
+      isPeople: s.view === 'people',
+      isSearch: s.view === 'search',
+      isFiles: s.view === 'files',
+      isCompose: s.compose,
+      isPerson: !s.compose,
+
+      pq: s.pq,
+      onPeopleQuery: (e) => this.setState({ pq: e.target.value }),
+      peopleCount: list.length === people.length ? people.length + ' persone, chi ha scritto per ultimo in alto' : list.length + ' di ' + people.length + ' persone',
+      list: list,
+      noMatch: list.length === 0,
+      services: services,
+
+      cur: cur,
+      thread: this.thread(p, s),
+      canReply: p.id !== 'services',
+      replyTopic: replyTopic,
+      continuing: !s.newTopic,
+      newTopic: s.newTopic,
+      continueStyle: chip(!s.newTopic),
+      newStyle: chip(s.newTopic),
+      continueTopic: () => this.setState({ newTopic: false }),
+      startTopic: () => this.setState({ newTopic: true }),
+      topicDraft: s.topicDraft,
+      onTopicDraft: (e) => this.setState({ topicDraft: e.target.value }),
+      draft: s.draft,
+      onDraft: (e) => this.setState({ draft: e.target.value }),
+      onDraftKey: (e) => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); this.send(); } },
+      pending: pending,
+      hasPending: pending.length > 0,
+      onFiles: onFiles,
+      send: () => this.send(),
+      cantSend: !hasContent,
+      cantSendNew: !hasContent || !(s.toPick || s.toDraft.trim()),
+      compose: compose,
+
+      search: s.view === 'search' ? this.search(s, people) : { empty: true, active: false, examples: [], chips: [], results: [], none: false },
+      files: s.view === 'files' ? this.files(s, people) : { groups: [], modes: [], exts: [], sel: { versions: [] } }
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Ambassadress//sintetico//IT
+METHOD:REQUEST
+BEGIN:VEVENT
+UID:090@esempio.it
+DTSTART:20261009T130000Z
+DTEND:20261009T140000Z
+SUMMARY:Tentative Allineamento su piano operativo
+ORGANIZER;CN=Lorenzo Bellini:mailto:lorenzo@bellini.esempio.it
+END:VEVENT
+END:VCALENDAR

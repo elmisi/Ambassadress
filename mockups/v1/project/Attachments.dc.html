@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Allegati</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#F3F4F6}
+a{color:#2F45D8}a:hover{color:#1E2E9E}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #2F45D8;outline-offset:2px}
+</style>
+</helmet>
+<div style="min-height: 100vh; box-sizing: border-box; font-family: 'Instrument Sans', system-ui, sans-serif; color: #15171C; background: #F3F4F6; display: flex; flex-direction: column">
+
+  <header style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px 28px; padding: 14px 24px; background: #FFFFFF; border-bottom: 1px solid #E2E4EA">
+    <div style="display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; letter-spacing: -0.01em">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{accent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l9 6 9-6"></path><rect x="3" y="5" width="18" height="14" rx="3"></rect></svg>
+      Ambassadress
+    </div>
+    <nav aria-label="Viste" style="display: flex; flex-wrap: wrap; gap: 4px">
+      <a href="Main.dc.html" style="padding: 8px 12px; border-radius: 8px; color: #3D4250; text-decoration: none">Conversazioni</a>
+      <a href="Today.dc.html" style="padding: 8px 12px; border-radius: 8px; color: #3D4250; text-decoration: none">Oggi</a>
+      <a href="Search.dc.html" style="padding: 8px 12px; border-radius: 8px; color: #3D4250; text-decoration: none">Cerca</a>
+      <a href="Attachments.dc.html" aria-current="page" style="padding: 8px 12px; border-radius: 8px; background: #E8EBFB; color: #1E2E9E; font-weight: 600; text-decoration: none">Allegati</a>
+    </nav>
+    <div style="flex: 1 1 260px; display: flex; align-items: center; gap: 8px; padding: 0 12px; height: 40px; border: 1px solid #D5D8E0; border-radius: 10px; background: #F8F9FB">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5A6070" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M16.5 16.5L21 21"></path></svg>
+      <label for="aq" class="sr-only">Cerca negli allegati</label>
+      <input id="aq" type="search" placeholder="Cerca anche dentro i documenti…" style="flex: 1; min-width: 0; border: 0; background: transparent; font: inherit; font-size: 14px; color: #15171C; outline: none">
+    </div>
+  </header>
+
+  <div style="flex: 1; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 24px; padding: 28px 24px 48px; box-sizing: border-box; width: 100%; max-width: 1360px; margin: 0 auto">
+
+    <main style="flex: 999 1 600px; min-width: 0; display: flex; flex-direction: column; gap: 20px">
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px">
+        <h1 style="margin: 0; font-size: 30px; letter-spacing: -0.02em">Allegati</h1>
+        <div role="group" aria-label="Raggruppa per" style="display: flex; padding: 4px; border-radius: 12px; background: #E2E4EA; gap: 4px">
+          <sc-for list="{{modes}}" as="m" hint-placeholder-count="3">
+            <button type="button" onClick="{{m.pick}}" aria-pressed="{{m.on}}" style="{{m.style}}">{{m.label}}</button>
+          </sc-for>
+        </div>
+      </div>
+
+      <sc-for list="{{groups}}" as="g" hint-placeholder-count="2">
+        <section style="display: flex; flex-direction: column; gap: 10px">
+          <h2 style="margin: 0; display: flex; align-items: baseline; gap: 10px; font-size: 16px">{{g.title}} <span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; font-weight: 400; color: #5A6070">{{g.count}}</span></h2>
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px">
+            <sc-for list="{{g.items}}" as="f" hint-placeholder-count="3">
+              <button type="button" onClick="{{f.select}}" aria-pressed="{{f.selected}}" style="{{f.cardStyle}}">
+                <span aria-hidden="true" style="{{f.thumbStyle}}">{{f.ext}}</span>
+                <span style="font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">{{f.name}}</span>
+                <span style="font-size: 12px; color: #5A6070">{{f.meta}}</span>
+                <sc-if value="{{f.hasVersions}}" hint-placeholder-val="{{ false }}">
+                  <span style="align-self: flex-start; font-size: 12px; padding: 2px 8px; border-radius: 6px; background: #E8EBFB; color: #1E2E9E">{{f.versions}} versioni</span>
+                </sc-if>
+              </button>
+            </sc-for>
+          </div>
+        </section>
+      </sc-for>
+    </main>
+
+    <aside aria-label="Dettaglio allegato" style="flex: 1 1 300px; max-width: 360px; min-width: 0; background: #FFFFFF; border: 1px solid #E2E4EA; border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+      <div style="height: 200px; border-radius: 10px; border: 1px solid #E2E4EA; background: #FAFAFB; box-sizing: border-box; padding: 20px 24px; display: flex; flex-direction: column; gap: 8px" aria-hidden="true">
+        <span style="font-size: 11px; font-weight: 700">{{sel.ext}} · anteprima</span>
+        <span style="height: 5px; border-radius: 3px; background: #D5D8E0; width: 90%"></span>
+        <span style="height: 5px; border-radius: 3px; background: #D5D8E0; width: 70%"></span>
+        <span style="height: 5px; border-radius: 3px; background: #D5D8E0; width: 82%"></span>
+        <span style="height: 5px; border-radius: 3px; background: #D5D8E0; width: 55%"></span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 4px">
+        <h2 style="margin: 0; font-size: 18px">{{sel.name}}</h2>
+        <span style="font-size: 13px; color: #5A6070">{{sel.meta}}</span>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 8px">
+        <h3 style="margin: 0; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5A6070">Storia</h3>
+        <sc-for list="{{sel.history}}" as="h" hint-placeholder-count="2">
+          <div style="display: flex; gap: 10px; font-size: 14px">
+            <span style="flex: none; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #5A6070; width: 52px">{{h.when}}</span>
+            <span style="flex: 1">{{h.what}}</span>
+          </div>
+        </sc-for>
+      </div>
+      <a href="Main.dc.html" style="font-size: 14px">Apri la conversazione: {{sel.thread}}</a>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px">
+        <button type="button" style="flex: 1; height: 44px; border: 0; border-radius: 10px; background: {{accent}}; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer">Apri</button>
+        <button type="button" style="flex: 1; height: 44px; border: 1px solid #C3C7D2; border-radius: 10px; background: #FFFFFF; color: #15171C; font: inherit; cursor: pointer">Inoltra</button>
+        <button type="button" style="flex: 1; height: 44px; border: 1px solid #C3C7D2; border-radius: 10px; background: #FFFFFF; color: #15171C; font: inherit; cursor: pointer">Salva</button>
+      </div>
+    </aside>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2F45D8","options":["#2F45D8","#0F6E5C","#9A3412","#15171C"]},"$preview":{"width":1440,"height":960}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { mode: 'thread', selected: 'delega' };
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#2F45D8';
+    const mode = this.state.mode;
+    const selected = this.state.selected;
+    const tints = {
+      PDF: 'background: #FBE3E0; color: #9A2A1C;',
+      DOC: 'background: #DDE6FA; color: #1E3E8A;',
+      XLS: 'background: #DCEFE2; color: #1F5A33;',
+      JPG: 'background: #F3E6C8; color: #6B4A0E;'
+    };
+    const files = [
+      { id: 'delega', name: 'Delega assemblea', ext: 'PDF', from: 'Lucia Ferri', kind: 'Documenti', thread: 'Assemblea del 12 ottobre', meta: 'Lucia Ferri · oggi', versions: 2,
+        history: [{ when: '1 ott', what: 'Modulo vuoto, dall’amministrazione' }, { when: 'oggi', what: 'Compilato e firmato da Lucia' }] },
+      { id: 'conv', name: 'Convocazione 12-10.pdf', ext: 'PDF', from: 'Amministrazione condominio', kind: 'Documenti', thread: 'Assemblea del 12 ottobre', meta: 'Amministrazione · 1 ott', versions: 1,
+        history: [{ when: '1 ott', what: 'Ricevuto con la convocazione' }] },
+      { id: 'prev', name: 'Preventivo cucina', ext: 'PDF', from: 'Giulia Rinaldi', kind: 'Documenti', thread: 'Preventivo cucina', meta: 'Giulia Rinaldi · ieri', versions: 3,
+        history: [{ when: '20 set', what: 'Prima proposta' }, { when: '2 ott', what: 'Senza il piano in quarzo' }, { when: 'ieri', what: 'Con le misure aggiornate' }] },
+      { id: 'pianta', name: 'Pianta cucina.jpg', ext: 'JPG', from: 'Giulia Rinaldi', kind: 'Immagini', thread: 'Preventivo cucina', meta: 'Giulia Rinaldi · 20 set', versions: 1,
+        history: [{ when: '20 set', what: 'Ricevuta con la prima proposta' }] },
+      { id: 'spese', name: 'Spese condominiali 2026', ext: 'XLS', from: 'Amministrazione condominio', kind: 'Fogli', thread: 'Assemblea del 12 ottobre', meta: 'Amministrazione · 1 ott', versions: 1,
+        history: [{ when: '1 ott', what: 'Allegato all’ordine del giorno' }] },
+      { id: 'cu', name: 'Certificazione unica', ext: 'PDF', from: 'Studio Martini', kind: 'Documenti', thread: 'Dichiarazione dei redditi', meta: 'Studio Martini · lun', versions: 1,
+        history: [{ when: 'lun', what: 'Inviata allo studio' }] }
+    ];
+    const key = mode === 'thread' ? 'thread' : (mode === 'person' ? 'from' : 'kind');
+    const order = [];
+    const byKey = {};
+    files.forEach((f) => {
+      const k = f[key];
+      if (!byKey[k]) { byKey[k] = []; order.push(k); }
+      const isSel = f.id === selected;
+      byKey[k].push(Object.assign({}, f, {
+        selected: isSel,
+        hasVersions: f.versions > 1,
+        versions: String(f.versions),
+        select: () => this.setState({ selected: f.id }),
+        cardStyle: 'display: flex; flex-direction: column; gap: 6px; padding: 12px; border-radius: 12px; background: #FFFFFF; font: inherit; text-align: left; color: inherit; cursor: pointer; min-width: 0; ' + (isSel ? 'border: 2px solid ' + accent + ';' : 'border: 1px solid #E2E4EA;'),
+        thumbStyle: 'height: 96px; border-radius: 8px; display: flex; align-items: flex-end; justify-content: flex-start; padding: 8px 10px; box-sizing: border-box; font-size: 12px; font-weight: 700; ' + tints[f.ext]
+      }));
+    });
+    const groups = order.map((k) => ({ title: k, count: String(byKey[k].length), items: byKey[k] }));
+    const modes = [
+      { id: 'thread', label: 'Conversazione' },
+      { id: 'person', label: 'Persona' },
+      { id: 'kind', label: 'Tipo' }
+    ].map((m) => Object.assign({}, m, {
+      on: m.id === mode,
+      pick: () => this.setState({ mode: m.id }),
+      style: 'min-height: 36px; padding: 0 14px; border: 0; border-radius: 8px; font: inherit; font-size: 14px; cursor: pointer; ' + (m.id === mode ? 'background: #FFFFFF; color: #15171C; font-weight: 600;' : 'background: transparent; color: #3D4250;')
+    }));
+    const sel = files.find((f) => f.id === selected) || files[0];
+    return { accent: accent, modes: modes, groups: groups, sel: sel };
+  }
+}
+</script>
+</body>
+</html>

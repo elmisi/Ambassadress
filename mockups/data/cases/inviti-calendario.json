@@ -1,0 +1,2061 @@
+{
+  "id": "inviti-calendario",
+  "title": "Un collega con 39 messaggi divisi in 26 «argomenti», quasi tutti inviti di calendario, spostamenti e registrazioni di riunioni",
+  "report": "segnalazione del 2026-10-14 dalla vista Persone con i dati veri (forma del caso descritta dall’utente)",
+  "messages": [
+    {
+      "id": "case-inviti-1",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-1@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t1",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-08T16:20:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Faro",
+      "text": "Ciao Alex, prima di giovedì ti mando due righe su Faro: ci serve qualcuno che metta ordine nei processi operativi prima di scegliere gli strumenti. Ne parliamo con calma.",
+      "headers": [
+        [
+          "Subject",
+          "Faro"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-2",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "invite.ics",
+          "mimeType": "application/ics",
+          "size": 2900,
+          "inline": false
+        }
+      ],
+      "otherParts": [
+        "text/calendar"
+      ],
+      "messageId": "<case-inviti-2@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t2",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-08T16:31:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Invito: Faro - gio 10 set 2026 09:15 - 10:00 (CEST) (alex.moro@esempio.it)",
+      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nFaro\ngiovedì 10 settembre 2026 ⋅ 09:15 – 10:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=RmFybw==\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Faro</h2><p>giovedì 10 settembre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "headers": [
+        [
+          "Sender",
+          "Google Calendar <calendar-notification@google.com>"
+        ],
+        [
+          "Reply-To",
+          "Lorenzo Bellini <lorenzo@bellini.esempio.it>"
+        ],
+        [
+          "Content-Type",
+          "multipart/mixed; boundary=\"0000000000001\""
+        ],
+        [
+          "Subject",
+          "Invito: Faro - gio 10 set 2026 09:15 - 10:00 (CEST) (alex.moro@esempio.it)"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-3",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-3@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t3",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-10T08:12:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Record della riunione: \"Faro\" 10 set 2026",
+      "text": "La registrazione della riunione «Faro» del giovedì 10 settembre 2026 è pronta.\n\nLa trovi nella cartella Registrazioni di Meet su Drive dell’organizzatore.\nhttps://drive.google.com/file/d/1AbCdEfGhIjKlMnOp/view\n\nTrascrizione e note automatiche sono nella stessa cartella.",
+      "headers": [
+        [
+          "Sender",
+          "Google Meet <meet-recordings-noreply@google.com>"
+        ],
+        [
+          "Subject",
+          "Record della riunione: \"Faro\" 10 set 2026"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-4",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "invite.ics",
+          "mimeType": "application/ics",
+          "size": 2900,
+          "inline": false
+        }
+      ],
+      "otherParts": [
+        "text/calendar"
+      ],
+      "messageId": "<case-inviti-4@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t4",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-11T07:02:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Invito: Faro (placeholder) - gio 17 set 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)",
+      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nFaro (placeholder)\ngiovedì 17 settembre 2026 ⋅ 11:00 – 12:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=RmFybyAocGxhY2Vob2xkZXIp\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Faro (placeholder)</h2><p>giovedì 17 settembre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "headers": [
+        [
+          "Sender",
+          "Google Calendar <calendar-notification@google.com>"
+        ],
+        [
+          "Reply-To",
+          "Lorenzo Bellini <lorenzo@bellini.esempio.it>"
+        ],
+        [
+          "Content-Type",
+          "multipart/mixed; boundary=\"0000000000001\""
+        ],
+        [
+          "Subject",
+          "Invito: Faro (placeholder) - gio 17 set 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-5",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "invite.ics",
+          "mimeType": "application/ics",
+          "size": 2900,
+          "inline": false
+        }
+      ],
+      "otherParts": [
+        "text/calendar"
+      ],
+      "messageId": "<case-inviti-5@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t5",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-12T14:40:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Invito: Brief Faro con Alex - mar 15 set 2026 09:00 - 09:30 (CEST) (alex.moro@esempio.it)",
+      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nBrief Faro con Alex\nmartedì 15 settembre 2026 ⋅ 09:00 – 09:30\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=QnJpZWYgRmFybyBjb24gQWxl\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Brief Faro con Alex</h2><p>martedì 15 settembre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "headers": [
+        [
+          "Sender",
+          "Google Calendar <calendar-notification@google.com>"
+        ],
+        [
+          "Reply-To",
+          "Lorenzo Bellini <lorenzo@bellini.esempio.it>"
+        ],
+        [
+          "Content-Type",
+          "multipart/mixed; boundary=\"0000000000001\""
+        ],
+        [
+          "Subject",
+          "Invito: Brief Faro con Alex - mar 15 set 2026 09:00 - 09:30 (CEST) (alex.moro@esempio.it)"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-6",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-6@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t6",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-15T07:48:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Record della riunione: \"Brief Faro con Alex\" 15 set 2026",
+      "text": "La registrazione della riunione «Brief Faro con Alex» del martedì 15 settembre 2026 è pronta.\n\nLa trovi nella cartella Registrazioni di Meet su Drive dell’organizzatore.\nhttps://drive.google.com/file/d/1AbCdEfGhIjKlMnOp/view\n\nTrascrizione e note automatiche sono nella stessa cartella.",
+      "headers": [
+        [
+          "Sender",
+          "Google Meet <meet-recordings-noreply@google.com>"
+        ],
+        [
+          "Subject",
+          "Record della riunione: \"Brief Faro con Alex\" 15 set 2026"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-7",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "Contratto Faro - Selva Holding v1.pdf",
+          "mimeType": "application/pdf",
+          "size": 312000,
+          "inline": false
+        }
+      ],
+      "otherParts": [],
+      "messageId": "<case-inviti-7@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t7",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-16T09:05:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Faro, contratto Selva Holding",
+      "text": "Ti giro la bozza del contratto con Selva Holding. Guardala con calma, soprattutto l’articolo 4 sulle tempistiche.",
+      "headers": [
+        [
+          "Subject",
+          "Faro, contratto Selva Holding"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-8",
+      "to": [
+        {
+          "name": "Lorenzo Bellini",
+          "address": "lorenzo@bellini.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-8@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t7",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-17T07:30:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it"
+      },
+      "subject": "Re: Faro, contratto Selva Holding",
+      "text": "Letta. Sull’articolo 4 proporrei 60 giorni invece di 30, il resto mi torna.\n\nIl giorno mer 16 set 2026 alle ore 11:05 Lorenzo Bellini <lorenzo@bellini.esempio.it> ha scritto:\n> Ti giro la bozza del contratto con Selva Holding.",
+      "headers": [
+        [
+          "Subject",
+          "Re: Faro, contratto Selva Holding"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-9",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "Contratto Faro - Selva Holding v2.pdf",
+          "mimeType": "application/pdf",
+          "size": 318000,
+          "inline": false
+        }
+      ],
+      "otherParts": [],
+      "messageId": "<case-inviti-9@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t7",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-21T13:12:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Re: Faro, contratto Selva Holding",
+      "text": "Accettato, ecco la versione aggiornata.",
+      "headers": [
+        [
+          "Subject",
+          "Re: Faro, contratto Selva Holding"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-11",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "invite.ics",
+          "mimeType": "application/ics",
+          "size": 2900,
+          "inline": false
+        }
+      ],
+      "otherParts": [
+        "text/calendar"
+      ],
+      "messageId": "<case-inviti-11@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t8",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-21T15:45:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Invito: Sviluppo Alpino | Faro - gio 24 set 2026 11:30 - 12:30 (CEST) (alex.moro@esempio.it)",
+      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nSviluppo Alpino | Faro\ngiovedì 24 settembre 2026 ⋅ 11:30 – 12:30\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=U3ZpbHVwcG8gQWxwaW5vIHwg\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Sviluppo Alpino | Faro</h2><p>giovedì 24 settembre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "headers": [
+        [
+          "Sender",
+          "Google Calendar <calendar-notification@google.com>"
+        ],
+        [
+          "Reply-To",
+          "Lorenzo Bellini <lorenzo@bellini.esempio.it>"
+        ],
+        [
+          "Content-Type",
+          "multipart/mixed; boundary=\"0000000000001\""
+        ],
+        [
+          "Subject",
+          "Invito: Sviluppo Alpino | Faro - gio 24 set 2026 11:30 - 12:30 (CEST) (alex.moro@esempio.it)"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-12",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "invite.ics",
+          "mimeType": "application/ics",
+          "size": 2900,
+          "inline": false
+        }
+      ],
+      "otherParts": [
+        "text/calendar"
+      ],
+      "messageId": "<case-inviti-12@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t9",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-23T06:15:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Invito: Aggiornamento operativo - ven 25 set 2026 11:00 - 11:30 (CEST) (alex.moro@esempio.it)",
+      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nAggiornamento operativo\nvenerdì 25 settembre 2026 ⋅ 11:00 – 11:30\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=QWdnaW9ybmFtZW50byBvcGVy\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Aggiornamento operativo</h2><p>venerdì 25 settembre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "headers": [
+        [
+          "Sender",
+          "Google Calendar <calendar-notification@google.com>"
+        ],
+        [
+          "Reply-To",
+          "Lorenzo Bellini <lorenzo@bellini.esempio.it>"
+        ],
+        [
+          "Content-Type",
+          "multipart/mixed; boundary=\"0000000000001\""
+        ],
+        [
+          "Subject",
+          "Invito: Aggiornamento operativo - ven 25 set 2026 11:00 - 11:30 (CEST) (alex.moro@esempio.it)"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-10",
+      "to": [
+        {
+          "name": "Lorenzo Bellini",
+          "address": "lorenzo@bellini.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "Contratto Faro - Selva Holding firmato.pdf",
+          "mimeType": "application/pdf",
+          "size": 402000,
+          "inline": false
+        }
+      ],
+      "otherParts": [],
+      "messageId": "<case-inviti-10@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t7",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-23T08:01:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it"
+      },
+      "subject": "Re: Faro, contratto Selva Holding",
+      "text": "Firmato, te lo rimando.",
+      "headers": [
+        [
+          "Subject",
+          "Re: Faro, contratto Selva Holding"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-13",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-13@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t10",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-24T12:00:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Analisi cruscotti",
+      "text": "Pietro ha preparato i primi cruscotti sui tempi delle pratiche. Riesci a darci un’occhiata prima di venerdì?",
+      "headers": [
+        [
+          "Subject",
+          "Analisi cruscotti"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-14",
+      "to": [
+        {
+          "name": "Lorenzo Bellini",
+          "address": "lorenzo@bellini.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-14@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t10",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-25T06:40:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it"
+      },
+      "subject": "Re: Analisi cruscotti",
+      "text": "Visti. Il tempo medio è falsato dalle pratiche sospese: andrebbero escluse o mostrate a parte.",
+      "headers": [
+        [
+          "Subject",
+          "Re: Analisi cruscotti"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-15",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "invite.ics",
+          "mimeType": "application/ics",
+          "size": 2900,
+          "inline": false
+        }
+      ],
+      "otherParts": [
+        "text/calendar"
+      ],
+      "messageId": "<case-inviti-15@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t11",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-26T10:10:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Invito: Faro | Ciclo di vita della pratica: dalla domanda alla rendicontazione - ven 2 ott 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)",
+      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nFaro | Ciclo di vita della pratica: dalla domanda alla rendicontazione\nvenerdì 2 ottobre 2026 ⋅ 11:00 – 12:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=RmFybyB8IENpY2xvIGRpIHZp\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Faro | Ciclo di vita della pratica: dalla domanda alla rendicontazione</h2><p>venerdì 2 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "headers": [
+        [
+          "Sender",
+          "Google Calendar <calendar-notification@google.com>"
+        ],
+        [
+          "Reply-To",
+          "Lorenzo Bellini <lorenzo@bellini.esempio.it>"
+        ],
+        [
+          "Content-Type",
+          "multipart/mixed; boundary=\"0000000000001\""
+        ],
+        [
+          "Subject",
+          "Invito: Faro | Ciclo di vita della pratica: dalla domanda alla rendicontazione - ven 2 ott 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-16",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-16@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t12",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-26T14:00:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "FARO / Onboard Slack",
+      "text": "Vi ho invitati nello spazio Slack di Faro. Canali principali: #operations, #ingegneria, #contratti.",
+      "headers": [
+        [
+          "Subject",
+          "FARO / Onboard Slack"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-17",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        }
+      ],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-17@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t12",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-27T08:20:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Re: FARO / Onboard Slack",
+      "text": "Ilaria mi dice che il canale #ingegneria non lo vede, ci guardo.",
+      "headers": [
+        [
+          "Subject",
+          "Re: FARO / Onboard Slack"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-18",
+      "to": [
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-18@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t12",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-28T07:05:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Re: FARO / Onboard Slack",
+      "text": "Sistemato, era privato.",
+      "headers": [
+        [
+          "Subject",
+          "Re: FARO / Onboard Slack"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-20",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "invite.ics",
+          "mimeType": "application/ics",
+          "size": 2900,
+          "inline": false
+        }
+      ],
+      "otherParts": [
+        "text/calendar"
+      ],
+      "messageId": "<case-inviti-20@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t13",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-28T09:30:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Invito: Faro | Perizie, lavoro degli ingegneri e app no-code - gio 1 ott 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)",
+      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nFaro | Perizie, lavoro degli ingegneri e app no-code\ngiovedì 1 ottobre 2026 ⋅ 11:00 – 12:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=RmFybyB8IFBlcml6aWUsIGxh\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Faro | Perizie, lavoro degli ingegneri e app no-code</h2><p>giovedì 1 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "headers": [
+        [
+          "Sender",
+          "Google Calendar <calendar-notification@google.com>"
+        ],
+        [
+          "Reply-To",
+          "Lorenzo Bellini <lorenzo@bellini.esempio.it>"
+        ],
+        [
+          "Content-Type",
+          "multipart/mixed; boundary=\"0000000000001\""
+        ],
+        [
+          "Subject",
+          "Invito: Faro | Perizie, lavoro degli ingegneri e app no-code - gio 1 ott 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-21",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "invite.ics",
+          "mimeType": "application/ics",
+          "size": 2900,
+          "inline": false
+        }
+      ],
+      "otherParts": [
+        "text/calendar"
+      ],
+      "messageId": "<case-inviti-21@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t14",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-29T11:00:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Invito aggiornato: Faro | Ciclo di gestione della pratica: dalla domanda a... - ven 2 ott 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)",
+      "text": "Questo evento è stato modificato.\n\nFaro | Ciclo di gestione della pratica: dalla domanda alla rendicontazione\nvenerdì 2 ottobre 2026 ⋅ 11:00 – 12:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=RmFybyB8IENpY2xvIGRpIGdl\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Faro | Ciclo di gestione della pratica: dalla domanda alla rendicontazione</h2><p>venerdì 2 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "headers": [
+        [
+          "Sender",
+          "Google Calendar <calendar-notification@google.com>"
+        ],
+        [
+          "Reply-To",
+          "Lorenzo Bellini <lorenzo@bellini.esempio.it>"
+        ],
+        [
+          "Content-Type",
+          "multipart/mixed; boundary=\"0000000000001\""
+        ],
+        [
+          "Subject",
+          "Invito aggiornato: Faro | Ciclo di gestione della pratica: dalla domanda a... - ven 2 ott 2026 11:00 - 12:00 (CEST) (alex.moro@esempio.it)"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-19",
+      "to": [
+        {
+          "name": "Lorenzo Bellini",
+          "address": "lorenzo@bellini.esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-19@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t12",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-29T17:30:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it"
+      },
+      "subject": "Re: FARO / Onboard Slack",
+      "text": "Tutto ok anche per me.",
+      "headers": [
+        [
+          "Subject",
+          "Re: FARO / Onboard Slack"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-22",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "invite.ics",
+          "mimeType": "application/ics",
+          "size": 2900,
+          "inline": false
+        }
+      ],
+      "otherParts": [
+        "text/calendar"
+      ],
+      "messageId": "<case-inviti-22@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t15",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-30T07:00:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Invito: Approfondimenti CEF - ven 2 ott 2026 16:30 - 17:30 (CEST) (alex.moro@esempio.it)",
+      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nApprofondimenti CEF\nvenerdì 2 ottobre 2026 ⋅ 16:30 – 17:30\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=QXBwcm9mb25kaW1lbnRpIENF\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Approfondimenti CEF</h2><p>venerdì 2 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "headers": [
+        [
+          "Sender",
+          "Google Calendar <calendar-notification@google.com>"
+        ],
+        [
+          "Reply-To",
+          "Lorenzo Bellini <lorenzo@bellini.esempio.it>"
+        ],
+        [
+          "Content-Type",
+          "multipart/mixed; boundary=\"0000000000001\""
+        ],
+        [
+          "Subject",
+          "Invito: Approfondimenti CEF - ven 2 ott 2026 16:30 - 17:30 (CEST) (alex.moro@esempio.it)"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-23",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-23@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t16",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-09-30T16:00:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Operations",
+      "text": "Apro questo filo per le cose operative della settimana, così non si perdono tra le riunioni.\n\n1) chi segue le pratiche sospese\n2) modello unico per le perizie\n3) chiusura mensile",
+      "headers": [
+        [
+          "Subject",
+          "Operations"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-24",
+      "to": [
+        {
+          "name": "Lorenzo Bellini",
+          "address": "lorenzo@bellini.esempio.it"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-24@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t16",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "problems": [],
+      "date": "2026-10-01T06:30:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it"
+      },
+      "subject": "Re: Operations",
+      "text": "Sulle pratiche sospese posso fare io una prima ricognizione entro lunedì.\n\nIl giorno mer 30 set 2026 alle ore 18:00 Lorenzo Bellini <lorenzo@bellini.esempio.it> ha scritto:\n> Apro questo filo per le cose operative della settimana, così non si perdono tra le riunioni.\n> \n> 1) chi segue le pratiche sospese\n> 2) modello unico per le perizie\n> 3) chiusura mensile",
+      "headers": [
+        [
+          "Subject",
+          "Re: Operations"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-30",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-30@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t17",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-10-01T08:30:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Riassutno call Nebula AI",
+      "text": "Riassunto veloce della call di stamattina con Nebula AI: possono integrare la lettura automatica dei documenti, preventivo entro due settimane, serve un caso pilota su 50 pratiche.",
+      "headers": [
+        [
+          "Subject",
+          "Riassutno call Nebula AI"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-25",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-25@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t16",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-10-01T10:15:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Re: Operations",
+      "text": "Per le perizie Ilaria ha un modello che usano da due anni, lo condivide su Slack.\n\nIl giorno gio 1 ott 2026 alle ore 08:30 Alex Moro <alex.moro@esempio.it> ha scritto:\n> Sulle pratiche sospese posso fare io una prima ricognizione entro lunedì.",
+      "headers": [
+        [
+          "Subject",
+          "Re: Operations"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-31",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Giada Valle",
+          "address": "giada.valle@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "Mappa Ufficio Ingegneria.pdf",
+          "mimeType": "application/pdf",
+          "size": 1240000,
+          "inline": false
+        }
+      ],
+      "otherParts": [],
+      "messageId": "<case-inviti-31@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t18",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-10-01T14:20:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Faro, Ufficio Ingegneria: prima mappa",
+      "text": "Vi mando la prima mappa dell’Ufficio Ingegneria: chi fa cosa, quali strumenti usano, dove si blocca il lavoro.",
+      "headers": [
+        [
+          "Subject",
+          "Faro, Ufficio Ingegneria: prima mappa"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-32",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "invite.ics",
+          "mimeType": "application/ics",
+          "size": 2900,
+          "inline": false
+        }
+      ],
+      "otherParts": [
+        "text/calendar"
+      ],
+      "messageId": "<case-inviti-32@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t19",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-10-01T15:00:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Invito: Faro | Punto della settimana sulle priorità operations - ven 2 ott 2026 17:30 - 18:00 (CEST) (alex.moro@esempio.it)",
+      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nFaro | Punto della settimana sulle priorità operations\nvenerdì 2 ottobre 2026 ⋅ 17:30 – 18:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=RmFybyB8IFB1bnRvIGRlbGxh\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Faro | Punto della settimana sulle priorità operations</h2><p>venerdì 2 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "headers": [
+        [
+          "Sender",
+          "Google Calendar <calendar-notification@google.com>"
+        ],
+        [
+          "Reply-To",
+          "Lorenzo Bellini <lorenzo@bellini.esempio.it>"
+        ],
+        [
+          "Content-Type",
+          "multipart/mixed; boundary=\"0000000000001\""
+        ],
+        [
+          "Subject",
+          "Invito: Faro | Punto della settimana sulle priorità operations - ven 2 ott 2026 17:30 - 18:00 (CEST) (alex.moro@esempio.it)"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-33",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-33@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t20",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-10-02T06:00:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Due side event di Onda a Torino, 8 e 9 ottobre: vi aspetto",
+      "text": "Ciao a tutti, l’8 e il 9 ottobre a Torino ci sono due side event di Onda dedicati all’innovazione nella pubblica amministrazione. Io ci sarò entrambi i giorni: se passate scrivetemi.\n\nProgramma e iscrizioni: https://onda.esempio.it/torino",
+      "headers": [
+        [
+          "Subject",
+          "Due side event di Onda a Torino, 8 e 9 ottobre: vi aspetto"
+        ]
+      ],
+      "bcc": []
+    },
+    {
+      "id": "case-inviti-26",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-26@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t16",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-10-02T07:00:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Re: Operations",
+      "text": "Perfetto. Alex, la ricognizione mettila nel documento condiviso.\n\nIl giorno gio 1 ott 2026 alle ore 12:15 Lorenzo Bellini <lorenzo@bellini.esempio.it> ha scritto:\n> Per le perizie Ilaria ha un modello che usano da due anni, lo condivide su Slack.",
+      "headers": [
+        [
+          "Subject",
+          "Re: Operations"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-34",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "invite.ics",
+          "mimeType": "application/ics",
+          "size": 2900,
+          "inline": false
+        }
+      ],
+      "otherParts": [
+        "text/calendar"
+      ],
+      "messageId": "<case-inviti-34@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t21",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-10-02T12:20:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Invito aggiornato: Faro | Ciclo di gestione della pratica: dalla domanda a... - mar 6 ott 2026 16:30 - 17:30 (CEST) (alex.moro@esempio.it)",
+      "text": "Questo evento è stato modificato.\n\nFaro | Ciclo di gestione della pratica: dalla domanda alla rendicontazione\nmartedì 6 ottobre 2026 ⋅ 16:30 – 17:30\nOra dell’Europa centrale - Roma\n(modificato: prima era venerdì 2 ottobre 2026 ⋅ 11:00 – 12:00)\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=RmFybyB8IENpY2xvIGRpIGdl\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Faro | Ciclo di gestione della pratica: dalla domanda alla rendicontazione</h2><p>martedì 6 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "headers": [
+        [
+          "Sender",
+          "Google Calendar <calendar-notification@google.com>"
+        ],
+        [
+          "Reply-To",
+          "Lorenzo Bellini <lorenzo@bellini.esempio.it>"
+        ],
+        [
+          "Content-Type",
+          "multipart/mixed; boundary=\"0000000000001\""
+        ],
+        [
+          "Subject",
+          "Invito aggiornato: Faro | Ciclo di gestione della pratica: dalla domanda a... - mar 6 ott 2026 16:30 - 17:30 (CEST) (alex.moro@esempio.it)"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-35",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "Ciclo di gestione della pratica.pdf",
+          "mimeType": "application/pdf",
+          "size": 680000,
+          "inline": false
+        }
+      ],
+      "otherParts": [],
+      "messageId": "<case-inviti-35@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t22",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-10-05T09:00:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Faro | Ciclo di gestione della pratica: dalla domanda alla rendicontazione",
+      "text": "In vista di martedì vi mando lo schema del ciclo di gestione della pratica, dalla domanda alla rendicontazione. Segnate dove secondo voi si perde più tempo.",
+      "headers": [
+        [
+          "Subject",
+          "Faro | Ciclo di gestione della pratica: dalla domanda alla rendicontazione"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-27",
+      "to": [
+        {
+          "name": "Lorenzo Bellini",
+          "address": "lorenzo@bellini.esempio.it"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-27@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t16",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "problems": [],
+      "date": "2026-10-05T15:45:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it"
+      },
+      "subject": "Re: Operations",
+      "text": "Fatto: 42 pratiche sospese, 30 per documenti mancanti, 12 in attesa di perizia.\n\nIl giorno ven 2 ott 2026 alle ore 09:00 Lorenzo Bellini <lorenzo@bellini.esempio.it> ha scritto:\n> Perfetto. Alex, la ricognizione mettila nel documento condiviso.",
+      "headers": [
+        [
+          "Subject",
+          "Re: Operations"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-28",
+      "to": [
+        {
+          "name": "Lorenzo Bellini",
+          "address": "lorenzo@bellini.esempio.it"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-28@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t16",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "problems": [],
+      "date": "2026-10-06T08:10:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it"
+      },
+      "subject": "Re: Operations",
+      "text": "Le 12 in attesa di perizia secondo Pietro si chiudono entro fine mese, se arrivano le nomine.\n\nIl giorno lun 5 ott 2026 alle ore 17:45 Alex Moro <alex.moro@esempio.it> ha scritto:\n> Fatto: 42 pratiche sospese, 30 per documenti mancanti, 12 in attesa di perizia.",
+      "headers": [
+        [
+          "Subject",
+          "Re: Operations"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-36",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "invite.ics",
+          "mimeType": "application/ics",
+          "size": 2900,
+          "inline": false
+        }
+      ],
+      "otherParts": [
+        "text/calendar"
+      ],
+      "messageId": "<case-inviti-36@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t23",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-10-07T07:30:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Invito aggiornato: Faro | Ciclo di gestione della pratica: dalla domanda a... - mar 13 ott 2026 16:30 - 17:30 (CEST) (alex.moro@esempio.it)",
+      "text": "Questo evento è stato modificato.\n\nFaro | Ciclo di gestione della pratica: dalla domanda alla rendicontazione\nmartedì 13 ottobre 2026 ⋅ 16:30 – 17:30\nOra dell’Europa centrale - Roma\n(modificato: prima era martedì 6 ottobre 2026 ⋅ 16:30 – 17:30)\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=RmFybyB8IENpY2xvIGRpIGdl\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Faro | Ciclo di gestione della pratica: dalla domanda alla rendicontazione</h2><p>martedì 13 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "headers": [
+        [
+          "Sender",
+          "Google Calendar <calendar-notification@google.com>"
+        ],
+        [
+          "Reply-To",
+          "Lorenzo Bellini <lorenzo@bellini.esempio.it>"
+        ],
+        [
+          "Content-Type",
+          "multipart/mixed; boundary=\"0000000000001\""
+        ],
+        [
+          "Subject",
+          "Invito aggiornato: Faro | Ciclo di gestione della pratica: dalla domanda a... - mar 13 ott 2026 16:30 - 17:30 (CEST) (alex.moro@esempio.it)"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-37",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "invite.ics",
+          "mimeType": "application/ics",
+          "size": 2900,
+          "inline": false
+        }
+      ],
+      "otherParts": [
+        "text/calendar"
+      ],
+      "messageId": "<case-inviti-37@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t24",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-10-09T13:00:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Invito: Tentative Allineamento su piano operativo - gio 15 ott 2026 15:00 - 16:00 (CEST) (alex.moro@esempio.it)",
+      "text": "Lorenzo Bellini ti ha invitato a un evento.\n\nTentative Allineamento su piano operativo\ngiovedì 15 ottobre 2026 ⋅ 15:00 – 16:00\nOra dell’Europa centrale - Roma\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=VGVudGF0aXZlIEFsbGluZWFt\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Tentative Allineamento su piano operativo</h2><p>giovedì 15 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "headers": [
+        [
+          "Sender",
+          "Google Calendar <calendar-notification@google.com>"
+        ],
+        [
+          "Reply-To",
+          "Lorenzo Bellini <lorenzo@bellini.esempio.it>"
+        ],
+        [
+          "Content-Type",
+          "multipart/mixed; boundary=\"0000000000001\""
+        ],
+        [
+          "Subject",
+          "Invito: Tentative Allineamento su piano operativo - gio 15 ott 2026 15:00 - 16:00 (CEST) (alex.moro@esempio.it)"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-38",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-38@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t25",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-10-10T07:00:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Spazio agenti, il tuo accesso al tenant Faro",
+      "text": "Ti ho dato accesso allo Spazio agenti nel tenant Faro. Al primo accesso ti chiede di impostare la verifica in due passaggi.\n\nhttps://agenti.faro.esempio.it/accesso",
+      "headers": [
+        [
+          "Subject",
+          "Spazio agenti, il tuo accesso al tenant Faro"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-29",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "references": [],
+      "attachments": [],
+      "otherParts": [],
+      "messageId": "<case-inviti-29@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t16",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-10-12T17:05:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Re: Operations",
+      "text": "Ottimo, ne parliamo giovedì all’allineamento. Intanto mettete tutto in #operations.\n\nIl giorno mar 6 ott 2026 alle ore 10:10 Alex Moro <alex.moro@esempio.it> ha scritto:\n> Le 12 in attesa di perizia secondo Pietro si chiudono entro fine mese, se arrivano le nomine.",
+      "headers": [
+        [
+          "Subject",
+          "Re: Operations"
+        ]
+      ]
+    },
+    {
+      "id": "case-inviti-39",
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        },
+        {
+          "name": "Ilaria Conte",
+          "address": "ilaria.conte@faro.esempio.it"
+        },
+        {
+          "name": "Pietro Sala",
+          "address": "pietro.sala@faro.esempio.it"
+        }
+      ],
+      "cc": [],
+      "references": [],
+      "attachments": [
+        {
+          "filename": "invite.ics",
+          "mimeType": "application/ics",
+          "size": 2900,
+          "inline": false
+        }
+      ],
+      "otherParts": [
+        "text/calendar"
+      ],
+      "messageId": "<case-inviti-39@esempio.it>",
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-inviti-t26",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "problems": [],
+      "date": "2026-10-13T16:10:00.000Z",
+      "from": {
+        "name": "Lorenzo Bellini",
+        "address": "lorenzo@bellini.esempio.it"
+      },
+      "subject": "Invito aggiornato: Tentative Allineamento su piano operativo - gio 15 ott 2026 14:30 - 15:30 (CEST) (alex.moro@esempio.it)",
+      "text": "Questo evento è stato modificato.\n\nTentative Allineamento su piano operativo\ngiovedì 15 ottobre 2026 ⋅ 14:30 – 15:30\nOra dell’Europa centrale - Roma\n(modificato: prima era giovedì 15 ottobre 2026 ⋅ 15:00 – 16:00)\n\nPartecipa con Google Meet\nmeet.google.com/abc-defg-hij\n\nInvitati\nLorenzo Bellini - organizzatore\nalex.moro@esempio.it\nIlaria Conte\nPietro Sala\n\nVisualizza tutti i dettagli dell’evento: https://calendar.google.com/calendar/event?action=VIEW&eid=VGVudGF0aXZlIEFsbGluZWFt\n\nRispondi per alex.moro@esempio.it\nSì   No   Forse   Altre opzioni\n\nInvito da Google Calendar\nHai ricevuto questa email perché sei un invitato all’evento. Per non ricevere più aggiornamenti su questo evento, rifiuta l’invito.",
+      "html": "<div itemscope itemtype=\"http://schema.org/Event\"><table><tr><td><h2>Tentative Allineamento su piano operativo</h2><p>giovedì 15 ottobre 2026</p><a href=\"https://meet.google.com/abc-defg-hij\">Partecipa con Google Meet</a></td></tr></table></div>",
+      "headers": [
+        [
+          "Sender",
+          "Google Calendar <calendar-notification@google.com>"
+        ],
+        [
+          "Reply-To",
+          "Lorenzo Bellini <lorenzo@bellini.esempio.it>"
+        ],
+        [
+          "Content-Type",
+          "multipart/mixed; boundary=\"0000000000001\""
+        ],
+        [
+          "Subject",
+          "Invito aggiornato: Tentative Allineamento su piano operativo - gio 15 ott 2026 14:30 - 15:30 (CEST) (alex.moro@esempio.it)"
+        ]
+      ]
+    }
+  ]
+}

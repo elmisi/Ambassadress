@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(/mockups/**/private/**)",
+      "Edit(/mockups/**/private/**)",
+      "Bash(*data/private*)",
+      "Read(~/.secrets/**)",
+      "Edit(~/.secrets/**)",
+      "Bash(*gmail-app-password*)",
+      "Bash(*gmail-user*)"
+    ]
+  }
+}

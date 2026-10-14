@@ -1,0 +1,12 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Ambassadress//sintetico//IT
+METHOD:REQUEST
+BEGIN:VEVENT
+UID:083@esempio.it
+DTSTART:20260929T110000Z
+DTEND:20260929T120000Z
+SUMMARY:Faro | Ciclo di gestione della pratica: dalla domanda a...
+ORGANIZER;CN=Lorenzo Bellini:mailto:lorenzo@bellini.esempio.it
+END:VEVENT
+END:VCALENDAR
