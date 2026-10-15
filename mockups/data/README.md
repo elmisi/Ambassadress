@@ -19,6 +19,8 @@ python3 tools/gmail-export.py --limit 1000          # scrive mockups/data/privat
 python3 tools/gmail-export.py --mbox takeout.mbox   # in alternativa, da Google Takeout
 ```
 
+Se `real.js` c'è già, lo script scarica solo le email nuove: dalla più recente fino alla prima già presente nel file, al massimo `--limit`, e le aggiunge. Se le nuove sono più di `--limit` prende le più vecchie tra queste e dice quante ne restano: basta rilanciarlo. `--full` riscrive il file da zero con le `--limit` più recenti.
+
 Poi apri il prototipo aggiungendo `?data=real` all’indirizzo, per esempio
 `mockups/v9/project/Main.dc.html?data=real`.
 In alto compare «Dati veri, solo in locale». Se il file manca il prototipo non mostra niente invece di ripiegare sui dati sintetici.

@@ -8,6 +8,10 @@ Sources:
   IMAP (default)   reads the latest N messages of "All Mail", read-only.
   --mbox FILE      reads a Google Takeout mbox instead.
 
+If the output file already exists, only the messages it does not have yet are
+downloaded: from the newest down to the first one already in the file, at most N,
+and they are added to it. --full writes the file again from scratch.
+
 Credentials for IMAP (one line each, never printed):
   ~/.secrets/gmail-user.txt           the Gmail address
   ~/.secrets/gmail-app-password.txt   an app password (Google account > Security >
@@ -34,6 +38,8 @@ REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_OUT = os.path.join(REPO, 'mockups', 'data', 'private', 'real.js')
 SECRETS = os.path.expanduser('~/.secrets')
 SCHEMA = 1
+PREFIX = 'window.AMB_DATA = '
+CHUNK = 500
 
 
 def read_secret(name):
@@ -133,7 +139,70 @@ def progress(done, total, nbytes, started):
     print(line, end='', file=sys.stderr, flush=True)
 
 
-def imap_source(limit, mailbox_name):
+def load_existing(path):
+    """Read a previous export, or None if there is none. Never prints its content."""
+    if not os.path.exists(path):
+        return None
+    try:
+        with open(path, encoding='utf-8') as f:
+            text = f.read().strip()
+        if text.startswith(PREFIX):
+            text = text[len(PREFIX):]
+        if text.endswith(';'):
+            text = text[:-1]
+        data = json.loads(text)
+        if data.get('schema') != SCHEMA or not isinstance(data.get('messages'), list):
+            raise ValueError
+        return data
+    except (OSError, ValueError):
+        sys.exit(f'Non riesco a leggere {path}: rilancia con --full per riscriverlo da zero.')
+
+
+def pick_new(items, is_known, limit, info):
+    """ITEMS go from oldest to newest. Keep the ones newer than the newest known item.
+
+    If there are more than LIMIT, keep the oldest of them, so the next run goes on
+    from there without leaving a gap. If no item is known at all, keep the newest.
+    """
+    fresh = []
+    overlap = False
+    for item in reversed(items):
+        if is_known(item):
+            overlap = True
+            break
+        fresh.append(item)
+    fresh.reverse()
+    info['overlap'] = overlap
+    if not overlap:
+        return fresh[-limit:]
+    info['left'] = max(len(fresh) - limit, 0)
+    return fresh[:limit]
+
+
+def gmail_ids(conn, all_uids, known):
+    """Return a lookup UID -> X-GM-MSGID, fetched in chunks from the newest down,
+    stopping at the first chunk that holds a message already in the file."""
+    ids = {}
+    for end in range(len(all_uids), 0, -CHUNK):
+        chunk = all_uids[max(0, end - CHUNK):end]
+        typ, resp = conn.uid('FETCH', chunk[0] + b':' + chunk[-1], '(X-GM-MSGID)')
+        found = False
+        for item in resp or []:
+            line = item[0] if isinstance(item, tuple) else item
+            if not isinstance(line, bytes):
+                continue
+            text = line.decode('ascii', 'replace')
+            u = re.search(r'UID (\d+)', text)
+            m = re.search(r'X-GM-MSGID (\d+)', text)
+            if u and m:
+                ids[u.group(1).encode()] = m.group(1)
+                found = found or m.group(1) in known
+        if found:
+            break
+    return ids
+
+
+def imap_source(limit, mailbox_name, known, info):
     user = read_secret('gmail-user.txt')
     password = read_secret('gmail-app-password.txt')
     say('Connessione a imap.gmail.com…')
@@ -151,9 +220,21 @@ def imap_source(limit, mailbox_name):
     say(f'Cartella {imap_utf7_decode(box)} aperta in sola lettura. Elenco i messaggi…')
     typ, data = conn.uid('SEARCH', None, 'ALL')
     all_uids = data[0].split()
-    uids = all_uids[-limit:]
+    if known:
+        say(f'{len(all_uids)} messaggi nella casella. Cerco quelli che non sono ancora nel file…')
+        ids = gmail_ids(conn, all_uids, known)
+        uids = pick_new(all_uids, lambda u: ids.get(u) in known, limit, info)
+        if not info['overlap']:
+            say('Nessun messaggio della casella è già nel file: prendo i più recenti e li aggiungo.')
+    else:
+        uids = all_uids[-limit:]
     total = len(uids)
-    say(f'{len(all_uids)} messaggi nella casella: scarico i {total} più recenti, allegati compresi.')
+    if not total:
+        say('Nessuna email nuova nella casella.')
+        conn.logout()
+        return user
+    what = 'nuovi' if known else 'più recenti'
+    say(f'{len(all_uids)} messaggi nella casella: scarico i {total} {what}, allegati compresi.')
     done = 0
     nbytes = 0
     started = time.monotonic()
@@ -191,7 +272,7 @@ def imap_source(limit, mailbox_name):
     return user
 
 
-def mbox_source(path, limit):
+def mbox_source(path, limit, known, info):
     say(f'Leggo {path}…')
     box = mailbox.mbox(path, create=False)
     keyed = []
@@ -202,13 +283,17 @@ def mbox_source(path, limit):
             ts = email.utils.parsedate_to_datetime(head.get('Date', '')).timestamp()
         except (TypeError, ValueError, IndexError):
             ts = 0
-        keyed.append((ts, key))
-    keyed.sort()
-    chosen = keyed[-limit:]
-    say(f'{len(keyed)} messaggi nel file: tengo i {len(chosen)} più recenti.')
+        keyed.append((ts, key, str(head.get('Message-ID', '') or '').strip()))
+    keyed.sort(key=lambda k: k[0])
+    if known:
+        chosen = pick_new(keyed, lambda k: bool(k[2]) and k[2] in known, limit, info)
+        say(f'{len(keyed)} messaggi nel file mbox: {len(chosen)} non sono ancora nell\'export.')
+    else:
+        chosen = keyed[-limit:]
+        say(f'{len(keyed)} messaggi nel file mbox: tengo i {len(chosen)} più recenti.')
     started = time.monotonic()
     nbytes = 0
-    for done, (ts, key) in enumerate(chosen, 1):
+    for done, (ts, key, _) in enumerate(chosen, 1):
         raw = box.get_bytes(key)
         nbytes += len(raw)
         progress(done, len(chosen), nbytes, started)
@@ -379,7 +464,9 @@ def convert(raw, meta, max_kb, save_dir=None):
 
 def main():
     ap = argparse.ArgumentParser(description='Esporta email da Gmail per il prototipo (solo in locale).')
-    ap.add_argument('--limit', type=int, default=1000, help='quanti messaggi, i più recenti (default 1000)')
+    ap.add_argument('--limit', type=int, default=1000,
+                    help='quanti messaggi scaricare al massimo (default 1000): la prima volta i più recenti, poi quelli nuovi')
+    ap.add_argument('--full', action='store_true', help='riscrivi il file da zero invece di aggiungere solo le email nuove')
     ap.add_argument('--mailbox', help='cartella IMAP (default: Tutti i messaggi)')
     ap.add_argument('--mbox', help='leggi un file mbox di Google Takeout invece di IMAP')
     ap.add_argument('--alias', action='append', default=[], help='altri tuoi indirizzi (ripetibile)')
@@ -387,14 +474,22 @@ def main():
     ap.add_argument('--out', default=DEFAULT_OUT, help='file di uscita (default mockups/data/private/real.js)')
     ap.add_argument('--no-attachments', action='store_true', help='non salvare gli allegati su disco (solo nome, tipo e dimensione)')
     args = ap.parse_args()
-    save_dir = None if args.no_attachments else os.path.join(os.path.dirname(os.path.abspath(args.out)), 'attachments')
+    out = os.path.abspath(args.out)
+    save_dir = None if args.no_attachments else os.path.join(os.path.dirname(out), 'attachments')
+
+    existing = None if args.full else load_existing(out)
+    old = existing['messages'] if existing else []
+    known = {k for r in old for k in (r.get('id'), r.get('messageId')) if k}
+    if existing:
+        say(f'Il file esiste già con {len(old)} messaggi: aggiungo solo quelli nuovi (--full per riscriverlo).')
 
     records = []
     account = None
+    info = {'left': 0, 'overlap': True}
     if args.mbox:
-        source = mbox_source(args.mbox, args.limit)
+        source = mbox_source(args.mbox, args.limit, known, info)
     else:
-        source = imap_source(args.limit, args.mailbox)
+        source = imap_source(args.limit, args.mailbox, known, info)
     while True:
         try:
             raw, meta = next(source)
@@ -403,19 +498,27 @@ def main():
             break
         records.append(convert(raw, meta, args.max_body_kb, save_dir))
 
+    old_mids = {r.get('messageId') for r in old if r.get('messageId')}
+    added = [r for r in records
+             if r.get('id') not in known and not (r.get('messageId') and r['messageId'] in old_mids)]
+    if existing and not added:
+        print(f'Nessuna email nuova: {out} resta com\'è, con {len(old)} messaggi.')
+        return
+    messages = old + added
+    aliases = list(dict.fromkeys((existing or {}).get('account', {}).get('aliases', []) + args.alias))
+
     data = {
         'schema': SCHEMA,
         'meta': {
             'source': 'mbox' if args.mbox else 'gmail-imap',
             'exportedAt': datetime.datetime.now(datetime.timezone.utc).isoformat(),
-            'count': len(records),
+            'count': len(messages),
             'shiftToNow': False,
         },
-        'account': {'address': account or '', 'aliases': args.alias},
-        'messages': records,
+        'account': {'address': account or (existing or {}).get('account', {}).get('address', ''), 'aliases': aliases},
+        'messages': messages,
     }
 
-    out = os.path.abspath(args.out)
     os.makedirs(os.path.dirname(out), mode=0o700, exist_ok=True)
     tmp = out + '.tmp'
     fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
@@ -425,11 +528,16 @@ def main():
         f.write(';\n')
     os.replace(tmp, out)
 
-    with_problems = sum(1 for r in records if r.get('problems'))
+    with_problems = sum(1 for r in added if r.get('problems'))
     size_mb = os.path.getsize(out) / 1024 / 1024
-    print(f'Esportati {len(records)} messaggi in {out} ({size_mb:.1f} MB).')
+    if existing:
+        print(f'Aggiunti {len(added)} messaggi nuovi: in {out} ora sono {len(messages)} ({size_mb:.1f} MB).')
+    else:
+        print(f'Esportati {len(messages)} messaggi in {out} ({size_mb:.1f} MB).')
+    if info['left']:
+        print(f'Ne restano {info["left"]} più recenti da scaricare: rilancia lo script.')
     if save_dir:
-        saved = sum(1 for r in records for a in r.get('attachments', []) if a.get('path'))
+        saved = sum(1 for r in added for a in r.get('attachments', []) if a.get('path'))
         print(f'Allegati salvati: {saved}, in {save_dir}.')
     print(f'Messaggi con problemi di lettura: {with_problems}.')
     print('Apri il prototipo con ?data=real per usarli.')
