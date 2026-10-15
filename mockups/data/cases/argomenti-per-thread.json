@@ -1,0 +1,220 @@
+{
+  "id": "argomenti-per-thread",
+  "title": "Un thread che cambia oggetto a metà, due «Fattura» diverse con la stessa persona e una domanda rimasta senza risposta",
+  "report": "nota del 2026-10-15 per la v10: argomenti raggruppati per thread e non per oggetto; «Aspetti una risposta»",
+  "messages": [
+    {
+      "date": "2026-07-14T08:40:00.000Z",
+      "from": {
+        "name": "Ugo Bertolini",
+        "address": "ugo@falegnameria-bertolini.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "subject": "Fattura",
+      "messageId": "<case-apt-f1a@falegnameria-bertolini.esempio.it>",
+      "text": "Buongiorno, le mando la fattura dell'acconto per la libreria, il 30% come d'accordo.\n\nIl bonifico può farlo con calma entro fine mese.\n\nUgo Bertolini",
+      "gmail": {
+        "threadId": "case-apt-fattura-acconto"
+      }
+    },
+    {
+      "date": "2026-07-15T17:05:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it"
+      },
+      "to": [
+        {
+          "name": "Ugo Bertolini",
+          "address": "ugo@falegnameria-bertolini.esempio.it"
+        }
+      ],
+      "subject": "Re: Fattura",
+      "messageId": "<case-apt-f1b@esempio.it>",
+      "inReplyTo": "<case-apt-f1a@falegnameria-bertolini.esempio.it>",
+      "references": [
+        "<case-apt-f1a@falegnameria-bertolini.esempio.it>"
+      ],
+      "text": "Fatto il bonifico stamattina, dovrebbe arrivarle domani. Grazie!",
+      "gmail": {
+        "threadId": "case-apt-fattura-acconto",
+        "labels": [
+          "\\Sent"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-22T07:55:00.000Z",
+      "from": {
+        "name": "Ugo Bertolini",
+        "address": "ugo@falegnameria-bertolini.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "subject": "Preventivo libreria su misura",
+      "messageId": "<case-apt-l1@falegnameria-bertolini.esempio.it>",
+      "text": "Buongiorno, ecco il preventivo per la libreria a parete: rovere naturale, sei ripiani, due ante in basso.\n\nPer le misure definitive dovrei passare a fare un sopralluogo. Le va bene giovedì 1 ottobre in mattinata?\n\nUgo Bertolini",
+      "gmail": {
+        "threadId": "case-apt-libreria"
+      }
+    },
+    {
+      "date": "2026-09-23T19:20:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it"
+      },
+      "to": [
+        {
+          "name": "Ugo Bertolini",
+          "address": "ugo@falegnameria-bertolini.esempio.it"
+        }
+      ],
+      "subject": "Re: Preventivo libreria su misura",
+      "messageId": "<case-apt-l2@esempio.it>",
+      "inReplyTo": "<case-apt-l1@falegnameria-bertolini.esempio.it>",
+      "references": [
+        "<case-apt-l1@falegnameria-bertolini.esempio.it>"
+      ],
+      "text": "Il preventivo va bene. Giovedì mattina però sono fuori città: possiamo fare la settimana dopo?",
+      "gmail": {
+        "threadId": "case-apt-libreria",
+        "labels": [
+          "\\Sent"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-25T08:10:00.000Z",
+      "from": {
+        "name": "Ugo Bertolini",
+        "address": "ugo@falegnameria-bertolini.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "subject": "Libreria: nuova data per il sopralluogo",
+      "messageId": "<case-apt-l3@falegnameria-bertolini.esempio.it>",
+      "inReplyTo": "<case-apt-l2@esempio.it>",
+      "references": [
+        "<case-apt-l1@falegnameria-bertolini.esempio.it>",
+        "<case-apt-l2@esempio.it>"
+      ],
+      "text": "Nessun problema. Facciamo martedì 6 ottobre alle 9? Porto anche i campioni di rovere e di noce, così sceglie dal vivo.\n\nUgo",
+      "gmail": {
+        "threadId": "case-apt-libreria-nuova-data"
+      }
+    },
+    {
+      "date": "2026-09-25T12:30:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it"
+      },
+      "to": [
+        {
+          "name": "Ugo Bertolini",
+          "address": "ugo@falegnameria-bertolini.esempio.it"
+        }
+      ],
+      "subject": "Re: Libreria: nuova data per il sopralluogo",
+      "messageId": "<case-apt-l4@esempio.it>",
+      "inReplyTo": "<case-apt-l3@falegnameria-bertolini.esempio.it>",
+      "references": [
+        "<case-apt-l1@falegnameria-bertolini.esempio.it>",
+        "<case-apt-l2@esempio.it>",
+        "<case-apt-l3@falegnameria-bertolini.esempio.it>"
+      ],
+      "text": "Martedì alle 9 va benissimo, a presto.",
+      "gmail": {
+        "threadId": "case-apt-libreria-nuova-data",
+        "labels": [
+          "\\Sent"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-06T14:20:00.000Z",
+      "from": {
+        "name": "Ugo Bertolini",
+        "address": "ugo@falegnameria-bertolini.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "subject": "Re: Libreria: nuova data per il sopralluogo",
+      "messageId": "<case-apt-l5@falegnameria-bertolini.esempio.it>",
+      "inReplyTo": "<case-apt-l4@esempio.it>",
+      "references": [
+        "<case-apt-l1@falegnameria-bertolini.esempio.it>",
+        "<case-apt-l2@esempio.it>",
+        "<case-apt-l3@falegnameria-bertolini.esempio.it>",
+        "<case-apt-l4@esempio.it>"
+      ],
+      "text": "Buongiorno, grazie per stamattina. Le riassumo quello che abbiamo visto, così ha tutto per iscritto.\n\nMisure: la parete è 312 cm di larghezza per 268 di altezza, con il battiscopa da 8 cm che va tolto nella parte centrale. A destra c'è la presa doppia: la sposto io dentro il primo modulo, così resta raggiungibile da dietro uno dei ripiani.\n\nLegno: ha scelto il rovere naturale con finitura a olio, non verniciato. Il noce le piaceva, ma sulla parete chiara e con la luce che entra da sinistra il rovere rende di più, e in più costa meno. Le ante in basso le faccio nello stesso rovere, con le venature in continuità.\n\nRipiani: sei, spessore 3 cm, regolabili. Quelli centrali li rinforzo con una barra in acciaio nascosta, perché lì andranno i libri d'arte che pesano parecchio.\n\nTempi: mi servono circa quattro settimane per il legno e due giorni per il montaggio. Se mi conferma entro venerdì, il montaggio potrebbe essere nella prima settimana di novembre.\n\nPer qualsiasi dubbio mi chiami pure, anche la sera.\n\nUgo Bertolini",
+      "gmail": {
+        "threadId": "case-apt-libreria-nuova-data"
+      }
+    },
+    {
+      "date": "2026-10-07T16:45:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it"
+      },
+      "to": [
+        {
+          "name": "Ugo Bertolini",
+          "address": "ugo@falegnameria-bertolini.esempio.it"
+        }
+      ],
+      "subject": "Ferramenta per le ante",
+      "messageId": "<case-apt-a1@esempio.it>",
+      "text": "Ciao Ugo, ripensando al sopralluogo: per le due ante in basso si possono mettere le cerniere ammortizzate? E quanto cambierebbe il prezzo?\n\nAlex",
+      "gmail": {
+        "threadId": "case-apt-ante",
+        "labels": [
+          "\\Sent"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-08T09:15:00.000Z",
+      "from": {
+        "name": "Ugo Bertolini",
+        "address": "ugo@falegnameria-bertolini.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "subject": "Fattura",
+      "messageId": "<case-apt-f2@falegnameria-bertolini.esempio.it>",
+      "text": "Buongiorno, le giro la fattura del secondo acconto, quella del sopralluogo e del progetto esecutivo.\n\nUgo Bertolini",
+      "flags": {
+        "seen": false,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-apt-fattura-progetto"
+      }
+    }
+  ]
+}

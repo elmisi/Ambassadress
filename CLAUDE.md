@@ -1,0 +1,66 @@
+# Ambassadress
+
+Un client di posta ripensato da zero. Per ora è una serie di mockup navigabili (`mockups/v1` … `mockups/v10`), uno per giro di lavoro. Cosa vuole l'utente: `docs/desiderata.md`. Le note di ogni giro, con la mappa di stati ed eventi: `docs/mockup_v10.md`.
+
+## Regole fisse
+
+- **Sempre in italiano**, in chat e nei documenti. Tono piano, mai saccente.
+- **Mai i dati veri.** L'export della casella Gmail sta in `mockups/data/private/` (in `.gitignore`, con deny in `.claude/settings.json`). Non leggerlo, cercarlo, stamparlo o caricarlo, neanche per verifica. Si lavora solo con `mockups/data/synthetic.js`. Anche quando l'utente incolla esempi, nei dati sintetici nomi, aziende, indirizzi e testi sono sempre inventati.
+- **Mai `~/.secrets/`.** La password Gmail la legge solo `tools/gmail-export.py`, che stampa solo conteggi.
+- **Link locali sempre.** In ogni risposta sui mockup dare i link `file:///home/alessandro/elmisi/Ambassadress/mockups/...` (indice e versione, più `?data=real` per i dati veri).
+- **Leggero e pulito.** Ogni miglioria aggiunge il minimo: un'etichetta o un comportamento automatico, non un pulsante, una vista o un'impostazione. Zero configurazioni. Quando si propone qualcosa, dire cosa si aggiunge all'interfaccia.
+- **Commit e pubblicazione solo su richiesta.** Niente `Co-Authored-By` né altre righe che indicano Claude come autore, nei commit e nei documenti. Non c'è un file `VERSION`: niente semver. Messaggi di commit in italiano, brevi.
+
+## Come si lavora un giro
+
+1. **Note.** Durante l'uso della versione corrente l'utente detta osservazioni: vanno in `mockups/PROSSIMO-GIRO.md` (crearlo se manca), una voce per punto, in grassetto il titolo, poi cosa succede oggi nella versione corrente e cosa si vuole. In questa fase si scrive solo nel file, **non si implementa niente**.
+2. **Mappa.** Quando una nota tocca lo stato degli argomenti, aggiornare la mappa stati × eventi (in `docs/mockup_v10.md` c'è quella attuale, da copiare e aggiornare). Se una combinazione non è chiara, chiedere con domande a scelta, con la proposta consigliata per prima.
+3. **Proposte.** Se l'utente lo chiede, analizzare tutto quello che l'app fa più le note, e proporre migliorie **una alla volta**, ciascuna con contesto e motivazione, aspettando il sì o il no prima della successiva. Quelle accettate finiscono nel file.
+4. **«Vai».** Solo quando l'utente dice di procedere si costruisce la versione nuova (sotto).
+5. **Chiusura del giro.** Il file delle note si sposta in `docs/mockup_vN.md`, con in fondo «Com'è andata nella vN»: scostamenti dalle note, bug trovati, cosa resta aperto. Si aggiorna questo file, poi commit e push se richiesti.
+
+## Costruire la versione nuova
+
+- **Caricare la skill `frontend-design:frontend-design`** prima di toccare l'aspetto. Il linguaggio visivo è quello della v7 in poi (sotto): estenderlo, non tornare a card, chip, maiuscoletti e accento blu.
+- Copiare `mockups/v(N-1)/project/` in `mockups/vN/project/`; in `Main.dc.html` aggiornare `this.version`. Ricreare i symlink `support.js -> ../../support.js` e `data -> ../../data`. Aggiornare `canvas.json` (titolo «Ambassadress mockups vN» e nome della tavola).
+- Aggiungere la versione in cima a `mockups/index.html` e nella tabella di `mockups/README.md` («ancora da pubblicare» finché non c'è il canvas).
+- Se serve un caso nuovo nei dati: `mockups/data/cases/<nome>.json` (modello `_modello.json`), descriverlo in `mockups/data/README.md`, rigenerare con `node mockups/data/generate-synthetic.mjs`. I dati sono comuni a tutte le versioni.
+- **Provare tutto prima di dire che è pronto**: Playwright via `python3 -m http.server -d mockups 8799` (la porta 8765 è occupata da un altro progetto dell'utente: non toccarla) e anche da `file://`. Nessun errore in console, ogni voce delle note provata, anche a 390 px di larghezza senza scorrimento orizzontale. Dopo aver rigenerato `synthetic.js`, disattivare la cache del browser (CDP `Network.setCacheDisabled`), altrimenti si vedono i dati vecchi. Svuotare il `localStorage` tra una prova e l'altra quando serve partire puliti. Alla fine cancellare `.playwright-mcp/` e fermare il server.
+- Il resoconto finale all'utente: link locali, cosa c'è, bug corretti, dove ci si è discostati dalle note e perché, cosa resta aperto, e le decisioni che spettano a lui (commit, canvas, note del giro).
+
+## Come sono fatti i mockup
+
+- **`.dc.html`** è il formato del canvas Claude Design. In locale gira con `mockups/support.js`, un runtime minimo scritto per questo progetto: `{{buchi}}`, `<sc-for>`, `<sc-if>`, eventi `on*` (in minuscolo), stato `DCLogic`. A ogni `setState` ridisegna tutto (`replaceChildren`) e rimette il fuoco solo per `id`: i campi che devono tenere il fuoco hanno un `id`, e le scorciatoie vanno agganciate a `window`, non a un elemento. Se una tavola usa qualcosa che il runtime non copre, estendere `support.js`.
+- **Stato salvato** nel `localStorage`, chiave `ambassadress:<fonte>` (`synthetic` o `real`), comune alle versioni. I campi persistenti della v10 sono in `persisted()`; `change(etichetta, patch)` li modifica con l'avviso «Annulla» (Ctrl+Z). «Torna allo stato iniziale» dal pulsante «Dati sintetici» / «Dati veri» azzera tutto, con «Annulla».
+- **Bug con i dati veri**: l'utente preme «Segnala», il report ha il contenuto già sostituito (lettere in x, cifre in 9, indirizzi in `⟦P3⟧`). Dal report si ricostruisce un caso sintetico che riproduce la forma, poi si corregge il prototipo finché il caso si vede bene. Non chiedere mai di incollare email vere.
+- **Canvas**: ogni versione ha un canvas privato su claude.ai, pubblicato con root `mockups/vN/`. Dei dati si pubblica solo `data/synthetic.js`, mai `support.js` né `private/`. Pubblicare solo se l'utente lo chiede; poi mettere il link in `mockups/README.md`.
+- **Icona**: sigillo H2 su fascia di pergamena L3, file in `mockups/icona/`, canvas nel README. Il nome breve sotto l'icona del telefono è ancora da decidere.
+
+## Linguaggio visivo (dalla v7)
+
+- Fondo carta, tre colonne: persone, conversazione, indice degli argomenti. Carattere Atkinson Hyperlegible Next.
+- Il colore ha un significato: ogni argomento ha il suo, una striscia a sinistra della conversazione («il filo»). Il rosso ceralacca segna solo «da leggere». Tutto il resto è inchiostro. Stati premuti morbidi, niente testo bianco su nero.
+- Box dei messaggi larghi 3/4 della colonna, testo 15 px con interlinea 1,45, righe vuote di fila ridotte a una.
+- Accanto al titolo dell'argomento niente righe di meta, solo piccole etichette quando servono («prima: …», «in archivio», «aspetti una risposta da N giorni»).
+
+## Decisioni prese sul prodotto
+
+- **La conversazione è per persona; dentro, un blocco per argomento**, dal più recente, tutti mostrati senza «carica altri». Un argomento è un **thread** (`In-Reply-To`, `References`, thread di Gmail), non un oggetto: l'oggetto conta solo per i messaggi senza riferimenti. Il titolo è l'oggetto più recente, con «prima: …» se è cambiato.
+- **Tre pulsanti fissi sotto ogni argomento**, sempre nello stesso posto: «Rispondi» / «Riprendi la bozza», «letto» / «da leggere», «Archivia» / «Ripristina». Agiscono sull'argomento intero. Niente azioni sui singoli messaggi, niente «Elimina»: la cancellazione è una pulizia semi-automatica delle notifiche dei servizi. Niente «Rispondi a tutti», niente «Silenzia», niente regole speciali per chi è solo in copia.
+- **Stati di un argomento** (mappa completa in `docs/mockup_v10.md`): «letto» chiude l'argomento e resta chiuso anche dopo il ricaricamento; una email da altri lo riapre, anche dall'archivio (torna tutto). I miei messaggi non riaprono. Chiuso è per argomento, condiviso tra le persone. Ripristina → chiuso e letto. «da leggere» su un archiviato → ripristina e segna da leggere. Dopo «letto» o «Archivia» l'argomento attivo passa al prossimo da leggere della stessa persona.
+- **Risposta**: va agli stessi destinatari dell'ultimo messaggio, io escluso, ognuno con la sua ×, più un campo per aggiungerne; il riquadro avvisa di chi non riceverà la risposta e di chi è nuovo. Una bozza per argomento, salvata mentre scrivo, segnata accanto alla persona e nel riassunto.
+- **Destinatari nei box**: con un solo destinatario non si mostrano; con più di uno tutti, A: e Cc:, nome ed email, i primi 10 senza aprire niente.
+- **«Leggi tutto»** taglia a fine paragrafo o di frase; l'utente sposta il taglio e il mockup impara per persona (nel prodotto vero potrebbe farlo un'AI locale).
+- **«Aspetti una risposta»**: etichetta più una voce compatta in basso nella lista persone; solo se il mio messaggio chiede qualcosa («?»), è degli ultimi 30 giorni e sono passati 3 giorni lavorativi.
+- **Tastiera**: ↑ ↓ argomento, Maiusc+↑ ↓ persona, Invio apre o chiude, R / L / A i tre pulsanti, «/» cerca, Esc, Ctrl+Z, Ctrl+Invio. La lettera si vede nel suggerimento del pulsante; niente pannello delle scorciatoie.
+
+## A che punto siamo
+
+La v10 è fatta e provata (`docs/mockup_v10.md`, «Com'è andata nella v10»). Restano aperti:
+
+- canvas della v10 da pubblicare;
+- «eliminato altrove» da simulare, e le regole della mappa da estendere ai servizi;
+- allegati delle bozze persi al ricaricamento (resta il nome);
+- nome breve dell'app sotto l'icona.
+
+Il prossimo giro riparte dalle note dell'utente in `mockups/PROSSIMO-GIRO.md`.

@@ -1,0 +1,67 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Main.dc.html": {
+      "h": 2140,
+      "title": "Pergamena e ceralacca, sei direzioni",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "Piatta.dc.html": {
+      "h": 2140,
+      "title": "Piatte: B, C e D",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "Rotolo.dc.html": {
+      "h": 2720,
+      "title": "Il sigillo sul rotolo: C3 e C1",
+      "w": 1440,
+      "x": 3040,
+      "y": 0
+    },
+    "ShortList.dc.html": {
+      "h": 1420,
+      "title": "Short list: G1 e H2",
+      "w": 1440,
+      "x": 4560,
+      "y": 0
+    },
+    "Nome.dc.html": {
+      "h": 1000,
+      "title": "H2 e il nome sotto l’icona",
+      "w": 1440,
+      "x": 4560,
+      "y": 1540
+    },
+    "Chiaro.dc.html": {
+      "h": 1420,
+      "title": "H2 sul fondo chiaro",
+      "w": 1440,
+      "x": 6080,
+      "y": 0
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-10-15T08:00:00Z",
+    "v": 1
+  },
+  "designSystems": [],
+  "launch": {
+    "view": "canvas"
+  },
+  "notes": {},
+  "order": [
+    "Main.dc.html",
+    "Piatta.dc.html",
+    "Rotolo.dc.html",
+    "ShortList.dc.html",
+    "Nome.dc.html",
+    "Chiaro.dc.html"
+  ],
+  "pages": [],
+  "title": "Ambassadress icona"
+}

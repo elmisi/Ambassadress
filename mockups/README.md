@@ -1,6 +1,6 @@
 # Mockups
 
-Una cartella per versione. Ogni versione si apre in locale e ha un canvas Claude Design (privato) per commenti e modifiche.
+Una cartella per versione. Ogni versione si apre in locale e ha un canvas Claude Design (privato) per commenti e modifiche. Le note di ogni giro e le decisioni prese sono in `../docs/mockup_vN.md` (dalla v10) e in `../CLAUDE.md`.
 
 | Versione | Locale | Canvas |
 | --- | --- | --- |
@@ -13,8 +13,11 @@ Una cartella per versione. Ogni versione si apre in locale e ha un canvas Claude
 | v7 · Il filo | `v7/project/Main.dc.html` (`?data=real` per i dati veri) | https://claude.ai/artifact/74czDhLRudmykHNgMKKrb9 |
 | v8 · Per argomento | `v8/project/Main.dc.html` (`?data=real` per i dati veri) | https://claude.ai/artifact/YAWa692USuocPWrJ32r6FX |
 | v9 · Argomenti che si chiudono | `v9/project/Main.dc.html` (`?data=real` per i dati veri) | https://claude.ai/artifact/MQ5mJ5gZXq5hJs85gHfHmC |
+| v10 · Stati chiari | `v10/project/Main.dc.html` (`?data=real` per i dati veri) | ancora da pubblicare |
 
-Dalla v5 lo stato «letto», l'archivio e il cestino restano nel `localStorage` del browser, separati per dati sintetici e veri. Dalla v6 la chiave è comune alle versioni (`ambassadress:<fonte>`), e la v6 riprende lo stato salvato dalla v5. Dalla v7 si azzera dal pulsante «Dati sintetici» / «Dati veri» in alto, con «Annulla» (dalla v8 «Torna allo stato iniziale», che riporta ai flag di lettura di Gmail); nelle versioni precedenti dalla console del browser con `localStorage.removeItem('ambassadress:synthetic')` (o `ambassadress:real`).
+L’icona ha un canvas a parte: `icona/project/Main.dc.html`, https://claude.ai/artifact/YKJjSseVQJ6eXcsouBtUa1. La scelta è H2 con il contorno L3; i file sono in `icona/`: `icona.svg` (fondo inchiostro), `icona-chiara.svg` (fondo carta), `icona-senza-fondo.svg` e `sigillo.svg` (solo il sigillo, per favicon e barra).
+
+Dalla v5 lo stato «letto», l'archivio e il cestino restano nel `localStorage` del browser (dalla v10 anche argomenti chiusi, bozze, preferenze su «Leggi tutto», messaggi inviati e simulati), separati per dati sintetici e veri. Dalla v6 la chiave è comune alle versioni (`ambassadress:<fonte>`), e la v6 riprende lo stato salvato dalla v5. Dalla v7 si azzera dal pulsante «Dati sintetici» / «Dati veri» in alto, con «Annulla» (dalla v8 «Torna allo stato iniziale», che riporta ai flag di lettura di Gmail); nelle versioni precedenti dalla console del browser con `localStorage.removeItem('ambassadress:synthetic')` (o `ambassadress:real`).
 
 ## Aprire in locale
 

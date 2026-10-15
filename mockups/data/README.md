@@ -39,6 +39,7 @@ Casi presenti:
 - `servizi-automatici`: notifiche di revisione codice, issue, build, sicurezza, ricevute, pacchi, newsletter e social.
 - `copia-e-citazione-a-capo`: messaggi dove sei solo in copia con tanti destinatari, e intestazione «Il giorno … ha scritto:» spezzata su più righe.
 - `indirizzi-multipli`: una persona con un indirizzo vecchio, fermo da due anni, e uno nuovo in uso.
+- `argomenti-per-thread`: un thread che cambia oggetto a metà (legato da `In-Reply-To` e `References`), due «Fattura» diverse con la stessa persona, un messaggio lungo per «Leggi tutto» e una domanda rimasta senza risposta.
 
 ## Formato
 
