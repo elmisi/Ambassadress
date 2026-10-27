@@ -7,6 +7,7 @@
 import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import * as T from './testi-lunghi.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const NOW = new Date('2026-10-14T12:00:00+02:00');
@@ -48,6 +49,68 @@ const bytes = (s) => {
 let seq = 0;
 const messages = [];
 
+// How each sender's mail program writes a reply: the header above the quote, how the quote is
+// marked, and where the signature goes. Separate random stream, so the rest of the data stays put.
+const rq = rng(20261027);
+const pq = (arr) => arr[Math.floor(rq() * arr.length)];
+const CLIENTS = ['gmail-it', 'gmail-it', 'gmail-it', 'gmail-en', 'outlook', 'outlook', 'outlook-en', 'apple', 'iphone', 'iphone', 'thunderbird'];
+const clientOf = (p) => p.client || (p.client = pq(CLIENTS));
+const DAYS_LONG = ['domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato'];
+const MONTHS_LONG = ['gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno', 'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'];
+const EN_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const EN_DAYS_LONG = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const EN_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const EN_MONTHS_LONG = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const hm = (d) => `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+const ampm = (d) => `${(d.getHours() % 12) || 12}:${String(d.getMinutes()).padStart(2, '0')} ${d.getHours() < 12 ? 'AM' : 'PM'}`;
+const nameAddr = (p) => (p.name ? `${p.name} <${p.address}>` : p.address);
+const names = (list) => list.map((p) => p.name || p.address).join('; ');
+// Gmail wraps a long header line, sometimes right inside the address
+const wrap = (line) => (line.length > 78 && rq() < 0.5 ? line.replace(/ <([^>]+)>/, ' <\n$1>') : line);
+const QUOTE_CAP = 16000;
+function quoteBlock(client, prev) {
+  let raw = prev.text || '';
+  if (raw.length > QUOTE_CAP) raw = raw.slice(0, raw.lastIndexOf('\n', QUOTE_CAP));
+  const d = new Date(prev.date);
+  const who = nameAddr(prev.from);
+  const gmailMark = (t) => t.split('\n').map((l) => (l.trim() ? (l.startsWith('>') ? '>' + l : '> ' + l) : '>')).join('\n');
+  switch (client) {
+    case 'gmail-en':
+      return wrap(`On ${EN_DAYS[d.getDay()]}, ${EN_MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} at ${ampm(d)} ${who} wrote:`) + '\n' + gmailMark(raw);
+    case 'outlook':
+      return '________________________________\n' + `Da: ${who}\nInviato: ${DAYS_LONG[d.getDay()]} ${d.getDate()} ${MONTHS_LONG[d.getMonth()]} ${d.getFullYear()} ${hm(d)}\nA: ${names(prev.to)}\n` + (prev.cc.length ? `Cc: ${names(prev.cc)}\n` : '') + `Oggetto: ${prev.subject}\n\n` + raw;
+    case 'outlook-en':
+      return '-----Original Message-----\n' + `From: ${who}\nSent: ${EN_DAYS_LONG[d.getDay()]}, ${EN_MONTHS_LONG[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()} ${ampm(d)}\nTo: ${names(prev.to)}\n` + (prev.cc.length ? `Cc: ${names(prev.cc)}\n` : '') + `Subject: ${prev.subject}\n\n` + raw;
+    case 'apple':
+      return `Il giorno ${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}, alle ore ${hm(d)}, ${who} ha scritto:\n\n` + raw.split('\n').map((l) => (l.startsWith('>') ? '>' + l : '> ' + l)).join('\n');
+    case 'iphone':
+      return raw.split('\n').map((l) => (l.startsWith('>') ? '>' + l : '> ' + l)).join('\n').replace(/^/, `> Il giorno ${d.getDate()} ${MONTHS[d.getMonth()]} ${d.getFullYear()}, alle ore ${hm(d)}, ${who} ha scritto:\n> \n`);
+    case 'thunderbird':
+      // righe vuote lasciate vuote: la citazione si interrompe
+      return `Il ${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()} ${hm(d)}, ${prev.from.name || prev.from.address} ha scritto:\n` + raw.split('\n').map((l) => (l.trim() ? '>' + (l.startsWith('>') ? '' : ' ') + l : '')).join('\n');
+    default:
+      return wrap(`Il giorno ${itQuoteDate(d)} ${who} ha scritto:`) + '\n' + gmailMark(raw);
+  }
+}
+// Signatures as people write them: with or without "-- ", phone signatures, long company ones.
+function signatureOf(p, client) {
+  if (client === 'iphone') return p.signature && rq() < 0.3 ? '\n\n' + p.signature + '\n\nInviato da iPhone' : '\n\nInviato da iPhone';
+  if (!p.signature) return '';
+  return p.sigDash === false ? '\n\n' + p.signature : '\n\n-- \n' + p.signature;
+}
+// A reply written inside the quote: each answer under the paragraph it answers.
+function inlineReply(prev, intro, answers, client) {
+  const d = new Date(prev.date);
+  const paras = prev.textMain.split(/\n\s*\n/);
+  const out = [intro, '', wrap(`Il giorno ${itQuoteDate(d)} ${nameAddr(prev.from)} ha scritto:`)];
+  paras.forEach((para, i) => {
+    out.push(para.split('\n').map((l) => '> ' + l).join('\n'));
+    if (answers[i]) out.push('', answers[i], '');
+    else out.push('>');
+  });
+  return out.join('\n').replace(/\n>\n*$/, '');
+}
+
 // One conversation = one Gmail thread between ME and `who` about `topic`.
 // entries: { d, h, m, me, text, att: [[name, ext, size]], cc: [person], quote: bool, fwd: bool }
 function thread(who, topic, entries, opts = {}) {
@@ -60,15 +123,11 @@ function thread(who, topic, entries, opts = {}) {
     const to = e.to || (e.me ? [who] : [ME]);
     const subject = e.subject ?? (i === 0 ? topic : (opts.prefix || 'Re: ') + topic);
     const messageId = `<syn-${++seq}@esempio.it>`;
+    const client = e.client || (e.outlook ? 'outlook' : clientOf(from));
     let text = e.text;
-    if (e.signature ?? (!e.me && who.signature)) text += '\n\n-- \n' + who.signature;
-    if (prev && (e.quote ?? rnd() < 0.55)) {
-      if (e.outlook) {
-        text += `\n\nDa: ${prev.from.name} <${prev.from.address}>\nInviato: ${itQuoteDate(new Date(prev.date))}\nA: ${prev.to.map((p) => p.name || p.address).join('; ')}\nOggetto: ${prev.subject}\n\n${prev.textMain}`;
-      } else {
-        text += `\n\nIl giorno ${itQuoteDate(new Date(prev.date))} ${prev.from.name} <${prev.from.address}> ha scritto:\n` + prev.textMain.split('\n').map((l) => '> ' + l).join('\n');
-      }
-    }
+    if (prev && e.inline) text = inlineReply(prev, e.text, e.inline, client);
+    if (e.signature !== false && text) text += signatureOf(from, client);
+    if (prev && !e.inline && (e.quote ?? rq() < 0.85)) text += '\n\n' + quoteBlock(client, prev);
     const labels = e.labels || (from === ME ? ['\\Sent'] : ['\\Inbox']);
     const rec = {
       id: 'syn-' + seq,
@@ -96,19 +155,23 @@ function thread(who, topic, entries, opts = {}) {
   });
 }
 
-const P = (name, address, signature) => ({ name, address, signature });
-const lucia = P('Lucia Ferri', 'lucia.ferri@esempio.it');
-const marco = P('Marco Bassi', 'marco.bassi@esempio.it');
-const elena = P('Arch. Elena Sartori', 'elena.sartori@studiosartori.esempio.it', 'Arch. Elena Sartori\nStudio Sartori architetti\nVia [indirizzo] · 06 5550 1234');
-const anna = P('Anna Ricci', 'anna.ricci@scuolacollodi.esempio.it', 'Maestra Anna Ricci\nScuola primaria Collodi, classe 3B');
-const martini = P('Studio Martini', 'segreteria@studiomartini.esempio.it', 'Studio Martini · Commercialisti associati\nQuesta email e i suoi allegati sono riservati. Se l’hai ricevuta per errore avvisaci e cancellala.');
-const admin = P('Amministrazione Condominio Via Ostiense 12', 'amministrazione@condominio.esempio.it');
-const paolo = P('Paolo Conti', 'paolo.conti@esempio.it');
-const paoloWork = P('Conti Paolo', 'p.conti@azienda.esempio.it', 'Paolo Conti | Ufficio acquisti\nAzienda Esempio S.p.A.');
-const giulia = P('Giulia Rinaldi', 'giulia@cucinerinaldi.esempio.it');
-const davide = P('Davide Greco', 'davide.greco@lavoro.esempio.it');
-const sara = P('Sara Neri', 'sara.neri@lavoro.esempio.it');
-const luca = P('Luca Fontana', 'luca.fontana@lavoro.esempio.it');
+const P = (name, address, signature, more) => Object.assign({ name, address, signature }, more || {});
+ME.signature = 'Alex Moro';
+ME.client = 'gmail-it';
+const DISCLAIMER_IT = 'Le informazioni contenute in questo messaggio di posta elettronica e nei suoi allegati sono riservate e destinate esclusivamente alla persona o alla società indicata come destinatario. Qualsiasi utilizzo, diffusione o copia non autorizzati sono vietati. Se avete ricevuto questo messaggio per errore, vi preghiamo di avvisare immediatamente il mittente e di cancellarlo dal vostro sistema.';
+const DISCLAIMER_EN = 'This e-mail and any attachments are confidential and intended solely for the addressee. If you have received this message in error, please notify the sender immediately and delete it. Any unauthorised use, disclosure or copying is strictly prohibited.';
+const lucia = P('Lucia Ferri', 'lucia.ferri@esempio.it', '', { client: 'iphone' });
+const marco = P('Marco Bassi', 'marco.bassi@esempio.it', 'Marco', { client: 'gmail-it', sigDash: false });
+const elena = P('Arch. Elena Sartori', 'elena.sartori@studiosartori.esempio.it', 'Arch. Elena Sartori\nStudio Sartori architetti\nVia dei Volsci 41, 00185 Roma\ntel. 06 5550 1234 · cell. 333 555 0148\nwww.studiosartori.esempio.it', { client: 'outlook', sigDash: false });
+const anna = P('Anna Ricci', 'anna.ricci@scuolacollodi.esempio.it', 'Maestra Anna Ricci\nScuola primaria Collodi, classe 3B', { client: 'apple' });
+const martini = P('Studio Martini', 'segreteria@studiomartini.esempio.it', 'Segreteria\nStudio Martini · Commercialisti associati\nViale Marconi 210, 00146 Roma\nTel. 06 5550 7788 · Fax 06 5550 7789\nP.IVA 01234567890\n\n' + DISCLAIMER_IT, { client: 'outlook', sigDash: false });
+const admin = P('Amministrazione Condominio Via Ostiense 12', 'amministrazione@condominio.esempio.it', 'Studio Amministrazioni Ferretti\nRag. Federica Monti\nVia Ostiense 98, 00154 Roma\nTel. 06 5550 3311 (lun-ven 9-13)\nPEC: studioferretti@pec.esempio.it\n\nAVVISO DI RISERVATEZZA: ' + DISCLAIMER_IT, { client: 'outlook', sigDash: false });
+const paolo = P('Paolo Conti', 'paolo.conti@esempio.it', '', { client: 'iphone' });
+const paoloWork = P('Conti Paolo', 'p.conti@azienda.esempio.it', 'Paolo Conti | Ufficio acquisti\nAzienda Esempio S.p.A.\nVia Tiburtina 1180, 00156 Roma\nT +39 06 5550 2000 | M +39 347 555 0911\n\n' + DISCLAIMER_EN, { client: 'outlook-en', sigDash: false });
+const giulia = P('Giulia Rinaldi', 'giulia@cucinerinaldi.esempio.it', 'Giulia Rinaldi\nCucine Rinaldi – progettazione e arredo\nShowroom: Via Appia Nuova 512, Roma\n06 5550 6060', { client: 'gmail-it' });
+const davide = P('Davide Greco', 'davide.greco@lavoro.esempio.it', 'Davide Greco\nResponsabile amministrazione e controllo\nLavoro Esempio S.r.l.\nT. 06 5550 4410 – M. 335 555 0172', { client: 'outlook', sigDash: false });
+const sara = P('Sara Neri', 'sara.neri@lavoro.esempio.it', 'Sara Neri\nProject manager | Lavoro Esempio S.r.l.\n+39 06 5550 4422', { client: 'gmail-en' });
+const luca = P('Luca Fontana', 'luca.fontana@lavoro.esempio.it', 'Luca', { client: 'thunderbird', sigDash: false });
 const ASM = (() => { const d = at(-4, 18, 0); return `${['domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato'][d.getDay()]} ${d.getDate()} ottobre`; })();
 
 thread(lucia, 'Cena di fine estate', [
@@ -287,10 +350,11 @@ const POOL = [
 ];
 const THEM = ['Ciao! Per {t} ti va bene giovedì sera?', 'Ti giro le ultime novità su {t}.', 'Scusa il ritardo, ho visto solo ora il messaggio.', 'Allora confermiamo? Fammi sapere entro domani.', 'Ho sentito anche gli altri: per loro va bene.', 'Ti mando i dettagli, dimmi se torna tutto.', 'Ottimo, grazie mille!', 'Mi era sfuggito, ci penso io.', 'Ti ricordi a che ora avevamo detto?', 'Possiamo spostare di una settimana?'];
 const MINE = ['Ok per me.', 'Perfetto, grazie!', 'Facciamo la settimana prossima?', 'Ricevuto, ci guardo stasera.', 'Ci sono, segnato in agenda.', 'Mi sembra tutto giusto.', 'Ti richiamo dopo pranzo.', 'Va benissimo, a presto.'];
-const LONG = 'Ti scrivo con calma perché la cosa si è un po’ complicata. Ho sentito tutti e ognuno ha una disponibilità diversa: chi può solo nel weekend, chi solo la sera, chi preferisce rimandare a dopo le feste.\n\nHo provato a mettere insieme le date, ma l’unica che va bene quasi a tutti è giovedì 23. Se per te è un problema dimmelo subito, così sento di nuovo gli altri prima di confermare. Nel frattempo ho chiesto anche un preventivo, ma non mi hanno ancora risposto: appena so qualcosa ti aggiorno.';
 FIRST.forEach((first, k) => {
   const name = first + ' ' + LAST[(k * 5 + 2) % LAST.length];
-  const who = P(name, name.toLowerCase().replace(/\s+/g, '.') + '@esempio.it');
+  const r = rq();
+  const sig = r < 0.3 ? '' : r < 0.5 ? first : r < 0.65 ? name : r < 0.8 ? name + '\ncell. 3' + (40 + k) + ' 555 0' + (100 + k * 7) : r < 0.9 ? 'Un caro saluto,\n' + first : name + '\n' + pq(['Studio legale associato', 'Farmacia San Marco', 'Agenzia viaggi Mediterranea', 'Officina meccanica Prati']) + '\nVia ' + pq(['Cavour', 'Nomentana', 'Prenestina', 'Cassia']) + ' ' + (10 + k * 3) + ', Roma\n\n' + (rq() < 0.5 ? DISCLAIMER_IT : DISCLAIMER_EN);
+  const who = P(name, name.toLowerCase().replace(/\s+/g, '.') + '@esempio.it', sig, { sigDash: rq() < 0.6 });
   const last = 3 + Math.floor(rnd() * 160);
   const nTopics = 1 + Math.floor(rnd() * 3);
   const used = {};
@@ -305,12 +369,42 @@ FIRST.forEach((first, k) => {
     for (let i = 0; i < n; i++) {
       const me = i > 0 && rnd() < 0.5;
       let text = i === 0 ? THEM[Math.floor(rnd() * 2)].replace('{t}', lower) : (me ? pick(MINE) : pick(THEM).replace('{t}', lower));
-      if (!me && i > 0 && rnd() < 0.15) text = LONG;
+      if (!me && i > 0 && rnd() < 0.15) text = pq(T.LUNGHE_POOL);
       entries.push({ d: Math.max(last, start - i * 2), h: 8 + Math.floor(rnd() * 14), m: Math.floor(rnd() * 60), me, text, att: i === 0 && tp[1] && rnd() < 0.75 ? [tp[1]] : undefined, unread: !me && last < 6 && i === n - 1 });
     }
     thread(who, tp[0], entries);
   }
 });
+
+// Long emails and threads with more than two people, as real mail is: whole thread quoted under
+// every reply, different mail programs, long company signatures, a reply written inside the quote.
+const chiara = P('Chiara Benedetti', 'c.benedetti@studiotecnico.esempio.it', 'Geom. Chiara Benedetti\nStudio tecnico Benedetti\nVia Laurentina 77, 00142 Roma\ncell. 338 555 0420', { client: 'gmail-it' });
+const galli = P('Roberto Galli', 'r.galli@gallicostruzioni.esempio.it', 'Roberto Galli\nUfficio tecnico\n\nGALLI COSTRUZIONI S.r.l.\nRistrutturazioni · Impermeabilizzazioni · Facciate\nVia della Magliana 640 – 00148 Roma\nTel. 06 5550 9090 – Fax 06 5550 9091\nwww.gallicostruzioni.esempio.it\nP.IVA e C.F. 09876543210\n\n' + DISCLAIMER_IT + '\n\n' + DISCLAIMER_EN, { client: 'outlook', sigDash: false });
+// only ever in copy of other people's messages: must not become a person in the list
+const monti = { name: 'Federica Monti', address: 'federica.monti@studioferretti.esempio.it' };
+thread(chiara, 'Infiltrazioni dal terrazzo', [
+  { d: 9, h: 18, m: 40, cc: [galli, monti], text: T.RELAZIONE_TERRAZZO, att: [['Foto terrazzo.zip', 'ZIP', '24 MB'], ['Pianta misure umidità.pdf', 'PDF', '410 KB']] },
+  { d: 7, h: 11, m: 20, from: galli, to: [ME, chiara], cc: [monti], subject: 'R: Infiltrazioni dal terrazzo', text: T.PREVENTIVO_GALLI, att: [['Preventivo 2026-214 terrazzo.pdf', 'PDF', '280 KB']], quote: true },
+  { d: 6, h: 21, m: 5, me: true, to: [chiara, galli], text: T.DOMANDE_TERRAZZO, quote: true },
+  { d: 5, h: 8, m: 50, cc: [galli, monti], text: 'Ciao Alex, ti rispondo qui sotto punto per punto.', inline: { 2: T.RISPOSTE_TERRAZZO[0], 3: T.RISPOSTE_TERRAZZO[2], 4: T.RISPOSTE_TERRAZZO[3] } },
+  { d: 1, h: 17, m: 35, from: galli, to: [ME], cc: [chiara, monti], client: 'iphone', quote: true, unread: true, text: 'Buonasera a tutti,\n\nrispondo dal telefono perché sono in cantiere. Sul solaio: se troviamo i ferri arrugginiti, per una superficie come la vostra si parla di 1.500-2.500 euro in più, ma come dice la Geometra è raro.\n\nPer giovedì confermo: arriviamo alle 8:30, due persone, mezza giornata. Mi lasci libero il passaggio verso la porta del terrazzo, grazie.\n\nR. Galli' }
+]);
+thread(sara, 'Passaggio di consegne progetto Orione', [
+  { d: 20, h: 18, m: 5, cc: [davide, luca], text: T.PASSAGGIO_CONSEGNE },
+  { d: 19, h: 9, m: 12, me: true, to: [sara], cc: [davide, luca], text: T.DOMANDE_CONSEGNE, quote: true },
+  { d: 19, h: 11, m: 47, from: luca, to: [ME, sara], cc: [davide], text: T.RISPOSTA_LUCA, quote: true },
+  { d: 18, h: 8, m: 30, from: davide, to: [ME, sara, luca], client: 'outlook-en', text: T.RISPOSTA_DAVIDE, quote: true },
+  { d: 18, h: 10, m: 15, to: [ME], cc: [davide, luca], text: T.RISPOSTA_SARA, quote: true },
+  { d: 17, h: 19, m: 2, me: true, to: [sara, davide, luca], text: 'Perfetto, allora giovedì facciamo così. Davide, mi mandi una bozza della proposta sulle varianti entro mercoledì? Grazie a tutti, davvero.', quote: true }
+]);
+thread(admin, 'Verbale dell’assemblea straordinaria del 18 settembre', [
+  { d: 22, h: 15, m: 30, to: [{ name: 'Condomini Via Ostiense 12', address: 'condomini@condominio.esempio.it' }], text: T.VERBALE_ASSEMBLEA, att: [['Verbale assemblea 18-09-2026 firmato.pdf', 'PDF', '1,6 MB'], ['Foglio presenze.pdf', 'PDF', '320 KB'], ['Regolamento biciclette approvato.pdf', 'PDF', '140 KB']], quote: false }
+]);
+thread(lucia, 'Portogallo, il programma', [
+  { d: 40, h: 22, m: 15, client: 'apple', text: T.ITINERARIO, att: [['Spese viaggio Portogallo.xlsx', 'XLS', '28 KB']] },
+  { d: 39, h: 8, m: 40, me: true, text: 'Ciao Lucia, letto tutto: è perfetto, grazie per esserti sobbarcata l’organizzazione.\n\nCoimbra per me va benissimo, mi incuriosisce il fado diverso. La valigia grande sì, aggiungila pure: al ritorno porto a casa almeno due bottiglie di porto.\n\nPer i soldi ti faccio un bonifico stasera. Il foglio l’ho visto, c’è solo una cosa: l’auto mi sembra contata due volte, nella riga 4 e nella 9. Ricontrolli?', quote: true },
+  { d: 39, h: 9, m: 2, text: 'Hai ragione, l’auto era doppia! Corretto, viene 590 a testa 😊 Valigia aggiunta.', quote: true }
+]);
 
 // Automated senders.
 const unsub = (domain) => [['List-Unsubscribe', `<https://${domain}/unsubscribe>`], ['List-Id', `<news.${domain}>`]];

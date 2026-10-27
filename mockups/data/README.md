@@ -4,6 +4,7 @@
 | --- | --- | --- |
 | `synthetic.js` | casella inventata, generata da `generate-synthetic.mjs` | tutti: canvas, sviluppo, git |
 | `attachments/` | file veri (PDF, immagini, fogli, inviti) per gli allegati sintetici, generati insieme a `synthetic.js` | tutti |
+| `testi-lunghi.mjs` | i testi delle email lunghe (relazioni, verbali, passaggi di consegne), importati dal generatore | tutti |
 | `cases/*.json` | casi sintetici che riproducono un problema visto con i dati veri; `cases/make-*.mjs` li rigenera | tutti |
 | `private/*.js` | export della tua casella vera (`tools/gmail-export.py`) | solo questo computer |
 | `private/attachments/` | gli allegati veri salvati dall'export (`--no-attachments` per non salvarli) | solo questo computer |
@@ -33,6 +34,8 @@ In alto compare «Dati veri, solo in locale». Se il file manca il prototipo non
 4. Copia il report e incollalo nella chat.
 
 Dal report si ricostruisce un caso in `cases/<nome>.json` (modello: `cases/_modello.json`, oppure uno script `cases/make-<nome>.mjs` quando il caso è grande), si rigenera `synthetic.js` con `node mockups/data/generate-synthetic.mjs` e si corregge il prototipo finché il caso sintetico si vede bene. Nei casi tutto è inventato: persone, aziende, progetti, indirizzi e testi; del caso vero si tiene solo la forma.
+
+Dalla v11 la casella sintetica imita la posta vera: ogni risposta cita tutto il thread sotto, con le intestazioni del programma di chi scrive (Gmail in italiano e in inglese, Outlook in italiano e in inglese, Apple Mail, iPhone, Thunderbird), firme di ogni forma e testi lunghi. Ci sono anche due thread a più persone scritti apposta: «Infiltrazioni dal terrazzo» (una persona solo in copia che non deve comparire nella lista, una risposta scritta dentro la citazione) e «Passaggio di consegne progetto Orione» (quattro persone, citazioni fino a quattro livelli).
 
 Casi presenti:
 

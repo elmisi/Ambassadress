@@ -1,6 +1,6 @@
 # Ambassadress
 
-Un client di posta ripensato da zero. Per ora è una serie di mockup navigabili (`mockups/v1` … `mockups/v10`), uno per giro di lavoro. Cosa vuole l'utente: `docs/desiderata.md`. Le note di ogni giro, con la mappa di stati ed eventi: `docs/mockup_v10.md`.
+Un client di posta ripensato da zero. Per ora è una serie di mockup navigabili (`mockups/v1` … `mockups/v11`), uno per giro di lavoro. Cosa vuole l'utente: `docs/desiderata.md`. Le note di ogni giro: `docs/mockup_vN.md` (dalla v10); la mappa di stati ed eventi è in `docs/mockup_v10.md`.
 
 ## Regole fisse
 
@@ -24,7 +24,8 @@ Un client di posta ripensato da zero. Per ora è una serie di mockup navigabili 
 - **Caricare la skill `frontend-design:frontend-design`** prima di toccare l'aspetto. Il linguaggio visivo è quello della v7 in poi (sotto): estenderlo, non tornare a card, chip, maiuscoletti e accento blu.
 - Copiare `mockups/v(N-1)/project/` in `mockups/vN/project/`; in `Main.dc.html` aggiornare `this.version`. Ricreare i symlink `support.js -> ../../support.js` e `data -> ../../data`. Aggiornare `canvas.json` (titolo «Ambassadress mockups vN» e nome della tavola).
 - Aggiungere la versione in cima a `mockups/index.html` e nella tabella di `mockups/README.md` («ancora da pubblicare» finché non c'è il canvas).
-- Se serve un caso nuovo nei dati: `mockups/data/cases/<nome>.json` (modello `_modello.json`), descriverlo in `mockups/data/README.md`, rigenerare con `node mockups/data/generate-synthetic.mjs`. I dati sono comuni a tutte le versioni.
+- Se serve un caso nuovo nei dati: `mockups/data/cases/<nome>.json` (modello `_modello.json`) per riprodurre una segnalazione, oppure un thread nel generatore per dare realismo; descriverlo in `mockups/data/README.md`, rigenerare con `node mockups/data/generate-synthetic.mjs`. I dati sono comuni a tutte le versioni.
+- **I dati sintetici devono sembrare posta vera, non una chat** (richiesta dell'utente dopo la v10): ogni risposta cita tutto il thread sotto, nel formato del programma di chi scrive (`clientOf` e `quoteBlock` nel generatore: Gmail it/en, Outlook it/en, Apple Mail, iPhone, Thunderbird); firme di ogni forma (`signatureOf`); testi lunghi in `mockups/data/testi-lunghi.mjs`. Le scelte di stile usano un generatore casuale a parte (`rq`), così aggiungere thread non sposta il resto.
 - **Provare tutto prima di dire che è pronto**: Playwright via `python3 -m http.server -d mockups 8799` (la porta 8765 è occupata da un altro progetto dell'utente: non toccarla) e anche da `file://`. Nessun errore in console, ogni voce delle note provata, anche a 390 px di larghezza senza scorrimento orizzontale. Dopo aver rigenerato `synthetic.js`, disattivare la cache del browser (CDP `Network.setCacheDisabled`), altrimenti si vedono i dati vecchi. Svuotare il `localStorage` tra una prova e l'altra quando serve partire puliti. Alla fine cancellare `.playwright-mcp/` e fermare il server.
 - Il resoconto finale all'utente: link locali, cosa c'è, bug corretti, dove ci si è discostati dalle note e perché, cosa resta aperto, e le decisioni che spettano a lui (commit, canvas, note del giro).
 
@@ -41,11 +42,14 @@ Un client di posta ripensato da zero. Per ora è una serie di mockup navigabili 
 - Fondo carta, tre colonne: persone, conversazione, indice degli argomenti. Carattere Atkinson Hyperlegible Next.
 - Il colore ha un significato: ogni argomento ha il suo, una striscia a sinistra della conversazione («il filo»). Il rosso ceralacca segna solo «da leggere». Tutto il resto è inchiostro. Stati premuti morbidi, niente testo bianco su nero.
 - Box dei messaggi larghi 3/4 della colonna, testo 15 px con interlinea 1,45, righe vuote di fila ridotte a una.
+- Niente riquadri intorno all'argomento attivo (escono dallo schermo con le email lunghe): il suo filo si fa più spesso e il titolo si evidenzia nell'indice.
+- Nella conversazione di una persona, i messaggi degli altri hanno le loro iniziali nei loro colori; il nome porta alla loro conversazione.
+- Una risposta scritta dentro la citazione si mostra con le righe citate in piccolo, rientrate e senza `>`.
 - Accanto al titolo dell'argomento niente righe di meta, solo piccole etichette quando servono («prima: …», «in archivio», «aspetti una risposta da N giorni»).
 
 ## Decisioni prese sul prodotto
 
-- **La conversazione è per persona; dentro, un blocco per argomento**, dal più recente, tutti mostrati senza «carica altri». Un argomento è un **thread** (`In-Reply-To`, `References`, thread di Gmail), non un oggetto: l'oggetto conta solo per i messaggi senza riferimenti. Il titolo è l'oggetto più recente, con «prima: …» se è cambiato.
+- **La conversazione è per persona; dentro, un blocco per argomento**, dal più recente, tutti mostrati senza «carica altri». **Il thread è sempre intero** (dalla v11): la persona sceglie quali thread vedi, non quali messaggi. Un thread compare da chi ci ha scritto e da chi ha ricevuto un mio messaggio (A: o Cc:), non da chi è solo in copia dei messaggi altrui. Un messaggio da leggere accende il pallino su tutte le persone del thread. Un argomento è un **thread** (`In-Reply-To`, `References`, thread di Gmail), non un oggetto: l'oggetto conta solo per i messaggi senza riferimenti. Il titolo è l'oggetto più recente, con «prima: …» se è cambiato.
 - **Tre pulsanti fissi sotto ogni argomento**, sempre nello stesso posto: «Rispondi» / «Riprendi la bozza», «letto» / «da leggere», «Archivia» / «Ripristina». Agiscono sull'argomento intero. Niente azioni sui singoli messaggi, niente «Elimina»: la cancellazione è una pulizia semi-automatica delle notifiche dei servizi. Niente «Rispondi a tutti», niente «Silenzia», niente regole speciali per chi è solo in copia.
 - **Stati di un argomento** (mappa completa in `docs/mockup_v10.md`): «letto» chiude l'argomento e resta chiuso anche dopo il ricaricamento; una email da altri lo riapre, anche dall'archivio (torna tutto). I miei messaggi non riaprono. Chiuso è per argomento, condiviso tra le persone. Ripristina → chiuso e letto. «da leggere» su un archiviato → ripristina e segna da leggere. Dopo «letto» o «Archivia» l'argomento attivo passa al prossimo da leggere della stessa persona.
 - **Risposta**: va agli stessi destinatari dell'ultimo messaggio, io escluso, ognuno con la sua ×, più un campo per aggiungerne; il riquadro avvisa di chi non riceverà la risposta e di chi è nuovo. Una bozza per argomento, salvata mentre scrivo, segnata accanto alla persona e nel riassunto.
@@ -56,9 +60,9 @@ Un client di posta ripensato da zero. Per ora è una serie di mockup navigabili 
 
 ## A che punto siamo
 
-La v10 è fatta e provata (`docs/mockup_v10.md`, «Com'è andata nella v10»). Restano aperti:
+La v11 è fatta e provata (`docs/mockup_v11.md`, «Com'è andata nella v11»). Restano aperti:
 
-- canvas della v10 da pubblicare;
+- canvas della v10 e della v11 da pubblicare;
 - «eliminato altrove» da simulare, e le regole della mappa da estendere ai servizi;
 - allegati delle bozze persi al ricaricamento (resta il nome);
 - nome breve dell'app sotto l'icona.

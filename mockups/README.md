@@ -14,6 +14,7 @@ Una cartella per versione. Ogni versione si apre in locale e ha un canvas Claude
 | v8 · Per argomento | `v8/project/Main.dc.html` (`?data=real` per i dati veri) | https://claude.ai/artifact/YAWa692USuocPWrJ32r6FX |
 | v9 · Argomenti che si chiudono | `v9/project/Main.dc.html` (`?data=real` per i dati veri) | https://claude.ai/artifact/MQ5mJ5gZXq5hJs85gHfHmC |
 | v10 · Stati chiari | `v10/project/Main.dc.html` (`?data=real` per i dati veri) | ancora da pubblicare |
+| v11 · Thread interi | `v11/project/Main.dc.html` (`?data=real` per i dati veri) | ancora da pubblicare |
 
 L’icona ha un canvas a parte: `icona/project/Main.dc.html`, https://claude.ai/artifact/YKJjSseVQJ6eXcsouBtUa1. La scelta è H2 con il contorno L3; i file sono in `icona/`: `icona.svg` (fondo inchiostro), `icona-chiara.svg` (fondo carta), `icona-senza-fondo.svg` e `sigillo.svg` (solo il sigillo, per favicon e barra).
 
