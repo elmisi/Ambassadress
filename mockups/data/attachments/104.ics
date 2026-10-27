@@ -3,10 +3,10 @@ VERSION:2.0
 PRODID:-//Ambassadress//sintetico//IT
 METHOD:REQUEST
 BEGIN:VEVENT
-UID:097@esempio.it
-DTSTART:20261009T130000Z
-DTEND:20261009T140000Z
-SUMMARY:Tentative Allineamento su piano operativo
+UID:104@esempio.it
+DTSTART:20260930T070000Z
+DTEND:20260930T080000Z
+SUMMARY:Approfondimenti sul magazzino
 ORGANIZER;CN=Lorenzo Bellini:mailto:lorenzo@bellini.esempio.it
 END:VEVENT
 END:VCALENDAR

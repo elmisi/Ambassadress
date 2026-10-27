@@ -37,6 +37,8 @@ Dal report si ricostruisce un caso in `cases/<nome>.json` (modello: `cases/_mode
 
 Dalla v11 la casella sintetica imita la posta vera: ogni risposta cita tutto il thread sotto, con le intestazioni del programma di chi scrive (Gmail in italiano e in inglese, Outlook in italiano e in inglese, Apple Mail, iPhone, Thunderbird), firme di ogni forma e testi lunghi. Ci sono anche due thread a più persone scritti apposta: «Infiltrazioni dal terrazzo» (una persona solo in copia che non deve comparire nella lista, una risposta scritta dentro la citazione) e «Passaggio di consegne progetto Orione» (quattro persone, citazioni fino a quattro livelli).
 
+Dalla v12 ci sono due casi di firme fatte di immagini: «Manutenzione caldaia, preventivo sostituzione» (Paolo Bassi, Outlook: il logo `image001.png` e due icone social `image002.png` e `image003.png`, piccole e uguali in tre messaggi, con il segnaposto `[cid:…]` nel testo; nello stesso thread `targhetta caldaia.jpg`, 31 KB, è una foto vera e deve restare visibile) e «Documenti per il 730» (Studio Conti, un logo `.gif` e un banner `.jpg` in un solo messaggio, riconosciuti dal nome). Le immagini piccole hanno un file SVG piccolo (logo con le iniziali o icona tonda).
+
 Casi presenti:
 
 - `citazioni-annidate`: risposta sopra tre livelli di citazione con firma in mezzo.

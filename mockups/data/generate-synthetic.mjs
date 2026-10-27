@@ -37,7 +37,7 @@ const itQuoteDate = (d) => `${DAYS[d.getDay()]} ${d.getDate()} ${MONTHS[d.getMon
 const rfcDate = (d) => d.toUTCString().replace('GMT', '+0000');
 const fmtAddr = (p) => (p.name ? `"${p.name}" <${p.address}>` : p.address);
 
-const MIME = { PDF: 'application/pdf', JPG: 'image/jpeg', DOC: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', XLS: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', ZIP: 'application/zip' };
+const MIME = { PDF: 'application/pdf', JPG: 'image/jpeg', DOC: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', XLS: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', ZIP: 'application/zip', PNG: 'image/png', GIF: 'image/gif' };
 const bytes = (s) => {
   if (!s) return 20000;
   const m = /([\d,]+)\s*(KB|MB)/.exec(s);
@@ -406,6 +406,23 @@ thread(lucia, 'Portogallo, il programma', [
   { d: 39, h: 9, m: 2, text: 'Hai ragione, l’auto era doppia! Corretto, viene 590 a testa 😊 Valigia aggiunta.', quote: true }
 ]);
 
+// Signatures made of images, as Outlook sends them: the company logo and the social icons arrive
+// as small attachments (image001.png…), the same in every message. A real small photo in the same
+// message must stay visible. In the text Outlook leaves a [cid:…] placeholder where the logo was.
+const bassi = P('Paolo Bassi', 'assistenza@termobassi.esempio.it', '[cid:image001.png@01DB2C4E.7A1F3B20]\nPaolo Bassi\nAssistenza tecnica\nTERMOIDRAULICA BASSI S.n.c.\nVia dei Castani 212 – 00172 Roma\nTel. 06 5554 1180 | Cell. 347 555 0912\nwww.termobassi.esempio.it\n[cid:image002.png@01DB2C4E.7A1F3B20] [cid:image003.png@01DB2C4E.7A1F3B20]', { client: 'outlook', sigDash: false });
+const sigImgs = [['image001.png', 'PNG', '14 KB'], ['image002.png', 'PNG', '1 KB'], ['image003.png', 'PNG', '1 KB']];
+thread(bassi, 'Manutenzione caldaia, preventivo sostituzione', [
+  { d: 13, h: 9, m: 10, text: 'Buongiorno Sig. Moro,\n\ncome anticipato al telefono le invio il preventivo per la sostituzione della caldaia. Quella attuale ha 19 anni e alla prova fumi di ieri il rendimento era al limite: si può ancora usare per questo inverno, ma una riparazione importante non conviene più.\n\nLe propongo una caldaia a condensazione da 25 kW, con installazione, smaltimento della vecchia e pratica per la detrazione. Il prezzo è nel preventivo allegato, valido 30 giorni.\n\nResto a disposizione per qualsiasi chiarimento.\n\nCordiali saluti', att: [['Preventivo 2026-0871 caldaia.pdf', 'PDF', '190 KB']].concat(sigImgs) },
+  { d: 12, h: 20, m: 30, me: true, text: 'Buonasera Paolo,\n\ngrazie del preventivo. Prima di decidere mi servirebbe sapere se la canna fumaria va adeguata, e quanto tempo resteremmo senza riscaldamento.\n\nMi può mandare anche il modello esatto della caldaia attuale? Lo chiede l’amministratore per la pratica.\n\nGrazie, Alex Moro', quote: true },
+  { d: 11, h: 8, m: 45, text: 'Buongiorno,\n\nla canna fumaria va intubata, è già compresa nel preventivo alla voce 4. Il lavoro si fa in una giornata: la mattina stacchiamo la vecchia, la sera avete già il riscaldamento.\n\nLe allego la foto della targhetta della caldaia attuale, si legge bene modello e matricola.\n\nCordiali saluti', att: [['targhetta caldaia.jpg', 'JPG', '31 KB']].concat(sigImgs), quote: true },
+  { d: 2, h: 10, m: 5, unread: true, text: 'Buongiorno Sig. Moro,\n\nle scrivo per sapere se ha deciso: da metà novembre abbiamo poche giornate libere, se vuole fare il lavoro prima del freddo conviene fissare la data entro la prossima settimana.\n\nCordiali saluti', att: sigImgs, quote: true }
+]);
+// A signature with a gif logo and a jpeg banner, sent once: small and with a signature name.
+const conti = P('Studio Conti', 'segreteria@studioconti.esempio.it', 'Segreteria\nStudio Conti – Commercialisti associati\nViale Marconi 98, 00146 Roma\ntel. 06 5553 7720', { client: 'apple' });
+thread(conti, 'Documenti per il 730', [
+  { d: 16, h: 11, m: 30, text: 'Gentile Alex,\n\nper preparare il 730 ci servono entro fine mese le spese mediche, le ricevute dei lavori in casa e la certificazione unica. Può mandarle anche come foto, purché leggibili.\n\nLe ricordiamo che lo studio resta chiuso dal 30 ottobre al 2 novembre.\n\nUn cordiale saluto', att: [['logo_studioconti.gif', 'GIF', '6 KB'], ['banner-firma.jpg', 'JPG', '22 KB']] }
+]);
+
 // Automated senders.
 const unsub = (domain) => [['List-Unsubscribe', `<https://${domain}/unsubscribe>`], ['List-Id', `<news.${domain}>`]];
 const SVC = [
@@ -495,6 +512,16 @@ function svg(name, i) {
 <text x="48" y="128" font-family="sans-serif" font-size="24" fill="hsl(${h},${s}%,25%)">immagine sintetica</text>
 </svg>\n`;
 }
+// Small signature images: a logo with the sender's initials, or a round social icon.
+function smallSvg(from, size, i) {
+  const who = (from && (from.name || from.address)) || '?';
+  if (size < 4 * 1024) {
+    const fill = i % 2 ? '#2A5DB0' : '#2C7DA0';
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="${fill}"/><text x="16" y="21" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#fff">${i % 2 ? 'in' : 'f'}</text></svg>\n`;
+  }
+  const ini = who.split(/\s+/).map((w) => w[0]).join('').slice(0, 2).toUpperCase();
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="240" height="64" viewBox="0 0 240 64"><rect width="240" height="64" fill="#fff"/><rect x="4" y="8" width="48" height="48" rx="8" fill="#B5462E"/><text x="28" y="40" text-anchor="middle" font-family="sans-serif" font-size="20" font-weight="700" fill="#fff">${xmlEsc(ini)}</text><text x="64" y="40" font-family="sans-serif" font-size="18" font-weight="700" fill="#333">${xmlEsc(who.toUpperCase()).slice(0, 18)}</text></svg>\n`;
+}
 const toIcs = (d) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
 let fileNo = 0;
 messages.forEach((msg) => {
@@ -511,8 +538,8 @@ messages.forEach((msg) => {
       writeFileSync(join(ATT_DIR, base + '.pdf'), pdf(name.replace(/\.pdf$/i, ''), lines));
       a.path = `attachments/${base}.pdf`;
       a.preview = [name.replace(/\.pdf$/i, '')].concat(lines).join('\n');
-    } else if (['jpg', 'jpeg', 'png'].includes(ext)) {
-      writeFileSync(join(ATT_DIR, base + '.svg'), svg(name, no));
+    } else if (['jpg', 'jpeg', 'png', 'gif'].includes(ext)) {
+      writeFileSync(join(ATT_DIR, base + '.svg'), a.size < 40 * 1024 && !/targhetta/i.test(name) ? smallSvg(msg.from, a.size, no) : svg(name, no));
       a.path = `attachments/${base}.svg`;
     } else if (['xlsx', 'xls', 'csv'].includes(ext)) {
       const rows = ['Voce;Quantità;Importo'].concat(['Materiali', 'Manodopera', 'Trasporto', 'Smaltimento', 'Imprevisti', 'Totale'].map((v, i) => `${v};${i < 5 ? 1 + (no + i) % 7 : ''};${(120 + ((no * 37 + i * 91) % 900)).toFixed(2).replace('.', ',')}`));

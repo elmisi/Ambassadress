@@ -15,10 +15,22 @@ Una cartella per versione. Ogni versione si apre in locale e ha un canvas Claude
 | v9 · Argomenti che si chiudono | `v9/project/Main.dc.html` (`?data=real` per i dati veri) | https://claude.ai/artifact/MQ5mJ5gZXq5hJs85gHfHmC |
 | v10 · Stati chiari | `v10/project/Main.dc.html` (`?data=real` per i dati veri) | ancora da pubblicare |
 | v11 · Thread interi | `v11/project/Main.dc.html` (`?data=real` per i dati veri) | ancora da pubblicare |
+| v12 · Segnalazioni e tagli | `v12/project/Main.dc.html` (`?data=real` per i dati veri) | ancora da pubblicare |
 
-L’icona ha un canvas a parte: `icona/project/Main.dc.html`, https://claude.ai/artifact/YKJjSseVQJ6eXcsouBtUa1. La scelta è H2 con il contorno L3; i file sono in `icona/`: `icona.svg` (fondo inchiostro), `icona-chiara.svg` (fondo carta), `icona-senza-fondo.svg` e `sigillo.svg` (solo il sigillo, per favicon e barra).
+L’icona ha un canvas a parte: `icona/project/Main.dc.html`, https://claude.ai/artifact/YKJjSseVQJ6eXcsouBtUa1. La scelta è H2 con il contorno L3; i file sono in `icona/`: `icona.svg` (fondo inchiostro), `icona-chiara.svg` (fondo carta), `icona-senza-fondo.svg` e `sigillo.svg` (solo il sigillo, per favicon e barra). Dalla v12 la favicon e il logo accanto al nome sono L3, cioè `icona-senza-fondo.svg` ritagliata intorno alla fascia, nel mockup e in `index.html`.
 
 Dalla v5 lo stato «letto», l'archivio e il cestino restano nel `localStorage` del browser (dalla v10 anche argomenti chiusi, bozze, preferenze su «Leggi tutto», messaggi inviati e simulati), separati per dati sintetici e veri. Dalla v6 la chiave è comune alle versioni (`ambassadress:<fonte>`), e la v6 riprende lo stato salvato dalla v5. Dalla v7 si azzera dal pulsante «Dati sintetici» / «Dati veri» in alto, con «Annulla» (dalla v8 «Torna allo stato iniziale», che riporta ai flag di lettura di Gmail); nelle versioni precedenti dalla console del browser con `localStorage.removeItem('ambassadress:synthetic')` (o `ambassadress:real`).
+
+## Segnalazioni
+
+Dalla v12 «Segnala» salva la segnalazione in `../segnalazioni/segnalazioni.sqlite` (fuori da git) se è acceso il server locale:
+
+```sh
+python3 tools/segnalazioni.py            # dalla radice del repository, porta 8797
+python3 tools/segnalazioni.py elenco     # le segnalazioni aperte
+```
+
+Se il server è spento restano «Copia il report» e «Scarica .json». Come ci si lavora: `../CLAUDE.md`.
 
 ## Aprire in locale
 

@@ -1,3 +1,6 @@
 # Real mailbox exports: they stay on this machine, never in git
 mockups/data/private/
 __pycache__/
+
+# Segnalazioni del prototipo: restano su questa macchina
+segnalazioni/
