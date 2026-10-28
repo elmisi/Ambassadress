@@ -1,0 +1,12 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Ambassadress//sintetico//IT
+METHOD:REQUEST
+BEGIN:VEVENT
+UID:119@esempio.it
+DTSTART:20261002T122000Z
+DTEND:20261002T132000Z
+SUMMARY:Lanterna | Giro delle consegne: dall’ordine alla fattur...
+ORGANIZER;CN=Lorenzo Bellini:mailto:lorenzo@bellini.esempio.it
+END:VEVENT
+END:VCALENDAR

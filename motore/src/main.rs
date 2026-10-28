@@ -13,6 +13,7 @@ use motore::credenziali;
 use motore::db::{self, Db};
 use motore::errore::Errore;
 use motore::rete::{Contatori, Indirizzo, Sicurezza};
+use motore::scaricamento;
 use motore::sincronizza::{self, Collegamento, Config, Opzioni, Rapporto};
 use motore::tempo::{byte, data_utc, durata, numero, ora_utc};
 
@@ -23,6 +24,7 @@ Uso:
   motore sincronizza [opzioni]   scarica e aggiorna la casella nel database locale
   motore stato [--db FILE]       conteggi del database locale
   motore cerca PAROLE [--db FILE] quanti messaggi trova la ricerca (solo il numero)
+  motore allegati [--db FILE]    totali degli allegati (numero e peso, per tipo e per anno)
   motore ascolta [opzioni]       resta in ascolto (IDLE) e sincronizza quando arriva posta
   motore aiuto
 
@@ -147,6 +149,7 @@ fn main() -> ExitCode {
         "sincronizza" | "sync" => comando_sincronizza(&a),
         "stato" => comando_stato(&a),
         "cerca" => comando_cerca(&a),
+        "allegati" => comando_allegati(&a),
         "ascolta" => comando_ascolta(&a),
         "aiuto" | "--help" | "-h" | "help" => {
             print!("{AIUTO}");
@@ -357,9 +360,6 @@ fn comando_sincronizza(a: &Argomenti) -> Result<(), Errore> {
     eprintln!("Sincronizzo in sola lettura…");
     let r = sincronizza::sincronizza(&mut col, &mut db, &opzioni(a, true));
     col.chiudi();
-    if !r.capacita.is_empty() {
-        let _ = db.salva_meta("capacita", &r.capacita.join(" "));
-    }
     stampa_rapporto(&r, &db);
     match r.errore {
         Some(e) => Err(e),
@@ -477,6 +477,56 @@ fn comando_cerca(a: &Argomenti) -> Result<(), Errore> {
         "{} messaggi trovati in {}",
         numero(n.max(0) as u64),
         durata(t.elapsed())
+    );
+    Ok(())
+}
+
+/// `61 · 4.2 MB · scaricati 10 (1.1 MB) · da scaricare 51 (3.1 MB)`
+fn riga_conto(c: &scaricamento::Conto) -> String {
+    format!(
+        "{} · {} · scaricati {} ({}) · da scaricare {} ({})",
+        numero(c.numero()),
+        byte(c.byte()),
+        numero(c.scaricati),
+        byte(c.byte_scaricati),
+        numero(c.da_scaricare),
+        byte(c.byte_da_scaricare)
+    )
+}
+
+/// Solo i totali degli allegati: numeri, tipi e anni, mai nomi, oggetti o indirizzi.
+fn comando_allegati(a: &Argomenti) -> Result<(), Errore> {
+    if !a.db.exists() {
+        println!("Il database non c'è ancora: lancia prima `motore sincronizza`.");
+        return Ok(());
+    }
+    let db = Db::apri(&a.db)?;
+    let t = scaricamento::totali(&db)?;
+    println!("Allegati      {}", riga_conto(&t.tutti));
+    println!("Per tipo");
+    for (c, conto) in &t.per_tipo {
+        println!("  {:<11} {}", c.nome(), riga_conto(conto));
+    }
+    println!("Per anno");
+    for (anno, conto) in &t.per_anno {
+        let anno = if *anno == 0 {
+            "senza data".to_string()
+        } else {
+            anno.to_string()
+        };
+        println!("  {anno:<11} {}", riga_conto(conto));
+    }
+    let q = scaricamento::quota(&db, scaricamento::QUOTA_CONSIGLIATA)?;
+    println!(
+        "Archivio      {} su disco (lo stesso contenuto una volta sola) · in attesa di riprovare {}",
+        byte(t.archivio),
+        numero(t.in_attesa)
+    );
+    println!(
+        "Oggi          {} scaricati dal server, quota {} (giorno UTC {})",
+        byte(q.scaricati),
+        byte(q.limite),
+        q.giorno
     );
     Ok(())
 }

@@ -1,6 +1,6 @@
 # Ambassadress
 
-Un client di posta ripensato da zero. Per ora è una serie di mockup navigabili (`mockups/v1` … `mockups/v13`), uno per giro di lavoro. Cosa vuole l'utente: `docs/desiderata.md`. Come si costruisce l'app vera: `docs/implementazione.md`. Le note di ogni giro: `docs/mockup_vN.md` (dalla v10); la mappa di stati ed eventi è in `docs/mockup_v10.md`.
+Un client di posta ripensato da zero. Ci sono i mockup navigabili (`mockups/v1` … `mockups/v14`), uno per giro di lavoro, il motore in Rust (`motore/`) e l'app desktop in sola lettura (`app/`, Tauri). Cosa vuole l'utente: `docs/desiderata.md`. Come si costruisce l'app vera: `docs/implementazione.md`. Le note di ogni giro: `docs/mockup_vN.md` (dalla v10); la mappa di stati ed eventi è in `docs/mockup_v10.md`.
 
 ## Regole fisse
 
@@ -31,7 +31,7 @@ Un client di posta ripensato da zero. Per ora è una serie di mockup navigabili 
 
 ## Come sono fatti i mockup
 
-- **`.dc.html`** è il formato del canvas Claude Design. In locale gira con `mockups/support.js`, un runtime minimo scritto per questo progetto: `{{buchi}}`, `<sc-for>`, `<sc-if>`, eventi `on*` (in minuscolo), stato `DCLogic`. A ogni `setState` ridisegna tutto (`replaceChildren`) e rimette il fuoco solo per `id`: i campi che devono tenere il fuoco hanno un `id`, e le scorciatoie vanno agganciate a `window`, non a un elemento. Se una tavola usa qualcosa che il runtime non copre, estendere `support.js`.
+- **`.dc.html`** è il formato del canvas Claude Design. In locale gira con `mockups/support.js`, un runtime minimo scritto per questo progetto: `{{buchi}}`, `<sc-for>`, `<sc-if>`, eventi `on*` (in minuscolo), stato `DCLogic`. A ogni `setState` ridisegna tutto (`replaceChildren`) e rimette il fuoco solo per `id`: i campi che devono tenere il fuoco hanno un `id`, e le scorciatoie vanno agganciate a `window`, non a un elemento. La pagina è viva in `<x-dc>` prima del primo disegno: un `src` o un `onLoad` con un `{{buco}}` partirebbe così com'è scritto, quindi si scrive `sc-src` / `sc-onLoad` (dalla v14). Se una tavola usa qualcosa che il runtime non copre, estendere `support.js`.
 - **Stato salvato** nel `localStorage`, chiave `ambassadress:<fonte>` (`synthetic` o `real`), comune alle versioni. I campi persistenti della v10 sono in `persisted()`; `change(etichetta, patch)` li modifica con l'avviso «Annulla» (Ctrl+Z). «Torna allo stato iniziale» dal pulsante «Dati sintetici» / «Dati veri» azzera tutto, con «Annulla».
 - **Bug con i dati veri**: l'utente preme «Segnala», il report ha il contenuto già sostituito (lettere in x, cifre in 9, indirizzi in `⟦P3⟧`). Dal report si ricostruisce un caso sintetico che riproduce la forma, poi si corregge il prototipo finché il caso si vede bene. Non chiedere mai di incollare email vere.
 - **Segnalazioni (dalla v12).** Con `python3 tools/segnalazioni.py` acceso (porta 8797), «Segnala» salva in `segnalazioni/segnalazioni.sqlite` (in `.gitignore`, si può leggere: il contenuto dei dati veri è già sostituito). Gli stati li gestisce Claude:
@@ -75,4 +75,18 @@ La v13 è fatta e provata (`docs/mockup_v13.md`): è l'ultimo giro di mockup, co
 - le regole della mappa da estendere ai servizi;
 - allegati delle bozze persi al ricaricamento (resta il nome).
 
-Il lavoro riparte dall'ordine in `docs/implementazione.md`: il motore in sola lettura è in `motore/` (vedi il suo README). Se servono altri ritocchi ai mockup, le note vanno di nuovo in `mockups/PROSSIMO-GIRO.md`.
+Il lavoro riparte dall'ordine in `docs/implementazione.md`. Il motore in sola lettura è in `motore/`, l'app Tauri in sola lettura è in `app/`: per entrambi vedi il README. Ora si usa l'app sulla casella vera e la si mette a punto a giri, come i mockup (sotto).
+
+Come si lavora un giro dell'app (deciso il 28 ottobre 2026):
+1. **Note.** L'utente usa l'app e detta osservazioni: vanno in `app/NOTE.md`, una voce per punto (titolo in grassetto, cosa succede oggi nell'app, cosa si vuole). In questa fase si scrive solo nel file. I problemi che si vedono solo sulla casella vera si riproducono con un caso sintetico nel finto server.
+2. **Prototipo prima, se serve.** Le voci che cambiano l'interfaccia passano prima da una versione nuova del mockup (v14, v15…), costruita come sopra. In fondo a `app/NOTE.md` la sezione «Cosa tocca il prototipo» dice quali sono.
+3. **Ok al prototipo.** Si va avanti solo quando l'utente approva il mockup.
+4. **Implementazione nell'app.** Si porta tutto in `app/` (le voci del prototipo e quelle solo dell'app), provato col finto server.
+5. **Chiusura.** Le note vanno in `docs/app_giroN.md` con «Com'è andato il giro»; si aggiornano questo file e i README, poi commit se richiesto. L'app non si copia a ogni giro: cambia sul posto.
+
+Regole per l'app:
+- **Mai i dati veri dell'app.** `~/.local/share/a10s/` (casella, password, database, allegati), `~/.local/share/it.elmisi.a10s/` (lo stato dell'interfaccia) e `~/.cache/a10s/` non si leggono, come `motore/private/`; ci sono i deny in `.claude/settings.json`.
+- **Prove solo col finto server** del motore e i dati sintetici, con `A10S_DATI` in una cartella di prova.
+- **Nelle prove, mai il desktop vero**: `xdg-open`, `xdg-user-dir` e `notify-send` vanno sostituiti da script finti in testa al `PATH`. Una volta un PDF sintetico è finito nella cartella Scaricati vera.
+- **`ui/index.html` dell'app parte dalla v13 ma ora vive per conto suo.** Le modifiche all'interfaccia si fanno lì; i mockup restano per le idee.
+- **Fermare i processi in un comando separato.** Il comando che li ferma va lanciato da solo. Se nella stessa riga c'è anche il comando che avvia il processo, `pgrep -f` trova la shell stessa e la chiude.

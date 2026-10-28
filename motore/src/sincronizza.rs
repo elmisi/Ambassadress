@@ -19,6 +19,8 @@
 use std::collections::{BTreeMap, HashMap, HashSet};
 use std::io::Write;
 use std::sync::Arc;
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::mpsc::Sender;
 use std::time::{Duration, Instant};
 
 use crate::credenziali::Credenziali;
@@ -40,6 +42,53 @@ pub struct Config {
     pub timeout: Duration,
 }
 
+/// La fase di un giro, per «Scarico la posta, X di N».
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum Fase {
+    /// Intestazioni e struttura dei messaggi nuovi.
+    Intestazioni,
+    /// Testi dei messaggi più recenti.
+    Testi,
+}
+
+/// Quello che succede durante la sincronizzazione, per l'interfaccia. Arriva sul
+/// canale `Opzioni::notizie`; `servizio` aggiunge `InLinea` e le cadute dell'IDLE.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub enum Notizia {
+    /// Comincia un giro.
+    Inizio,
+    /// `fatti` di `totale` nella fase indicata.
+    Passo {
+        fase: Fase,
+        fatti: usize,
+        totale: usize,
+    },
+    /// Giro finito bene.
+    Fine {
+        nuovi: usize,
+        aggiornati: usize,
+        spariti: usize,
+        testi: usize,
+    },
+    /// Rete assente o server irraggiungibile. Con `riprovo_tra` si riprova da soli dopo
+    /// quell'attesa; con `None` il giro si è arreso.
+    Offline {
+        motivo: String,
+        riprovo_tra: Option<Duration>,
+    },
+    /// Il server rifiuta utente o password: non si riprova finché non cambiano.
+    AccessoRifiutato { motivo: String },
+    /// Un errore che una nuova connessione non risolve (database, guardia, uso).
+    Errore { motivo: String },
+    /// La connessione IDLE è attiva: la posta nuova arriva da sola. Solo da `servizio`.
+    InLinea,
+    /// Il server ha risposto (secondi Unix): dopo un giro riuscito, quando l'IDLE si
+    /// collega e a ogni controllo periodico dell'ascolto. Al massimo una al minuto,
+    /// quindi per l'ora esatta dopo un aggiornamento a mano conta anche `Fine`.
+    /// Solo da `servizio`.
+    Contatto { alle: i64 },
+}
+
 #[derive(Clone, Debug)]
 pub struct Opzioni {
     /// Quanti messaggi recenti tenere sincronizzati; `None` per tutti.
@@ -56,6 +105,10 @@ pub struct Opzioni {
     pub tentativi: u32,
     pub attesa_iniziale: Duration,
     pub mostra_avanzamento: bool,
+    /// Dove mandare le notizie del giro (inizio, avanzamento, fine, errori).
+    pub notizie: Option<Sender<Notizia>>,
+    /// Se diventa vero il giro non riprova più dopo un errore di rete (chiusura dell'app).
+    pub stop: Option<Arc<AtomicBool>>,
 }
 
 impl Default for Opzioni {
@@ -70,6 +123,8 @@ impl Default for Opzioni {
             tentativi: 3,
             attesa_iniziale: Duration::from_secs(1),
             mostra_avanzamento: false,
+            notizie: None,
+            stop: None,
         }
     }
 }
@@ -224,6 +279,33 @@ impl Attese {
     }
 }
 
+/// Apre una connessione nuova già pronta: LOGIN, ID, ENABLE. Per le richieste
+/// dell'app (testi, allegati) che usano una connessione loro.
+pub fn apri_sessione(cfg: &Config, contatori: Arc<Contatori>) -> Risultato<Sessione> {
+    let mut s = Sessione::connetti(&cfg.indirizzo, cfg.timeout, contatori)?;
+    let esito = (|| {
+        s.login(
+            cfg.credenziali.utente.esponi(),
+            cfg.credenziali.password.esponi(),
+        )?;
+        s.id()?;
+        s.abilita_estensioni()
+    })();
+    match esito {
+        Ok(()) => Ok(s),
+        Err(e) => {
+            s.abbandona();
+            Err(e)
+        }
+    }
+}
+
+fn notizia(opz: &Opzioni, n: Notizia) {
+    if let Some(tx) = &opz.notizie {
+        let _ = tx.send(n);
+    }
+}
+
 /// Trova la cartella con tutti i messaggi (`\All`); se non c'è, INBOX.
 pub fn trova_cartella(s: &mut Sessione) -> Risultato<(String, String)> {
     let cartelle = s.elenca_cartelle()?;
@@ -246,14 +328,21 @@ pub fn sincronizza(col: &mut Collegamento, db: &mut Db, opz: &Opzioni) -> Rappor
     };
     let mut attese = Attese::new(opz.attesa_iniziale, Duration::from_secs(30));
     let mut tentativi = 0;
+    notizia(opz, Notizia::Inizio);
     loop {
         match passata(col, db, opz, &mut r) {
             Ok(()) => break,
             Err(e) => {
                 db.annulla();
+                let fermato = opz.stop.as_ref().is_some_and(|s| s.load(Ordering::Relaxed));
                 if e.di_rete() {
-                    col.butta();
-                    if tentativi < opz.tentativi {
+                    if fermato {
+                        // Lettura interrotta apposta: il LOGOUT si manda, senza aspettare.
+                        col.chiudi();
+                    } else {
+                        col.butta();
+                    }
+                    if tentativi < opz.tentativi && !fermato {
                         tentativi += 1;
                         r.riconnessioni += 1;
                         r.errori_rete.push(e.to_string());
@@ -263,7 +352,15 @@ pub fn sincronizza(col: &mut Collegamento, db: &mut Db, opz: &Opzioni) -> Rappor
                                 opz.tentativi
                             );
                         }
-                        std::thread::sleep(attese.prossima());
+                        let attesa = attese.prossima();
+                        notizia(
+                            opz,
+                            Notizia::Offline {
+                                motivo: e.to_string(),
+                                riprovo_tra: Some(attesa),
+                            },
+                        );
+                        std::thread::sleep(attesa);
                         continue;
                     }
                 }
@@ -275,16 +372,55 @@ pub fn sincronizza(col: &mut Collegamento, db: &mut Db, opz: &Opzioni) -> Rappor
     r.durata = inizio.elapsed();
     r.byte_letti = col.contatori.letti() - letti0;
     r.byte_scritti = col.contatori.scritti() - scritti0;
+    if !r.capacita.is_empty() {
+        let _ = db.salva_meta("capacita", &r.capacita.join(" "));
+    }
     if let Err(e) = db.registra_sincronizzazione(&r)
         && r.errore.is_none()
     {
         r.errore = Some(e);
     }
+    // Interrotto apposta (chiusura dell'app): l'errore che ne viene non è una notizia.
+    let fermato = opz.stop.as_ref().is_some_and(|s| s.load(Ordering::Relaxed));
+    if r.errore.is_some() && fermato {
+        return r;
+    }
+    notizia(
+        opz,
+        match &r.errore {
+            None => Notizia::Fine {
+                nuovi: r.nuovi,
+                aggiornati: r.aggiornati,
+                spariti: r.spariti,
+                testi: r.corpi,
+            },
+            Some(Errore::Accesso(t)) => Notizia::AccessoRifiutato { motivo: t.clone() },
+            Some(e) if e.di_rete() => Notizia::Offline {
+                motivo: e.to_string(),
+                riprovo_tra: None,
+            },
+            Some(e) => Notizia::Errore {
+                motivo: e.to_string(),
+            },
+        },
+    );
     r
 }
 
-fn avanzamento(opz: &Opzioni, fase: &str, fatti: usize, totale: usize) {
+fn avanzamento(opz: &Opzioni, fase: Fase, fatti: usize, totale: usize) {
+    notizia(
+        opz,
+        Notizia::Passo {
+            fase,
+            fatti,
+            totale,
+        },
+    );
     if opz.mostra_avanzamento {
+        let fase = match fase {
+            Fase::Intestazioni => "intestazioni",
+            Fase::Testi => "testi",
+        };
         eprint!(
             "\r  {fase}: {}/{}   ",
             tempo::numero(fatti as u64),
@@ -618,6 +754,7 @@ fn scarica_intestazioni(
 
     let totale = da_scaricare.len();
     let mut fatti = 0;
+    avanzamento(opz, Fase::Intestazioni, 0, totale);
     for (lista, attributi) in [(&normali, &pieni), (&ritentati, &ridotti)] {
         for lotto in lista.chunks(opz.lotto.max(1)) {
             let chiesti: HashSet<u32> = lotto.iter().copied().collect();
@@ -666,7 +803,7 @@ fn scarica_intestazioni(
             db.conferma()?;
             r.da_riprovare += lotto.len() - salvati.len();
             fatti += lotto.len();
-            avanzamento(opz, "intestazioni", fatti, totale);
+            avanzamento(opz, Fase::Intestazioni, fatti, totale);
         }
     }
     Ok(())
@@ -683,12 +820,23 @@ fn scarica_corpi(
         return Ok(());
     }
     let lista = db.corpi_da_scaricare(cartella_id, opz.corpi)?;
+    scarica_lista_corpi(s, db, &lista, opz, r)
+}
+
+/// Scarica e salva il testo dei messaggi indicati, nella cartella già aperta.
+pub(crate) fn scarica_lista_corpi(
+    s: &mut Sessione,
+    db: &mut Db,
+    lista: &[CorpoDaScaricare],
+    opz: &Opzioni,
+    r: &mut Rapporto,
+) -> Risultato<()> {
     if lista.is_empty() {
         return Ok(());
     }
     // Messaggi con le stesse parti si chiedono insieme.
     let mut gruppi: BTreeMap<String, Vec<&CorpoDaScaricare>> = BTreeMap::new();
-    for m in &lista {
+    for m in lista {
         let firma =
             m.2.iter()
                 .map(|p| p.parte.as_str())
@@ -699,6 +847,7 @@ fn scarica_corpi(
     let totale = lista.len();
     let mut fatti = 0;
     let massimo = opz.massimo_corpo;
+    avanzamento(opz, Fase::Testi, 0, totale);
     for gruppo in gruppi.values() {
         for lotto in gruppo.chunks(opz.lotto_corpi.max(1)) {
             let parti = &lotto[0].2;
@@ -759,7 +908,7 @@ fn scarica_corpi(
             }
             db.conferma()?;
             fatti += lotto.len();
-            avanzamento(opz, "testi", fatti, totale);
+            avanzamento(opz, Fase::Testi, fatti, totale);
         }
     }
     Ok(())

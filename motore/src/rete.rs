@@ -6,8 +6,8 @@
 
 use std::io::{Read, Write};
 use std::net::{Shutdown, TcpStream, ToSocketAddrs};
-use std::sync::atomic::{AtomicU64, Ordering};
-use std::sync::{Arc, OnceLock};
+use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
+use std::sync::{Arc, Mutex, OnceLock};
 use std::time::{Duration, Instant};
 
 use crate::errore::{Errore, Risultato};
@@ -40,12 +40,20 @@ impl Indirizzo {
     }
 }
 
-/// Byte letti e scritti, comuni a tutte le connessioni che li condividono.
+/// Byte letti e scritti, comuni a tutte le connessioni che li condividono, e i loro
+/// socket: `interrompi` li chiude tutti insieme da un altro thread (per la chiusura
+/// veloce dell'app), anche mentre una lettura aspetta il server.
 #[derive(Debug, Default)]
 pub struct Contatori {
     pub letti: AtomicU64,
     pub scritti: AtomicU64,
+    /// Dopo `interrompi` nessuna connessione nuova parte più.
+    interrotto: AtomicBool,
+    aperte: Mutex<Vec<(u64, TcpStream)>>,
 }
+
+/// Numeri per riconoscere i socket nel registro di `Contatori`.
+static PROSSIMO_SOCKET: AtomicU64 = AtomicU64::new(1);
 
 impl Contatori {
     pub fn letti(&self) -> u64 {
@@ -53,6 +61,47 @@ impl Contatori {
     }
     pub fn scritti(&self) -> u64 {
         self.scritti.load(Ordering::Relaxed)
+    }
+
+    /// Chiude la lettura di tutte le connessioni che condividono questi contatori:
+    /// chi aspetta una risposta si sveglia subito con «connessione chiusa». La
+    /// scrittura resta aperta, così il LOGOUT di cortesia può ancora uscire. Le
+    /// connessioni aperte dopo vengono rifiutate subito.
+    pub fn interrompi(&self) {
+        self.interrotto.store(true, Ordering::SeqCst);
+        if let Ok(aperte) = self.aperte.lock() {
+            for (_, s) in aperte.iter() {
+                let _ = s.shutdown(Shutdown::Read);
+            }
+        }
+    }
+
+    /// Vero dopo `interrompi`.
+    pub fn interrotto(&self) -> bool {
+        self.interrotto.load(Ordering::SeqCst)
+    }
+
+    fn registra(&self, s: &TcpStream) -> Option<u64> {
+        let copia = s.try_clone().ok()?;
+        let n = PROSSIMO_SOCKET.fetch_add(1, Ordering::Relaxed);
+        let mut aperte = self.aperte.lock().ok()?;
+        aperte.push((n, copia));
+        // Controllato dopo l'inserimento: se `interrompi` è arrivato nel frattempo, si chiude qui.
+        if self.interrotto() {
+            let _ = s.shutdown(Shutdown::Read);
+        }
+        Some(n)
+    }
+
+    fn togli(&self, n: u64) {
+        if let Ok(mut aperte) = self.aperte.lock() {
+            aperte.retain(|(x, _)| *x != n);
+        }
+    }
+
+    /// Quante connessioni sono aperte adesso con questi contatori.
+    pub fn connessioni_aperte(&self) -> usize {
+        self.aperte.lock().map(|a| a.len()).unwrap_or(0)
     }
 }
 
@@ -69,6 +118,8 @@ pub struct Connessione {
     ripresa: (usize, usize),
     guardia: Guardia,
     contatori: Arc<Contatori>,
+    /// Il posto nel registro dei socket di `contatori` (tenuto per il suo Drop).
+    _registro: Option<Registro>,
     /// Versione TLS negoziata, se la connessione è cifrata.
     pub tls: Option<String>,
 }
@@ -105,6 +156,9 @@ impl Connessione {
         timeout: Duration,
         contatori: Arc<Contatori>,
     ) -> Risultato<Self> {
+        if contatori.interrotto() {
+            return Err(Errore::Chiusa);
+        }
         let indirizzi: Vec<_> = (indirizzo.host.as_str(), indirizzo.porta)
             .to_socket_addrs()?
             .collect();
@@ -132,6 +186,16 @@ impl Connessione {
         tcp.set_read_timeout(Some(timeout))?;
         tcp.set_write_timeout(Some(timeout))?;
         let controllo = tcp.try_clone()?;
+        // Registrata prima della stretta di mano TLS, così `interrompi` arriva anche lì.
+        // Se qualcosa va storto più avanti, il Drop di `Registro` la toglie.
+        let registrata = contatori.registra(&controllo).map(|n| Registro {
+            contatori: contatori.clone(),
+            n,
+        });
+        if contatori.interrotto() {
+            let _ = controllo.shutdown(Shutdown::Both);
+            return Err(Errore::Chiusa);
+        }
 
         let (flusso, tls): (Box<dyn Flusso>, Option<String>) = match indirizzo.sicurezza {
             Sicurezza::InChiaro => (Box::new(tcp), None),
@@ -159,6 +223,7 @@ impl Connessione {
             ripresa: (0, 0),
             guardia: Guardia::new(),
             contatori,
+            _registro: registrata,
             tls,
         })
     }
@@ -241,6 +306,18 @@ impl Connessione {
 
     pub fn chiudi(&mut self) {
         let _ = self.tcp.shutdown(Shutdown::Both);
+    }
+}
+
+/// Un socket nel registro di `Contatori`: esce dal registro quando la connessione finisce.
+struct Registro {
+    contatori: Arc<Contatori>,
+    n: u64,
+}
+
+impl Drop for Registro {
+    fn drop(&mut self) {
+        self.contatori.togli(self.n);
     }
 }
 

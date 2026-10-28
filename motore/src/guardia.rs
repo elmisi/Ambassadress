@@ -362,6 +362,8 @@ mod prove {
             "a20 UID FETCH 7 (UID BODY.PEEK[1.2]<0.1048576> BODY.PEEK[1.1]<0.1048576>)",
             "a21 FETCH 1:10 FLAGS",
             "a22 FETCH 1 BODY.PEEK[]",
+            "a22b UID FETCH 5 (UID BODY.PEEK[])",
+            "a22c UID FETCH 5 (UID BODY.PEEK[]<4194304.4194304>)",
             "a23 FETCH 1 (BINARY.PEEK[1] BINARY.SIZE[1])",
             "a24 FETCH 1:5 FAST",
             "a25 FETCH 1 (RFC822.HEADER RFC822.SIZE ENVELOPE BODY)",

@@ -4,9 +4,9 @@ PRODID:-//Ambassadress//sintetico//IT
 METHOD:REQUEST
 BEGIN:VEVENT
 UID:105@esempio.it
-DTSTART:20260929T110000Z
-DTEND:20260929T120000Z
-SUMMARY:Lanterna | Giro delle consegne: dall’ordine alla fattur...
+DTSTART:20260908T163100Z
+DTEND:20260908T173100Z
+SUMMARY:Lanterna
 ORGANIZER;CN=Lorenzo Bellini:mailto:lorenzo@bellini.esempio.it
 END:VEVENT
 END:VCALENDAR

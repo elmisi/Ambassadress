@@ -73,6 +73,8 @@ pub struct DatiFetch {
     pub struttura: Option<Vec<crate::mime::Parte>>,
     /// Sezioni del corpo per numero di parte ("1", "1.2").
     pub sezioni: Vec<(String, Vec<u8>)>,
+    /// Il messaggio intero (`BODY[]`, anche un pezzo `BODY[]<inizio>`).
+    pub intero: Option<Vec<u8>>,
 }
 
 impl DatiFetch {
@@ -92,7 +94,11 @@ impl DatiFetch {
                 AttributeValue::GmailMsgId(m) => d.gm_msgid = Some(*m),
                 AttributeValue::GmailThrId(t) => d.gm_thrid = Some(*t),
                 AttributeValue::GmailLabels(l) => {
-                    d.etichette = Some(l.iter().map(|x| utf7::decodifica(x)).collect());
+                    d.etichette = Some(
+                        l.iter()
+                            .map(|x| utf7::decodifica(&senza_escape(x)))
+                            .collect(),
+                    );
                 }
                 AttributeValue::BodyStructure(b) => {
                     d.struttura = Some(crate::mime::parti_da_struttura(b))
@@ -103,6 +109,7 @@ impl DatiFetch {
                 AttributeValue::BodySection { section, data, .. } => {
                     let dati = data.as_deref().unwrap_or_default().to_vec();
                     match section {
+                        None => d.intero = Some(dati),
                         Some(SectionPath::Full(imap_proto::MessageSection::Header)) => {
                             d.intestazioni = Some(dati)
                         }
@@ -122,6 +129,26 @@ impl DatiFetch {
         }
         d
     }
+}
+
+/// Toglie gli escape di una stringa IMAP tra virgolette (`\\` e `\"`): `imap-proto`
+/// la restituisce così com'è. Non tocca gli atomi come `\Inbox`, che non li contengono.
+pub fn senza_escape(s: &str) -> String {
+    if !s.contains('\\') {
+        return s.to_string();
+    }
+    let mut out = String::with_capacity(s.len());
+    let mut c = s.chars().peekable();
+    while let Some(x) = c.next() {
+        if x == '\\' && matches!(c.peek(), Some('\\') | Some('"')) {
+            if let Some(y) = c.next() {
+                out.push(y);
+            }
+        } else {
+            out.push(x);
+        }
+    }
+    out
 }
 
 /// Novità che arrivano durante IDLE o NOOP.
@@ -184,9 +211,15 @@ pub fn insieme_uid(uid: &[u32]) -> String {
     out
 }
 
+/// Quanto si aspetta la risposta al LOGOUT: è solo cortesia, e alla chiusura
+/// dell'app non deve trattenere niente.
+pub const ATTESA_LOGOUT: Duration = Duration::from_millis(300);
+
 pub struct Sessione {
     conn: Connessione,
     etichetta: u32,
+    /// L'etichetta dell'IDLE in corso, se c'è (serve un DONE prima del LOGOUT).
+    idle: Option<String>,
     pub timeout: Duration,
     capacita: Vec<String>,
     abilitate: HashSet<String>,
@@ -230,6 +263,7 @@ impl Sessione {
         Ok(Sessione {
             conn,
             etichetta: 0,
+            idle: None,
             timeout,
             capacita,
             abilitate: HashSet::new(),
@@ -512,6 +546,7 @@ impl Sessione {
         let etichetta = self.prossima_etichetta();
         self.conn
             .invia(format!("{etichetta} IDLE\r\n").as_bytes())?;
+        self.idle = Some(etichetta.clone());
         let mut novita = Vec::new();
         loop {
             let byte = self.conn.leggi_risposta(Instant::now() + self.timeout)?;
@@ -526,6 +561,7 @@ impl Sessione {
                     },
                 )) if tag.0 == etichetta => {
                     self.conn.annulla_idle();
+                    self.idle = None;
                     return Err(Errore::Server {
                         comando: "IDLE".into(),
                         stato: format!("{status:?}").to_uppercase(),
@@ -576,6 +612,7 @@ impl Sessione {
 
     /// Manda DONE e aspetta la fine di IDLE entro `entro`: se non arriva, la connessione è morta.
     pub fn idle_termina(&mut self, etichetta: &str, entro: Duration) -> Risultato<Vec<Novita>> {
+        self.idle = None;
         self.conn.invia(b"DONE\r\n")?;
         let scadenza = Instant::now() + entro;
         let mut novita = Vec::new();
@@ -615,10 +652,13 @@ impl Sessione {
         }
     }
 
-    /// LOGOUT di cortesia: gli errori non contano.
+    /// LOGOUT di cortesia: si manda, ma la risposta si aspetta al massimo
+    /// `ATTESA_LOGOUT`; gli errori non contano. Durante un IDLE prima va il DONE.
     pub fn logout(mut self) {
-        let vecchio = self.timeout;
-        self.timeout = vecchio.min(Duration::from_secs(5));
+        self.timeout = self.timeout.min(ATTESA_LOGOUT);
+        if self.idle.take().is_some() {
+            let _ = self.conn.invia(b"DONE\r\n");
+        }
         let _ = self.esegui("LOGOUT", |_| Ok(()));
         self.conn.chiudi();
     }
@@ -657,6 +697,24 @@ mod prove {
         assert_eq!(insieme_uid(&[1, 2, 3, 5, 7, 8, 9, 20]), "1:3,5,7:9,20");
         assert_eq!(insieme_uid(&[4]), "4");
         assert_eq!(insieme_uid(&[9, 8, 7, 7]), "7:9");
+    }
+
+    #[test]
+    fn etichette_con_escape() {
+        assert_eq!(senza_escape("\\\\Inbox"), "\\Inbox");
+        assert_eq!(senza_escape("\\Inbox"), "\\Inbox");
+        assert_eq!(senza_escape(r#"Detto \"cos\\ì\""#), r#"Detto "cos\ì""#);
+        let (_, r) = Response::parse(
+            b"* 1 FETCH (UID 4 X-GM-LABELS (\\Inbox \"\\\\Sent\" Casa \"Muy \\\"Importante\\\"\"))\r\n",
+        )
+        .unwrap();
+        let Response::Fetch(_, a) = r else {
+            panic!("non è un FETCH")
+        };
+        assert_eq!(
+            DatiFetch::da(&a).etichette.unwrap(),
+            vec!["\\Inbox", "\\Sent", "Casa", "Muy \"Importante\""]
+        );
     }
 
     #[test]

@@ -41,6 +41,8 @@ Dalla v12 ci sono due casi di firme fatte di immagini: «Manutenzione caldaia, p
 
 Dalla v13: una seconda casella, `alex@studiomoro.esempio.it` (IMAP, non Gmail), elencata in `accounts` e tra gli alias, con due thread («Bagno di via Merulana, sopralluogo», «Campionatura cotto, ordine 3381»); le etichette dell'utente (Condominio, Casa, Lavoro, Viaggi, Tasse) aggiunte per oggetto; un messaggio di spam (`\Spam`) che non deve comparire da nessuna parte; le newsletter con due immagini esterne e un pixel che traccia.
 
+Dalla v14: i PDF hanno più pagine (circa una ogni 95 KB della misura dichiarata, da 1 a 24) con una prima pagina riconoscibile, e accanto la miniatura `NNN.jpg` della prima pagina, fatta con `pdftoppm` come la farà il motore (senza `poppler-utils` i PDF restano senza miniatura). Le immagini hanno le misure in pixel (`width`, `height`), come il motore le leggerà dal file; un'immagine con `noDims` nel caso resta senza misure, come un file non ancora scaricato.
+
 Casi presenti:
 
 - `citazioni-annidate`: risposta sopra tre livelli di citazione con firma in mezzo.
@@ -48,6 +50,8 @@ Casi presenti:
 - `servizi-automatici`: notifiche di revisione codice, issue, build, sicurezza, ricevute, pacchi, newsletter e social.
 - `copia-e-citazione-a-capo`: messaggi dove sei solo in copia con tanti destinatari, e intestazione «Il giorno … ha scritto:» spezzata su più righe.
 - `indirizzi-multipli`: una persona con un indirizzo vecchio, fermo da due anni, e uno nuovo in uso.
+- `inoltro-e-copia-a-meta` (v14): un preventivo di Ilaria Venturi inoltrato a Tommaso Orsini dentro lo stesso thread di Gmail, con la risposta di Tommaso; e una cena di classe dove Nadia Pellegrino entra in copia al quarto messaggio. Da Tommaso e da Nadia la parte di prima è chiusa in una riga.
+- `immagini-piccole` (v14): un'impresa con due colleghi, Marta Sereni e Luca Gualtieri, con il logo `ATT00001.png` (52 KB ma 200×80 px), un `marchio.png` senza misure ripetuto dai due indirizzi dello stesso dominio, una foto vera, una schermata vera di 35 KB (820×460, resta visibile) e un'icona di 96×96 in un messaggio senza firma.
 - `argomenti-per-thread`: un thread che cambia oggetto a metà (legato da `In-Reply-To` e `References`), due «Fattura» diverse con la stessa persona, un messaggio lungo per «Leggi tutto» e una domanda rimasta senza risposta.
 
 ## Formato
@@ -64,7 +68,7 @@ window.AMB_DATA = {
     from: { name, address }, sender, replyTo: [], to: [], cc: [], bcc: [],
     subject, messageId, inReplyTo, references: [],
     text, html, truncated,
-    attachments: [{ filename, mimeType, size, inline, contentId, path, preview }],  // path: relativo a mockups/data
+    attachments: [{ filename, mimeType, size, inline, contentId, path, preview, width, height, pages, thumb }],  // path e thumb: relativi a mockups/data
     otherParts: [], headers: [[nome, valore]],
     flags: { seen, flagged },
     gmail: { threadId, labels: [] },

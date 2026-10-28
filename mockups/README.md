@@ -17,6 +17,7 @@ Una cartella per versione. Ogni versione si apre in locale e ha un canvas Claude
 | v11 · Thread interi | `v11/project/Main.dc.html` (`?data=real` per i dati veri) | ancora da pubblicare |
 | v12 · Segnalazioni e tagli | `v12/project/Main.dc.html` (`?data=real` per i dati veri) | ancora da pubblicare |
 | v13 · Primo avvio, caselle, tema scuro | `v13/project/Main.dc.html` (`?data=real` per i dati veri) | ancora da pubblicare |
+| v14 · Aggiornamento, pulizia, allegati, inoltri | `v14/project/Main.dc.html` (`?data=real` per i dati veri) | ancora da pubblicare |
 
 L’icona ha un canvas a parte: `icona/project/Main.dc.html`, https://claude.ai/artifact/YKJjSseVQJ6eXcsouBtUa1. La scelta è H2 con il contorno L3; i file sono in `icona/`: `icona.svg` (fondo inchiostro), `icona-chiara.svg` (fondo carta), `icona-senza-fondo.svg` e `sigillo.svg` (solo il sigillo, per favicon e barra). Dalla v12 la favicon e il logo accanto al nome sono L3, cioè `icona-senza-fondo.svg` ritagliata intorno alla fascia, nel mockup e in `index.html`.
 

@@ -87,6 +87,13 @@
     var el = node.cloneNode(false);
     Array.prototype.slice.call(node.attributes).forEach(function (attr) {
       var name = attr.name;
+      // sc-src, sc-onload…: the page markup is live in <x-dc> before the first render, so a plain
+      // src or onload with a {{hole}} would load or run as written; the sc- prefix keeps them inert
+      if (name.indexOf('sc-') === 0) {
+        el.removeAttribute(name);
+        name = name.slice(3);
+        if (attr.value.indexOf('{{') === -1 && name.indexOf('on') !== 0) { el.setAttribute(name, attr.value); return; }
+      }
       if (name.indexOf('hint-') === 0) {
         el.removeAttribute(name);
         return;

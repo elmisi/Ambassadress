@@ -28,10 +28,23 @@ pub struct Intestazioni {
     pub lista_id: Option<String>,
     /// Newsletter, notifiche, risposte automatiche.
     pub automatico: bool,
+    /// Le intestazioni di `INTESTAZIONI_VISTA` così come sono (svolte e decodificate).
+    pub extra: Vec<(String, String)>,
 }
 
+/// Le intestazioni che l'interfaccia legge così come sono, nell'ordine in cui arrivano.
+pub const INTESTAZIONI_VISTA: &[&str] = &[
+    "Sender",
+    "Reply-To",
+    "List-Id",
+    "List-Unsubscribe",
+    "List-Unsubscribe-Post",
+    "Precedence",
+    "Auto-Submitted",
+];
+
 /// I campi chiesti al server con BODY.PEEK[HEADER.FIELDS (…)].
-pub const CAMPI_INTESTAZIONE: &str = "DATE FROM SENDER REPLY-TO TO CC BCC SUBJECT MESSAGE-ID IN-REPLY-TO REFERENCES LIST-ID LIST-UNSUBSCRIBE AUTO-SUBMITTED PRECEDENCE";
+pub const CAMPI_INTESTAZIONE: &str = "DATE FROM SENDER REPLY-TO TO CC BCC SUBJECT MESSAGE-ID IN-REPLY-TO REFERENCES LIST-ID LIST-UNSUBSCRIBE LIST-UNSUBSCRIBE-POST AUTO-SUBMITTED PRECEDENCE";
 
 fn persone(a: Option<&Address<'_>>) -> Vec<Persona> {
     let Some(a) = a else { return Vec::new() };
@@ -83,7 +96,40 @@ pub fn leggi_intestazioni(grezze: &[u8]) -> Intestazioni {
         v == "bulk" || v == "list" || v == "junk"
     });
     h.automatico = h.lista_id.is_some() || disiscrizione || auto || massiva;
+    h.extra = intestazioni_vista(grezze);
     h
+}
+
+/// Le intestazioni di `INTESTAZIONI_VISTA` presenti, svolte su una riga e con le
+/// parole codificate RFC 2047 decodificate.
+pub fn intestazioni_vista(grezze: &[u8]) -> Vec<(String, String)> {
+    let testo = String::from_utf8_lossy(grezze);
+    let mut righe: Vec<(String, String)> = Vec::new();
+    for riga in testo.split('\n') {
+        let riga = riga.trim_end_matches('\r');
+        if riga.is_empty() {
+            break;
+        }
+        if riga.starts_with([' ', '\t']) {
+            if let Some(ultima) = righe.last_mut() {
+                ultima.1.push(' ');
+                ultima.1.push_str(riga.trim());
+            }
+            continue;
+        }
+        if let Some((n, v)) = riga.split_once(':') {
+            righe.push((n.trim().to_string(), v.trim().to_string()));
+        }
+    }
+    righe
+        .into_iter()
+        .filter_map(|(n, v)| {
+            let nome = INTESTAZIONI_VISTA
+                .iter()
+                .find(|x| x.eq_ignore_ascii_case(&n))?;
+            Some((nome.to_string(), decodifica_parole(&v)))
+        })
+        .collect()
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -144,7 +190,7 @@ fn parametro(p: &Parametri<'_>, nome: &str) -> Option<String> {
 }
 
 /// Decodifica le parole codificate RFC 2047 (`=?UTF-8?Q?…?=`) passando da mail-parser.
-fn decodifica_parole(v: &str) -> String {
+pub fn decodifica_parole(v: &str) -> String {
     if !v.contains("=?") {
         return v.to_string();
     }
@@ -424,6 +470,35 @@ List-Unsubscribe: <mailto:via@esempio.invalid>\r\n\r\n",
         assert_eq!(h.data, Some(1793091600));
         assert!(h.automatico);
         assert_eq!(chiave_thread(&h, "x"), "ref:m1@esempio.invalid");
+        assert_eq!(
+            h.extra,
+            vec![(
+                "List-Unsubscribe".to_string(),
+                "<mailto:via@esempio.invalid>".to_string()
+            )]
+        );
+    }
+
+    #[test]
+    fn intestazioni_per_la_vista() {
+        let v = intestazioni_vista(
+            b"Sender: =?UTF-8?Q?Calendario_=C3=A8?= <cal@esempio.invalid>\r\n\
+reply-to: Lucia <lucia@esempio.invalid>,\r\n Marco <marco@esempio.invalid>\r\n\
+X-Altro: niente\r\n\r\nList-Id: dopo la riga vuota\r\n",
+        );
+        assert_eq!(
+            v,
+            vec![
+                (
+                    "Sender".to_string(),
+                    "Calendario è <cal@esempio.invalid>".to_string()
+                ),
+                (
+                    "Reply-To".to_string(),
+                    "Lucia <lucia@esempio.invalid>, Marco <marco@esempio.invalid>".to_string()
+                ),
+            ]
+        );
     }
 
     #[test]

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+<rect width="1200" height="800" fill="hsl(214,60%,82%)"/>
+<circle cx="900" cy="250" r="120" fill="hsl(214,60%,92%)"/>
+<path d="M0 640 L300 380 L520 560 L760 300 L1200 700 L1200 800 L0 800 Z" fill="hsl(214,60%,45%)"/>
+<path d="M0 700 L260 520 L560 720 L900 520 L1200 760 L1200 800 L0 800 Z" fill="hsl(214,60%,30%)"/>
+<text x="48" y="80" font-family="sans-serif" font-size="40" fill="hsl(214,60%,20%)">ponteggio lato strada.jpg</text>
+<text x="48" y="128" font-family="sans-serif" font-size="24" fill="hsl(214,60%,25%)">immagine sintetica</text>
+</svg>

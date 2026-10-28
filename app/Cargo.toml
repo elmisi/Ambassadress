@@ -1,0 +1,23 @@
+[package]
+name = "ambassadress"
+version = "0.1.0"
+edition = "2024"
+description = "Ambassadress, il client di posta: l'app desktop (Tauri) sopra il motore"
+publish = false
+
+[dependencies]
+# Il motore: sincronizzazione IMAP in sola lettura, database, allegati.
+motore = { path = "../motore" }
+# La finestra e il ponte con l'interfaccia, sul motore web del sistema (WebKitGTK su Linux).
+tauri = { version = "2.11.2", features = [] }
+# Già dentro Tauri: servono per gli argomenti dei comandi e i dati degli eventi.
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+[build-dependencies]
+tauri-build = { version = "2.6.2", features = [] }
+
+[profile.release]
+lto = "thin"
+codegen-units = 4
+strip = true

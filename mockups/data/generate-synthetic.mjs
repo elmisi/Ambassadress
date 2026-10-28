@@ -4,7 +4,8 @@
 //
 //   node mockups/data/generate-synthetic.mjs
 
-import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as T from './testi-lunghi.mjs';
@@ -507,18 +508,54 @@ const ATT_DIR = join(HERE, 'attachments');
 rmSync(ATT_DIR, { recursive: true, force: true });
 mkdirSync(ATT_DIR, { recursive: true });
 
-function pdf(title, lines) {
+// A PDF with real pages: page 1 looks like a document (coloured band, title, paragraphs, a table),
+// the others carry sections and the page number. The thumbnail is drawn from page 1 (v14).
+function pdf(title, lines, pages, hue) {
   const esc = (s) => s.replace(/[’‘]/g, "'").replace(/[“”«»]/g, '"').replace(/[–—]/g, '-').replace(/…/g, '...').replace(/⋅/g, '-')
     .replace(/[\\()]/g, (c) => '\\' + c).replace(/[^\x20-\x7e\xa0-\xff]/g, '?');
-  const body = ['BT', '/F1 18 Tf', '56 780 Td', `(${esc(title)}) Tj`, '/F1 11 Tf', '0 -30 Td']
-    .concat(...lines.map((l) => [`(${esc(l)}) Tj`, '0 -17 Td']), ['ET']).join('\n');
-  const objs = [
-    '<< /Type /Catalog /Pages 2 0 R >>',
-    '<< /Type /Pages /Kids [3 0 R] /Count 1 >>',
-    '<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>',
-    `<< /Length ${Buffer.byteLength(body, 'latin1')} >>\nstream\n${body}\nendstream`,
-    '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>'
-  ];
+  const rgb = (h, s, l) => {
+    const k = (n) => (n + h / 30) % 12, a = s * Math.min(l, 1 - l);
+    const f = (n) => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+    return [f(0), f(8), f(4)].map((v) => v.toFixed(3)).join(' ');
+  };
+  const bars = (y, n, seed) => {
+    const out = ['0.82 g'];
+    for (let i = 0; i < n; i++) {
+      const w = i % 5 === 4 ? 180 + ((seed * 31 + i * 17) % 160) : 470 - ((seed * 13 + i * 7) % 40);
+      out.push(`56 ${y - i * 15} ${w} 7 re f`);
+    }
+    return out;
+  };
+  const page = (k) => {
+    const ops = [];
+    if (k === 1) {
+      ops.push(`${rgb(hue, 0.45, 0.42)} rg`, '0 772 595 70 re f');
+      ops.push('BT', '1 1 1 rg', '/F1 20 Tf', '56 800 Td', `(${esc(title)}) Tj`, 'ET');
+      ops.push('BT', '0.15 g', '/F1 11 Tf', '56 740 Td');
+      lines.filter((l) => !/^Pagina /.test(l)).forEach((l) => ops.push(`(${esc(l)}) Tj`, '0 -16 Td'));
+      ops.push('ET');
+      ops.push(...bars(530, 9, k + title.length));
+      ops.push('0.6 G', '0.8 w', '56 250 483 120 re S', '56 330 m 539 330 l S', '56 290 m 539 290 l S', '300 250 m 300 370 l S');
+      ops.push(`${rgb(hue, 0.35, 0.85)} rg`, '56.4 330.4 482.2 39.2 re f');
+      ops.push(...bars(200, 5, k * 3));
+    } else {
+      ops.push('BT', '0.15 g', '/F1 15 Tf', '56 780 Td', `(${k}. Sezione ${k}) Tj`, 'ET');
+      ops.push(...bars(740, 22, k + title.length));
+      ops.push(...bars(380, 14, k * 7));
+    }
+    ops.push('BT', '0.45 g', '/F1 9 Tf', '480 40 Td', `(Pagina ${k} di ${pages}) Tj`, 'ET');
+    return ops.join('\n');
+  };
+  const objs = ['<< /Type /Catalog /Pages 2 0 R >>', null, '<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>'];
+  const kids = [];
+  for (let k = 1; k <= pages; k++) {
+    const body = page(k);
+    const pageNo = objs.length + 1;
+    kids.push(`${pageNo} 0 R`);
+    objs.push(`<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents ${pageNo + 1} 0 R /Resources << /Font << /F1 3 0 R >> >> >>`);
+    objs.push(`<< /Length ${Buffer.byteLength(body, 'latin1')} >>\nstream\n${body}\nendstream`);
+  }
+  objs[1] = `<< /Type /Pages /Kids [${kids.join(' ')}] /Count ${pages} >>`;
   let out = '%PDF-1.4\n';
   const offsets = [];
   objs.forEach((o, i) => { offsets.push(Buffer.byteLength(out, 'latin1')); out += `${i + 1} 0 obj\n${o}\nendobj\n`; });
@@ -526,6 +563,21 @@ function pdf(title, lines) {
   out += `xref\n0 ${objs.length + 1}\n0000000000 65535 f \n` + offsets.map((o) => String(o).padStart(10, '0') + ' 00000 n \n').join('');
   out += `trailer\n<< /Size ${objs.length + 1} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF\n`;
   return Buffer.from(out, 'latin1');
+}
+// Pages from the declared size: about one page every 95 KB, from 1 to 24.
+const pagesFor = (size) => Math.max(1, Math.min(24, Math.round((size || 0) / 95000)));
+// The thumbnail of page 1, as the engine will make it with pdftoppm; without poppler-utils, none.
+let hasPdftoppm = true;
+function pdfThumb(pdfPath, outBase) {
+  if (!hasPdftoppm) return false;
+  try {
+    execFileSync('pdftoppm', ['-f', '1', '-l', '1', '-singlefile', '-scale-to', '360', '-jpeg', '-jpegopt', 'quality=72', pdfPath, outBase], { stdio: 'ignore' });
+    return existsSync(outBase + '.jpg');
+  } catch (e) {
+    hasPdftoppm = false;
+    console.warn('pdftoppm non c’è: i PDF restano senza miniatura');
+    return false;
+  }
 }
 const xmlEsc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 function svg(name, i) {
@@ -539,6 +591,18 @@ function svg(name, i) {
 <text x="48" y="80" font-family="sans-serif" font-size="40" fill="hsl(${h},${s}%,20%)">${xmlEsc(name)}</text>
 <text x="48" y="128" font-family="sans-serif" font-size="24" fill="hsl(${h},${s}%,25%)">immagine sintetica</text>
 </svg>\n`;
+}
+// An image with the declared pixel size: a logo strip, a small icon or a screenshot-like picture.
+function sizedSvg(name, from, w, h, i) {
+  const who = (from && (from.name || from.address)) || '?';
+  if (w >= 300 && h >= 120) {
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><rect width="${w}" height="${h}" fill="#F3F3F1"/><rect width="${w}" height="${Math.round(h * 0.12)}" fill="#3B5B7A"/><rect x="${Math.round(w * 0.05)}" y="${Math.round(h * 0.22)}" width="${Math.round(w * 0.9)}" height="${Math.round(h * 0.6)}" fill="#fff" stroke="#C9C9C4"/><text x="${Math.round(w * 0.08)}" y="${Math.round(h * 0.34)}" font-family="sans-serif" font-size="${Math.max(12, Math.round(h * 0.06))}" fill="#333">${xmlEsc(name)}</text><text x="${Math.round(w * 0.08)}" y="${Math.round(h * 0.46)}" font-family="sans-serif" font-size="${Math.max(10, Math.round(h * 0.045))}" fill="#666">immagine sintetica, ${w}×${h}</text></svg>\n`;
+  }
+  if (w <= 120 && h <= 120) {
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 96 96"><circle cx="48" cy="48" r="44" fill="#F2C94C"/><circle cx="34" cy="40" r="6" fill="#5B4300"/><circle cx="62" cy="40" r="6" fill="#5B4300"/><path d="M28 58 Q48 78 68 58" stroke="#5B4300" stroke-width="6" fill="none" stroke-linecap="round"/></svg>\n`;
+  }
+  const ini = who.split(/\s+/).map((x) => x[0]).join('').slice(0, 2).toUpperCase();
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 200 80"><rect width="200" height="80" fill="#fff"/><path d="M8 66 L40 14 L72 66 Z" fill="#C2410C"/><text x="84" y="46" font-family="sans-serif" font-size="22" font-weight="700" fill="#333">EDIL</text><text x="84" y="66" font-family="sans-serif" font-size="13" fill="#666">${xmlEsc(ini)} srl</text></svg>\n`;
 }
 // Small signature images: a logo with the sender's initials, or a round social icon.
 function smallSvg(from, size, i) {
@@ -561,14 +625,23 @@ messages.forEach((msg) => {
     const who = (msg.from && (msg.from.name || msg.from.address)) || '';
     const base = `${String(no).padStart(3, '0')}`;
     if (ext === 'pdf') {
+      const pages = pagesFor(a.size);
       const lines = [`Documento sintetico creato per il prototipo.`, `Argomento: ${topic}`, `Da: ${who}`, `Data: ${(msg.date || '').slice(0, 10)}`, '',
-        '1. Premessa e obiettivi', '2. Dettaglio delle voci', '3. Tempi e responsabilita', '4. Condizioni', '', 'Pagina 1 di 1'];
-      writeFileSync(join(ATT_DIR, base + '.pdf'), pdf(name.replace(/\.pdf$/i, ''), lines));
+        '1. Premessa e obiettivi', '2. Dettaglio delle voci', '3. Tempi e responsabilita', '4. Condizioni', '', `Pagina 1 di ${pages}`];
+      writeFileSync(join(ATT_DIR, base + '.pdf'), pdf(name.replace(/\.pdf$/i, ''), lines, pages, (no * 47) % 360));
       a.path = `attachments/${base}.pdf`;
+      a.pages = pages;
+      if (pdfThumb(join(ATT_DIR, base + '.pdf'), join(ATT_DIR, base))) a.thumb = `attachments/${base}.jpg`;
       a.preview = [name.replace(/\.pdf$/i, '')].concat(lines).join('\n');
     } else if (['jpg', 'jpeg', 'png', 'gif'].includes(ext)) {
-      writeFileSync(join(ATT_DIR, base + '.svg'), a.size < 40 * 1024 && !/targhetta/i.test(name) ? smallSvg(msg.from, a.size, no) : svg(name, no));
+      // the pixel size, as the engine reads it from the first bytes of the file (v14); noDims: not downloaded yet
+      const small = a.size < 40 * 1024 && !/targhetta/i.test(name);
+      const w = a.width || (small ? (a.size < 4 * 1024 ? 32 : 240) : 1200);
+      const h = a.height || (small ? (a.size < 4 * 1024 ? 32 : 64) : 800);
+      writeFileSync(join(ATT_DIR, base + '.svg'), a.width && !(/\.jpe?g$/i.test(name) && w >= 300) ? sizedSvg(name, msg.from, w, h, no) : small && !a.width ? smallSvg(msg.from, a.size, no) : svg(name, no));
       a.path = `attachments/${base}.svg`;
+      if (a.noDims) delete a.noDims;
+      else { a.width = w; a.height = h; }
     } else if (['xlsx', 'xls', 'csv'].includes(ext)) {
       const rows = ['Voce;Quantità;Importo'].concat(['Materiali', 'Manodopera', 'Trasporto', 'Smaltimento', 'Imprevisti', 'Totale'].map((v, i) => `${v};${i < 5 ? 1 + (no + i) % 7 : ''};${(120 + ((no * 37 + i * 91) % 900)).toFixed(2).replace('.', ',')}`));
       const csv = rows.join('\n') + '\n';

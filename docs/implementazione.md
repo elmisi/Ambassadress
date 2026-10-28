@@ -81,10 +81,24 @@ Il motore in sola lettura è in `motore/` (dettagli e come si lancia nel suo REA
   - Se COMPRESS vale una dipendenza in più.
   - Se IDLE resta su «Tutti i messaggi» o va su INBOX.
 
+## Client in sola lettura: com'è fatto (2026-10-28)
+
+L'app è in `app/` (dettagli, prove e cosa manca nel suo README).
+
+- **Tauri 2 su WebKitGTK**, un eseguibile di 11 MB in release. L'interfaccia è la v13 copiata in `app/ui/` con le modifiche per l'app, sullo stesso runtime dei mockup, che riceve i dati dal motore attraverso `ponte.js`. Il carattere è dentro l'app, niente rete per i font.
+- **Dati**: il motore (`vista`) scrive il JSON nello stesso formato di `AMB_DATA`, quindi il modello del prototipo funziona senza cambiare. La sincronizzazione è il `Servizio` del motore (sincronizza, poi IDLE, si ricollega da solo) con una finestra dei 3.000 messaggi più recenti, testi compresi.
+- **Allegati**: protocollo `a10s://localhost/allegato/<messaggio>/<parte>`. Il motore li scarica la prima volta con BODY.PEEK su una connessione riusata, poi li tiene in un archivio per contenuto (SHA-256). I PDF si vedono dentro l'app con il visore di WebKitGTK; «Apri» passa una copia a `xdg-open`.
+- **Casella**: primo avvio vero (accesso di prova, poi salvataggio). La password sta in un file 0600; il portachiavi del sistema verrà dopo.
+- **Sola lettura**: la guardia del motore resta l'unico punto che parla col server. «Letto», «archivia» e le bozze restano nell'interfaccia, «Invia» dice che la scrittura non c'è ancora.
+- **Prove** senza la posta vera:
+  - nel browser con il motore finto di `ponte.js`;
+  - nella finestra vera col finto server IMAP del motore, che serve i dati sintetici come email vere, guidata da script (`A10S_PROVA_JS`) e fotografata su Xvfb.
+- **Velocità**: l'interfaccia ridisegna tutto a ogni clic. Con 3.000 messaggi regge, con 10.000 un ridisegno costa circa 250 ms. Il disegno delle sole righe sullo schermo resta da fare, insieme allo storico oltre la finestra.
+
 ## Ordine di lavoro
 
 1. **Banco di prova del motore**: sincronizzazione, coda delle operazioni, misure sulla casella vera in sola lettura (stampa solo conteggi e tempi). Prove con rete che cade, sospensione, cambio di wifi.
-2. **Client in sola lettura**: persone, thread, ricerca, allegati, con la resa della v12 e le schermate della v13 (primo avvio, stato della rete, account, tema scuro, newsletter).
+2. **Client in sola lettura**: persone, thread, ricerca, allegati, con la resa della v12 e le schermate della v13 (primo avvio, stato della rete, account, tema scuro, newsletter). *Fatto in `app/`, provato col finto server; da usare sulla casella vera e raccogliere note.*
 3. **Scrittura**: «letto», «chiudi», «archivia» verso il server con la coda offline; poi risposta, bozze e invio.
 4. **Moduli**: import, rubrica, anteprime Office; poi, se serve, l'AI locale.
 

@@ -12,7 +12,7 @@ use crate::imap::DatiFetch;
 use crate::mime::{self, Parte, Persona, Ruolo};
 use crate::tempo;
 
-const VERSIONE_SCHEMA: i64 = 1;
+const VERSIONE_SCHEMA: i64 = 3;
 
 const SCHEMA: &str = r#"
 CREATE TABLE IF NOT EXISTS meta (
@@ -133,6 +133,48 @@ CREATE TABLE IF NOT EXISTS mancanti (
     PRIMARY KEY (cartella_id, uid)
 ) WITHOUT ROWID;
 
+-- Intestazioni che l'interfaccia legge così come sono (Sender, Reply-To, List-*…). Dallo schema 2.
+CREATE TABLE IF NOT EXISTS intestazioni (
+    messaggio_id INTEGER NOT NULL REFERENCES messaggi(id),
+    posizione INTEGER NOT NULL,
+    nome TEXT NOT NULL,
+    valore TEXT NOT NULL,
+    PRIMARY KEY (messaggio_id, posizione)
+) WITHOUT ROWID;
+
+-- Allegati scaricati: messaggio e parte → file in <cartella del database>/allegati/<impronta>.
+-- L'impronta è lo SHA-256 del contenuto decodificato: stesso contenuto, un file solo. Dallo schema 2.
+-- Misure dallo schema 3 (nei database più vecchi le aggiunge `migra`): NULL vuol dire «non
+-- ancora guardato» (o programma esterno assente), 0 «guardato, ma non si legge».
+CREATE TABLE IF NOT EXISTS allegati (
+    messaggio_id INTEGER NOT NULL REFERENCES messaggi(id),
+    parte TEXT NOT NULL,
+    impronta TEXT NOT NULL,
+    byte INTEGER NOT NULL,            -- dimensione decodificata
+    scaricato INTEGER NOT NULL,
+    larghezza INTEGER,                -- immagini: pixel, dalle prime righe del file
+    altezza INTEGER,
+    pagine INTEGER,                   -- PDF: da pdfinfo
+    miniatura INTEGER,                -- PDF: 1 se c'è <impronta>.miniatura.jpg nell'archivio
+    PRIMARY KEY (messaggio_id, parte)
+) WITHOUT ROWID;
+CREATE INDEX IF NOT EXISTS allegati_impronta ON allegati(impronta);
+
+-- Parti che non sono arrivate: si riprovano dopo attese crescenti, non subito. Dallo schema 3.
+CREATE TABLE IF NOT EXISTS parti_fallite (
+    messaggio_id INTEGER NOT NULL REFERENCES messaggi(id),
+    parte TEXT NOT NULL,
+    tentativi INTEGER NOT NULL,
+    prossimo INTEGER NOT NULL,        -- secondi Unix: prima di allora non si riprova
+    PRIMARY KEY (messaggio_id, parte)
+) WITHOUT ROWID;
+
+-- Byte scaricati dal server per parti e messaggi interi, per giorno UTC (la quota). Dallo schema 3.
+CREATE TABLE IF NOT EXISTS scaricati (
+    giorno TEXT PRIMARY KEY,
+    byte INTEGER NOT NULL
+);
+
 CREATE TABLE IF NOT EXISTS sincronizzazioni (
     id INTEGER PRIMARY KEY,
     inizio INTEGER NOT NULL,
@@ -173,11 +215,69 @@ pub type RigaGiro = (i64, i64, String, i64, i64, i64, i64);
 /// Un messaggio senza testo: id, UID, parti di testo da chiedere.
 pub type CorpoDaScaricare = (i64, u32, Vec<Parte>);
 
+/// Dove sta un messaggio sul server.
+#[derive(Debug, Clone)]
+pub struct Posizione {
+    pub cartella_id: i64,
+    pub cartella: String,
+    pub uidvalidity: Option<u32>,
+    pub uid: u32,
+}
+
+fn parte_da_riga(r: &rusqlite::Row<'_>) -> rusqlite::Result<Parte> {
+    Ok(Parte {
+        parte: r.get(0)?,
+        tipo: r.get(1)?,
+        charset: r.get(2)?,
+        codifica: r.get(3)?,
+        byte: r.get::<_, i64>(4)? as u64,
+        nome_file: r.get(5)?,
+        disposizione: r.get(6)?,
+        content_id: r.get(7)?,
+        ruolo: Ruolo::da_testo(&r.get::<_, String>(8)?),
+    })
+}
+
 /// Il percorso predefinito: `motore/private/ambassadress.sqlite`.
 pub fn percorso_predefinito() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR"))
         .join("private")
         .join("ambassadress.sqlite")
+}
+
+/// Porta un database di uno schema precedente a quello attuale. Le tabelle nuove le
+/// crea già `SCHEMA` (CREATE … IF NOT EXISTS); qui si aggiungono le colonne nuove
+/// alle tabelle che c'erano. Niente si cancella: un database vecchio resta leggibile.
+fn migra(conn: &Connection) -> Risultato<()> {
+    let colonne: HashSet<String> = conn
+        .prepare("SELECT name FROM pragma_table_info('allegati')")?
+        .query_map([], |r| r.get(0))?
+        .collect::<Result<_, _>>()?;
+    for c in ["larghezza", "altezza", "pagine", "miniatura"] {
+        if !colonne.contains(c) {
+            conn.execute_batch(&format!("ALTER TABLE allegati ADD COLUMN {c} INTEGER"))?;
+        }
+    }
+    Ok(())
+}
+
+/// Le misure di una parte scaricata: `None` lascia il valore com'è.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
+pub struct MisureParte {
+    /// Immagini: larghezza e altezza in pixel (0 se il file non si legge).
+    pub larghezza: Option<u32>,
+    pub altezza: Option<u32>,
+    /// PDF: numero di pagine (0 se è protetto o rotto).
+    pub pagine: Option<u32>,
+    /// PDF: vero se la miniatura della prima pagina è nell'archivio.
+    pub miniatura: Option<bool>,
+}
+
+/// Secondi da aspettare prima del tentativo dopo il numero `tentativi` fallito:
+/// 60 s, 2 min, 4 min… fino a 6 ore.
+pub fn attesa_dopo_fallimento(tentativi: i64) -> i64 {
+    let esponente = (tentativi.max(1) - 1).min(20) as u32;
+    (60i64 << esponente).min(6 * 3600)
 }
 
 fn flag_note(flags: &[String]) -> (bool, bool, bool, bool, String) {
@@ -221,8 +321,10 @@ impl Db {
             "PRAGMA journal_mode=WAL; PRAGMA synchronous=NORMAL; PRAGMA foreign_keys=ON;",
         )?;
         conn.execute_batch(SCHEMA)?;
+        migra(&conn)?;
         conn.execute(
-            "INSERT OR IGNORE INTO meta(chiave, valore) VALUES ('schema', ?1)",
+            "INSERT INTO meta(chiave, valore) VALUES ('schema', ?1)
+             ON CONFLICT(chiave) DO UPDATE SET valore = excluded.valore",
             params![VERSIONE_SCHEMA.to_string()],
         )?;
         Ok(Db {
@@ -230,6 +332,11 @@ impl Db {
             percorso: percorso.to_path_buf(),
             in_transazione: false,
         })
+    }
+
+    /// La connessione SQLite, per le letture del resto del motore (la vista).
+    pub(crate) fn conn(&self) -> &Connection {
+        &self.conn
     }
 
     pub fn inizia(&mut self) -> Risultato<()> {
@@ -579,6 +686,14 @@ impl Db {
                 )?
                 .execute(params![id, e])?;
         }
+        for (i, (nome, valore)) in h.extra.iter().enumerate() {
+            self.conn
+                .prepare_cached(
+                    "INSERT OR REPLACE INTO intestazioni(messaggio_id, posizione, nome, valore)
+                     VALUES (?1, ?2, ?3, ?4)",
+                )?
+                .execute(params![id, i as i64, nome, valore])?;
+        }
         for p in parti {
             self.conn
                 .prepare_cached(
@@ -667,49 +782,231 @@ impl Db {
             })?
             .collect::<Result<_, _>>()?;
         let mut out = Vec::new();
-        let mut st = self.conn.prepare_cached(
-            "SELECT parte, tipo, charset, codifica, byte, nome_file, disposizione, content_id, ruolo
-             FROM parti WHERE messaggio_id = ?1 AND ruolo IN ('testo', 'html')",
-        )?;
         for (id, uid, corpo) in righe {
             if corpo != 0 {
                 continue;
             }
-            let tutte: Vec<Parte> = st
-                .query_map(params![id], |r| {
-                    Ok(Parte {
-                        parte: r.get(0)?,
-                        tipo: r.get(1)?,
-                        charset: r.get(2)?,
-                        codifica: r.get(3)?,
-                        byte: r.get::<_, i64>(4)? as u64,
-                        nome_file: r.get(5)?,
-                        disposizione: r.get(6)?,
-                        content_id: r.get(7)?,
-                        ruolo: Ruolo::da_testo(&r.get::<_, String>(8)?),
-                    })
-                })?
-                .collect::<Result<_, _>>()?;
-            // La prima parte di testo semplice e la prima HTML, in ordine di parte.
-            let mut scelte = Vec::new();
-            for ruolo in [Ruolo::Testo, Ruolo::Html] {
-                if let Some(p) = tutte
-                    .iter()
-                    .filter(|p| p.ruolo == ruolo)
-                    .min_by(|a, b| ordine_parti(&a.parte, &b.parte))
-                {
-                    scelte.push(p.clone());
-                }
+            if let Some(scelte) = self.parti_di_testo(id)? {
+                out.push((id, uid, scelte));
             }
-            if scelte.is_empty() {
-                self.conn
-                    .execute("UPDATE messaggi SET corpo = 2 WHERE id = ?1", params![id])?;
-                continue;
-            }
-            scelte.sort_by(|a, b| ordine_parti(&a.parte, &b.parte));
-            out.push((id, uid, scelte));
         }
         Ok(out)
+    }
+
+    /// La prima parte di testo semplice e la prima HTML di un messaggio, in ordine di parte.
+    /// Se non ne ha, lo segna come «niente da scaricare» e restituisce None.
+    fn parti_di_testo(&self, id: i64) -> Risultato<Option<Vec<Parte>>> {
+        let tutte: Vec<Parte> = self
+            .conn
+            .prepare_cached(
+                "SELECT parte, tipo, charset, codifica, byte, nome_file, disposizione, content_id, ruolo
+                 FROM parti WHERE messaggio_id = ?1 AND ruolo IN ('testo', 'html')",
+            )?
+            .query_map(params![id], parte_da_riga)?
+            .collect::<Result<_, _>>()?;
+        let mut scelte = Vec::new();
+        for ruolo in [Ruolo::Testo, Ruolo::Html] {
+            if let Some(p) = tutte
+                .iter()
+                .filter(|p| p.ruolo == ruolo)
+                .min_by(|a, b| ordine_parti(&a.parte, &b.parte))
+            {
+                scelte.push(p.clone());
+            }
+        }
+        if scelte.is_empty() {
+            self.conn
+                .execute("UPDATE messaggi SET corpo = 2 WHERE id = ?1", params![id])?;
+            return Ok(None);
+        }
+        scelte.sort_by(|a, b| ordine_parti(&a.parte, &b.parte));
+        Ok(Some(scelte))
+    }
+
+    /// Per i messaggi indicati ancora senza testo: dove stanno e quali parti chiedere.
+    pub fn corpi_per_messaggi(&self, ids: &[i64]) -> Risultato<Vec<(Posizione, CorpoDaScaricare)>> {
+        let mut out = Vec::new();
+        for &id in ids {
+            let corpo: Option<i64> = self
+                .conn
+                .prepare_cached("SELECT corpo FROM messaggi WHERE id = ?1 AND eliminato IS NULL")?
+                .query_row(params![id], |r| r.get(0))
+                .optional()?;
+            if corpo != Some(0) {
+                continue;
+            }
+            let Some(pos) = self.posizione(id)? else {
+                continue;
+            };
+            if let Some(parti) = self.parti_di_testo(id)? {
+                let uid = pos.uid;
+                out.push((pos, (id, uid, parti)));
+            }
+        }
+        Ok(out)
+    }
+
+    /// Dove sta un messaggio sul server (la prima posizione, se ne ha più d'una).
+    pub fn posizione(&self, messaggio: i64) -> Risultato<Option<Posizione>> {
+        Ok(self
+            .conn
+            .prepare_cached(
+                "SELECT p.cartella_id, c.nome, c.uidvalidity, p.uid FROM posizioni p
+                 JOIN cartelle c ON c.id = p.cartella_id WHERE p.messaggio_id = ?1
+                 ORDER BY p.cartella_id LIMIT 1",
+            )?
+            .query_row(params![messaggio], |r| {
+                Ok(Posizione {
+                    cartella_id: r.get(0)?,
+                    cartella: r.get(1)?,
+                    uidvalidity: r.get::<_, Option<i64>>(2)?.map(|v| v as u32),
+                    uid: r.get::<_, i64>(3)? as u32,
+                })
+            })
+            .optional()?)
+    }
+
+    /// Una parte del messaggio, dalla struttura.
+    pub fn parte(&self, messaggio: i64, parte: &str) -> Risultato<Option<Parte>> {
+        Ok(self
+            .conn
+            .prepare_cached(
+                "SELECT parte, tipo, charset, codifica, byte, nome_file, disposizione, content_id, ruolo
+                 FROM parti WHERE messaggio_id = ?1 AND parte = ?2",
+            )?
+            .query_row(params![messaggio, parte], parte_da_riga)
+            .optional()?)
+    }
+
+    /// Impronta e dimensione di una parte già scaricata.
+    pub fn allegato_scaricato(
+        &self,
+        messaggio: i64,
+        parte: &str,
+    ) -> Risultato<Option<(String, u64)>> {
+        Ok(self
+            .conn
+            .prepare_cached(
+                "SELECT impronta, byte FROM allegati WHERE messaggio_id = ?1 AND parte = ?2",
+            )?
+            .query_row(params![messaggio, parte], |r| {
+                Ok((r.get(0)?, r.get::<_, i64>(1)? as u64))
+            })
+            .optional()?)
+    }
+
+    /// Registra una parte scaricata (le misure si aggiungono con `salva_misure`) e la
+    /// toglie da quelle fallite.
+    pub fn salva_allegato(
+        &self,
+        messaggio: i64,
+        parte: &str,
+        impronta: &str,
+        byte: u64,
+    ) -> Risultato<()> {
+        self.togli_parte_fallita(messaggio, parte)?;
+        self.conn
+            .prepare_cached(
+                "INSERT OR REPLACE INTO allegati(messaggio_id, parte, impronta, byte, scaricato)
+                 VALUES (?1, ?2, ?3, ?4, ?5)",
+            )?
+            .execute(params![
+                messaggio,
+                parte,
+                impronta,
+                byte as i64,
+                tempo::adesso()
+            ])?;
+        Ok(())
+    }
+
+    /// Aggiunge le misure (immagine, pagine, miniatura) a una parte già in `allegati`.
+    pub fn salva_misure(&self, messaggio: i64, parte: &str, m: &MisureParte) -> Risultato<()> {
+        self.conn
+            .prepare_cached(
+                "UPDATE allegati SET larghezza = COALESCE(?3, larghezza), altezza = COALESCE(?4, altezza),
+                    pagine = COALESCE(?5, pagine), miniatura = COALESCE(?6, miniatura)
+                 WHERE messaggio_id = ?1 AND parte = ?2",
+            )?
+            .execute(params![
+                messaggio,
+                parte,
+                m.larghezza,
+                m.altezza,
+                m.pagine,
+                m.miniatura
+            ])?;
+        Ok(())
+    }
+
+    /// Le misure salvate di una parte scaricata.
+    pub fn misure(&self, messaggio: i64, parte: &str) -> Risultato<Option<MisureParte>> {
+        Ok(self
+            .conn
+            .prepare_cached(
+                "SELECT larghezza, altezza, pagine, miniatura FROM allegati
+                 WHERE messaggio_id = ?1 AND parte = ?2",
+            )?
+            .query_row(params![messaggio, parte], |r| {
+                Ok(MisureParte {
+                    larghezza: r.get(0)?,
+                    altezza: r.get(1)?,
+                    pagine: r.get(2)?,
+                    miniatura: r.get(3)?,
+                })
+            })
+            .optional()?)
+    }
+
+    /// Una parte non è arrivata: si riproverà dopo un'attesa che raddoppia a ogni
+    /// tentativo (1 minuto, 2, 4… fino a 6 ore). Restituisce quando (secondi Unix).
+    pub fn segna_parte_fallita(&self, messaggio: i64, parte: &str) -> Risultato<i64> {
+        let tentativi: i64 = self
+            .conn
+            .prepare_cached(
+                "SELECT tentativi FROM parti_fallite WHERE messaggio_id = ?1 AND parte = ?2",
+            )?
+            .query_row(params![messaggio, parte], |r| r.get(0))
+            .optional()?
+            .unwrap_or(0)
+            + 1;
+        let prossimo = tempo::adesso() + attesa_dopo_fallimento(tentativi);
+        self.conn
+            .prepare_cached(
+                "INSERT INTO parti_fallite(messaggio_id, parte, tentativi, prossimo) VALUES (?1, ?2, ?3, ?4)
+                 ON CONFLICT(messaggio_id, parte) DO UPDATE SET tentativi = ?3, prossimo = ?4",
+            )?
+            .execute(params![messaggio, parte, tentativi, prossimo])?;
+        Ok(prossimo)
+    }
+
+    pub fn togli_parte_fallita(&self, messaggio: i64, parte: &str) -> Risultato<()> {
+        self.conn
+            .prepare_cached("DELETE FROM parti_fallite WHERE messaggio_id = ?1 AND parte = ?2")?
+            .execute(params![messaggio, parte])?;
+        Ok(())
+    }
+
+    /// Aggiunge byte scaricati dal server alla quota di oggi (UTC).
+    pub fn aggiungi_scaricati(&self, byte: u64) -> Risultato<()> {
+        self.conn
+            .prepare_cached(
+                "INSERT INTO scaricati(giorno, byte) VALUES (?1, ?2)
+                 ON CONFLICT(giorno) DO UPDATE SET byte = byte + excluded.byte",
+            )?
+            .execute(params![tempo::giorno(tempo::adesso()), byte as i64])?;
+        Ok(())
+    }
+
+    /// Byte scaricati in un giorno (`2026-10-28`, UTC).
+    pub fn scaricati_il(&self, giorno: &str) -> Risultato<u64> {
+        Ok(self
+            .conn
+            .prepare_cached("SELECT byte FROM scaricati WHERE giorno = ?1")?
+            .query_row(params![giorno], |r| r.get::<_, i64>(0))
+            .optional()?
+            .unwrap_or(0)
+            .max(0) as u64)
     }
 
     pub fn salva_corpo(
@@ -829,4 +1126,87 @@ fn ordine_parti(a: &str, b: &str) -> std::cmp::Ordering {
     let na: Vec<u32> = a.split('.').filter_map(|x| x.parse().ok()).collect();
     let nb: Vec<u32> = b.split('.').filter_map(|x| x.parse().ok()).collect();
     na.cmp(&nb)
+}
+
+#[cfg(test)]
+mod prove {
+    use super::*;
+
+    #[test]
+    fn attese_dopo_i_fallimenti() {
+        assert_eq!(attesa_dopo_fallimento(1), 60);
+        assert_eq!(attesa_dopo_fallimento(2), 120);
+        assert_eq!(attesa_dopo_fallimento(3), 240);
+        assert_eq!(attesa_dopo_fallimento(9), 60 << 8);
+        assert_eq!(attesa_dopo_fallimento(10), 6 * 3600);
+        assert_eq!(attesa_dopo_fallimento(1000), 6 * 3600);
+    }
+
+    #[test]
+    fn migrazione_dallo_schema_2() {
+        let dir = std::env::temp_dir().join(format!("motore-migra-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).unwrap();
+        let p = dir.join("vecchio.sqlite");
+        {
+            // La tabella degli allegati com'era nello schema 2, con una riga.
+            let c = Connection::open(&p).unwrap();
+            c.execute_batch(
+                "CREATE TABLE allegati (messaggio_id INTEGER NOT NULL, parte TEXT NOT NULL,
+                    impronta TEXT NOT NULL, byte INTEGER NOT NULL, scaricato INTEGER NOT NULL,
+                    PRIMARY KEY (messaggio_id, parte)) WITHOUT ROWID;
+                 INSERT INTO allegati VALUES (7, '2', 'abc', 10, 1);
+                 CREATE TABLE meta (chiave TEXT PRIMARY KEY, valore TEXT);
+                 INSERT INTO meta VALUES ('schema', '2');",
+            )
+            .unwrap();
+        }
+        let db = Db::apri(&p).unwrap();
+        assert_eq!(db.meta("schema").unwrap().as_deref(), Some("3"));
+        assert_eq!(
+            db.allegato_scaricato(7, "2").unwrap(),
+            Some(("abc".into(), 10))
+        );
+        assert_eq!(db.misure(7, "2").unwrap(), Some(MisureParte::default()));
+        db.salva_misure(
+            7,
+            "2",
+            &MisureParte {
+                larghezza: Some(300),
+                altezza: Some(90),
+                ..Default::default()
+            },
+        )
+        .unwrap();
+        db.salva_misure(
+            7,
+            "2",
+            &MisureParte {
+                pagine: Some(0),
+                ..Default::default()
+            },
+        )
+        .unwrap();
+        assert_eq!(
+            db.misure(7, "2").unwrap(),
+            Some(MisureParte {
+                larghezza: Some(300),
+                altezza: Some(90),
+                pagine: Some(0),
+                miniatura: None
+            })
+        );
+        drop(db);
+        // Riaprire un database già migrato non cambia niente.
+        let db = Db::apri(&p).unwrap();
+        assert_eq!(db.misure(7, "2").unwrap().unwrap().larghezza, Some(300));
+        db.aggiungi_scaricati(100).unwrap();
+        db.aggiungi_scaricati(50).unwrap();
+        assert_eq!(
+            db.scaricati_il(&tempo::giorno(tempo::adesso())).unwrap(),
+            150
+        );
+        assert_eq!(db.scaricati_il("1999-01-01").unwrap(), 0);
+        let _ = std::fs::remove_dir_all(&dir);
+    }
 }

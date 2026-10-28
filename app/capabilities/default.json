@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "La finestra principale: i comandi dell'app e gli eventi del motore",
+  "windows": ["main"],
+  "permissions": ["core:default"]
+}

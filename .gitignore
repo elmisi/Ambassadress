@@ -8,3 +8,9 @@ segnalazioni/
 # Il motore: build e dati veri sincronizzati
 motore/target/
 motore/private/
+
+# L'app: build
+app/target/
+app/gen/
+# Il motore: messaggi .eml generati dai dati sintetici (tools/sintetici-in-eml.mjs)
+motore/prove/sintetici/

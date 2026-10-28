@@ -1,0 +1,296 @@
+{
+  "id": "inoltro-e-copia-a-meta",
+  "title": "Un inoltro dentro il thread di Gmail e una persona aggiunta in copia a metà",
+  "report": "giro 1 dell’app, proposta 4: non nasce da una segnalazione",
+  "messages": [
+    {
+      "date": "2026-10-09T08:12:00.000Z",
+      "from": {
+        "name": "Ilaria Venturi",
+        "address": "ilaria.venturi@tendeluce.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "subject": "Preventivo tende da sole",
+      "messageId": "<case-inoltro-0@esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Buongiorno,\ncome d’accordo al telefono le mando il preventivo per le tende da sole del terrazzo: due tende a bracci da 3 metri, tessuto acrilico ecrù, motore con telecomando.\n\nIl prezzo comprende montaggio e smaltimento delle vecchie. I tempi di consegna sono di circa tre settimane dall’ordine.\n\nResto a disposizione.\n\nCordiali saluti\n\nIlaria Venturi\nUfficio commerciale\nTendeluce snc – tende e coperture\nTel. 06 5550 1182",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "Preventivo tende Tendeluce.pdf",
+          "mimeType": "application/pdf",
+          "size": 284000,
+          "inline": false
+        }
+      ]
+    },
+    {
+      "date": "2026-10-09T16:30:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it"
+      },
+      "to": [
+        {
+          "name": "Ilaria Venturi",
+          "address": "ilaria.venturi@tendeluce.esempio.it"
+        }
+      ],
+      "subject": "Re: Preventivo tende da sole",
+      "messageId": "<case-inoltro-1@esempio.it>",
+      "inReplyTo": "<case-inoltro-0@esempio.it>",
+      "references": [
+        "<case-inoltro-0@esempio.it>"
+      ],
+      "text": "Grazie, molto chiaro. Una domanda: il motore si può comandare anche da un interruttore a muro, oltre che dal telecomando?\n\nAlex\n\nIl giorno ven 9 ott 2026 alle ore 10:12 Ilaria Venturi <ilaria.venturi@tendeluce.esempio.it> ha scritto:\n> Buongiorno,\n> come d’accordo al telefono le mando il preventivo per le tende da sole del terrazzo: due tende a bracci da 3 metri, tessuto acrilico ecrù, motore con telecomando.\n>\n> Il prezzo comprende montaggio e smaltimento delle vecchie. I tempi di consegna sono di circa tre settimane dall’ordine.\n>\n> Resto a disposizione.\n>\n> Cordiali saluti\n>\n> Ilaria Venturi\n> Ufficio commerciale\n> Tendeluce snc – tende e coperture\n> Tel. 06 5550 1182",
+      "html": null,
+      "gmail": {
+        "labels": [
+          "\\Sent"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-10T09:20:00.000Z",
+      "from": {
+        "name": "Ilaria Venturi",
+        "address": "ilaria.venturi@tendeluce.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "subject": "Re: Preventivo tende da sole",
+      "messageId": "<case-inoltro-2@esempio.it>",
+      "inReplyTo": "<case-inoltro-1@esempio.it>",
+      "references": [
+        "<case-inoltro-0@esempio.it>",
+        "<case-inoltro-1@esempio.it>"
+      ],
+      "text": "Sì, l’interruttore a muro è compreso: lo montiamo accanto alla porta finestra. Se le serve anche il sensore del vento sono 90 euro in più per tenda.\n\nCordiali saluti\n\nIlaria Venturi\nUfficio commerciale\nTendeluce snc – tende e coperture\nTel. 06 5550 1182\n\nIl giorno ven 9 ott 2026 alle ore 18:30 Alex Moro <alex.moro@esempio.it> ha scritto:\n> Grazie, molto chiaro. Una domanda: il motore si può comandare anche da un interruttore a muro, oltre che dal telecomando?\n>\n> Alex\n>\n> Il giorno ven 9 ott 2026 alle ore 10:12 Ilaria Venturi <ilaria.venturi@tendeluce.esempio.it> ha scritto:\n> > Buongiorno,\n> > come d’accordo al telefono le mando il preventivo per le tende da sole del terrazzo: due tende a bracci da 3 metri, tessuto acrilico ecrù, motore con telecomando.\n> >\n> > Il prezzo comprende montaggio e smaltimento delle vecchie. I tempi di consegna sono di circa tre settimane dall’ordine.\n> >\n> > Resto a disposizione.\n> >\n> > Cordiali saluti\n> >\n> > Ilaria Venturi\n> > Ufficio commerciale\n> > Tendeluce snc – tende e coperture\n> > Tel. 06 5550 1182",
+      "html": null
+    },
+    {
+      "date": "2026-10-12T16:40:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it"
+      },
+      "to": [
+        {
+          "name": "Tommaso Orsini",
+          "address": "tommaso.orsini@esempio.it"
+        }
+      ],
+      "subject": "Fwd: Preventivo tende da sole",
+      "messageId": "<case-inoltro-3@esempio.it>",
+      "inReplyTo": "<case-inoltro-2@esempio.it>",
+      "references": [
+        "<case-inoltro-0@esempio.it>",
+        "<case-inoltro-1@esempio.it>",
+        "<case-inoltro-2@esempio.it>"
+      ],
+      "text": "Tommaso, ti giro il preventivo delle tende che ho chiesto per il terrazzo: mi dicevi che anche voi le dovete cambiare. Dimmi se il modello ti piace, magari chiedendole insieme ci fanno un prezzo migliore.\n\nAlex\n\n---------- Messaggio inoltrato ---------\nDa: Ilaria Venturi <ilaria.venturi@tendeluce.esempio.it>\nDate: sab 10 ott 2026 alle ore 11:20\nSubject: Re: Preventivo tende da sole\nTo: Alex Moro <alex.moro@esempio.it>\n\nSì, l’interruttore a muro è compreso: lo montiamo accanto alla porta finestra. Se le serve anche il sensore del vento sono 90 euro in più per tenda.\n\nCordiali saluti\n\nIlaria Venturi\nUfficio commerciale\nTendeluce snc – tende e coperture\nTel. 06 5550 1182\n\nIl giorno ven 9 ott 2026 alle ore 18:30 Alex Moro <alex.moro@esempio.it> ha scritto:\n> Grazie, molto chiaro. Una domanda: il motore si può comandare anche da un interruttore a muro, oltre che dal telecomando?\n>\n> Alex\n>\n> Il giorno ven 9 ott 2026 alle ore 10:12 Ilaria Venturi <ilaria.venturi@tendeluce.esempio.it> ha scritto:\n> > Buongiorno,\n> > come d’accordo al telefono le mando il preventivo per le tende da sole del terrazzo: due tende a bracci da 3 metri, tessuto acrilico ecrù, motore con telecomando.\n> >\n> > Il prezzo comprende montaggio e smaltimento delle vecchie. I tempi di consegna sono di circa tre settimane dall’ordine.\n> >\n> > Resto a disposizione.\n> >\n> > Cordiali saluti\n> >\n> > Ilaria Venturi\n> > Ufficio commerciale\n> > Tendeluce snc – tende e coperture\n> > Tel. 06 5550 1182",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "Preventivo tende Tendeluce.pdf",
+          "mimeType": "application/pdf",
+          "size": 284000,
+          "inline": false
+        }
+      ],
+      "gmail": {
+        "labels": [
+          "\\Sent"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-13T07:05:00.000Z",
+      "from": {
+        "name": "Tommaso Orsini",
+        "address": "tommaso.orsini@esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "subject": "Re: Fwd: Preventivo tende da sole",
+      "messageId": "<case-inoltro-4@esempio.it>",
+      "inReplyTo": "<case-inoltro-3@esempio.it>",
+      "references": [
+        "<case-inoltro-0@esempio.it>",
+        "<case-inoltro-1@esempio.it>",
+        "<case-inoltro-2@esempio.it>",
+        "<case-inoltro-3@esempio.it>"
+      ],
+      "text": "Grazie Alex! Il modello mi piace, ma per il nostro terrazzo ne servirebbe una sola da 4 metri. Le scrivi tu o la chiamo io? Il sensore del vento lo prenderei.\n\nTommaso\n\nInviato da iPhone\n\nIl giorno 12 ott 2026, alle ore 18:40, Alex Moro <alex.moro@esempio.it> ha scritto:\n\n> Tommaso, ti giro il preventivo delle tende che ho chiesto per il terrazzo: mi dicevi che anche voi le dovete cambiare. Dimmi se il modello ti piace, magari chiedendole insieme ci fanno un prezzo migliore.\n>\n> Alex\n>\n> ---------- Messaggio inoltrato ---------\n> Da: Ilaria Venturi <ilaria.venturi@tendeluce.esempio.it>\n> Date: sab 10 ott 2026 alle ore 11:20\n> Subject: Re: Preventivo tende da sole\n> To: Alex Moro <alex.moro@esempio.it>\n>\n> Sì, l’interruttore a muro è compreso: lo montiamo accanto alla porta finestra. Se le serve anche il sensore del vento sono 90 euro in più per tenda.\n>\n> Cordiali saluti\n>\n> Ilaria Venturi\n> Ufficio commerciale\n> Tendeluce snc – tende e coperture\n> Tel. 06 5550 1182\n>\n> Il giorno ven 9 ott 2026 alle ore 18:30 Alex Moro <alex.moro@esempio.it> ha scritto:\n> > Grazie, molto chiaro. Una domanda: il motore si può comandare anche da un interruttore a muro, oltre che dal telecomando?\n> >\n> > Alex\n> >\n> > Il giorno ven 9 ott 2026 alle ore 10:12 Ilaria Venturi <ilaria.venturi@tendeluce.esempio.it> ha scritto:\n> > > Buongiorno,\n> > > come d’accordo al telefono le mando il preventivo per le tende da sole del terrazzo: due tende a bracci da 3 metri, tessuto acrilico ecrù, motore con telecomando.\n> > >\n> > > Il prezzo comprende montaggio e smaltimento delle vecchie. I tempi di consegna sono di circa tre settimane dall’ordine.\n> > >\n> > > Resto a disposizione.\n> > >\n> > > Cordiali saluti\n> > >\n> > > Ilaria Venturi\n> > > Ufficio commerciale\n> > > Tendeluce snc – tende e coperture\n> > > Tel. 06 5550 1182",
+      "html": null,
+      "flags": {
+        "seen": false,
+        "flagged": false
+      }
+    },
+    {
+      "date": "2026-10-07T07:15:00.000Z",
+      "from": {
+        "name": "Federico Brambilla",
+        "address": "federico.brambilla@esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "subject": "Cena di classe, vent’anni dal diploma",
+      "messageId": "<case-copia-0@esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Ciao Alex,\nper la cena dei vent’anni dal diploma pensavo alla trattoria di Monteverde, quella con il pergolato. Ti va di organizzarla insieme? Dovremmo essere una trentina, con qualche accompagnatore.\n\nFede",
+      "html": null,
+      "gmail": {
+        "threadId": "case-inoltro-e-copia-a-meta-cena"
+      }
+    },
+    {
+      "date": "2026-10-07T11:02:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it"
+      },
+      "to": [
+        {
+          "name": "Federico Brambilla",
+          "address": "federico.brambilla@esempio.it"
+        }
+      ],
+      "subject": "Re: Cena di classe, vent’anni dal diploma",
+      "messageId": "<case-copia-1@esempio.it>",
+      "inReplyTo": "<case-copia-0@esempio.it>",
+      "references": [
+        "<case-copia-0@esempio.it>"
+      ],
+      "text": "Volentieri! Venerdì 7 novembre ti va bene? Io chiamerei la trattoria per sapere se hanno una sala tutta per noi.\n\nAlex\n\nIl giorno mer 7 ott 2026 alle ore 09:15 Federico Brambilla <federico.brambilla@esempio.it> ha scritto:\n> Ciao Alex,\n> per la cena dei vent’anni dal diploma pensavo alla trattoria di Monteverde, quella con il pergolato. Ti va di organizzarla insieme? Dovremmo essere una trentina, con qualche accompagnatore.\n>\n> Fede",
+      "html": null,
+      "gmail": {
+        "labels": [
+          "\\Sent"
+        ],
+        "threadId": "case-inoltro-e-copia-a-meta-cena"
+      }
+    },
+    {
+      "date": "2026-10-08T18:47:00.000Z",
+      "from": {
+        "name": "Federico Brambilla",
+        "address": "federico.brambilla@esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "subject": "Re: Cena di classe, vent’anni dal diploma",
+      "messageId": "<case-copia-2@esempio.it>",
+      "inReplyTo": "<case-copia-1@esempio.it>",
+      "references": [
+        "<case-copia-0@esempio.it>",
+        "<case-copia-1@esempio.it>"
+      ],
+      "text": "Il 7 va benissimo. Per la lista dei contatti sentirei Nadia, che li ha tenuti tutti in questi anni.\n\nFede\n\nIl giorno mer 7 ott 2026 alle ore 13:02 Alex Moro <alex.moro@esempio.it> ha scritto:\n> Volentieri! Venerdì 7 novembre ti va bene? Io chiamerei la trattoria per sapere se hanno una sala tutta per noi.\n>\n> Alex\n>\n> Il giorno mer 7 ott 2026 alle ore 09:15 Federico Brambilla <federico.brambilla@esempio.it> ha scritto:\n> > Ciao Alex,\n> > per la cena dei vent’anni dal diploma pensavo alla trattoria di Monteverde, quella con il pergolato. Ti va di organizzarla insieme? Dovremmo essere una trentina, con qualche accompagnatore.\n> >\n> > Fede",
+      "html": null,
+      "gmail": {
+        "threadId": "case-inoltro-e-copia-a-meta-cena"
+      }
+    },
+    {
+      "date": "2026-10-09T06:30:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it"
+      },
+      "to": [
+        {
+          "name": "Federico Brambilla",
+          "address": "federico.brambilla@esempio.it"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Nadia Pellegrino",
+          "address": "nadia.pellegrino@esempio.it"
+        }
+      ],
+      "subject": "Re: Cena di classe, vent’anni dal diploma",
+      "messageId": "<case-copia-3@esempio.it>",
+      "inReplyTo": "<case-copia-2@esempio.it>",
+      "references": [
+        "<case-copia-0@esempio.it>",
+        "<case-copia-1@esempio.it>",
+        "<case-copia-2@esempio.it>"
+      ],
+      "text": "Aggiungo Nadia in copia.\n\nNadia, ci daresti una mano con i contatti della classe? La cena sarebbe venerdì 7 novembre alla trattoria di Monteverde: la sala c’è, la tengono fino a mercoledì.\n\nAlex\n\nIl giorno gio 8 ott 2026 alle ore 20:47 Federico Brambilla <federico.brambilla@esempio.it> ha scritto:\n> Il 7 va benissimo. Per la lista dei contatti sentirei Nadia, che li ha tenuti tutti in questi anni.\n>\n> Fede\n>\n> Il giorno mer 7 ott 2026 alle ore 13:02 Alex Moro <alex.moro@esempio.it> ha scritto:\n> > Volentieri! Venerdì 7 novembre ti va bene? Io chiamerei la trattoria per sapere se hanno una sala tutta per noi.\n> >\n> > Alex\n> >\n> > Il giorno mer 7 ott 2026 alle ore 09:15 Federico Brambilla <federico.brambilla@esempio.it> ha scritto:\n> > > Ciao Alex,\n> > > per la cena dei vent’anni dal diploma pensavo alla trattoria di Monteverde, quella con il pergolato. Ti va di organizzarla insieme? Dovremmo essere una trentina, con qualche accompagnatore.\n> > >\n> > > Fede",
+      "html": null,
+      "gmail": {
+        "labels": [
+          "\\Sent"
+        ],
+        "threadId": "case-inoltro-e-copia-a-meta-cena"
+      }
+    },
+    {
+      "date": "2026-10-10T17:10:00.000Z",
+      "from": {
+        "name": "Nadia Pellegrino",
+        "address": "nadia.pellegrino@esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Federico Brambilla",
+          "address": "federico.brambilla@esempio.it"
+        }
+      ],
+      "subject": "Re: Cena di classe, vent’anni dal diploma",
+      "messageId": "<case-copia-4@esempio.it>",
+      "inReplyTo": "<case-copia-3@esempio.it>",
+      "references": [
+        "<case-copia-0@esempio.it>",
+        "<case-copia-1@esempio.it>",
+        "<case-copia-2@esempio.it>",
+        "<case-copia-3@esempio.it>"
+      ],
+      "text": "Certo, con piacere! Ho quasi tutti i numeri e le email, vi mando il foglio entro domenica. Manca solo qualcuno che si è trasferito all’estero, provo a sentirli su Facebook.\n\nNadia\n\nIl giorno ven 9 ott 2026 alle ore 08:30 Alex Moro <alex.moro@esempio.it> ha scritto:\n> Aggiungo Nadia in copia.\n>\n> Nadia, ci daresti una mano con i contatti della classe? La cena sarebbe venerdì 7 novembre alla trattoria di Monteverde: la sala c’è, la tengono fino a mercoledì.\n>\n> Alex\n>\n> Il giorno gio 8 ott 2026 alle ore 20:47 Federico Brambilla <federico.brambilla@esempio.it> ha scritto:\n> > Il 7 va benissimo. Per la lista dei contatti sentirei Nadia, che li ha tenuti tutti in questi anni.\n> >\n> > Fede\n> >\n> > Il giorno mer 7 ott 2026 alle ore 13:02 Alex Moro <alex.moro@esempio.it> ha scritto:\n> > > Volentieri! Venerdì 7 novembre ti va bene? Io chiamerei la trattoria per sapere se hanno una sala tutta per noi.\n> > >\n> > > Alex\n> > >\n> > > Il giorno mer 7 ott 2026 alle ore 09:15 Federico Brambilla <federico.brambilla@esempio.it> ha scritto:\n> > > > Ciao Alex,\n> > > > per la cena dei vent’anni dal diploma pensavo alla trattoria di Monteverde, quella con il pergolato. Ti va di organizzarla insieme? Dovremmo essere una trentina, con qualche accompagnatore.\n> > > >\n> > > > Fede",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "contatti classe.xlsx",
+          "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "size": 24000,
+          "inline": false
+        }
+      ],
+      "gmail": {
+        "threadId": "case-inoltro-e-copia-a-meta-cena"
+      }
+    }
+  ]
+}

@@ -10,7 +10,14 @@
       "Bash(*gmail-user*)",
       "Read(/motore/**/private/**)",
       "Edit(/motore/**/private/**)",
-      "Bash(*motore/private*)"
+      "Bash(*motore/private*)",
+      "Read(~/.local/share/a10s/**)",
+      "Edit(~/.local/share/a10s/**)",
+      "Bash(*share/a10s*)",
+      "Read(~/.cache/a10s/**)",
+      "Read(~/.local/share/it.elmisi.a10s/**)",
+      "Bash(*cache/a10s*)",
+      "Bash(*it.elmisi.a10s*)"
     ]
   }
 }

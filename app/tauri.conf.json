@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Ambassadress",
+  "version": "0.1.0",
+  "identifier": "it.elmisi.a10s",
+  "build": {
+    "frontendDist": "ui"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [],
+    "security": {
+      "csp": {
+        "default-src": "'self'",
+        "script-src": "'self' 'unsafe-eval'",
+        "style-src": "'self' 'unsafe-inline'",
+        "img-src": "'self' data: a10s: http://a10s.localhost https: http:",
+        "font-src": "'self'",
+        "frame-src": "'self' a10s: http://a10s.localhost",
+        "connect-src": "'self' ipc: http://ipc.localhost a10s: http://a10s.localhost http://127.0.0.1:8797"
+      },
+      "dangerousDisableAssetCspModification": [
+        "style-src"
+      ]
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": [
+      "deb"
+    ],
+    "category": "Email",
+    "shortDescription": "Il client di posta per persone",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ]
+  }
+}

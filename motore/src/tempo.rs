@@ -33,6 +33,17 @@ fn civile_da_giorni(z: i64) -> (i64, u32, u32) {
     (if m <= 2 { y + 1 } else { y }, m, d)
 }
 
+/// L'anno (UTC) di un istante.
+pub fn anno(ts: i64) -> i64 {
+    civile_da_giorni(ts.div_euclid(86400)).0
+}
+
+/// Il giorno (UTC) di un istante: `2026-10-28`. È la chiave della quota giornaliera.
+pub fn giorno(ts: i64) -> String {
+    let (a, m, g) = civile_da_giorni(ts.div_euclid(86400));
+    format!("{a:04}-{m:02}-{g:02}")
+}
+
 /// INTERNALDATE di IMAP: `17-Jul-1996 02:44:25 -0700` (il giorno può avere uno spazio davanti).
 pub fn da_internaldate(s: &str) -> Option<i64> {
     let s = s.trim();
@@ -79,6 +90,51 @@ pub fn data_utc(ts: i64) -> String {
         "{a:04}-{m:02}-{g:02} {:02}:{:02} UTC",
         s / 3600,
         (s % 3600) / 60
+    )
+}
+
+/// ISO 8601 in UTC con i millesimi, come `Date.toISOString()`: `2026-10-28T14:03:00.000Z`.
+pub fn iso(ts: i64) -> String {
+    let (a, m, g) = civile_da_giorni(ts.div_euclid(86400));
+    let s = ts.rem_euclid(86400);
+    format!(
+        "{a:04}-{m:02}-{g:02}T{:02}:{:02}:{:02}.000Z",
+        s / 3600,
+        (s % 3600) / 60,
+        s % 60
+    )
+}
+
+const MESI: [&str; 12] = [
+    "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
+];
+
+/// INTERNALDATE di IMAP in UTC: `28-Oct-2026 14:03:00 +0000`.
+pub fn internaldate(ts: i64) -> String {
+    let (a, m, g) = civile_da_giorni(ts.div_euclid(86400));
+    let s = ts.rem_euclid(86400);
+    format!(
+        "{g:02}-{}-{a:04} {:02}:{:02}:{:02} +0000",
+        MESI[(m - 1) as usize],
+        s / 3600,
+        (s % 3600) / 60,
+        s % 60
+    )
+}
+
+/// Data RFC 5322 in UTC, per l'intestazione Date: `Wed, 28 Oct 2026 14:03:00 +0000`.
+pub fn rfc5322(ts: i64) -> String {
+    const GIORNI: [&str; 7] = ["Thu", "Fri", "Sat", "Sun", "Mon", "Tue", "Wed"];
+    let giorni = ts.div_euclid(86400);
+    let (a, m, g) = civile_da_giorni(giorni);
+    let s = ts.rem_euclid(86400);
+    format!(
+        "{}, {g:02} {} {a:04} {:02}:{:02}:{:02} +0000",
+        GIORNI[giorni.rem_euclid(7) as usize],
+        MESI[(m - 1) as usize],
+        s / 3600,
+        (s % 3600) / 60,
+        s % 60
     )
 }
 
@@ -132,7 +188,7 @@ mod prove {
     use super::*;
 
     #[test]
-    fn internaldate() {
+    fn lettura_internaldate() {
         assert_eq!(
             da_internaldate("17-Jul-1996 02:44:25 -0700"),
             Some(837596665)
@@ -147,9 +203,20 @@ mod prove {
     #[test]
     fn date_e_numeri() {
         assert_eq!(data_utc(1767225600), "2026-01-01 00:00 UTC");
+        assert_eq!(anno(1767225599), 2025);
+        assert_eq!(anno(1767225600), 2026);
+        assert_eq!(giorno(1793091600), "2026-10-27");
         assert_eq!(numero(48213), "48.213");
         assert_eq!(numero(999), "999");
         assert_eq!(numero(1000000), "1.000.000");
         assert_eq!(byte(2048), "2.0 KB");
+    }
+
+    #[test]
+    fn formati() {
+        assert_eq!(iso(1793091600), "2026-10-27T09:00:00.000Z");
+        assert_eq!(internaldate(1793091600), "27-Oct-2026 09:00:00 +0000");
+        assert_eq!(rfc5322(1793091600), "Tue, 27 Oct 2026 09:00:00 +0000");
+        assert_eq!(da_internaldate(&internaldate(1793091621)), Some(1793091621));
     }
 }

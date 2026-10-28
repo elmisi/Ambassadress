@@ -1,0 +1,210 @@
+{
+  "id": "immagini-piccole",
+  "title": "Loghi e icone di un’impresa: grandi in KB ma piccoli in pixel, ripetuti da due colleghi, più uno screenshot vero",
+  "report": "giro 1 dell’app, proposta 5: sulla casella vera molte immagini di firma restano tra gli allegati",
+  "messages": [
+    {
+      "date": "2026-10-09T07:40:00.000Z",
+      "from": {
+        "name": "Marta Sereni",
+        "address": "marta.sereni@edilsereni.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "subject": "Ponteggio facciata, lato strada",
+      "messageId": "<case-firme-0@esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Buongiorno,\nil ponteggio sul lato strada è montato e collaudato. Le mando la foto, dal lunedì iniziamo con la pulizia della facciata.\n\nCordiali saluti\n\nMarta Sereni\nUfficio tecnico\nEdil Sereni srl\nVia dei Gelsi 4, 00152 Roma\n[cid:ATT00001.png@01DC3A]",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "ATT00001.png",
+          "mimeType": "image/png",
+          "size": 52300,
+          "inline": false,
+          "width": 200,
+          "height": 80
+        },
+        {
+          "filename": "marchio.png",
+          "mimeType": "image/png",
+          "size": 61400,
+          "inline": false,
+          "noDims": true
+        },
+        {
+          "filename": "ponteggio lato strada.jpg",
+          "mimeType": "image/jpeg",
+          "size": 2150000,
+          "inline": false,
+          "width": 1200,
+          "height": 800
+        }
+      ]
+    },
+    {
+      "date": "2026-10-09T10:05:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it"
+      },
+      "to": [
+        {
+          "name": "Marta Sereni",
+          "address": "marta.sereni@edilsereni.esempio.it"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Luca Gualtieri",
+          "address": "luca.gualtieri@edilsereni.esempio.it"
+        }
+      ],
+      "subject": "Re: Ponteggio facciata, lato strada",
+      "messageId": "<case-firme-1@esempio.it>",
+      "inReplyTo": "<case-firme-0@esempio.it>",
+      "references": [
+        "<case-firme-0@esempio.it>"
+      ],
+      "text": "Grazie, ottimo. Sul lato cortile però vedo che manca ancora il telo di protezione: arriva insieme al resto?\n\nAlex\n\nIl giorno ven 9 ott 2026 alle ore 09:40 Marta Sereni <marta.sereni@edilsereni.esempio.it> ha scritto:\n> Buongiorno,\n> il ponteggio sul lato strada è montato e collaudato. Le mando la foto, dal lunedì iniziamo con la pulizia della facciata.\n>\n> Cordiali saluti\n>\n> Marta Sereni\n> Ufficio tecnico\n> Edil Sereni srl\n> Via dei Gelsi 4, 00152 Roma\n> [cid:ATT00001.png@01DC3A]",
+      "html": null,
+      "gmail": {
+        "labels": [
+          "\\Sent"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-10T08:15:00.000Z",
+      "from": {
+        "name": "Luca Gualtieri",
+        "address": "luca.gualtieri@edilsereni.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Marta Sereni",
+          "address": "marta.sereni@edilsereni.esempio.it"
+        }
+      ],
+      "subject": "Re: Ponteggio facciata, lato strada",
+      "messageId": "<case-firme-2@esempio.it>",
+      "inReplyTo": "<case-firme-1@esempio.it>",
+      "references": [
+        "<case-firme-0@esempio.it>",
+        "<case-firme-1@esempio.it>"
+      ],
+      "text": "Buongiorno,\nil telo per il lato cortile arriva lunedì mattina con il secondo camion. Le allego la schermata dell’ordine con le misure.\n\nSaluti\n\nLuca Gualtieri\nLogistica\nEdil Sereni srl\n[cid:ATT00001.png@01DC3A]\n\nIl giorno ven 9 ott 2026 alle ore 12:05 Alex Moro <alex.moro@esempio.it> ha scritto:\n> Grazie, ottimo. Sul lato cortile però vedo che manca ancora il telo di protezione: arriva insieme al resto?\n>\n> Alex\n>\n> Il giorno ven 9 ott 2026 alle ore 09:40 Marta Sereni <marta.sereni@edilsereni.esempio.it> ha scritto:\n> > Buongiorno,\n> > il ponteggio sul lato strada è montato e collaudato. Le mando la foto, dal lunedì iniziamo con la pulizia della facciata.\n> >\n> > Cordiali saluti\n> >\n> > Marta Sereni\n> > Ufficio tecnico\n> > Edil Sereni srl\n> > Via dei Gelsi 4, 00152 Roma\n> > [cid:ATT00001.png@01DC3A]",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "schermata ordine.png",
+          "mimeType": "image/png",
+          "size": 35800,
+          "inline": false,
+          "width": 820,
+          "height": 460
+        },
+        {
+          "filename": "ATT00001.png",
+          "mimeType": "image/png",
+          "size": 52300,
+          "inline": false,
+          "width": 200,
+          "height": 80
+        },
+        {
+          "filename": "marchio.png",
+          "mimeType": "image/png",
+          "size": 61400,
+          "inline": false,
+          "noDims": true
+        }
+      ]
+    },
+    {
+      "date": "2026-10-10T09:00:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it"
+      },
+      "to": [
+        {
+          "name": "Luca Gualtieri",
+          "address": "luca.gualtieri@edilsereni.esempio.it"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Marta Sereni",
+          "address": "marta.sereni@edilsereni.esempio.it"
+        }
+      ],
+      "subject": "Re: Ponteggio facciata, lato strada",
+      "messageId": "<case-firme-3@esempio.it>",
+      "inReplyTo": "<case-firme-2@esempio.it>",
+      "references": [
+        "<case-firme-0@esempio.it>",
+        "<case-firme-1@esempio.it>",
+        "<case-firme-2@esempio.it>"
+      ],
+      "text": "Perfetto, grazie a tutti e due. A lunedì!\n\nAlex\n\nIl giorno sab 10 ott 2026 alle ore 10:15 Luca Gualtieri <luca.gualtieri@edilsereni.esempio.it> ha scritto:\n> Buongiorno,\n> il telo per il lato cortile arriva lunedì mattina con il secondo camion. Le allego la schermata dell’ordine con le misure.\n>\n> Saluti\n>\n> Luca Gualtieri\n> Logistica\n> Edil Sereni srl\n> [cid:ATT00001.png@01DC3A]\n>\n> Il giorno ven 9 ott 2026 alle ore 12:05 Alex Moro <alex.moro@esempio.it> ha scritto:\n> > Grazie, ottimo. Sul lato cortile però vedo che manca ancora il telo di protezione: arriva insieme al resto?\n> >\n> > Alex\n> >\n> > Il giorno ven 9 ott 2026 alle ore 09:40 Marta Sereni <marta.sereni@edilsereni.esempio.it> ha scritto:\n> > > Buongiorno,\n> > > il ponteggio sul lato strada è montato e collaudato. Le mando la foto, dal lunedì iniziamo con la pulizia della facciata.\n> > >\n> > > Cordiali saluti\n> > >\n> > > Marta Sereni\n> > > Ufficio tecnico\n> > > Edil Sereni srl\n> > > Via dei Gelsi 4, 00152 Roma\n> > > [cid:ATT00001.png@01DC3A]",
+      "html": null,
+      "gmail": {
+        "labels": [
+          "\\Sent"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-10T09:20:00.000Z",
+      "from": {
+        "name": "Marta Sereni",
+        "address": "marta.sereni@edilsereni.esempio.it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Luca Gualtieri",
+          "address": "luca.gualtieri@edilsereni.esempio.it"
+        }
+      ],
+      "subject": "Re: Ponteggio facciata, lato strada",
+      "messageId": "<case-firme-4@esempio.it>",
+      "inReplyTo": "<case-firme-3@esempio.it>",
+      "references": [
+        "<case-firme-0@esempio.it>",
+        "<case-firme-1@esempio.it>",
+        "<case-firme-2@esempio.it>",
+        "<case-firme-3@esempio.it>"
+      ],
+      "text": "Ricevuto, a lunedì 🙂",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "IMG_0412.png",
+          "mimeType": "image/png",
+          "size": 9100,
+          "inline": false,
+          "width": 96,
+          "height": 96
+        }
+      ]
+    }
+  ]
+}

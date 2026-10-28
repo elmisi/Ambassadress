@@ -89,6 +89,8 @@ pub fn ascolta(
                 });
                 return;
             }
+            // Fermati da fuori (i socket chiusi da `Contatori::interrompi`): non è una caduta.
+            Err(_) if stop.load(Ordering::Relaxed) => break,
             Err(e) => {
                 let attesa = attese.prossima();
                 if tx
@@ -192,6 +194,12 @@ fn sessione_idle(
         Ok(()) => {
             s.logout();
             Ok(())
+        }
+        // Con lo stop la lettura è stata interrotta apposta: il LOGOUT (dopo il DONE) si
+        // manda lo stesso, senza aspettarne la risposta oltre `imap::ATTESA_LOGOUT`.
+        Err(e) if stop.load(Ordering::Relaxed) => {
+            s.logout();
+            Err(e)
         }
         Err(e) => {
             s.abbandona();
