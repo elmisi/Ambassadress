@@ -9,6 +9,18 @@ Come si costruisce l'app vera dopo i mockup (v1 … v12). Requisiti: `desiderata
 - **Dipendenze: poche e scelte.** Da librerie mature solo MIME (`mail-parser`), protocollo IMAP, TLS (`rustls`) e SQLite (con FTS5); tutto il resto scritto nel progetto. Ogni dipendenza nuova va motivata.
 - **Motore in Rust.** Veloce, poca memoria, nessuna pausa per la pulizia della memoria, un solo eseguibile; si integra con Tauri.
 
+## Regole decise (2026-10-28)
+
+- **Più caselle: una lista sola.** Le persone sono persone, da qualunque casella scrivano. La risposta parte dall'indirizzo a cui ti hanno scritto; con più di una casella il riquadro della risposta dice da quale.
+- **Notifiche del desktop: solo dalle persone.** Niente per servizi e newsletter, niente per i thread in cui sei solo in copia dei messaggi altrui.
+- **Cartelle ed etichette di Gmail: filtri della ricerca.** Lo spam non si vede, il cestino è dove va la pulizia dei servizi, le etichette dell'utente diventano filtri in Cerca. Nessuna vista nuova.
+- **Storico: tutto, a strati.** Intestazioni di tutta la casella; testi degli ultimi 12 mesi subito, il resto in background a bassa priorità; allegati grandi quando si aprono. I numeri si confermano col banco di prova.
+- **Eliminato altrove: sparisce in silenzio.** Se era l'ultimo messaggio dell'argomento, l'argomento va via. Resta cercabile nel cestino finché il server lo tiene.
+- **Immagini esterne delle newsletter: bloccate.** «Mostra immagini» le mostra e vale da lì in poi per quel mittente.
+- **«Segnala» resta nell'app vera** per tutto il periodo di prova, con lo stesso report reso anonimo e lo stesso SQLite.
+- **Nome breve sotto l'icona: «a10s».**
+- **Prima la sola lettura.** La prima versione dell'app legge soltanto dal server IMAP, per non fare danni: le azioni («letto», «archivia», «chiudi», invio) restano locali o arrivano dopo, con la parte di scrittura.
+
 ## Architettura
 
 ```
@@ -51,11 +63,29 @@ Come si costruisce l'app vera dopo i mockup (v1 … v12). Requisiti: `desiderata
 - Accesso a Gmail: password per app per l'uso personale. Per distribuire l'app serve OAuth, con la verifica di sicurezza di Google per l'accesso alla posta; senza verifica, in modalità «test», l'accesso andrebbe rinnovato ogni settimana.
 - Le bozze: una per argomento, salvata spesso in locale e caricata sul server di rado, per non moltiplicarle come fa Gmail.
 
+## Banco di prova: cosa ha detto (2026-10-28)
+
+Il motore in sola lettura è in `motore/` (dettagli e come si lancia nel suo README).
+- **Struttura e dipendenze.** Rust, nessun runtime async: due thread con I/O bloccante e tempi massimi. Cinque dipendenze dirette: `imap-proto` (solo il parser delle risposte), `mail-parser` 0.11, `rustls` con `ring`, `webpki-roots`, `rusqlite` con `bundled`.
+- **Sola lettura.**
+  - Ogni comando passa da una guardia con la lista dei comandi ammessi, in un solo punto che scrive sul socket.
+  - Il corpo si legge solo con `BODY.PEEK`, le cartelle si aprono solo con EXAMINE, e se il server risponde `[READ-WRITE]` ci si ferma.
+  - 33 test con un finto server IMAP, `clippy` pulito.
+- **Gmail.**
+  - Estensioni: CONDSTORE sì, **QRESYNC no**, IDLE sì, COMPRESS=DEFLATE sì, X-GM-EXT-1 sì.
+  - La casella ha 23.379 messaggi.
+  - 200 messaggi con 100 testi si scaricano in 4,8 s (2 MB); un secondo giro senza novità costa 0,7 s e 2 KB.
+  - Stime per tutto: intestazioni circa 25 MB e meno di un minuto, testi circa 400 MB e una decina di minuti.
+- **Deciso dopo il banco di prova.** «Chiuso» su Gmail si salva con un'etichetta (`X-GM-LABELS`), che si vede anche dentro Gmail. Arriva con la parte di scrittura; fino ad allora «chiuso» resta locale.
+- **Ancora da decidere.**
+  - Se COMPRESS vale una dipendenza in più.
+  - Se IDLE resta su «Tutti i messaggi» o va su INBOX.
+
 ## Ordine di lavoro
 
 1. **Banco di prova del motore**: sincronizzazione, coda delle operazioni, misure sulla casella vera in sola lettura (stampa solo conteggi e tempi). Prove con rete che cade, sospensione, cambio di wifi.
-2. **Client in sola lettura**: persone, thread, ricerca, allegati, con la resa della v12.
-3. **Azioni**: «letto», «chiudi», «archivia» con la coda offline; poi risposta, bozze e invio.
+2. **Client in sola lettura**: persone, thread, ricerca, allegati, con la resa della v12 e le schermate della v13 (primo avvio, stato della rete, account, tema scuro, newsletter).
+3. **Scrittura**: «letto», «chiudi», «archivia» verso il server con la coda offline; poi risposta, bozze e invio.
 4. **Moduli**: import, rubrica, anteprime Office; poi, se serve, l'AI locale.
 
 Ogni passo si usa per un po' e si raccolgono note, come con i mockup.

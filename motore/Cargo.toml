@@ -1,0 +1,22 @@
+[package]
+name = "motore"
+version = "0.1.0"
+edition = "2024"
+description = "Banco di prova del motore di Ambassadress: sincronizza una casella IMAP in SQLite, in sola lettura"
+publish = false
+
+[dependencies]
+# Analisi delle risposte IMAP (solo il parser, senza client né runtime): dipende solo da nom.
+imap-proto = "0.17.0"
+# Intestazioni MIME, parole codificate (RFC 2047), set di caratteri, quoted-printable e base64.
+mail-parser = "0.11.9"
+# SQLite compilato dentro l'eseguibile, con FTS5; "cache" per le istruzioni preparate riusate.
+rusqlite = { version = "0.41.0", default-features = false, features = ["bundled", "cache"] }
+# TLS in Rust puro, con ring come crittografia (niente OpenSSL, niente cmake).
+rustls = { version = "0.23.46", default-features = false, features = ["ring", "std", "tls12"] }
+# Le autorità di certificazione di Mozilla, compilate dentro l'eseguibile.
+webpki-roots = "1.0.11"
+
+[profile.release]
+lto = "thin"
+codegen-units = 4

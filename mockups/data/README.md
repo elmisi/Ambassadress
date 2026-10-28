@@ -39,6 +39,8 @@ Dalla v11 la casella sintetica imita la posta vera: ogni risposta cita tutto il 
 
 Dalla v12 ci sono due casi di firme fatte di immagini: «Manutenzione caldaia, preventivo sostituzione» (Paolo Bassi, Outlook: il logo `image001.png` e due icone social `image002.png` e `image003.png`, piccole e uguali in tre messaggi, con il segnaposto `[cid:…]` nel testo; nello stesso thread `targhetta caldaia.jpg`, 31 KB, è una foto vera e deve restare visibile) e «Documenti per il 730» (Studio Conti, un logo `.gif` e un banner `.jpg` in un solo messaggio, riconosciuti dal nome). Le immagini piccole hanno un file SVG piccolo (logo con le iniziali o icona tonda).
 
+Dalla v13: una seconda casella, `alex@studiomoro.esempio.it` (IMAP, non Gmail), elencata in `accounts` e tra gli alias, con due thread («Bagno di via Merulana, sopralluogo», «Campionatura cotto, ordine 3381»); le etichette dell'utente (Condominio, Casa, Lavoro, Viaggi, Tasse) aggiunte per oggetto; un messaggio di spam (`\Spam`) che non deve comparire da nessuna parte; le newsletter con due immagini esterne e un pixel che traccia.
+
 Casi presenti:
 
 - `citazioni-annidate`: risposta sopra tre livelli di citazione con firma in mezzo.

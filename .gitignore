@@ -4,3 +4,7 @@ __pycache__/
 
 # Segnalazioni del prototipo: restano su questa macchina
 segnalazioni/
+
+# Il motore: build e dati veri sincronizzati
+motore/target/
+motore/private/

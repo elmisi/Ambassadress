@@ -3,10 +3,10 @@ VERSION:2.0
 PRODID:-//Ambassadress//sintetico//IT
 METHOD:REQUEST
 BEGIN:VEVENT
-UID:107@esempio.it
-DTSTART:20261002T122000Z
-DTEND:20261002T132000Z
-SUMMARY:Lanterna | Giro delle consegne: dall’ordine alla fattur...
+UID:113@esempio.it
+DTSTART:20261013T161000Z
+DTEND:20261013T171000Z
+SUMMARY:Tentative Allineamento su piano operativo
 ORGANIZER;CN=Lorenzo Bellini:mailto:lorenzo@bellini.esempio.it
 END:VEVENT
 END:VCALENDAR

@@ -4,9 +4,9 @@ PRODID:-//Ambassadress//sintetico//IT
 METHOD:REQUEST
 BEGIN:VEVENT
 UID:104@esempio.it
-DTSTART:20260930T070000Z
-DTEND:20260930T080000Z
-SUMMARY:Approfondimenti sul magazzino
+DTSTART:20260928T093000Z
+DTEND:20260928T103000Z
+SUMMARY:Lanterna | Furgoni, turni dei corrieri e fogli condivisi
 ORGANIZER;CN=Lorenzo Bellini:mailto:lorenzo@bellini.esempio.it
 END:VEVENT
 END:VCALENDAR

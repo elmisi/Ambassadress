@@ -3,10 +3,10 @@ VERSION:2.0
 PRODID:-//Ambassadress//sintetico//IT
 METHOD:REQUEST
 BEGIN:VEVENT
-UID:093@esempio.it
-DTSTART:20260908T163100Z
-DTEND:20260908T173100Z
-SUMMARY:Lanterna
+UID:108@esempio.it
+DTSTART:20261001T150000Z
+DTEND:20261001T160000Z
+SUMMARY:Lanterna | Punto della settimana sulle priorità operations
 ORGANIZER;CN=Lorenzo Bellini:mailto:lorenzo@bellini.esempio.it
 END:VEVENT
 END:VCALENDAR

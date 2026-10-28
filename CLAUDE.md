@@ -1,6 +1,6 @@
 # Ambassadress
 
-Un client di posta ripensato da zero. Per ora è una serie di mockup navigabili (`mockups/v1` … `mockups/v12`), uno per giro di lavoro. Cosa vuole l'utente: `docs/desiderata.md`. Come si costruisce l'app vera: `docs/implementazione.md`. Le note di ogni giro: `docs/mockup_vN.md` (dalla v10); la mappa di stati ed eventi è in `docs/mockup_v10.md`.
+Un client di posta ripensato da zero. Per ora è una serie di mockup navigabili (`mockups/v1` … `mockups/v13`), uno per giro di lavoro. Cosa vuole l'utente: `docs/desiderata.md`. Come si costruisce l'app vera: `docs/implementazione.md`. Le note di ogni giro: `docs/mockup_vN.md` (dalla v10); la mappa di stati ed eventi è in `docs/mockup_v10.md`.
 
 ## Regole fisse
 
@@ -42,7 +42,7 @@ Un client di posta ripensato da zero. Per ora è una serie di mockup navigabili 
   5. Nel resoconto all'utente si dice quali segnalazioni sono state chiuse.
   Il server non si accende da solo: lo accende l'utente quando prova il prototipo. Per le prove con Playwright si può accendere in background e poi fermarlo, cancellando le segnalazioni di prova.
 - **Canvas**: ogni versione ha un canvas privato su claude.ai, pubblicato con root `mockups/vN/`. Dei dati si pubblica solo `data/synthetic.js`, mai `support.js` né `private/`. Pubblicare solo se l'utente lo chiede; poi mettere il link in `mockups/README.md`.
-- **Icona**: sigillo H2 su fascia di pergamena L3, file in `mockups/icona/`, canvas nel README. Dalla v12 la favicon e il logo accanto al nome sono L3 (`icona-senza-fondo.svg` ritagliata intorno alla fascia, incorporata come `data:` nella pagina); L4, con i bordi del rotolo più scuri, è l'alternativa. Il nome breve sotto l'icona del telefono è ancora da decidere.
+- **Icona**: sigillo H2 su fascia di pergamena L3, file in `mockups/icona/`, canvas nel README. Dalla v12 la favicon e il logo accanto al nome sono L3 (`icona-senza-fondo.svg` ritagliata intorno alla fascia, incorporata come `data:` nella pagina); L4, con i bordi del rotolo più scuri, è l'alternativa. Il nome breve sotto l'icona è «a10s».
 
 ## Linguaggio visivo (dalla v7)
 
@@ -53,6 +53,7 @@ Un client di posta ripensato da zero. Per ora è una serie di mockup navigabili 
 - Nella conversazione di una persona, i messaggi degli altri hanno le loro iniziali nei loro colori; il nome porta alla loro conversazione.
 - Una risposta scritta dentro la citazione si mostra con le righe citate in piccolo, rientrate e senza `>`.
 - Le immagini della firma (sotto i 40 KB, con un nome da firma o uguali in più messaggi della stessa persona) non stanno tra gli allegati del messaggio: tornano con «Mostra firma», sotto la firma di testo; in Allegati stanno in fondo, in «Immagini delle firme».
+- Tutti i colori passano da variabili CSS (`:root`), con il tema scuro in `:root[data-theme="dark"]` e in `prefers-color-scheme` (dalla v13): niente colori scritti a mano nelle viste. Al buio le tinte delle persone si invertono.
 - Accanto al titolo dell'argomento niente righe di meta, solo piccole etichette quando servono («prima: …», «in archivio», «aspetti una risposta da N giorni»).
 
 ## Decisioni prese sul prodotto
@@ -68,11 +69,10 @@ Un client di posta ripensato da zero. Per ora è una serie di mockup navigabili 
 
 ## A che punto siamo
 
-La v12 è fatta e provata (`docs/mockup_v12.md`, «Com'è andata nella v12»). Con la v12 i mockup sono finiti: si passa all'app vera. Decisioni, architettura e ordine di lavoro sono in `docs/implementazione.md` (desktop Linux con Tauri, motore in Rust, IMAP generico provato su Gmail, poche dipendenze scelte). Restano aperti dai mockup:
+La v13 è fatta e provata (`docs/mockup_v13.md`): è l'ultimo giro di mockup, con primo avvio, stato della rete, caselle, tema scuro, newsletter ed etichette. Si passa all'app vera. Decisioni, architettura e ordine di lavoro sono in `docs/implementazione.md` (desktop Linux con Tauri, motore in Rust, IMAP generico provato su Gmail, poche dipendenze scelte). Restano aperti dai mockup:
 
-- canvas della v10, della v11 e della v12 da pubblicare;
-- «eliminato altrove» da simulare, e le regole della mappa da estendere ai servizi;
-- allegati delle bozze persi al ricaricamento (resta il nome);
-- nome breve dell'app sotto l'icona.
+- canvas della v10, v11, v12 e v13 da pubblicare;
+- le regole della mappa da estendere ai servizi;
+- allegati delle bozze persi al ricaricamento (resta il nome).
 
-Il prossimo giro riparte dalle note dell'utente in `mockups/PROSSIMO-GIRO.md`.
+Il lavoro riparte dall'ordine in `docs/implementazione.md`: il motore in sola lettura è in `motore/` (vedi il suo README). Se servono altri ritocchi ai mockup, le note vanno di nuovo in `mockups/PROSSIMO-GIRO.md`.

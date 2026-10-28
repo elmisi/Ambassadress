@@ -119,8 +119,9 @@ function thread(who, topic, entries, opts = {}) {
   const refs = [];
   entries.forEach((e, i) => {
     const date = e.date || at(e.d, e.h ?? 10, e.m ?? 0);
-    const from = e.from || (e.me ? ME : who);
-    const to = e.to || (e.me ? [who] : [ME]);
+    const me = opts.me || ME;
+    const from = e.from || (e.me ? me : who);
+    const to = e.to || (e.me ? [who] : [me]);
     const subject = e.subject ?? (i === 0 ? topic : (opts.prefix || 'Re: ') + topic);
     const messageId = `<syn-${++seq}@esempio.it>`;
     const client = e.client || (e.outlook ? 'outlook' : clientOf(from));
@@ -128,7 +129,7 @@ function thread(who, topic, entries, opts = {}) {
     if (prev && e.inline) text = inlineReply(prev, e.text, e.inline, client);
     if (e.signature !== false && text) text += signatureOf(from, client);
     if (prev && !e.inline && (e.quote ?? rq() < 0.85)) text += '\n\n' + quoteBlock(client, prev);
-    const labels = e.labels || (from === ME ? ['\\Sent'] : ['\\Inbox']);
+    const labels = e.labels || (from === me ? ['\\Sent'] : ['\\Inbox']);
     const rec = {
       id: 'syn-' + seq,
       date: date.toISOString(),
@@ -423,6 +424,19 @@ thread(conti, 'Documenti per il 730', [
   { d: 16, h: 11, m: 30, text: 'Gentile Alex,\n\nper preparare il 730 ci servono entro fine mese le spese mediche, le ricevute dei lavori in casa e la certificazione unica. Può mandarle anche come foto, purché leggibili.\n\nLe ricordiamo che lo studio resta chiuso dal 30 ottobre al 2 novembre.\n\nUn cordiale saluto', att: [['logo_studioconti.gif', 'GIF', '6 KB'], ['banner-firma.jpg', 'JPG', '22 KB']] }
 ]);
 
+// A second mailbox (the studio, plain IMAP, not Gmail): the people list is one, the reply leaves
+// from the address the message was sent to.
+const ME2 = { name: 'Alex Moro', address: 'alex@studiomoro.esempio.it', signature: 'Alex Moro\nStudio Moro – progettazione d’interni\nwww.studiomoro.esempio.it', client: 'thunderbird' };
+const ferrante = P('Giulia Ferrante', 'giulia.ferrante@esempio.it', 'Giulia', { client: 'iphone' });
+thread(ferrante, 'Bagno di via Merulana, sopralluogo', [
+  { d: 8, h: 19, m: 20, text: 'Buonasera Alex,\n\nci ha dato il suo contatto la signora Benedetti, che è rimasta molto contenta della cucina. Vorremmo rifare il bagno dell’appartamento di via Merulana: è piccolo, 4 metri quadri, con una finestra sola, e vorremmo una doccia al posto della vasca.\n\nAvrebbe tempo per un sopralluogo la settimana prossima? Siamo liberi martedì e giovedì dopo le 17.\n\nGrazie' },
+  { d: 8, h: 21, m: 5, me: true, text: 'Buonasera Giulia,\n\ngrazie, mi fa piacere. Giovedì alle 17:30 per me va bene: mi manda l’indirizzo preciso e il piano?\n\nSe ha una piantina, anche una foto fatta col telefono, me la porti: mi aiuta a preparare qualche idea già dalla prima volta.', quote: true },
+  { d: 3, h: 9, m: 15, unread: true, text: 'Buongiorno, confermo giovedì alle 17:30. Via Merulana 141, scala B, terzo piano, citofono Ferrante. Le allego la piantina che avevamo dal rogito.\n\nA giovedì', att: [['Piantina appartamento.pdf', 'PDF', '640 KB']], quote: true }
+], { me: ME2 });
+thread(P('Fornace Sartori', 'ordini@fornacesartori.esempio.it', 'Ufficio ordini\nFornace Sartori S.r.l.\nTel. 0444 555 210', { client: 'outlook', sigDash: false }), 'Campionatura cotto, ordine 3381', [
+  { d: 15, h: 10, m: 40, text: 'Buongiorno,\n\nle confermiamo la spedizione della campionatura richiesta: cinque formati di cotto naturale e due trattati. Il corriere passa domani in mattinata.\n\nCordiali saluti', att: [['Bolla 3381.pdf', 'PDF', '95 KB']] }
+], { me: ME2 });
+
 // Automated senders.
 const unsub = (domain) => [['List-Unsubscribe', `<https://${domain}/unsubscribe>`], ['List-Id', `<news.${domain}>`]];
 const SVC = [
@@ -449,7 +463,7 @@ const NEWS = [
 ];
 NEWS.forEach(([d, name, address, subject, title], i) => {
   const domain = address.split('@')[1];
-  const html = `<!doctype html><html><head><style>body{font-family:Arial}</style></head><body><table width="600"><tr><td><h1>${title}</h1><p>Ciao, ecco la selezione di questa settimana.</p><ul><li>Primo articolo</li><li>Secondo articolo</li><li>Terzo articolo</li></ul><p><a href="https://${domain}/leggi">Leggi tutto sul sito</a></p><p style="font-size:11px">Ricevi questa email perché sei iscritto. <a href="https://${domain}/unsubscribe">Disiscriviti</a></p></td></tr></table></body></html>`;
+  const html = `<!doctype html><html><head><style>body{font-family:Arial}</style></head><body><table width="600"><tr><td><img src="https://img.${domain}/testata-${i}.jpg" width="600" height="160" alt="${name}"><h1>${title}</h1><p>Ciao, ecco la selezione di questa settimana.</p><p><img src="https://img.${domain}/scelta-${i}.jpg" width="280" height="180" alt="La scelta della settimana"></p><ul><li>Primo articolo</li><li>Secondo articolo</li><li>Terzo articolo</li></ul><p><a href="https://${domain}/leggi">Leggi tutto sul sito</a></p><img src="https://t.${domain}/o.gif?u=8f3a${i}" width="1" height="1" alt=""><p style="font-size:11px">Ricevi questa email perché sei iscritto. <a href="https://${domain}/unsubscribe">Disiscriviti</a></p></td></tr></table></body></html>`;
   thread(P(name, address), subject, [{ d, h: 6, m: 30 + i, html, text: null, headers: unsub(domain), labels: ['\\Inbox', 'CATEGORY_PROMOTIONS'], quote: false }]);
 });
 
@@ -473,6 +487,20 @@ for (const f of readdirSync(join(HERE, 'cases')).filter((f) => f.endsWith('.json
     }));
   });
 }
+
+// The user's own Gmail labels: in the app they become search filters.
+const LABELS = [[/assemblea|condominio|facciata|rendiconto|verbale/i, 'Condominio'], [/terrazzo|caldaia|cucina/i, 'Casa'], [/orione|report trimestrale|riunione di lunedì/i, 'Lavoro'], [/portogallo/i, 'Viaggi'], [/redditi|730|scadenze di novembre/i, 'Tasse']];
+messages.forEach((m) => {
+  const hit = LABELS.find(([re]) => re.test(m.subject || ''));
+  if (hit && m.gmail) m.gmail.labels = m.gmail.labels.concat([hit[1]]);
+});
+// Spam: it is in the mailbox, it must not appear anywhere.
+messages.push({
+  id: 'syn-spam-1', date: at(2, 4, 12).toISOString(), dateRaw: rfcDate(at(2, 4, 12)), from: { name: 'Premi Fedeltà', address: 'premi@vincita-sicura.esempio.com' }, to: [ME], cc: [],
+  subject: 'Hai vinto un buono da 500 euro!', messageId: '<spam-1@vincita-sicura.esempio.com>', inReplyTo: null, references: [],
+  text: 'Complimenti! Sei stato selezionato. Clicca qui per ritirare il tuo premio entro 24 ore.', html: null, attachments: [], headers: [],
+  flags: { seen: false, flagged: false }, gmail: { threadId: 'spam-1', labels: ['\\Spam'] }, problems: []
+});
 
 // Real files for every synthetic attachment, so the prototype can open them.
 const ATT_DIR = join(HERE, 'attachments');
@@ -573,7 +601,8 @@ messages.sort((a, b) => String(a.date || a.internalDate).localeCompare(String(b.
 const data = {
   schema: 1,
   meta: { source: 'synthetic', generatedAt: NOW.toISOString(), count: messages.length, shiftToNow: true, cases },
-  account: { address: ME.address, name: ME.name, aliases: [] },
+  account: { address: ME.address, name: ME.name, aliases: [ME2.address] },
+  accounts: [{ address: ME.address, kind: 'gmail', server: 'imap.gmail.com' }, { address: ME2.address, kind: 'imap', server: 'mail.studiomoro.esempio.it' }],
   messages
 };
 writeFileSync(join(HERE, 'synthetic.js'), '// Generated by generate-synthetic.mjs, do not edit.\nwindow.AMB_DATA = ' + JSON.stringify(data) + ';\n');

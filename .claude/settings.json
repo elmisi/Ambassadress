@@ -7,7 +7,10 @@
       "Read(~/.secrets/**)",
       "Edit(~/.secrets/**)",
       "Bash(*gmail-app-password*)",
-      "Bash(*gmail-user*)"
+      "Bash(*gmail-user*)",
+      "Read(/motore/**/private/**)",
+      "Edit(/motore/**/private/**)",
+      "Bash(*motore/private*)"
     ]
   }
 }
