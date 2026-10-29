@@ -1,6 +1,6 @@
 # Ambassadress
 
-Un client di posta ripensato da zero. Ci sono i mockup navigabili (`mockups/v1` … `mockups/v14`), uno per giro di lavoro, il motore in Rust (`motore/`) e l'app desktop in sola lettura (`app/`, Tauri). Cosa vuole l'utente: `docs/desiderata.md`. Come si costruisce l'app vera: `docs/implementazione.md`. Le note di ogni giro: `docs/mockup_vN.md` (dalla v10); la mappa di stati ed eventi è in `docs/mockup_v10.md`.
+Un client di posta ripensato da zero. Ci sono i mockup navigabili (`mockups/v1` … `mockups/v14`), uno per giro di lavoro, il motore in Rust (`motore/`) e l'app desktop in sola lettura (`app/`, Tauri). Cosa vuole l'utente: `docs/desiderata.md`. Come si costruisce l'app vera: `docs/implementazione.md`. Le note di ogni giro: `docs/mockup_vN.md` (dalla v10 alla v13), poi `docs/app_giroN.md` (dal giro 1 dell'app, che contiene la v14); la mappa di stati ed eventi è in `docs/mockup_v10.md`.
 
 ## Regole fisse
 
@@ -69,7 +69,7 @@ Un client di posta ripensato da zero. Ci sono i mockup navigabili (`mockups/v1` 
 
 ## A che punto siamo
 
-La v13 è fatta e provata (`docs/mockup_v13.md`): è l'ultimo giro di mockup, con primo avvio, stato della rete, caselle, tema scuro, newsletter ed etichette. Si passa all'app vera. Decisioni, architettura e ordine di lavoro sono in `docs/implementazione.md` (desktop Linux con Tauri, motore in Rust, IMAP generico provato su Gmail, poche dipendenze scelte). Restano aperti dai mockup:
+La v13 (`docs/mockup_v13.md`) ha chiuso i giri di soli mockup. Dal 28 ottobre 2026 si usa l'app sulla casella vera: il giro 1 dell'app (`docs/app_giro1.md`) ha prodotto la v14 del prototipo e dell'app; il giro 2 è aperto in `app/NOTE.md`. Decisioni, architettura e ordine di lavoro sono in `docs/implementazione.md` (desktop Linux con Tauri, motore in Rust, IMAP generico provato su Gmail, poche dipendenze scelte). Restano aperti dai mockup:
 
 - canvas della v10, v11, v12 e v13 da pubblicare;
 - le regole della mappa da estendere ai servizi;
@@ -83,6 +83,8 @@ Come si lavora un giro dell'app (deciso il 28 ottobre 2026):
 3. **Ok al prototipo.** Si va avanti solo quando l'utente approva il mockup.
 4. **Implementazione nell'app.** Si porta tutto in `app/` (le voci del prototipo e quelle solo dell'app), provato col finto server.
 5. **Chiusura.** Le note vanno in `docs/app_giroN.md` con «Com'è andato il giro»; si aggiornano questo file e i README, poi commit se richiesto. L'app non si copia a ogni giro: cambia sul posto.
+
+App e prototipo portano lo stesso numero, provvisorio (deciso il 29 ottobre 2026): la v14 è la prima per l'app, senza lo storico prima. Si cambia in `this.version` di `app/ui/index.html` insieme al mockup nuovo; il pannello «Prototipo» dell'app lo mostra.
 
 Regole per l'app:
 - **Mai i dati veri dell'app.** `~/.local/share/a10s/` (casella, password, database, allegati), `~/.local/share/it.elmisi.a10s/` (lo stato dell'interfaccia) e `~/.cache/a10s/` non si leggono, come `motore/private/`; ci sono i deny in `.claude/settings.json`.

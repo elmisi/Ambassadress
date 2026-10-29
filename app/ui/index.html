@@ -1528,7 +1528,7 @@ html.still,html.still body{overflow:hidden}
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.version = 'app';
+    this.version = 'v14';
     this.toastSeq = 0;
     this.log = [];
     this.errors = [];
@@ -5064,7 +5064,7 @@ class Component extends DCLogic {
       toggleProto: () => this.setState({ protoOpen: !this.state.protoOpen, acctOpen: false }),
       sim: this.simVals(s),
       onProtoKey: (e) => { if (e.key === 'Escape') this.setState({ protoOpen: false }); },
-      protoData: this.app ? 'Versione di prova, in sola lettura: niente cambia sul server. ' + model.count + ' messaggi su questo computer' + (this.timing.modelMs ? ', modello in ' + this.timing.modelMs + ' ms' : '') + '.' : !model.ok ? 'Nessun file di dati caricato.' : (model.synthetic ? 'Casella sintetica, ' : 'La tua casella, solo su questo computer, ') + model.count + ' messaggi. Versione ' + this.version + '.',
+      protoData: this.app ? 'Versione ' + this.version + ' di prova, in sola lettura: niente cambia sul server. ' + model.count + ' messaggi su questo computer' + (this.timing.modelMs ? ', modello in ' + this.timing.modelMs + ' ms' : '') + '.' : !model.ok ? 'Nessun file di dati caricato.' : (model.synthetic ? 'Casella sintetica, ' : 'La tua casella, solo su questo computer, ') + model.count + ' messaggi. Versione ' + this.version + '.',
       protoGmail: this.app ? 'Le scelte fatte qui («letto», «archivia», le bozze) restano su questo computer finché non arriva la parte di scrittura.' : !model.ok ? '' : model.synthetic
         ? 'Da leggere all’apertura: ' + model.initialUnread + ' messaggi, quelli che il file segna come non letti, come fa il flag di Gmail.'
         : 'Da leggere all’apertura: ' + model.initialUnread + ' messaggi, quelli non letti in Gmail quando hai esportato' + (model.exportedAt ? ' (' + this.longDay(Date.parse(model.exportedAt)) + ')' : '') + '. Per aggiornarli rilancia tools/gmail-export.py.',
