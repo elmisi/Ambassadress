@@ -1,0 +1,1007 @@
+{
+  "id": "pulizia-importanti",
+  "title": "Messaggi di servizi importanti fatti solo di testo dentro i gruppi della pulizia, le tre esclusioni (stella, allegato vero, thread con una mia risposta) e fatture ripetitive per la pulizia che impara",
+  "report": "giro v15, prova 6 di app/NOTE.md (la pulizia proposta)",
+  "messages": [
+    {
+      "date": "2026-07-03T04:30:00.000Z",
+      "from": {
+        "name": "Acqua Esempio",
+        "address": "avvisi@fornitore-acqua.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Fattura n. 1234 del 3 luglio",
+      "messageId": "<case-pulizia-importanti-11@fornitore-acqua.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Gentile cliente,\n\nè disponibile la fattura n. 1234 del 3 luglio 2026, importo 38,40 €, scadenza 3 agosto. L’importo sarà addebitato sul conto che termina con 4821.\n\nLa trova nell’area clienti, sezione Fatture.\n\nAcqua Esempio – servizio clienti",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Fattura n. 1234 del 3 luglio"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-acqua-1234",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      }
+    },
+    {
+      "date": "2026-07-10T15:20:00.000Z",
+      "from": {
+        "name": "Chiara Vela",
+        "address": "chiara.vela@officinavela.example",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Assemblea dei soci, la data",
+      "messageId": "<case-pulizia-importanti-17@officinavela.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Ciao Alex,\n\nper l’assemblea che approva il bilancio pensavamo a martedì 28 luglio alle 18, in sede. Ti va bene o preferisci il collegamento video?\n\nChiara Vela\nOfficina Vela srl – amministratrice",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Assemblea dei soci, la data"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-vela-bilancio",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-07-11T07:05:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Chiara Vela",
+          "address": "chiara.vela@officinavela.example",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Assemblea dei soci, la data",
+      "messageId": "<case-pulizia-importanti-18@esempio.it>",
+      "inReplyTo": "<case-pulizia-importanti-17@officinavela.example>",
+      "references": [
+        "<case-pulizia-importanti-17@officinavela.example>"
+      ],
+      "text": "Ciao Chiara, il 28 va bene, vengo in sede.\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Assemblea dei soci, la data"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-vela-bilancio",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-07-11T07:40:00.000Z",
+      "from": {
+        "name": "Chiara Vela",
+        "address": "chiara.vela@officinavela.example",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Assemblea dei soci, la data",
+      "messageId": "<case-pulizia-importanti-19@officinavela.example>",
+      "inReplyTo": "<case-pulizia-importanti-18@esempio.it>",
+      "references": [
+        "<case-pulizia-importanti-17@officinavela.example>",
+        "<case-pulizia-importanti-18@esempio.it>"
+      ],
+      "text": "Perfetto, ti mando la convocazione ufficiale la settimana prossima.\n\nChiara Vela\nOfficina Vela srl – amministratrice",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Assemblea dei soci, la data"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-vela-bilancio",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-07-11T08:02:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Chiara Vela",
+          "address": "chiara.vela@officinavela.example",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Assemblea dei soci, la data",
+      "messageId": "<case-pulizia-importanti-20@esempio.it>",
+      "inReplyTo": "<case-pulizia-importanti-19@officinavela.example>",
+      "references": [
+        "<case-pulizia-importanti-17@officinavela.example>",
+        "<case-pulizia-importanti-18@esempio.it>",
+        "<case-pulizia-importanti-19@officinavela.example>"
+      ],
+      "text": "Grazie, a presto.\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Assemblea dei soci, la data"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-vela-bilancio",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-07-22T06:00:00.000Z",
+      "from": {
+        "name": "Officina Vela",
+        "address": "aggiornamenti@officinavela.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Aggiornamento ai soci – secondo trimestre",
+      "messageId": "<case-pulizia-importanti-21@officinavela.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Care socie, cari soci,\n\nil secondo trimestre chiude con ricavi in crescita del 12% sull’anno scorso, trainati dalle commesse nautiche. Abbiamo assunto due tecnici e firmato il contratto per il nuovo capannone di via dei Calafati.\n\nNel prossimo trimestre: consegna delle prime due barche della serie Libeccio.\n\nChiara Vela, per il consiglio di amministrazione\n\nRicevi questa comunicazione perché sei socio di Officina Vela srl. Disiscriviti",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Aggiornamento ai soci – secondo trimestre"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://officinavela.example/disiscriviti>, <mailto:disiscrivi@officinavela.example>"
+        ],
+        [
+          "List-Id",
+          "<avvisi.officinavela.example>"
+        ],
+        [
+          "X-Mailer",
+          "Posta Massiva Esempio 4.2"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-vela-q2",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-08-02T04:30:00.000Z",
+      "from": {
+        "name": "Acqua Esempio",
+        "address": "avvisi@fornitore-acqua.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Fattura n. 1301 del 2 agosto",
+      "messageId": "<case-pulizia-importanti-12@fornitore-acqua.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Gentile cliente,\n\nè disponibile la fattura n. 1301 del 2 agosto 2026, importo 41,10 €, scadenza 1 settembre. L’importo sarà addebitato sul conto che termina con 4821.\n\nLa trova nell’area clienti, sezione Fatture.\n\nAcqua Esempio – servizio clienti",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Fattura n. 1301 del 2 agosto"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-acqua-1301",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      }
+    },
+    {
+      "date": "2026-08-20T07:00:00.000Z",
+      "from": {
+        "name": "Dominiamo Esempio",
+        "address": "noreply@dominiamo.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Domini .shop a 1,99 € il primo anno",
+      "messageId": "<case-pulizia-importanti-15@dominiamo.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Ciao Alex,\n\nsolo per questa settimana i domini .shop e .store costano 1,99 € il primo anno. Scegli il tuo nome prima che lo prenda qualcun altro.\n\nIl team di Dominiamo Esempio\n\nRicevi questa email perché sei cliente di Dominiamo Esempio. Disiscriviti",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Domini .shop a 1,99 € il primo anno"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://dominiamo.example/disiscriviti>, <mailto:disiscrivi@dominiamo.example>"
+        ],
+        [
+          "List-Id",
+          "<avvisi.dominiamo.example>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-dominiamo-promo",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_PROMOTIONS"
+        ]
+      }
+    },
+    {
+      "date": "2026-08-28T07:20:00.000Z",
+      "from": {
+        "name": "Fibra Esempio – Assistenza",
+        "address": "assistenza@fibraesempio.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Richiesta 48213: connessione lenta la sera",
+      "messageId": "<case-pulizia-importanti-8@fibraesempio.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Gentile cliente,\n\nabbiamo aperto la richiesta 48213 per la sua segnalazione «connessione lenta la sera». Può rispondere a questa email per aggiungere dettagli: la risposta viene allegata alla richiesta.\n\nAssistenza Fibra Esempio",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Richiesta 48213: connessione lenta la sera"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://fibraesempio.example/disiscriviti>, <mailto:disiscrivi@fibraesempio.example>"
+        ],
+        [
+          "List-Id",
+          "<avvisi.fibraesempio.example>"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-ticket",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-08-28T19:40:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Fibra Esempio – Assistenza",
+          "address": "assistenza@fibraesempio.example"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Richiesta 48213: connessione lenta la sera",
+      "messageId": "<case-pulizia-importanti-9@esempio.it>",
+      "inReplyTo": "<case-pulizia-importanti-8@fibraesempio.example>",
+      "references": [
+        "<case-pulizia-importanti-8@fibraesempio.example>"
+      ],
+      "text": "Buonasera,\n\nrallenta tutte le sere dalle 21 alle 23: la velocità scende sotto i 5 Mbit/s, di giorno è normale. Il modem è quello che mi avete dato voi, cablato. Cosa devo controllare?\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Richiesta 48213: connessione lenta la sera"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-ticket",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-08-31T09:05:00.000Z",
+      "from": {
+        "name": "Fibra Esempio – Assistenza",
+        "address": "assistenza@fibraesempio.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Richiesta 48213: connessione lenta la sera",
+      "messageId": "<case-pulizia-importanti-10@fibraesempio.example>",
+      "inReplyTo": "<case-pulizia-importanti-9@esempio.it>",
+      "references": [
+        "<case-pulizia-importanti-8@fibraesempio.example>",
+        "<case-pulizia-importanti-9@esempio.it>"
+      ],
+      "text": "Gentile cliente,\n\nabbiamo trovato un sovraccarico sull’apparato della sua centrale e lo abbiamo risolto stamattina. La richiesta 48213 è chiusa. Se il problema si ripresenta risponda a questa email entro 10 giorni e la riapriamo.\n\nAssistenza Fibra Esempio",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Richiesta 48213: connessione lenta la sera"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://fibraesempio.example/disiscriviti>, <mailto:disiscrivi@fibraesempio.example>"
+        ],
+        [
+          "List-Id",
+          "<avvisi.fibraesempio.example>"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-ticket",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-02T04:30:00.000Z",
+      "from": {
+        "name": "Acqua Esempio",
+        "address": "avvisi@fornitore-acqua.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Fattura n. 1388 del 2 settembre",
+      "messageId": "<case-pulizia-importanti-13@fornitore-acqua.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Gentile cliente,\n\nè disponibile la fattura n. 1388 del 2 settembre 2026, importo 39,75 €, scadenza 2 ottobre. L’importo sarà addebitato sul conto che termina con 4821.\n\nLa trova nell’area clienti, sezione Fatture.\n\nAcqua Esempio – servizio clienti",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Fattura n. 1388 del 2 settembre"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-acqua-1388",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-03T05:30:00.000Z",
+      "from": {
+        "name": "Cinema Esempio",
+        "address": "newsletter@cinemaesempio.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "La programmazione di settembre",
+      "messageId": "<case-pulizia-importanti-6@cinemaesempio.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": null,
+      "html": "<html><body><table width=\"600\"><tr><td><h1>Settembre al Cinema Esempio</h1><p>Torna la rassegna del giovedì: sei film restaurati, ingresso ridotto a 5 euro con la tessera.</p><ul><li>giovedì 17 settembre, ore 21: <b>Il sorpasso</b></li><li>giovedì 24 settembre, ore 21: <b>La dolce vita</b></li><li>giovedì 1 ottobre, ore 21: <b>Divorzio all’italiana</b></li></ul><p>Abbonamento alla rassegna: 24 euro, in cassa o sul sito.</p><p style=\"font-size:11px\">Ricevi questa email perché sei iscritto. <a href=\"https://cinemaesempio.example/disiscriviti\">Disiscriviti</a></p></td></tr></table></body></html>",
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "La programmazione di settembre"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://cinemaesempio.example/disiscriviti>, <mailto:disiscrivi@cinemaesempio.example>"
+        ],
+        [
+          "List-Id",
+          "<avvisi.cinemaesempio.example>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": true
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-cinema",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_PROMOTIONS"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-05T04:50:00.000Z",
+      "from": {
+        "name": "Hosting Esempio",
+        "address": "news@hostingesempio.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Il tuo documento contabile di settembre",
+      "messageId": "<case-pulizia-importanti-7@hostingesempio.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Ciao Alex,\n\nin allegato la fattura n. FT-2026-0912 del 1° settembre per il rinnovo annuale del dominio e dello spazio web. L’importo è già stato addebitato sulla carta registrata.\n\nIl team di Hosting Esempio\n\nRicevi questa email perché sei cliente di Hosting Esempio. Disiscriviti dalle comunicazioni",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "Fattura FT-2026-0912.pdf",
+          "mimeType": "application/pdf",
+          "size": 64000,
+          "inline": false
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Il tuo documento contabile di settembre"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://hostingesempio.example/disiscriviti>, <mailto:disiscrivi@hostingesempio.example>"
+        ],
+        [
+          "List-Id",
+          "<avvisi.hostingesempio.example>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-hosting",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-08T06:10:00.000Z",
+      "from": {
+        "name": "Spedizioni Lampo",
+        "address": "avvisi@spedizionilampo.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Il tuo pacco è in viaggio",
+      "messageId": "<case-pulizia-importanti-1@spedizionilampo.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Il tuo pacco LMP 4471 2093 è partito dal centro di smistamento. Arriva nel locker che hai scelto tra 1-2 giorni lavorativi.",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Il tuo pacco è in viaggio"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-lampo-1",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-10T12:35:00.000Z",
+      "from": {
+        "name": "Spedizioni Lampo",
+        "address": "avvisi@spedizionilampo.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Pacco nel locker: codice di ritiro 731 204",
+      "messageId": "<case-pulizia-importanti-2@spedizionilampo.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Il tuo pacco LMP 4471 2093 è nell’armadietto Locker Lampo di Piazza dei Tigli 3, vano 14.\n\nCodice di ritiro: 731 204\nPIN: 5528\n\nHai tempo fino al 13 settembre alle 20:00. Dopo il pacco torna al mittente.",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Pacco nel locker: codice di ritiro 731 204"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-lampo-2",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-11T16:02:00.000Z",
+      "from": {
+        "name": "Spedizioni Lampo",
+        "address": "avvisi@spedizionilampo.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Pacco ritirato",
+      "messageId": "<case-pulizia-importanti-3@spedizionilampo.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Hai ritirato il pacco LMP 4471 2093 dal locker di Piazza dei Tigli 3. Grazie!",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Pacco ritirato"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-lampo-3",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-12T01:15:00.000Z",
+      "from": {
+        "name": "Dominiamo Esempio",
+        "address": "noreply@dominiamo.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Rinnovo completato: studiomoro.esempio.it",
+      "messageId": "<case-pulizia-importanti-16@dominiamo.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Ciao Alex,\n\nil rinnovo del dominio studiomoro.esempio.it è stato completato.\n\nOrdine n. DM-558201\nImporto addebitato: 14,90 € sulla carta che termina con 0915\nNuova scadenza: 12 settembre 2027\n\nIl team di Dominiamo Esempio\n\nRicevi questa email perché sei cliente di Dominiamo Esempio. Disiscriviti",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Rinnovo completato: studiomoro.esempio.it"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://dominiamo.example/disiscriviti>, <mailto:disiscrivi@dominiamo.example>"
+        ],
+        [
+          "List-Id",
+          "<avvisi.dominiamo.example>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-dominiamo-rinnovo",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-14T14:45:00.000Z",
+      "from": {
+        "name": "Scuola di Musica Esempio",
+        "address": "segreteria@scuolamusica-esempio.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Grazie, Alex: quota del primo trimestre",
+      "messageId": "<case-pulizia-importanti-5@scuolamusica-esempio.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Ciao Alex,\n\nabbiamo ricevuto la quota del primo trimestre per il corso di chitarra di Leo.\n\nRicevuta n. 2026/0457\nImporto: 210,00 €\nPagato con bonifico il 12 settembre 2026\nIntestatario: Alex Moro\n\nConserva questa email: vale come ricevuta per la detrazione delle spese per le attività dei ragazzi.\n\nA presto in aula!\nLa segreteria\n\nRicevi questa email perché sei iscritto alle comunicazioni della scuola. Disiscriviti",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Grazie, Alex: quota del primo trimestre"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://scuolamusica-esempio.example/disiscriviti>, <mailto:disiscrivi@scuolamusica-esempio.example>"
+        ],
+        [
+          "List-Id",
+          "<avvisi.scuolamusica-esempio.example>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-quota",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-20T08:00:00.000Z",
+      "from": {
+        "name": "Poliambulatorio Salus Esempio",
+        "address": "prenotazioni@poliambulatorio-salus.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Promemoria: visita cardiologica di giovedì 12 novembre, ore 9:40",
+      "messageId": "<case-pulizia-importanti-4@poliambulatorio-salus.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Gentile Alex Moro,\n\nle ricordiamo la prenotazione n. 26-118734:\n\nvisita cardiologica con elettrocardiogramma\ndott. Fabio Serra\ngiovedì 12 novembre 2026, ore 9:40\nsede di Via delle Acacie 18, secondo piano\n\nSi presenti 15 minuti prima con l’impegnativa, la tessera sanitaria e gli esami precedenti. Per disdire o spostare la visita risponda a questa email o chiami lo 06 5554 3300 almeno 48 ore prima.\n\nPoliambulatorio Salus Esempio\n\nRicevi le comunicazioni del poliambulatorio perché sei registrato. Disiscriviti",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Promemoria: visita cardiologica di giovedì 12 novembre, ore 9:40"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://poliambulatorio-salus.example/disiscriviti>, <mailto:disiscrivi@poliambulatorio-salus.example>"
+        ],
+        [
+          "List-Id",
+          "<avvisi.poliambulatorio-salus.example>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-visita",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-02T04:30:00.000Z",
+      "from": {
+        "name": "Acqua Esempio",
+        "address": "avvisi@fornitore-acqua.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Fattura n. 1462 del 2 ottobre",
+      "messageId": "<case-pulizia-importanti-14@fornitore-acqua.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Gentile cliente,\n\nè disponibile la fattura n. 1462 del 2 ottobre 2026, importo 36,90 €, scadenza 1 novembre. L’importo sarà addebitato sul conto che termina con 4821.\n\nLa trova nell’area clienti, sezione Fatture.\n\nAcqua Esempio – servizio clienti",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Fattura n. 1462 del 2 ottobre"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-acqua-1462",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-15T06:00:00.000Z",
+      "from": {
+        "name": "Officina Vela",
+        "address": "aggiornamenti@officinavela.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Aggiornamento ai soci – terzo trimestre",
+      "messageId": "<case-pulizia-importanti-22@officinavela.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Care socie, cari soci,\n\nil terzo trimestre è andato meno bene del previsto: la consegna della serie Libeccio slitta a gennaio per un ritardo del fornitore delle vele. I conti restano in ordine; il dettaglio lo vediamo in assemblea a dicembre.\n\nChiara Vela, per il consiglio di amministrazione\n\nRicevi questa comunicazione perché sei socio di Officina Vela srl. Disiscriviti",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Aggiornamento ai soci – terzo trimestre"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://officinavela.example/disiscriviti>, <mailto:disiscrivi@officinavela.example>"
+        ],
+        [
+          "List-Id",
+          "<avvisi.officinavela.example>"
+        ],
+        [
+          "X-Mailer",
+          "Posta Massiva Esempio 4.2"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-pulizia-importanti-vela-q3",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    }
+  ]
+}

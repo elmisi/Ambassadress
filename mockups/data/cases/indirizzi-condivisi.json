@@ -1,0 +1,1747 @@
+{
+  "id": "indirizzi-condivisi",
+  "title": "Un indirizzo, tante persone: Jira con chi commenta e chi cambia solo lo stato, omonimi, un nome abbreviato e uno che cambia, la stessa persona su un servizio di codice, una casella aziendale firmata da persone diverse",
+  "report": "giro v15, prova 7 di app/NOTE.md e voce «Un indirizzo, tante persone (Jira e simili)»",
+  "messages": [
+    {
+      "date": "2026-09-24T10:40:00.000Z",
+      "from": {
+        "name": "Sara Conti",
+        "address": "sara.conti@acme-esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Riunione con Beta Logistica",
+      "messageId": "<case-indirizzi-condivisi-22@acme-esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Ciao Alex,\n\nvenerdì alle 11 c’è la riunione con Beta Logistica sul login. Ci vieni anche tu? Porto io i numeri delle segnalazioni dell’ultimo mese.\n\n-- \nSara Conti\nAcme Esempio · Sviluppo",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Riunione con Beta Logistica"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-sara-riunione",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-24T11:15:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Sara Conti",
+          "address": "sara.conti@acme-esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Riunione con Beta Logistica",
+      "messageId": "<case-indirizzi-condivisi-23@esempio.it>",
+      "inReplyTo": "<case-indirizzi-condivisi-22@acme-esempio.it>",
+      "references": [
+        "<case-indirizzi-condivisi-22@acme-esempio.it>"
+      ],
+      "text": "Ci sono. Mi mandi l’indirizzo della sala?\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Riunione con Beta Logistica"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-sara-riunione",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-24T11:30:00.000Z",
+      "from": {
+        "name": "Sara Conti",
+        "address": "sara.conti@acme-esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Riunione con Beta Logistica",
+      "messageId": "<case-indirizzi-condivisi-24@acme-esempio.it>",
+      "inReplyTo": "<case-indirizzi-condivisi-23@esempio.it>",
+      "references": [
+        "<case-indirizzi-condivisi-22@acme-esempio.it>",
+        "<case-indirizzi-condivisi-23@esempio.it>"
+      ],
+      "text": "Sala Ponente, al terzo piano. A venerdì!\n\n-- \nSara Conti\nAcme Esempio · Sviluppo",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Riunione con Beta Logistica"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-sara-riunione",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-27T16:30:00.000Z",
+      "from": {
+        "name": "Luca Neri",
+        "address": "luca.neri@studio-altro.example",
+        "client": "outlook"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Corso di fotografia, le date",
+      "messageId": "<case-indirizzi-condivisi-26@studio-altro.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Buonasera Alex,\n\ncome le avevo detto al mercatino, il corso di fotografia di base riparte a novembre: sei incontri il mercoledì sera, dalle 19 alle 21, più un’uscita di sabato mattina. Il costo è di 180 euro.\n\nSe le interessa le tengo un posto.\n\nLuca Neri\nStudio Altro – fotografia\nVia del Faro 5, Roma · 347 555 0388",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Corso di fotografia, le date"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-neri",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-28T06:50:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Luca Neri",
+          "address": "luca.neri@studio-altro.example",
+          "client": "outlook"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Corso di fotografia, le date",
+      "messageId": "<case-indirizzi-condivisi-27@esempio.it>",
+      "inReplyTo": "<case-indirizzi-condivisi-26@studio-altro.example>",
+      "references": [
+        "<case-indirizzi-condivisi-26@studio-altro.example>"
+      ],
+      "text": "Buongiorno Luca, sì, mi tenga un posto. Serve una macchina reflex o va bene anche una compatta?\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Corso di fotografia, le date"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-neri",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-28T07:10:00.000Z",
+      "from": {
+        "name": "Davide Russo (Acme)",
+        "address": "jira@acme-esempio.atlassian.net"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "[JIRA] (ACM-142) Errore nel login con SSO",
+      "messageId": "<case-indirizzi-condivisi-1@acme-esempio.atlassian.net>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Davide Russo ha creato questo ticket\n\nACM-142 · Errore nel login con SSO\nTipo: Bug · Priorità: Media · Assegnatario: non assegnato\n\nDa stamattina chi entra con l’accesso unico (SSO) torna alla pagina di login dopo aver inserito il codice. Succede con Chrome e Firefox, non con l’app. Il cliente Beta Logistica ha già aperto due segnalazioni.\n\nVisualizza il ticket: https://acme-esempio.atlassian.net/browse/ACM-142\n\nHai ricevuto questa email perché segui il ticket. Gestisci le notifiche: https://acme-esempio.atlassian.net/notifiche",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[JIRA] (ACM-142) Errore nel login con SSO"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ],
+        [
+          "Precedence",
+          "bulk"
+        ],
+        [
+          "X-JIRA-FingerPrint",
+          "a3f19c0e5b7d2864acme"
+        ],
+        [
+          "X-Atlassian-Issue",
+          "ACM-142"
+        ],
+        [
+          "X-Atlassian-Event",
+          "issue_created"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-ACM-142",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-28T07:11:00.000Z",
+      "from": {
+        "name": "Automation for Jira (Acme)",
+        "address": "jira@acme-esempio.atlassian.net"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "[JIRA] (ACM-142) Errore nel login con SSO",
+      "messageId": "<case-indirizzi-condivisi-2@acme-esempio.atlassian.net>",
+      "inReplyTo": "<case-indirizzi-condivisi-1@acme-esempio.atlassian.net>",
+      "references": [
+        "<case-indirizzi-condivisi-1@acme-esempio.atlassian.net>"
+      ],
+      "text": "Automation for Jira ha modificato questo ticket\n\nACM-142 · Errore nel login con SSO\nPriorità: Media → Alta\nEtichette: + sso, + cliente\n\nRegola: «Bug con SSO = priorità alta»\n\nVisualizza il ticket: https://acme-esempio.atlassian.net/browse/ACM-142\n\nHai ricevuto questa email perché segui il ticket. Gestisci le notifiche: https://acme-esempio.atlassian.net/notifiche",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[JIRA] (ACM-142) Errore nel login con SSO"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ],
+        [
+          "Precedence",
+          "bulk"
+        ],
+        [
+          "X-JIRA-FingerPrint",
+          "a3f19c0e5b7d2864acme"
+        ],
+        [
+          "X-Atlassian-Issue",
+          "ACM-142"
+        ],
+        [
+          "X-Atlassian-Event",
+          "issue_updated"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-ACM-142",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-28T08:05:00.000Z",
+      "from": {
+        "name": "Sara Conti (Acme)",
+        "address": "jira@acme-esempio.atlassian.net"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "[JIRA] (ACM-142) Errore nel login con SSO",
+      "messageId": "<case-indirizzi-condivisi-3@acme-esempio.atlassian.net>",
+      "inReplyTo": "<case-indirizzi-condivisi-2@acme-esempio.atlassian.net>",
+      "references": [
+        "<case-indirizzi-condivisi-1@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-2@acme-esempio.atlassian.net>"
+      ],
+      "text": "Sara Conti changed the status to In corso\n\nACM-142 · Errore nel login con SSO\nStatus: Da fare → In corso\n\nView issue: https://acme-esempio.atlassian.net/browse/ACM-142\n\nYou’re receiving this email because you’re watching this issue. Manage notifications: https://acme-esempio.atlassian.net/notifiche",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[JIRA] (ACM-142) Errore nel login con SSO"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ],
+        [
+          "Precedence",
+          "bulk"
+        ],
+        [
+          "X-JIRA-FingerPrint",
+          "a3f19c0e5b7d2864acme"
+        ],
+        [
+          "X-Atlassian-Issue",
+          "ACM-142"
+        ],
+        [
+          "X-Atlassian-Event",
+          "issue_generic"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-ACM-142",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-28T08:06:00.000Z",
+      "from": {
+        "name": "Sara Conti (Acme)",
+        "address": "jira@acme-esempio.atlassian.net"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "[JIRA] (ACM-142) Errore nel login con SSO",
+      "messageId": "<case-indirizzi-condivisi-4@acme-esempio.atlassian.net>",
+      "inReplyTo": "<case-indirizzi-condivisi-3@acme-esempio.atlassian.net>",
+      "references": [
+        "<case-indirizzi-condivisi-1@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-2@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-3@acme-esempio.atlassian.net>"
+      ],
+      "text": "Sara Conti assigned ACM-142 to you\n\nACM-142 · Errore nel login con SSO\nAssignee: Non assegnato → Alex Moro\n\nView issue: https://acme-esempio.atlassian.net/browse/ACM-142\n\nYou’re receiving this email because you’re watching this issue. Manage notifications: https://acme-esempio.atlassian.net/notifiche",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[JIRA] (ACM-142) Errore nel login con SSO"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ],
+        [
+          "Precedence",
+          "bulk"
+        ],
+        [
+          "X-JIRA-FingerPrint",
+          "a3f19c0e5b7d2864acme"
+        ],
+        [
+          "X-Atlassian-Issue",
+          "ACM-142"
+        ],
+        [
+          "X-Atlassian-Event",
+          "issue_assigned"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-ACM-142",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-28T10:20:00.000Z",
+      "from": {
+        "name": "Luca Neri",
+        "address": "luca.neri@studio-altro.example",
+        "client": "outlook"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Corso di fotografia, le date",
+      "messageId": "<case-indirizzi-condivisi-28@studio-altro.example>",
+      "inReplyTo": "<case-indirizzi-condivisi-27@esempio.it>",
+      "references": [
+        "<case-indirizzi-condivisi-26@studio-altro.example>",
+        "<case-indirizzi-condivisi-27@esempio.it>"
+      ],
+      "text": "Va benissimo la compatta, purché si possa impostare a mano. Le confermo il posto.\n\nLuca Neri\nStudio Altro – fotografia\nVia del Faro 5, Roma · 347 555 0388",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Corso di fotografia, le date"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-neri",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-29T09:20:00.000Z",
+      "from": {
+        "name": "Sara Conti (Acme)",
+        "address": "jira@acme-esempio.atlassian.net"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "[JIRA] (ACM-142) Errore nel login con SSO",
+      "messageId": "<case-indirizzi-condivisi-5@acme-esempio.atlassian.net>",
+      "inReplyTo": "<case-indirizzi-condivisi-4@acme-esempio.atlassian.net>",
+      "references": [
+        "<case-indirizzi-condivisi-1@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-2@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-3@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-4@acme-esempio.atlassian.net>"
+      ],
+      "text": "Sara Conti ha commentato\n\nACM-142 · Errore nel login con SSO\n\n«Ho riprodotto il problema: il token torna indietro con l’orario del server spostato di due ore. Alex, puoi controllare tu la configurazione del fuso orario sul server di prova? Io intanto preparo la correzione.»\n\nVisualizza il ticket: https://acme-esempio.atlassian.net/browse/ACM-142\n\nHai ricevuto questa email perché segui il ticket. Gestisci le notifiche: https://acme-esempio.atlassian.net/notifiche",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[JIRA] (ACM-142) Errore nel login con SSO"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ],
+        [
+          "Precedence",
+          "bulk"
+        ],
+        [
+          "X-JIRA-FingerPrint",
+          "a3f19c0e5b7d2864acme"
+        ],
+        [
+          "X-Atlassian-Issue",
+          "ACM-142"
+        ],
+        [
+          "X-Atlassian-Event",
+          "issue_commented"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-ACM-142",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-29T13:40:00.000Z",
+      "from": {
+        "name": "Luca Neri (Acme)",
+        "address": "jira@acme-esempio.atlassian.net"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "[JIRA] (ACM-142) Errore nel login con SSO",
+      "messageId": "<case-indirizzi-condivisi-6@acme-esempio.atlassian.net>",
+      "inReplyTo": "<case-indirizzi-condivisi-5@acme-esempio.atlassian.net>",
+      "references": [
+        "<case-indirizzi-condivisi-1@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-2@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-3@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-4@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-5@acme-esempio.atlassian.net>"
+      ],
+      "text": "Luca Neri ha commentato\n\nACM-142 · Errore nel login con SSO\n\n«Confermo: sul server di prova l’ora di sistema è in UTC, ma il servizio dei certificati legge l’ora legale. Lo sistemo domani mattina.»\n\nVisualizza il ticket: https://acme-esempio.atlassian.net/browse/ACM-142\n\nHai ricevuto questa email perché segui il ticket. Gestisci le notifiche: https://acme-esempio.atlassian.net/notifiche",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[JIRA] (ACM-142) Errore nel login con SSO"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ],
+        [
+          "Precedence",
+          "bulk"
+        ],
+        [
+          "X-JIRA-FingerPrint",
+          "a3f19c0e5b7d2864acme"
+        ],
+        [
+          "X-Atlassian-Issue",
+          "ACM-142"
+        ],
+        [
+          "X-Atlassian-Event",
+          "issue_commented"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-ACM-142",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-30T07:15:00.000Z",
+      "from": {
+        "name": "Davide Russo (Acme)",
+        "address": "jira@acme-esempio.atlassian.net"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "[JIRA] (ACM-142) Errore nel login con SSO",
+      "messageId": "<case-indirizzi-condivisi-7@acme-esempio.atlassian.net>",
+      "inReplyTo": "<case-indirizzi-condivisi-6@acme-esempio.atlassian.net>",
+      "references": [
+        "<case-indirizzi-condivisi-1@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-2@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-3@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-4@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-5@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-6@acme-esempio.atlassian.net>"
+      ],
+      "text": "Davide Russo ti ha menzionato in ACM-142\n\nACM-142 · Errore nel login con SSO\n\n«@Alex Moro quando hai controllato il fuso scrivimi qui, così rispondo al cliente con una data.»\n\nVisualizza il ticket: https://acme-esempio.atlassian.net/browse/ACM-142\n\nHai ricevuto questa email perché segui il ticket. Gestisci le notifiche: https://acme-esempio.atlassian.net/notifiche",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[JIRA] (ACM-142) Errore nel login con SSO"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ],
+        [
+          "Precedence",
+          "bulk"
+        ],
+        [
+          "X-JIRA-FingerPrint",
+          "a3f19c0e5b7d2864acme"
+        ],
+        [
+          "X-Atlassian-Issue",
+          "ACM-142"
+        ],
+        [
+          "X-Atlassian-Event",
+          "issue_mentioned"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-ACM-142",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-30T08:15:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex@studiomoro.esempio.it",
+        "client": "thunderbird"
+      },
+      "to": [
+        {
+          "name": "Forniture Esempio",
+          "address": "info@forniture-esempio.it",
+          "client": "outlook"
+        }
+      ],
+      "cc": [],
+      "subject": "Sedie per la sala riunioni",
+      "messageId": "<case-indirizzi-condivisi-29@studiomoro.esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Buongiorno,\n\nvorrei un preventivo per 8 sedie impilabili, modello Elle, colore antracite, con la consegna in studio, in via Merulana.\n\nGrazie\n\n-- \nAlex Moro\nStudio Moro – progettazione d’interni\nwww.studiomoro.esempio.it",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Sedie per la sala riunioni"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-sedie",
+        "labels": [
+          "\\Sent"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-01T09:40:00.000Z",
+      "from": {
+        "name": "Forniture Esempio - Paola",
+        "address": "info@forniture-esempio.it",
+        "client": "outlook"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex@studiomoro.esempio.it",
+          "client": "thunderbird"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Sedie per la sala riunioni",
+      "messageId": "<case-indirizzi-condivisi-30@forniture-esempio.it>",
+      "inReplyTo": "<case-indirizzi-condivisi-29@studiomoro.esempio.it>",
+      "references": [
+        "<case-indirizzi-condivisi-29@studiomoro.esempio.it>"
+      ],
+      "text": "Buongiorno,\n\nle mando il preventivo per le 8 sedie Elle antracite, consegna compresa. I tempi sono di circa una settimana dall’ordine.\n\nCordiali saluti\n\nPaola\nForniture Esempio srl – Ufficio commerciale\nTel. 06 5550 8120",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "Preventivo 2026-1187.pdf",
+          "mimeType": "application/pdf",
+          "size": 96000,
+          "inline": false,
+          "text": "Preventivo n. 2026-1187\nSedia impilabile Elle, scocca in polipropilene antracite, gambe in acciaio verniciato\n8 pezzi × 74,00 €\nTrasporto e consegna al piano: 40,00 €\nTotale: 632,00 € + IVA\nPagamento: bonifico alla conferma dell’ordine"
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Re: Sedie per la sala riunioni"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-sedie",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-10-01T15:25:00.000Z",
+      "from": {
+        "name": "Sara Conti",
+        "address": "notifications@repohub.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "[acme/portale] Correzione del fuso orario nel token SSO (PR #88)",
+      "messageId": "<case-indirizzi-condivisi-18@repohub.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Sara Conti opened this pull request and requested your review.\n\nCorregge ACM-142: la scadenza del token SSO ora si calcola in UTC, così l’ora legale non la sposta più.\n\nCommit summary\n * Usa UTC per la scadenza del token\n * Prova per il cambio dell’ora legale\n\nFile changes\n M src/auth/token.ts (12)\n M test/auth/token.test.ts (40)\n\nView it on Repohub: https://repohub.example/acme/portale/pull/88\nYou are receiving this because your review was requested.",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[acme/portale] Correzione del fuso orario nel token SSO (PR #88)"
+        ],
+        [
+          "List-Id",
+          "<portale.acme.repohub.example>"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://repohub.example/notifications/unsubscribe/acme-portale-88>"
+        ],
+        [
+          "X-Repohub-Reason",
+          "review_requested"
+        ],
+        [
+          "Precedence",
+          "list"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-pr88",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-01T15:30:00.000Z",
+      "from": {
+        "name": "S. Conti (Acme)",
+        "address": "jira@acme-esempio.atlassian.net"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "[JIRA] (ACM-142) Errore nel login con SSO",
+      "messageId": "<case-indirizzi-condivisi-8@acme-esempio.atlassian.net>",
+      "inReplyTo": "<case-indirizzi-condivisi-7@acme-esempio.atlassian.net>",
+      "references": [
+        "<case-indirizzi-condivisi-1@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-2@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-3@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-4@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-5@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-6@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-7@acme-esempio.atlassian.net>"
+      ],
+      "text": "S. Conti ha commentato\n\nACM-142 · Errore nel login con SSO\n\n«Correzione pronta, è nella pull request #88 su Repohub. Manca solo la revisione.»\n\nVisualizza il ticket: https://acme-esempio.atlassian.net/browse/ACM-142\n\nHai ricevuto questa email perché segui il ticket. Gestisci le notifiche: https://acme-esempio.atlassian.net/notifiche",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[JIRA] (ACM-142) Errore nel login con SSO"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ],
+        [
+          "Precedence",
+          "bulk"
+        ],
+        [
+          "X-JIRA-FingerPrint",
+          "a3f19c0e5b7d2864acme"
+        ],
+        [
+          "X-Atlassian-Issue",
+          "ACM-142"
+        ],
+        [
+          "X-Atlassian-Event",
+          "issue_commented"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-ACM-142",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-02T06:40:00.000Z",
+      "from": {
+        "name": "Luca Neri (Acme)",
+        "address": "jira@acme-esempio.atlassian.net"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "[JIRA] (ACM-163) Rinnovo dei certificati del server di prova",
+      "messageId": "<case-indirizzi-condivisi-16@acme-esempio.atlassian.net>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Luca Neri ha creato questo ticket\n\nACM-163 · Rinnovo dei certificati del server di prova\nTipo: Attività · Assegnatario: Luca Neri\n\nI certificati del server di prova scadono il 20 ottobre. Li rinnovo e intanto allineo l’ora del servizio, vedi ACM-142.\n\nVisualizza il ticket: https://acme-esempio.atlassian.net/browse/ACM-163\n\nHai ricevuto questa email perché segui il ticket. Gestisci le notifiche: https://acme-esempio.atlassian.net/notifiche",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[JIRA] (ACM-163) Rinnovo dei certificati del server di prova"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ],
+        [
+          "Precedence",
+          "bulk"
+        ],
+        [
+          "X-JIRA-FingerPrint",
+          "a3f19c0e5b7d2864acme"
+        ],
+        [
+          "X-Atlassian-Issue",
+          "ACM-163"
+        ],
+        [
+          "X-Atlassian-Event",
+          "issue_created"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-ACM-163",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-02T07:10:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex@studiomoro.esempio.it",
+        "client": "thunderbird"
+      },
+      "to": [
+        {
+          "name": "Forniture Esempio - Paola",
+          "address": "info@forniture-esempio.it",
+          "client": "outlook"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Sedie per la sala riunioni",
+      "messageId": "<case-indirizzi-condivisi-31@studiomoro.esempio.it>",
+      "inReplyTo": "<case-indirizzi-condivisi-30@forniture-esempio.it>",
+      "references": [
+        "<case-indirizzi-condivisi-29@studiomoro.esempio.it>",
+        "<case-indirizzi-condivisi-30@forniture-esempio.it>"
+      ],
+      "text": "Va bene, procediamo con l’ordine. Per la consegna serve qualcuno presente?\n\n-- \nAlex Moro\nStudio Moro – progettazione d’interni\nwww.studiomoro.esempio.it",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Sedie per la sala riunioni"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-sedie",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-10-02T08:10:00.000Z",
+      "from": {
+        "name": "Sara Conti",
+        "address": "notifications@repohub.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: [acme/portale] Correzione del fuso orario nel token SSO (PR #88)",
+      "messageId": "<case-indirizzi-condivisi-19@repohub.example>",
+      "inReplyTo": "<case-indirizzi-condivisi-18@repohub.example>",
+      "references": [
+        "<case-indirizzi-condivisi-18@repohub.example>"
+      ],
+      "text": "Sara Conti commented on this pull request.\n\nIn src/auth/token.ts:\n> +  const scadenza = adesso + durata;\n\nAlex, qui ho tolto il margine di 30 secondi che c’era prima: secondo te serve ancora con i telefoni che hanno l’ora sbagliata?\n\nReply to this email directly or view it on Repohub: https://repohub.example/acme/portale/pull/88#discussion_r1042",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: [acme/portale] Correzione del fuso orario nel token SSO (PR #88)"
+        ],
+        [
+          "List-Id",
+          "<portale.acme.repohub.example>"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://repohub.example/notifications/unsubscribe/acme-portale-88>"
+        ],
+        [
+          "X-Repohub-Reason",
+          "review_requested"
+        ],
+        [
+          "Precedence",
+          "list"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-pr88",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-03T07:30:00.000Z",
+      "from": {
+        "name": "Davide Russo",
+        "address": "notifications@repohub.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: [acme/portale] Correzione del fuso orario nel token SSO (PR #88)",
+      "messageId": "<case-indirizzi-condivisi-20@repohub.example>",
+      "inReplyTo": "<case-indirizzi-condivisi-19@repohub.example>",
+      "references": [
+        "<case-indirizzi-condivisi-18@repohub.example>",
+        "<case-indirizzi-condivisi-19@repohub.example>"
+      ],
+      "text": "Davide Russo approved this pull request.\n\nView it on Repohub: https://repohub.example/acme/portale/pull/88#pullrequestreview-551",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: [acme/portale] Correzione del fuso orario nel token SSO (PR #88)"
+        ],
+        [
+          "List-Id",
+          "<portale.acme.repohub.example>"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://repohub.example/notifications/unsubscribe/acme-portale-88>"
+        ],
+        [
+          "X-Repohub-Reason",
+          "review_requested"
+        ],
+        [
+          "Precedence",
+          "list"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-pr88",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-05T12:00:00.000Z",
+      "from": {
+        "name": "Davide Russo (Acme)",
+        "address": "jira@acme-esempio.atlassian.net"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "[JIRA] (ACM-157) Export CSV senza intestazioni",
+      "messageId": "<case-indirizzi-condivisi-10@acme-esempio.atlassian.net>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Davide Russo created this issue\n\nACM-157 · Export CSV senza intestazioni\nType: Bug · Priority: Media\n\nL’export CSV dei report esce senza la riga delle intestazioni da giovedì. Il cliente lo carica in un foglio di calcolo e le colonne non si capiscono più.\n\nView issue: https://acme-esempio.atlassian.net/browse/ACM-157\n\nYou’re receiving this email because you’re watching this issue. Manage notifications: https://acme-esempio.atlassian.net/notifiche",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[JIRA] (ACM-157) Export CSV senza intestazioni"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ],
+        [
+          "Precedence",
+          "bulk"
+        ],
+        [
+          "X-JIRA-FingerPrint",
+          "a3f19c0e5b7d2864acme"
+        ],
+        [
+          "X-Atlassian-Issue",
+          "ACM-157"
+        ],
+        [
+          "X-Atlassian-Event",
+          "issue_created"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-ACM-157",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-05T12:02:00.000Z",
+      "from": {
+        "name": "Davide Russo (Acme)",
+        "address": "jira@acme-esempio.atlassian.net"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "[JIRA] (ACM-157) Export CSV senza intestazioni",
+      "messageId": "<case-indirizzi-condivisi-11@acme-esempio.atlassian.net>",
+      "inReplyTo": "<case-indirizzi-condivisi-10@acme-esempio.atlassian.net>",
+      "references": [
+        "<case-indirizzi-condivisi-10@acme-esempio.atlassian.net>"
+      ],
+      "text": "Davide Russo assigned ACM-157 to you\n\nACM-157 · Export CSV senza intestazioni\nAssignee: Non assegnato → Alex Moro\n\nView issue: https://acme-esempio.atlassian.net/browse/ACM-157\n\nYou’re receiving this email because you’re watching this issue. Manage notifications: https://acme-esempio.atlassian.net/notifiche",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[JIRA] (ACM-157) Export CSV senza intestazioni"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ],
+        [
+          "Precedence",
+          "bulk"
+        ],
+        [
+          "X-JIRA-FingerPrint",
+          "a3f19c0e5b7d2864acme"
+        ],
+        [
+          "X-Atlassian-Issue",
+          "ACM-157"
+        ],
+        [
+          "X-Atlassian-Event",
+          "issue_assigned"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-ACM-157",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-05T16:20:00.000Z",
+      "from": {
+        "name": "Sara Conti",
+        "address": "notifications@repohub.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: [acme/portale] Correzione del fuso orario nel token SSO (PR #88)",
+      "messageId": "<case-indirizzi-condivisi-21@repohub.example>",
+      "inReplyTo": "<case-indirizzi-condivisi-20@repohub.example>",
+      "references": [
+        "<case-indirizzi-condivisi-18@repohub.example>",
+        "<case-indirizzi-condivisi-19@repohub.example>",
+        "<case-indirizzi-condivisi-20@repohub.example>"
+      ],
+      "text": "Merged #88 into main.\n\nView it on Repohub: https://repohub.example/acme/portale/pull/88",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: [acme/portale] Correzione del fuso orario nel token SSO (PR #88)"
+        ],
+        [
+          "List-Id",
+          "<portale.acme.repohub.example>"
+        ],
+        [
+          "List-Unsubscribe",
+          "<https://repohub.example/notifications/unsubscribe/acme-portale-88>"
+        ],
+        [
+          "X-Repohub-Reason",
+          "review_requested"
+        ],
+        [
+          "Precedence",
+          "list"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-pr88",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-06T06:50:00.000Z",
+      "from": {
+        "name": "Sara Conti Bassi (Acme)",
+        "address": "jira@acme-esempio.atlassian.net"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "[JIRA] (ACM-142) Errore nel login con SSO",
+      "messageId": "<case-indirizzi-condivisi-9@acme-esempio.atlassian.net>",
+      "inReplyTo": "<case-indirizzi-condivisi-8@acme-esempio.atlassian.net>",
+      "references": [
+        "<case-indirizzi-condivisi-1@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-2@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-3@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-4@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-5@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-6@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-7@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-8@acme-esempio.atlassian.net>"
+      ],
+      "text": "Sara Conti Bassi changed the status to Risolto\n\nACM-142 · Errore nel login con SSO\nStatus: In revisione → Risolto\nResolution: Risolto\n\nView issue: https://acme-esempio.atlassian.net/browse/ACM-142\n\nYou’re receiving this email because you’re watching this issue. Manage notifications: https://acme-esempio.atlassian.net/notifiche",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[JIRA] (ACM-142) Errore nel login con SSO"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ],
+        [
+          "Precedence",
+          "bulk"
+        ],
+        [
+          "X-JIRA-FingerPrint",
+          "a3f19c0e5b7d2864acme"
+        ],
+        [
+          "X-Atlassian-Issue",
+          "ACM-142"
+        ],
+        [
+          "X-Atlassian-Event",
+          "issue_resolved"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-ACM-142",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-06T08:40:00.000Z",
+      "from": {
+        "name": "Sara Conti (Acme)",
+        "address": "jira@acme-esempio.atlassian.net"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "[JIRA] (ACM-157) Export CSV senza intestazioni",
+      "messageId": "<case-indirizzi-condivisi-12@acme-esempio.atlassian.net>",
+      "inReplyTo": "<case-indirizzi-condivisi-11@acme-esempio.atlassian.net>",
+      "references": [
+        "<case-indirizzi-condivisi-10@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-11@acme-esempio.atlassian.net>"
+      ],
+      "text": "Sara Conti commented on ACM-157\n\n> Succede solo con i report programmati: quelli scaricati a mano hanno le intestazioni. Alex, can you check the scheduler configuration? Credo che l’opzione sia cambiata con l’ultimo aggiornamento.\n\nView issue: https://acme-esempio.atlassian.net/browse/ACM-157\n\nYou’re receiving this email because you’re watching this issue. Manage notifications: https://acme-esempio.atlassian.net/notifiche",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[JIRA] (ACM-157) Export CSV senza intestazioni"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ],
+        [
+          "Precedence",
+          "bulk"
+        ],
+        [
+          "X-JIRA-FingerPrint",
+          "a3f19c0e5b7d2864acme"
+        ],
+        [
+          "X-Atlassian-Issue",
+          "ACM-157"
+        ],
+        [
+          "X-Atlassian-Event",
+          "issue_commented"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-ACM-157",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-06T13:30:00.000Z",
+      "from": {
+        "name": "Forniture Esempio",
+        "address": "info@forniture-esempio.it",
+        "client": "outlook"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex@studiomoro.esempio.it",
+          "client": "thunderbird"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Sedie per la sala riunioni",
+      "messageId": "<case-indirizzi-condivisi-32@forniture-esempio.it>",
+      "inReplyTo": "<case-indirizzi-condivisi-31@studiomoro.esempio.it>",
+      "references": [
+        "<case-indirizzi-condivisi-29@studiomoro.esempio.it>",
+        "<case-indirizzi-condivisi-30@forniture-esempio.it>",
+        "<case-indirizzi-condivisi-31@studiomoro.esempio.it>"
+      ],
+      "text": "Buongiorno, sono Gianni del magazzino.\n\nLe sedie partono giovedì mattina, il corriere la chiama mezz’ora prima di arrivare. Serve qualcuno per firmare la bolla.\n\nSaluti\n\nGianni\nForniture Esempio srl – Magazzino",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Sedie per la sala riunioni"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-sedie",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-10-07T14:15:00.000Z",
+      "from": {
+        "name": "Davide Russo (Acme)",
+        "address": "jira@acme-esempio.atlassian.net"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "[JIRA] (ACM-157) Export CSV senza intestazioni",
+      "messageId": "<case-indirizzi-condivisi-13@acme-esempio.atlassian.net>",
+      "inReplyTo": "<case-indirizzi-condivisi-12@acme-esempio.atlassian.net>",
+      "references": [
+        "<case-indirizzi-condivisi-10@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-11@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-12@acme-esempio.atlassian.net>"
+      ],
+      "text": "Davide Russo mentioned you on ACM-157\n\n> @Alex Moro il cliente chiede una data: riusciamo entro venerdì?\n\nView issue: https://acme-esempio.atlassian.net/browse/ACM-157\n\nYou’re receiving this email because you’re watching this issue. Manage notifications: https://acme-esempio.atlassian.net/notifiche",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[JIRA] (ACM-157) Export CSV senza intestazioni"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ],
+        [
+          "Precedence",
+          "bulk"
+        ],
+        [
+          "X-JIRA-FingerPrint",
+          "a3f19c0e5b7d2864acme"
+        ],
+        [
+          "X-Atlassian-Issue",
+          "ACM-157"
+        ],
+        [
+          "X-Atlassian-Event",
+          "issue_mentioned"
+        ]
+      ],
+      "flags": {
+        "seen": false,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-ACM-157",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-08T07:00:00.000Z",
+      "from": {
+        "name": "Automation for Jira (Acme)",
+        "address": "jira@acme-esempio.atlassian.net"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "[JIRA] (ACM-157) Export CSV senza intestazioni",
+      "messageId": "<case-indirizzi-condivisi-14@acme-esempio.atlassian.net>",
+      "inReplyTo": "<case-indirizzi-condivisi-13@acme-esempio.atlassian.net>",
+      "references": [
+        "<case-indirizzi-condivisi-10@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-11@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-12@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-13@acme-esempio.atlassian.net>"
+      ],
+      "text": "Automation for Jira changed the status to In revisione\n\nACM-157 · Export CSV senza intestazioni\nStatus: In corso → In revisione\nRule: «PR aperta = in revisione»\n\nView issue: https://acme-esempio.atlassian.net/browse/ACM-157\n\nYou’re receiving this email because you’re watching this issue. Manage notifications: https://acme-esempio.atlassian.net/notifiche",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[JIRA] (ACM-157) Export CSV senza intestazioni"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ],
+        [
+          "Precedence",
+          "bulk"
+        ],
+        [
+          "X-JIRA-FingerPrint",
+          "a3f19c0e5b7d2864acme"
+        ],
+        [
+          "X-Atlassian-Issue",
+          "ACM-157"
+        ],
+        [
+          "X-Atlassian-Event",
+          "issue_updated"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-ACM-157",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-09T10:30:00.000Z",
+      "from": {
+        "name": "Sara Conti (Acme)",
+        "address": "jira@acme-esempio.atlassian.net"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "[JIRA] (ACM-157) Export CSV senza intestazioni",
+      "messageId": "<case-indirizzi-condivisi-15@acme-esempio.atlassian.net>",
+      "inReplyTo": "<case-indirizzi-condivisi-14@acme-esempio.atlassian.net>",
+      "references": [
+        "<case-indirizzi-condivisi-10@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-11@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-12@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-13@acme-esempio.atlassian.net>",
+        "<case-indirizzi-condivisi-14@acme-esempio.atlassian.net>"
+      ],
+      "text": "Sara Conti changed the status to Done\n\nACM-157 · Export CSV senza intestazioni\nStatus: In revisione → Done\n\nView issue: https://acme-esempio.atlassian.net/browse/ACM-157\n\nYou’re receiving this email because you’re watching this issue. Manage notifications: https://acme-esempio.atlassian.net/notifiche",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[JIRA] (ACM-157) Export CSV senza intestazioni"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ],
+        [
+          "Precedence",
+          "bulk"
+        ],
+        [
+          "X-JIRA-FingerPrint",
+          "a3f19c0e5b7d2864acme"
+        ],
+        [
+          "X-Atlassian-Issue",
+          "ACM-157"
+        ],
+        [
+          "X-Atlassian-Event",
+          "issue_resolved"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-ACM-157",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-10T07:05:00.000Z",
+      "from": {
+        "name": "Sara Conti Bassi",
+        "address": "sara.conti@acme-esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Pranzo per il compleanno di Davide",
+      "messageId": "<case-indirizzi-condivisi-25@acme-esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Ciao! Martedì offriamo il pranzo a Davide per il compleanno, alla trattoria qui sotto. Partecipi? Sono 15 euro a testa, li raccolgo io.\n\n-- \nSara Conti Bassi\nAcme Esempio · Sviluppo",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Pranzo per il compleanno di Davide"
+        ]
+      ],
+      "flags": {
+        "seen": false,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-sara-pranzo",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-12T15:05:00.000Z",
+      "from": {
+        "name": "Luca Neri (Acme)",
+        "address": "jira@acme-esempio.atlassian.net"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "[JIRA] (ACM-163) Rinnovo dei certificati del server di prova",
+      "messageId": "<case-indirizzi-condivisi-17@acme-esempio.atlassian.net>",
+      "inReplyTo": "<case-indirizzi-condivisi-16@acme-esempio.atlassian.net>",
+      "references": [
+        "<case-indirizzi-condivisi-16@acme-esempio.atlassian.net>"
+      ],
+      "text": "Luca Neri ha cambiato lo stato in Fatto\n\nACM-163 · Rinnovo dei certificati del server di prova\nStato: In corso → Fatto\n\nVisualizza il ticket: https://acme-esempio.atlassian.net/browse/ACM-163\n\nHai ricevuto questa email perché segui il ticket. Gestisci le notifiche: https://acme-esempio.atlassian.net/notifiche",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "[JIRA] (ACM-163) Rinnovo dei certificati del server di prova"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ],
+        [
+          "Precedence",
+          "bulk"
+        ],
+        [
+          "X-JIRA-FingerPrint",
+          "a3f19c0e5b7d2864acme"
+        ],
+        [
+          "X-Atlassian-Issue",
+          "ACM-163"
+        ],
+        [
+          "X-Atlassian-Event",
+          "issue_resolved"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-indirizzi-condivisi-ACM-163",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    }
+  ]
+}

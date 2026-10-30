@@ -1,0 +1,693 @@
+{
+  "id": "thread-difficili",
+  "title": "Thread difficili: l’oggetto cambia a metà nello stesso thread, un thread finisce con una domanda a me, uno con una mia domanda rimasta senza risposta",
+  "report": "giro v15, prova 2 di app/NOTE.md (la conversazione ricostruita)",
+  "messages": [
+    {
+      "date": "2026-09-24T19:15:00.000Z",
+      "from": {
+        "name": "Irene Valli",
+        "address": "irene.valli@esempio.it",
+        "client": "apple"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Bruno Carli",
+          "address": "bruno.carli@esempio.it",
+          "client": "gmail-en"
+        }
+      ],
+      "subject": "Weekend in Umbria",
+      "messageId": "<case-thread-difficili-1@esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Ciao Alex,\n\nallora per il weekend del 10 ottobre pensavamo a Todi: una notte in agriturismo, sabato giro in centro e domenica la cascata. Vi va?\n\n-- \nIrene",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Weekend in Umbria"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-thread-difficili-umbria",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-25T06:20:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Irene Valli",
+          "address": "irene.valli@esempio.it",
+          "client": "apple"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Bruno Carli",
+          "address": "bruno.carli@esempio.it",
+          "client": "gmail-en"
+        }
+      ],
+      "subject": "Re: Weekend in Umbria",
+      "messageId": "<case-thread-difficili-2@esempio.it>",
+      "inReplyTo": "<case-thread-difficili-1@esempio.it>",
+      "references": [
+        "<case-thread-difficili-1@esempio.it>"
+      ],
+      "text": "Ci stiamo! Prenotate voi l’agriturismo? A noi basta una camera.\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Weekend in Umbria"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-thread-difficili-umbria",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-25T11:40:00.000Z",
+      "from": {
+        "name": "Bruno Carli",
+        "address": "bruno.carli@esempio.it",
+        "client": "gmail-en"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        },
+        {
+          "name": "Irene Valli",
+          "address": "irene.valli@esempio.it",
+          "client": "apple"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Weekend in Umbria",
+      "messageId": "<case-thread-difficili-3@esempio.it>",
+      "inReplyTo": "<case-thread-difficili-2@esempio.it>",
+      "references": [
+        "<case-thread-difficili-1@esempio.it>",
+        "<case-thread-difficili-2@esempio.it>"
+      ],
+      "text": "L’agriturismo di Todi è pieno, ho chiamato stamattina.\n\nB.",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Weekend in Umbria"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-thread-difficili-umbria",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-25T16:05:00.000Z",
+      "from": {
+        "name": "Bruno Carli",
+        "address": "bruno.carli@esempio.it",
+        "client": "gmail-en"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        },
+        {
+          "name": "Irene Valli",
+          "address": "irene.valli@esempio.it",
+          "client": "apple"
+        }
+      ],
+      "cc": [],
+      "subject": "Umbria: si cambia, andiamo a Spello",
+      "messageId": "<case-thread-difficili-4@esempio.it>",
+      "inReplyTo": "<case-thread-difficili-3@esempio.it>",
+      "references": [
+        "<case-thread-difficili-1@esempio.it>",
+        "<case-thread-difficili-2@esempio.it>",
+        "<case-thread-difficili-3@esempio.it>"
+      ],
+      "text": "Cambio di programma: ho trovato posto a Spello, nella casa con l’uliveto che vi avevo fatto vedere. Due camere, 85 euro a camera con la colazione. Domenica possiamo andare a Bevagna invece della cascata. Confermo?\n\nB.",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Umbria: si cambia, andiamo a Spello"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-thread-difficili-umbria",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-25T17:30:00.000Z",
+      "from": {
+        "name": "Irene Valli",
+        "address": "irene.valli@esempio.it",
+        "client": "apple"
+      },
+      "to": [
+        {
+          "name": "Bruno Carli",
+          "address": "bruno.carli@esempio.it",
+          "client": "gmail-en"
+        },
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Umbria: si cambia, andiamo a Spello",
+      "messageId": "<case-thread-difficili-5@esempio.it>",
+      "inReplyTo": "<case-thread-difficili-4@esempio.it>",
+      "references": [
+        "<case-thread-difficili-1@esempio.it>",
+        "<case-thread-difficili-2@esempio.it>",
+        "<case-thread-difficili-3@esempio.it>",
+        "<case-thread-difficili-4@esempio.it>"
+      ],
+      "text": "Spello è anche meglio! Per me sì.\n\n-- \nIrene",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Umbria: si cambia, andiamo a Spello"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-thread-difficili-umbria",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-26T07:10:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Bruno Carli",
+          "address": "bruno.carli@esempio.it",
+          "client": "gmail-en"
+        },
+        {
+          "name": "Irene Valli",
+          "address": "irene.valli@esempio.it",
+          "client": "apple"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Umbria: si cambia, andiamo a Spello",
+      "messageId": "<case-thread-difficili-6@esempio.it>",
+      "inReplyTo": "<case-thread-difficili-5@esempio.it>",
+      "references": [
+        "<case-thread-difficili-1@esempio.it>",
+        "<case-thread-difficili-2@esempio.it>",
+        "<case-thread-difficili-3@esempio.it>",
+        "<case-thread-difficili-4@esempio.it>",
+        "<case-thread-difficili-5@esempio.it>"
+      ],
+      "text": "Anche per noi, conferma pure. Partiamo sabato verso le 9?\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Umbria: si cambia, andiamo a Spello"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-thread-difficili-umbria",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-26T08:02:00.000Z",
+      "from": {
+        "name": "Bruno Carli",
+        "address": "bruno.carli@esempio.it",
+        "client": "gmail-en"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        },
+        {
+          "name": "Irene Valli",
+          "address": "irene.valli@esempio.it",
+          "client": "apple"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Umbria: si cambia, andiamo a Spello",
+      "messageId": "<case-thread-difficili-7@esempio.it>",
+      "inReplyTo": "<case-thread-difficili-6@esempio.it>",
+      "references": [
+        "<case-thread-difficili-1@esempio.it>",
+        "<case-thread-difficili-2@esempio.it>",
+        "<case-thread-difficili-3@esempio.it>",
+        "<case-thread-difficili-4@esempio.it>",
+        "<case-thread-difficili-5@esempio.it>",
+        "<case-thread-difficili-6@esempio.it>"
+      ],
+      "text": "Confermato, caparra pagata. Alle 9 sotto casa vostra.\n\nB.",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Umbria: si cambia, andiamo a Spello"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-thread-difficili-umbria",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-10-01T17:40:00.000Z",
+      "from": {
+        "name": "Claudia Mancini",
+        "address": "claudia.mancini@esempio.it",
+        "client": "iphone"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Cantina in affitto",
+      "messageId": "<case-thread-difficili-12@esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Ciao Alex, Lucia mi ha detto che cerchi una cantina. La mia in via Ostiense è libera da novembre: 12 metri quadri, asciutta, con la luce. 60 euro al mese.\n\nInviato da iPhone",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Cantina in affitto"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-thread-difficili-cantina",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-02T06:30:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Claudia Mancini",
+          "address": "claudia.mancini@esempio.it",
+          "client": "iphone"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Cantina in affitto",
+      "messageId": "<case-thread-difficili-13@esempio.it>",
+      "inReplyTo": "<case-thread-difficili-12@esempio.it>",
+      "references": [
+        "<case-thread-difficili-12@esempio.it>"
+      ],
+      "text": "Ciao Claudia, grazie! Mi interessa molto. Si arriva con la macchina fino alla porta? Devo portarci dei mobili.\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Cantina in affitto"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-thread-difficili-cantina",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-10-05T08:30:00.000Z",
+      "from": {
+        "name": "Fabrizio Bruni",
+        "address": "fabrizio@bruniarredi.esempio.it",
+        "client": "outlook"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Tavolo su misura per la sala",
+      "messageId": "<case-thread-difficili-8@bruniarredi.esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Buongiorno Alex,\n\ncome d’accordo le mando il disegno del tavolo in rovere: gambe a cavalletto, piano da 4 cm, finitura a olio. Il prezzo è nel disegno, in basso a destra.\n\nFabrizio Bruni\nBruni Arredi – falegnameria su misura\nVia dei Platani 31, Roma · 06 5552 8814",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "Tavolo sala, disegno.pdf",
+          "mimeType": "application/pdf",
+          "size": 230000,
+          "inline": false
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Tavolo su misura per la sala"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-thread-difficili-tavolo",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-05T10:15:00.000Z",
+      "from": {
+        "name": "Claudia Mancini",
+        "address": "claudia.mancini@esempio.it",
+        "client": "iphone"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Cantina in affitto",
+      "messageId": "<case-thread-difficili-14@esempio.it>",
+      "inReplyTo": "<case-thread-difficili-13@esempio.it>",
+      "references": [
+        "<case-thread-difficili-12@esempio.it>",
+        "<case-thread-difficili-13@esempio.it>"
+      ],
+      "text": "Sì, la rampa arriva fino al corridoio delle cantine, la mia è la terza. Se vuoi passa a vederla quando vuoi, le chiavi le ha il portiere.\n\nInviato da iPhone",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Cantina in affitto"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-thread-difficili-cantina",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-10-06T19:10:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Fabrizio Bruni",
+          "address": "fabrizio@bruniarredi.esempio.it",
+          "client": "outlook"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Tavolo su misura per la sala",
+      "messageId": "<case-thread-difficili-9@esempio.it>",
+      "inReplyTo": "<case-thread-difficili-8@bruniarredi.esempio.it>",
+      "references": [
+        "<case-thread-difficili-8@bruniarredi.esempio.it>"
+      ],
+      "text": "Grazie Fabrizio, molto bello. Il cliente vuole sentire anche mia moglie prima di decidere la lunghezza: le facciamo sapere in settimana.\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Tavolo su misura per la sala"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-thread-difficili-tavolo",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-10-07T16:50:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Claudia Mancini",
+          "address": "claudia.mancini@esempio.it",
+          "client": "iphone"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Cantina in affitto",
+      "messageId": "<case-thread-difficili-15@esempio.it>",
+      "inReplyTo": "<case-thread-difficili-14@esempio.it>",
+      "references": [
+        "<case-thread-difficili-12@esempio.it>",
+        "<case-thread-difficili-13@esempio.it>",
+        "<case-thread-difficili-14@esempio.it>"
+      ],
+      "text": "L’ho vista stamattina, è perfetta. Ti va bene se il contratto parte dal 1° novembre, così ho il tempo di svuotare la mia? E il deposito lo preferisci con un bonifico?\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Cantina in affitto"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-thread-difficili-cantina",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-10-09T07:45:00.000Z",
+      "from": {
+        "name": "Fabrizio Bruni",
+        "address": "fabrizio@bruniarredi.esempio.it",
+        "client": "outlook"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Tavolo su misura per la sala",
+      "messageId": "<case-thread-difficili-10@bruniarredi.esempio.it>",
+      "inReplyTo": "<case-thread-difficili-9@esempio.it>",
+      "references": [
+        "<case-thread-difficili-8@bruniarredi.esempio.it>",
+        "<case-thread-difficili-9@esempio.it>"
+      ],
+      "text": "Nessun problema. Le ricordo solo che il rovere va ordinato entro la fine della prossima settimana, altrimenti si va a dicembre.\n\nFabrizio Bruni\nBruni Arredi – falegnameria su misura\nVia dei Platani 31, Roma · 06 5552 8814",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Tavolo su misura per la sala"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-thread-difficili-tavolo",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-10-13T15:20:00.000Z",
+      "from": {
+        "name": "Fabrizio Bruni",
+        "address": "fabrizio@bruniarredi.esempio.it",
+        "client": "outlook"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Tavolo su misura per la sala",
+      "messageId": "<case-thread-difficili-11@bruniarredi.esempio.it>",
+      "inReplyTo": "<case-thread-difficili-10@bruniarredi.esempio.it>",
+      "references": [
+        "<case-thread-difficili-8@bruniarredi.esempio.it>",
+        "<case-thread-difficili-9@esempio.it>",
+        "<case-thread-difficili-10@bruniarredi.esempio.it>"
+      ],
+      "text": "Buonasera Alex,\n\nil fornitore mi ha chiesto oggi l’ordine definitivo. Mi conferma entro venerdì la lunghezza del piano, 220 o 240 cm? Senza la misura non posso ordinare il legno.\n\nGrazie\n\nFabrizio Bruni\nBruni Arredi – falegnameria su misura\nVia dei Platani 31, Roma · 06 5552 8814",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Tavolo su misura per la sala"
+        ]
+      ],
+      "flags": {
+        "seen": false,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-thread-difficili-tavolo",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "quote": true
+    }
+  ]
+}

@@ -482,10 +482,18 @@ const cases = [];
 for (const f of readdirSync(join(HERE, 'cases')).filter((f) => f.endsWith('.json') && !f.startsWith('_')).sort()) {
   const c = JSON.parse(readFileSync(join(HERE, 'cases', f), 'utf8'));
   cases.push({ id: c.id, title: c.title, count: c.messages.length });
+  // "quote": true (v15): the reply quotes the previous message of the same thread, in the format
+  // of the sender's program (from.client), as the generated threads do.
+  const lastOf = {};
   c.messages.forEach((m, i) => {
-    messages.push(Object.assign({ id: `case-${c.id}-${i}`, cc: [], references: [], attachments: [], headers: [], flags: { seen: true, flagged: false }, problems: [] }, m, {
+    const rec = Object.assign({ id: `case-${c.id}-${i}`, cc: [], references: [], attachments: [], headers: [], flags: { seen: true, flagged: false }, problems: [] }, m, {
       gmail: Object.assign({ threadId: `case-${c.id}`, labels: ['\\Inbox'] }, m.gmail || {}, { labels: ((m.gmail && m.gmail.labels) || ['\\Inbox']).concat(['CASE/' + c.id]) })
-    }));
+    });
+    const prev = lastOf[rec.gmail.threadId];
+    if (rec.quote && prev) rec.text = (rec.text || '') + '\n\n' + quoteBlock((rec.from && rec.from.client) || 'gmail-it', prev);
+    delete rec.quote;
+    lastOf[rec.gmail.threadId] = rec;
+    messages.push(rec);
   });
 }
 
@@ -511,7 +519,7 @@ mkdirSync(ATT_DIR, { recursive: true });
 // A PDF with real pages: page 1 looks like a document (coloured band, title, paragraphs, a table),
 // the others carry sections and the page number. The thumbnail is drawn from page 1 (v14).
 function pdf(title, lines, pages, hue) {
-  const esc = (s) => s.replace(/[’‘]/g, "'").replace(/[“”«»]/g, '"').replace(/[–—]/g, '-').replace(/…/g, '...').replace(/⋅/g, '-')
+  const esc = (s) => s.replace(/[’‘]/g, "'").replace(/[“”«»]/g, '"').replace(/[–—]/g, '-').replace(/…/g, '...').replace(/⋅/g, '-').replace(/€/g, 'EUR')
     .replace(/[\\()]/g, (c) => '\\' + c).replace(/[^\x20-\x7e\xa0-\xff]/g, '?');
   const rgb = (h, s, l) => {
     const k = (n) => (n + h / 30) % 12, a = s * Math.min(l, 1 - l);
@@ -595,7 +603,30 @@ function svg(name, i) {
 // An image with the declared pixel size: a logo strip, a small icon or a screenshot-like picture.
 function sizedSvg(name, from, w, h, i) {
   const who = (from && (from.name || from.address)) || '?';
-  if (w >= 300 && h >= 120) {
+  // v15: a QR code and a barcode strip, drawn with plain rects so the PNG for the engine looks the same
+  if (/qr/i.test(name)) {
+    const n = 25, u = w / (n + 4), cells = [];
+    let s = name.length * 7 + i;
+    const finder = (x, y) => (x < 7 && y < 7) || (x >= n - 7 && y < 7) || (x < 7 && y >= n - 7);
+    for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
+      s = (s * 1103515245 + 12345) & 0x7fffffff;
+      if (!finder(x, y) && (s >> 16) % 2) cells.push(`<rect x="${((x + 2) * u).toFixed(1)}" y="${((y + 2) * u).toFixed(1)}" width="${u.toFixed(1)}" height="${u.toFixed(1)}" fill="#111111"/>`);
+    }
+    const eye = (x, y) => [[0, 7, '#111111'], [1, 5, '#ffffff'], [2, 3, '#111111']].map(([o, k, f]) => `<rect x="${((x + 2 + o) * u).toFixed(1)}" y="${((y + 2 + o) * u).toFixed(1)}" width="${(k * u).toFixed(1)}" height="${(k * u).toFixed(1)}" fill="${f}"/>`).join('');
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect x="0" y="0" width="${w}" height="${h}" fill="#ffffff"/>${eye(0, 0)}${eye(n - 7, 0)}${eye(0, n - 7)}${cells.join('')}</svg>\n`;
+  }
+  if (h < 120 && w >= 3 * h) {
+    const bars = [];
+    let x = Math.round(w * 0.06), s = name.length * 13 + i;
+    while (x < w * 0.94) {
+      s = (s * 1103515245 + 12345) & 0x7fffffff;
+      const bw = 1 + ((s >> 16) % 4);
+      bars.push(`<rect x="${x}" y="${Math.round(h * 0.12)}" width="${bw}" height="${Math.round(h * 0.62)}" fill="#1a1a1a"/>`);
+      x += bw + 1 + ((s >> 20) % 3);
+    }
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect x="0" y="0" width="${w}" height="${h}" fill="#f4f1ea"/>${bars.join('')}<text x="${Math.round(w * 0.06)}" y="${Math.round(h * 0.92)}" font-family="monospace" font-size="${Math.max(8, Math.round(h * 0.14))}" fill="#333">${xmlEsc(name)}</text></svg>\n`;
+  }
+  if ((w >= 300 && h >= 120) || /^(image|schermata|screenshot)/i.test(name)) {
     return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><rect width="${w}" height="${h}" fill="#F3F3F1"/><rect width="${w}" height="${Math.round(h * 0.12)}" fill="#3B5B7A"/><rect x="${Math.round(w * 0.05)}" y="${Math.round(h * 0.22)}" width="${Math.round(w * 0.9)}" height="${Math.round(h * 0.6)}" fill="#fff" stroke="#C9C9C4"/><text x="${Math.round(w * 0.08)}" y="${Math.round(h * 0.34)}" font-family="sans-serif" font-size="${Math.max(12, Math.round(h * 0.06))}" fill="#333">${xmlEsc(name)}</text><text x="${Math.round(w * 0.08)}" y="${Math.round(h * 0.46)}" font-family="sans-serif" font-size="${Math.max(10, Math.round(h * 0.045))}" fill="#666">immagine sintetica, ${w}×${h}</text></svg>\n`;
   }
   if (w <= 120 && h <= 120) {
@@ -616,6 +647,7 @@ function smallSvg(from, size, i) {
 }
 const toIcs = (d) => d.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '');
 let fileNo = 0;
+const fileByKey = {};
 messages.forEach((msg) => {
   (msg.attachments || []).forEach((a) => {
     const no = ++fileNo;
@@ -624,10 +656,16 @@ messages.forEach((msg) => {
     const topic = (msg.subject || '').replace(/^\s*((re|r|fwd|i)\s*:\s*)+/i, '').replace(/\s+-\s+(lun|mar|mer|gio|ven|sab|dom)\b.*$/i, '');
     const who = (msg.from && (msg.from.name || msg.from.address)) || '';
     const base = `${String(no).padStart(3, '0')}`;
-    if (ext === 'pdf') {
+    // v15: "fileKey" marks the same file sent more than once, maybe under another name: same bytes
+    const same = a.fileKey && fileByKey[a.fileKey];
+    if (same) {
+      for (const [from, to] of same.files) writeFileSync(join(ATT_DIR, base + to), readFileSync(join(ATT_DIR, from)));
+      Object.assign(a, same.fields(base));
+    } else if (ext === 'pdf') {
       const pages = pagesFor(a.size);
-      const lines = [`Documento sintetico creato per il prototipo.`, `Argomento: ${topic}`, `Da: ${who}`, `Data: ${(msg.date || '').slice(0, 10)}`, '',
-        '1. Premessa e obiettivi', '2. Dettaglio delle voci', '3. Tempi e responsabilita', '4. Condizioni', '', `Pagina 1 di ${pages}`];
+      // v15: "text" is what the document says, for the search inside attachments; otherwise the usual sections
+      const body = a.text ? a.text.split('\n') : ['1. Premessa e obiettivi', '2. Dettaglio delle voci', '3. Tempi e responsabilita', '4. Condizioni'];
+      const lines = [`Documento sintetico creato per il prototipo.`, `Argomento: ${topic}`, `Da: ${who}`, `Data: ${(msg.date || '').slice(0, 10)}`, ''].concat(body, ['', `Pagina 1 di ${pages}`]);
       writeFileSync(join(ATT_DIR, base + '.pdf'), pdf(name.replace(/\.pdf$/i, ''), lines, pages, (no * 47) % 360));
       a.path = `attachments/${base}.pdf`;
       a.pages = pages;
@@ -638,7 +676,7 @@ messages.forEach((msg) => {
       const small = a.size < 40 * 1024 && !/targhetta/i.test(name);
       const w = a.width || (small ? (a.size < 4 * 1024 ? 32 : 240) : 1200);
       const h = a.height || (small ? (a.size < 4 * 1024 ? 32 : 64) : 800);
-      writeFileSync(join(ATT_DIR, base + '.svg'), a.width && !(/\.jpe?g$/i.test(name) && w >= 300) ? sizedSvg(name, msg.from, w, h, no) : small && !a.width ? smallSvg(msg.from, a.size, no) : svg(name, no));
+      writeFileSync(join(ATT_DIR, base + '.svg'), a.width && !(/\.jpe?g$/i.test(name) && w >= 300 && h >= 120) ? sizedSvg(name, msg.from, w, h, no) : small && !a.width ? smallSvg(msg.from, a.size, no) : svg(name, no));
       a.path = `attachments/${base}.svg`;
       if (a.noDims) delete a.noDims;
       else { a.width = w; a.height = h; }
@@ -665,6 +703,12 @@ messages.forEach((msg) => {
     } else {
       a.preview = `Archivio «${name}»: nei dati sintetici il contenuto non c'è.`;
     }
+    if (a.fileKey && !same) {
+      const files = [a.path, a.thumb].filter(Boolean).map((p) => [p.replace('attachments/', ''), p.slice(p.lastIndexOf('.'))]);
+      const keep = { preview: a.preview, pages: a.pages, width: a.width, height: a.height, text: a.text, code: a.code };
+      fileByKey[a.fileKey] = { files, fields: (b) => Object.fromEntries(Object.entries(Object.assign({}, keep, { path: a.path && `attachments/${b}${a.path.slice(a.path.lastIndexOf('.'))}`, thumb: a.thumb && `attachments/${b}.jpg` })).filter(([, v]) => v !== undefined)) };
+    }
+    delete a.fileKey;
   });
 });
 

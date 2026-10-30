@@ -360,7 +360,7 @@ Sotto PTY, con `script -qec "…" /dev/null`, sulla casella dell'utente.
 - Il ciclo che scarica gli allegati in background lo fa l'app: il motore dà coda, quota e pausa. Del testo si prendono solo la prima parte semplice e la prima HTML, fino a 1 MiB ciascuna.
 - Le misure delle immagini non guardano l'orientamento EXIF dei JPEG (una foto girata ha larghezza e altezza scambiate).
 - Il finto server non descrive le parti `message/rfc822` (manca l'ENVELOPE nella struttura): nei dati sintetici non ci sono. Non ha QRESYNC, apre solo «[Gmail]/Tutti i messaggi» e SEARCH restituisce sempre tutto.
-- Nei dati sintetici nessun allegato è incorporato (`inline` è sempre falso, anche per le immagini della firma di Outlook): il percorso delle immagini incorporate è provato con il messaggio scritto a mano in `tests/sintetici.rs`.
+- Nei dati sintetici, dalla v15, c'è un'immagine incorporata (lo screenshot del caso `allegati-nascosti`, in `multipart/related` con il suo Content-ID); le immagini della firma di Outlook restano allegati normali. Il percorso delle immagini incorporate è provato anche con il messaggio scritto a mano in `tests/sintetici.rs`.
 - Niente invio di più comandi insieme (pipelining) né ESEARCH: l'elenco degli UID si richiede intero quando qualcosa è cambiato.
 - Sospensione del computer e cambio di wifi provati solo come «connessione morta in silenzio» nel finto server, non dal vero.
 - Thread fuori da Gmail: si usa la radice dei References, che non basta per i messaggi senza riferimenti.

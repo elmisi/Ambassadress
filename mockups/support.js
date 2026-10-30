@@ -195,6 +195,8 @@
     };
 
     inst.__render();
+    // per le prove automatiche (ritrovamento, Playwright): l'istanza della tavola
+    window.__dcInst = inst;
     host.setAttribute('data-ready', '');
     mounted = true;
     if (typeof inst.componentDidMount === 'function') inst.componentDidMount();

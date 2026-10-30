@@ -1,0 +1,1025 @@
+{
+  "id": "da-ritrovare",
+  "title": "Cose da ritrovare partendo dai ricordi: una decisione a metà di un thread lungo, un documento da Drive, un messaggio del 2023, una data nel testo diversa da quella del messaggio, codici brevi e nomi di file strani",
+  "report": "giro v15, prova 1 di app/NOTE.md (ritrovamento); le domande sono in mockups/data/ritrovamento.json",
+  "messages": [
+    {
+      "date": "2023-01-22T16:40:00.000Z",
+      "from": {
+        "name": "Ermanno Villa",
+        "address": "ermanno.villa@rifugioalpe.esempio.it",
+        "client": "apple"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Grazie della visita",
+      "messageId": "<case-da-ritrovare-14@rifugioalpe.esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Caro Alex,\n\ngrazie ancora della bella giornata, è raro avere ospiti che salgono con la neve fresca.\n\nCome promesso ecco la ricetta dei pizzoccheri della Rina, per quattro persone:\n- 300 g di farina di grano saraceno e 100 g di farina bianca, acqua quanto basta, si stende a 3 mm e si taglia a strisce larghe un dito;\n- due patate e mezza verza a pezzi, a bollire insieme ai pizzoccheri per dieci minuti;\n- a strati nella pirofila con formaggio d’alpeggio a scaglie e grana;\n- sopra burro fuso con salvia e uno spicchio d’aglio, fatto imbiondire piano.\n\nLa Rina dice che il segreto è non avere fretta con il burro.\n\nUn abbraccio, e tornate in estate\n\nErmanno\nRifugio Alpe Esempio, 1.870 m",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Grazie della visita"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-ricetta",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2023-01-23T07:15:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Ermanno Villa",
+          "address": "ermanno.villa@rifugioalpe.esempio.it",
+          "client": "apple"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Grazie della visita",
+      "messageId": "<case-da-ritrovare-15@esempio.it>",
+      "inReplyTo": "<case-da-ritrovare-14@rifugioalpe.esempio.it>",
+      "references": [
+        "<case-da-ritrovare-14@rifugioalpe.esempio.it>"
+      ],
+      "text": "Grazie Ermanno! La proviamo domenica, il burro piano piano. Un saluto alla Rina, torniamo di sicuro.\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Grazie della visita"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-ricetta",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-08-27T09:40:00.000Z",
+      "from": {
+        "name": "Comune di Roma - Sportello Edilizia",
+        "address": "sportello.edilizia@comune.esempio.it",
+        "client": "outlook"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Comunicazione di avvio del procedimento",
+      "messageId": "<case-da-ritrovare-17@comune.esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Oggetto: CILA prot. n. 88213 del 20/08/2026 – pratica n. 2026/0417 – immobile in Via Ostiense 12, interno 9.\n\nSi comunica l’avvio del procedimento relativo alla pratica in oggetto. Responsabile del procedimento: geom. Rita Sereni. Eventuali integrazioni vanno caricate sul portale indicando il numero di pratica.\n\nDistinti saluti\n\nSportello Unico per l’Edilizia\nMunicipio VIII – Ufficio tecnico\nNon rispondere a questo indirizzo per le integrazioni: usare il portale.",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "Avvio procedimento prot. 88213.pdf",
+          "mimeType": "application/pdf",
+          "size": 150000,
+          "inline": false
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Comunicazione di avvio del procedimento"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-pratica",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-01T08:20:00.000Z",
+      "from": {
+        "name": "Valerio Pace",
+        "address": "valerio@pacedesign.esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Sito dello studio",
+      "messageId": "<case-da-ritrovare-1@pacedesign.esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Ciao Alex,\n\ncome d’accordo ti mando la prima proposta: tre pagine (lo studio, i lavori, i contatti) più il blog. Le bozze grafiche sono nel PDF, la palette è quella del biglietto da visita.\n\nDimmi cosa ne pensi, con calma.\n\n-- \nValerio Pace\nPace Design – siti e identità visiva\n06 5551 2290",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "Proposta sito Studio Moro.pdf",
+          "mimeType": "application/pdf",
+          "size": 1150000,
+          "inline": false
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Sito dello studio"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-sito",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-02T06:45:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Valerio Pace",
+          "address": "valerio@pacedesign.esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Sito dello studio",
+      "messageId": "<case-da-ritrovare-2@esempio.it>",
+      "inReplyTo": "<case-da-ritrovare-1@pacedesign.esempio.it>",
+      "references": [
+        "<case-da-ritrovare-1@pacedesign.esempio.it>"
+      ],
+      "text": "Bella, mi piace soprattutto la pagina dei lavori con le foto grandi.\n\nSul blog ho dei dubbi: negli ultimi due anni ho scritto tre articoli. Ha senso tenerlo?\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Sito dello studio"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-sito",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-02T10:10:00.000Z",
+      "from": {
+        "name": "Valerio Pace",
+        "address": "valerio@pacedesign.esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Sito dello studio",
+      "messageId": "<case-da-ritrovare-3@pacedesign.esempio.it>",
+      "inReplyTo": "<case-da-ritrovare-2@esempio.it>",
+      "references": [
+        "<case-da-ritrovare-1@pacedesign.esempio.it>",
+        "<case-da-ritrovare-2@esempio.it>"
+      ],
+      "text": "Dipende da quanto vuoi scriverci: un blog fermo da un anno fa più danno che altro.\n\nTi chiedo anche un’altra cosa, già che ci siamo: il tuo hosting attuale scade a fine novembre. Vuoi restare dove sei o cambiamo?\n\n-- \nValerio Pace\nPace Design – siti e identità visiva\n06 5551 2290",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Sito dello studio"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-sito",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-03T17:30:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Valerio Pace",
+          "address": "valerio@pacedesign.esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Sito dello studio",
+      "messageId": "<case-da-ritrovare-4@esempio.it>",
+      "inReplyTo": "<case-da-ritrovare-3@pacedesign.esempio.it>",
+      "references": [
+        "<case-da-ritrovare-1@pacedesign.esempio.it>",
+        "<case-da-ritrovare-2@esempio.it>",
+        "<case-da-ritrovare-3@pacedesign.esempio.it>"
+      ],
+      "text": "Che alternative ci sono? Quello di adesso mi costa 180 euro l’anno e il pannello è lentissimo.\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Sito dello studio"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-sito",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-04T07:05:00.000Z",
+      "from": {
+        "name": "Valerio Pace",
+        "address": "valerio@pacedesign.esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Teo Marras",
+          "address": "teo@pacedesign.esempio.it",
+          "client": "thunderbird"
+        }
+      ],
+      "subject": "Re: Sito dello studio",
+      "messageId": "<case-da-ritrovare-5@pacedesign.esempio.it>",
+      "inReplyTo": "<case-da-ritrovare-4@esempio.it>",
+      "references": [
+        "<case-da-ritrovare-1@pacedesign.esempio.it>",
+        "<case-da-ritrovare-2@esempio.it>",
+        "<case-da-ritrovare-3@pacedesign.esempio.it>",
+        "<case-da-ritrovare-4@esempio.it>"
+      ],
+      "text": "Io mi trovo bene con Nuvola Esempio: 96 euro l’anno, copie giornaliere, certificato compreso. Teo ci ha spostato altri tre clienti quest’anno senza problemi, lo metto in copia.\n\n-- \nValerio Pace\nPace Design – siti e identità visiva\n06 5551 2290",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Sito dello studio"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-sito",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-04T16:40:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Valerio Pace",
+          "address": "valerio@pacedesign.esempio.it",
+          "client": "gmail-it"
+        },
+        {
+          "name": "Teo Marras",
+          "address": "teo@pacedesign.esempio.it",
+          "client": "thunderbird"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Sito dello studio",
+      "messageId": "<case-da-ritrovare-6@esempio.it>",
+      "inReplyTo": "<case-da-ritrovare-5@pacedesign.esempio.it>",
+      "references": [
+        "<case-da-ritrovare-1@pacedesign.esempio.it>",
+        "<case-da-ritrovare-2@esempio.it>",
+        "<case-da-ritrovare-3@pacedesign.esempio.it>",
+        "<case-da-ritrovare-4@esempio.it>",
+        "<case-da-ritrovare-5@pacedesign.esempio.it>"
+      ],
+      "text": "Va bene, allora facciamo così: il dominio resta quello di adesso, dal 1° dicembre passiamo a Nuvola Esempio e il blog lo chiudiamo. I tre articoli li sposto nella pagina dei lavori, come schede dei progetti.\n\nTeo, mi dici tu cosa ti serve per il trasferimento?\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Sito dello studio"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-sito",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-05T09:15:00.000Z",
+      "from": {
+        "name": "Teo Marras",
+        "address": "teo@pacedesign.esempio.it",
+        "client": "thunderbird"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Valerio Pace",
+          "address": "valerio@pacedesign.esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "subject": "Re: Sito dello studio",
+      "messageId": "<case-da-ritrovare-7@pacedesign.esempio.it>",
+      "inReplyTo": "<case-da-ritrovare-6@esempio.it>",
+      "references": [
+        "<case-da-ritrovare-1@pacedesign.esempio.it>",
+        "<case-da-ritrovare-2@esempio.it>",
+        "<case-da-ritrovare-3@pacedesign.esempio.it>",
+        "<case-da-ritrovare-4@esempio.it>",
+        "<case-da-ritrovare-5@pacedesign.esempio.it>",
+        "<case-da-ritrovare-6@esempio.it>"
+      ],
+      "text": "Ciao Alex,\nmi servono le credenziali del pannello attuale e il codice di trasferimento del dominio. Si chiama EPP o authcode, lo chiedi al vecchio fornitore dall’area clienti.\n\nTeo",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Sito dello studio"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-sito",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-07T06:30:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Teo Marras",
+          "address": "teo@pacedesign.esempio.it",
+          "client": "thunderbird"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Valerio Pace",
+          "address": "valerio@pacedesign.esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "subject": "Re: Sito dello studio",
+      "messageId": "<case-da-ritrovare-8@esempio.it>",
+      "inReplyTo": "<case-da-ritrovare-7@pacedesign.esempio.it>",
+      "references": [
+        "<case-da-ritrovare-1@pacedesign.esempio.it>",
+        "<case-da-ritrovare-2@esempio.it>",
+        "<case-da-ritrovare-3@pacedesign.esempio.it>",
+        "<case-da-ritrovare-4@esempio.it>",
+        "<case-da-ritrovare-5@pacedesign.esempio.it>",
+        "<case-da-ritrovare-6@esempio.it>",
+        "<case-da-ritrovare-7@pacedesign.esempio.it>"
+      ],
+      "text": "Il codice l’ho chiesto, dicono che arriva in cinque giorni lavorativi. Le credenziali te le mando a parte, non per email.\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Sito dello studio"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-sito",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-08T14:50:00.000Z",
+      "from": {
+        "name": "Valerio Pace",
+        "address": "valerio@pacedesign.esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [
+        {
+          "name": "Teo Marras",
+          "address": "teo@pacedesign.esempio.it",
+          "client": "thunderbird"
+        }
+      ],
+      "subject": "Re: Sito dello studio",
+      "messageId": "<case-da-ritrovare-9@pacedesign.esempio.it>",
+      "inReplyTo": "<case-da-ritrovare-8@esempio.it>",
+      "references": [
+        "<case-da-ritrovare-1@pacedesign.esempio.it>",
+        "<case-da-ritrovare-2@esempio.it>",
+        "<case-da-ritrovare-3@pacedesign.esempio.it>",
+        "<case-da-ritrovare-4@esempio.it>",
+        "<case-da-ritrovare-5@pacedesign.esempio.it>",
+        "<case-da-ritrovare-6@esempio.it>",
+        "<case-da-ritrovare-7@pacedesign.esempio.it>",
+        "<case-da-ritrovare-8@esempio.it>"
+      ],
+      "text": "Perfetto. Intanto vado avanti con le schede dei progetti: ti mando una bozza la settimana prossima.\n\n-- \nValerio Pace\nPace Design – siti e identità visiva\n06 5551 2290",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "Schede progetti, bozza.pdf",
+          "mimeType": "application/pdf",
+          "size": 640000,
+          "inline": false
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Re: Sito dello studio"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-sito",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-09T10:30:00.000Z",
+      "from": {
+        "name": "Consorzio di Bonifica Esempio – Ufficio gare",
+        "address": "gare@consorziobonifica.esempio.it",
+        "client": "outlook"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex@studiomoro.esempio.it",
+          "client": "thunderbird"
+        }
+      ],
+      "cc": [],
+      "subject": "Richiesta di preventivo – arredi sala consiliare",
+      "messageId": "<case-da-ritrovare-18@consorziobonifica.esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Spett.le Studio Moro,\n\nsi chiede un preventivo per la progettazione e la fornitura degli arredi della sala consiliare, come da capitolato allegato. Affidamento diretto ai sensi dell’art. 50 del d.lgs. 36/2023. CIG: B4A7E2915C.\n\nIl preventivo va inviato entro il 30 settembre, indicando il CIG nell’oggetto.\n\nDistinti saluti\n\nUfficio gare e contratti\nConsorzio di Bonifica Esempio\nPEC: gare@pec.consorziobonifica.esempio.it",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "Capitolato_arredi_sala_consiliare_DEF(2).pdf",
+          "mimeType": "application/pdf",
+          "size": 420000,
+          "inline": false
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Richiesta di preventivo – arredi sala consiliare"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-cig",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-10T07:00:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex@studiomoro.esempio.it",
+        "client": "thunderbird"
+      },
+      "to": [
+        {
+          "name": "Consorzio di Bonifica Esempio – Ufficio gare",
+          "address": "gare@consorziobonifica.esempio.it",
+          "client": "outlook"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Richiesta di preventivo – arredi sala consiliare",
+      "messageId": "<case-da-ritrovare-19@studiomoro.esempio.it>",
+      "inReplyTo": "<case-da-ritrovare-18@consorziobonifica.esempio.it>",
+      "references": [
+        "<case-da-ritrovare-18@consorziobonifica.esempio.it>"
+      ],
+      "text": "Buongiorno,\n\nricevuto, grazie. Il preventivo arriva entro il 25 settembre, con il CIG nell’oggetto come indicato.\n\nCordiali saluti\n\n-- \nAlex Moro\nStudio Moro – progettazione d’interni\nwww.studiomoro.esempio.it",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Richiesta di preventivo – arredi sala consiliare"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-cig",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-15T07:30:00.000Z",
+      "from": {
+        "name": "Giulia Ferraro",
+        "address": "giulia.ferraro@solaria-impianti.esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Sopralluogo per il fotovoltaico",
+      "messageId": "<case-da-ritrovare-12@solaria-impianti.esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Buongiorno Alex,\n\nconfermo il sopralluogo sul tetto per martedì 22 alle 10. Mi servono le chiavi della botola e, se le trova, le bollette dell’ultimo anno: con i consumi veri dimensioniamo l’accumulo.\n\nA martedì\n\nGiulia Ferraro\nSolaria Impianti – fotovoltaico e accumulo\ncell. 340 555 0761",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Sopralluogo per il fotovoltaico"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-sopralluogo",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-15T11:05:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Giulia Ferraro",
+          "address": "giulia.ferraro@solaria-impianti.esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Sopralluogo per il fotovoltaico",
+      "messageId": "<case-da-ritrovare-13@esempio.it>",
+      "inReplyTo": "<case-da-ritrovare-12@solaria-impianti.esempio.it>",
+      "references": [
+        "<case-da-ritrovare-12@solaria-impianti.esempio.it>"
+      ],
+      "text": "Perfetto, martedì alle 10. Le bollette le preparo, la botola la apre il portiere.\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Sopralluogo per il fotovoltaico"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-sopralluogo",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-16T19:10:00.000Z",
+      "from": {
+        "name": "Associazione Orti del Parco",
+        "address": "segreteria@ortidelparco.esempio.it",
+        "client": "outlook"
+      },
+      "to": [
+        {
+          "name": "Soci Orti del Parco",
+          "address": "soci@ortidelparco.esempio.it"
+        }
+      ],
+      "cc": [],
+      "subject": "Convocazione assemblea dei soci",
+      "messageId": "<case-da-ritrovare-16@ortidelparco.esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Cari soci,\n\nl’assemblea ordinaria è convocata per lunedì 12 ottobre alle 20:30 nella sala della parrocchia, in seconda convocazione.\n\nOrdine del giorno:\n1) bilancio 2025-2026;\n2) rinnovo del consiglio direttivo;\n3) turni dell’acqua per la prossima estate;\n4) quota associativa 2027.\n\nChi non può venire può delegare un altro socio con il modulo allegato, da consegnare firmato all’inizio dell’assemblea.\n\nLa segreteria\nAssociazione Orti del Parco APS\nsegreteria@ortidelparco.esempio.it",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "Ordine del giorno assemblea 12-10-2026.pdf",
+          "mimeType": "application/pdf",
+          "size": 120000,
+          "inline": false
+        },
+        {
+          "filename": "delega_socio_2026.pdf",
+          "mimeType": "application/pdf",
+          "size": 64000,
+          "inline": false
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Convocazione assemblea dei soci"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-orti",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-17T13:02:00.000Z",
+      "from": {
+        "name": "Giulia Ferraro (tramite Google Drive)",
+        "address": "drive-shares-dm-noreply@google.com"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Documento condiviso con te: \"Capitolato impianto fotovoltaico rev. B\"",
+      "messageId": "<case-da-ritrovare-10@google.com>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Giulia Ferraro (giulia.ferraro@solaria-impianti.esempio.it) ha condiviso il seguente documento:\n\nCapitolato impianto fotovoltaico rev. B\n\n«Ciao Alex, ecco il capitolato aggiornato con le due falde e l’accumulo da 10 kWh. Guardalo con calma prima del sopralluogo.»\n\nApri\nhttps://docs.google.com/document/d/1sinteticoCapitolatoRevB0000/edit?usp=sharing_eil\n\nGoogle LLC\nHai ricevuto questa email perché giulia.ferraro@solaria-impianti.esempio.it ha condiviso un documento con te da Google Drive.",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Documento condiviso con te: \"Capitolato impianto fotovoltaico rev. B\""
+        ],
+        [
+          "Reply-To",
+          "Giulia Ferraro <giulia.ferraro@solaria-impianti.esempio.it>"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-drive",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "replyTo": [
+        {
+          "name": "Giulia Ferraro",
+          "address": "giulia.ferraro@solaria-impianti.esempio.it",
+          "client": "gmail-it"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-19T11:20:00.000Z",
+      "from": {
+        "name": "Carla Mancuso",
+        "address": "carla.mancuso@esempio.it",
+        "client": "iphone"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "La planimetria che mi avevi chiesto",
+      "messageId": "<case-da-ritrovare-21@esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Eccola, l’ho scansionata ieri in copisteria. Il nome del file è quello che dà la macchina, scusa.\n\nInviato da iPhone",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "SCN_0047_20260918_planim-cat-fg812-part77-sub5.pdf",
+          "mimeType": "application/pdf",
+          "size": 380000,
+          "inline": false
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "La planimetria che mi avevi chiesto"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-planimetria",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-19T18:05:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Carla Mancuso",
+          "address": "carla.mancuso@esempio.it",
+          "client": "iphone"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: La planimetria che mi avevi chiesto",
+      "messageId": "<case-da-ritrovare-22@esempio.it>",
+      "inReplyTo": "<case-da-ritrovare-21@esempio.it>",
+      "references": [
+        "<case-da-ritrovare-21@esempio.it>"
+      ],
+      "text": "Grazie Carla, è proprio quella del catasto. Te la riporto sabato.\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: La planimetria che mi avevi chiesto"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-planimetria",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-21T16:20:00.000Z",
+      "from": {
+        "name": "Giulia Ferraro via Google Documenti",
+        "address": "comments-noreply@docs.google.com"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Capitolato impianto fotovoltaico rev. B: nuovo commento",
+      "messageId": "<case-da-ritrovare-11@docs.google.com>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Giulia Ferraro ha aggiunto un commento al documento\n\nCapitolato impianto fotovoltaico rev. B\n\nTesto commentato: «Inverter ibrido 6 kW»\n\nGiulia Ferraro: Alex, qui ho messo l’inverter da 6 kW. Se preferisci quello da 8 kW dimmelo entro venerdì: il prezzo sale di circa 700 euro, ma resta margine per i pannelli sul garage.\n\nRispondi   Apri\n\nGoogle LLC\nHai ricevuto questa email perché sei menzionato nei commenti o hai accesso al documento.",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Capitolato impianto fotovoltaico rev. B: nuovo commento"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-commento",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "replyTo": [
+        {
+          "name": "Giulia Ferraro",
+          "address": "giulia.ferraro@solaria-impianti.esempio.it",
+          "client": "gmail-it"
+        }
+      ]
+    },
+    {
+      "date": "2026-09-25T05:15:00.000Z",
+      "from": {
+        "name": "Gas Esempio",
+        "address": "servizioclienti@gasesempio.example"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Variazione delle condizioni economiche dal 1° novembre",
+      "messageId": "<case-da-ritrovare-20@gasesempio.example>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Gentile Alex Moro,\n\ncodice cliente 7730021 – PDR 00348812447102\n\ndal 1° novembre il prezzo della materia prima della sua offerta cambia come indicato nella tabella sotto. Se non è d’accordo può recedere senza costi entro il 31 ottobre, indicando il codice cliente.\n\nPrezzo attuale: 0,41 €/Smc\nNuovo prezzo: 0,47 €/Smc\n\nServizio clienti Gas Esempio",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Variazione delle condizioni economiche dal 1° novembre"
+        ],
+        [
+          "Auto-Submitted",
+          "auto-generated"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-da-ritrovare-gas",
+        "labels": [
+          "\\Inbox",
+          "CATEGORY_UPDATES"
+        ]
+      }
+    }
+  ]
+}

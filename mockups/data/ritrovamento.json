@@ -1,0 +1,143 @@
+[
+  {
+    "q": "quando abbiamo deciso di chiudere il blog",
+    "expect": [{ "from": "alex.moro@esempio.it", "subject": "Re: Sito dello studio", "text": "il blog lo chiudiamo" }],
+    "top": 5,
+    "note": "una decisione scritta a metà di un thread di 9 messaggi, senza parole dell'oggetto; le citazioni sotto le risposte dopo ripetono la frase"
+  },
+  {
+    "q": "hosting nuvola esempio da dicembre",
+    "expect": [{ "from": "alex.moro@esempio.it", "subject": "Re: Sito dello studio", "text": "dal 1° dicembre passiamo a Nuvola Esempio" }],
+    "top": 5,
+    "note": "la stessa decisione cercata con altre parole; «Nuvola Esempio» compare prima nella proposta di Valerio"
+  },
+  {
+    "q": "capitolato fotovoltaico di Giulia",
+    "expect": [{ "from": "drive-shares-dm-noreply@google.com", "subject": "Documento condiviso con te: \"Capitolato impianto fotovoltaico rev. B\"" }],
+    "top": 5,
+    "note": "documento condiviso da una persona attraverso Google Drive («Giulia Ferraro (tramite Google Drive)»): il nome della persona è nel nome visualizzato, non nell'indirizzo"
+  },
+  {
+    "q": "inverter da 8 kW",
+    "expect": [{ "from": "comments-noreply@docs.google.com", "subject": "Capitolato impianto fotovoltaico rev. B: nuovo commento" }],
+    "top": 3,
+    "note": "commento di Google Documenti, «Giulia Ferraro via Google Documenti»"
+  },
+  {
+    "q": "ricetta dei pizzoccheri",
+    "expect": [{ "from": "ermanno.villa@rifugioalpe.esempio.it", "subject": "Grazie della visita" }],
+    "top": 3,
+    "note": "messaggio del gennaio 2023, mittente visto solo quella volta, contenuto che si ricorda; l'oggetto non c'entra"
+  },
+  {
+    "q": "grano saraceno 2023",
+    "expect": [{ "from": "ermanno.villa@rifugioalpe.esempio.it", "subject": "Grazie della visita" }],
+    "top": 3,
+    "note": "lo stesso messaggio con un anno: oggi la ricerca non capisce gli anni"
+  },
+  {
+    "q": "assemblea del 12 ottobre",
+    "expect": [{ "from": "segreteria@ortidelparco.esempio.it", "subject": "Convocazione assemblea dei soci" }],
+    "top": 3,
+    "note": "convocazione arrivata a metà settembre che parla di una data di ottobre; c'è anche l'assemblea del condominio, con un'altra data"
+  },
+  {
+    "q": "pratica 2026/0417",
+    "expect": [{ "from": "sportello.edilizia@comune.esempio.it", "subject": "Comunicazione di avvio del procedimento" }],
+    "top": 3,
+    "note": "numero di pratica con la barra, solo nel testo"
+  },
+  {
+    "q": "prot 88213",
+    "expect": [{ "from": "sportello.edilizia@comune.esempio.it", "subject": "Comunicazione di avvio del procedimento" }],
+    "top": 3,
+    "note": "numero di protocollo, nel testo e nel nome del PDF"
+  },
+  {
+    "q": "CIG B4A7E2915C",
+    "expect": [{ "from": "gare@consorziobonifica.esempio.it", "subject": "Richiesta di preventivo – arredi sala consiliare" }],
+    "top": 3,
+    "note": "codice di gara di 10 caratteri, lettere e cifre; il messaggio è arrivato alla seconda casella (alex@studiomoro.esempio.it)"
+  },
+  {
+    "q": "codice cliente 7730021",
+    "expect": [{ "from": "servizioclienti@gasesempio.example", "subject": "Variazione delle condizioni economiche dal 1° novembre" }],
+    "top": 3,
+    "note": "codice cliente in un messaggio di servizio"
+  },
+  {
+    "q": "planimetria fg812",
+    "expect": [{ "from": "carla.mancuso@esempio.it", "subject": "La planimetria che mi avevi chiesto", "attachment": "SCN_0047_20260918_planim-cat-fg812-part77-sub5.pdf" }],
+    "top": 3,
+    "note": "nome di file fatto dallo scanner, con il foglio catastale dentro"
+  },
+  {
+    "q": "capitolato arredi sala consiliare",
+    "expect": [{ "from": "gare@consorziobonifica.esempio.it", "subject": "Richiesta di preventivo – arredi sala consiliare", "attachment": "Capitolato_arredi_sala_consiliare_DEF(2).pdf" }],
+    "top": 3,
+    "note": "nome di file con trattini bassi, «DEF» e «(2)»"
+  },
+  {
+    "q": "la convocazione dell'assemblea con la delega",
+    "expect": [{ "from": "amministrazione@condominio.esempio.it", "subject": "Assemblea ordinaria", "attachment": "Modulo delega.docx" }],
+    "top": 5,
+    "note": "esempio già presente nella ricerca del prototipo; ora c'è anche la convocazione degli Orti con la delega"
+  },
+  {
+    "q": "preventivo cucina definitivo e quello prima",
+    "expect": [
+      { "from": "giulia@cucinerinaldi.esempio.it", "subject": "Re: Preventivo cucina", "attachment": "Preventivo cucina definitivo.pdf" },
+      { "from": "giulia@cucinerinaldi.esempio.it", "subject": "Re: Preventivo cucina", "attachment": "Preventivo cucina v2.pdf" }
+    ],
+    "top": 5,
+    "note": "l'ultima versione di un preventivo insieme alla precedente"
+  },
+  {
+    "q": "Elena computo metrico ultima versione",
+    "expect": [{ "from": "elena.sartori@studiosartori.esempio.it", "subject": "Re: Computo metrico", "attachment": "Computo metrico v3.xlsx" }],
+    "top": 5,
+    "note": "tre versioni dello stesso foglio nello stesso thread"
+  },
+  {
+    "q": "foto della targhetta della caldaia",
+    "expect": [{ "from": "assistenza@termobassi.esempio.it", "subject": "Re: Manutenzione caldaia, preventivo sostituzione", "attachment": "targhetta caldaia.jpg" }],
+    "top": 3,
+    "note": "una foto piccola (31 KB) in mezzo alle immagini della firma"
+  },
+  {
+    "q": "verbale assemblea 18 settembre",
+    "expect": [{ "from": "amministrazione@condominio.esempio.it", "subject": "Verbale dell’assemblea straordinaria del 18 settembre" }],
+    "top": 3,
+    "note": "data nell'oggetto, diversa da quella del messaggio"
+  },
+  {
+    "q": "bolletta di settembre",
+    "expect": [{ "from": "bollette@energia.esempio.it", "subject": "La tua bolletta di settembre" }],
+    "top": 3,
+    "note": "messaggio di servizio; c'è anche la bolletta di agosto"
+  },
+  {
+    "q": "foto del tubo corroso",
+    "expect": [{ "from": "elena.sartori@studiosartori.esempio.it", "subject": "Imprevisti in cantiere", "attachment": "Tubo corroso, foto.jpg" }],
+    "top": 3,
+    "note": "foto in un thread lungo con tanti allegati"
+  },
+  {
+    "q": "preventivo bianco latte",
+    "expect": [{ "from": "preventivi@coloriciampi.esempio.it", "subject": "Preventivo tinteggiatura soggiorno", "attachment": "PREV_2026_0311.pdf" }],
+    "top": 3,
+    "note": "v15, dopo le prove: «bianco latte» sta solo dentro il PDF"
+  },
+  {
+    "q": "sedie in polipropilene",
+    "expect": [{ "from": "info@forniture-esempio.it", "subject": "Re: Sedie per la sala riunioni", "attachment": "Preventivo 2026-1187.pdf" }],
+    "top": 3,
+    "note": "v15, dopo le prove: il materiale sta solo nel preventivo allegato"
+  },
+  {
+    "q": "qr della fiera",
+    "expect": [{ "from": "michela.rota@esempio.it", "subject": "Fiera dell’artigianato, sabato", "attachment": "qrcode.png" }],
+    "top": 3,
+    "note": "v15, dopo le prove: «qr» cerca tra i codici"
+  }
+]

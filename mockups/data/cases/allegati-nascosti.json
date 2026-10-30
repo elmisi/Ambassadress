@@ -1,0 +1,679 @@
+{
+  "id": "allegati-nascosti",
+  "title": "Allegati che sembrano decorazioni: un QR, uno screenshot incorporato, una scansione stretta, lo stesso documento in tre messaggi, lo stesso file con due nomi, due file diversi con lo stesso nome",
+  "report": "giro v15, prova 3 di app/NOTE.md (gli allegati nascosti)",
+  "messages": [
+    {
+      "date": "2026-09-21T07:00:00.000Z",
+      "from": {
+        "name": "Renato Fusco",
+        "address": "renato.fusco@cooperativa-casa.esempio.it",
+        "client": "outlook"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Bozza dello statuto",
+      "messageId": "<case-allegati-nascosti-7@cooperativa-casa.esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Buongiorno Alex,\n\nti mando la bozza dello statuto che ha preparato il notaio. Guarda soprattutto l’articolo 7 sulle quote.\n\nRenato Fusco\nPresidente – Cooperativa Casa Comune",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "Statuto cooperativa, bozza.pdf",
+          "mimeType": "application/pdf",
+          "size": 310000,
+          "inline": false,
+          "fileKey": "statuto-cooperativa"
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Bozza dello statuto"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-allegati-nascosti-statuto",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-22T20:30:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Renato Fusco",
+          "address": "renato.fusco@cooperativa-casa.esempio.it",
+          "client": "outlook"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Bozza dello statuto",
+      "messageId": "<case-allegati-nascosti-8@esempio.it>",
+      "inReplyTo": "<case-allegati-nascosti-7@cooperativa-casa.esempio.it>",
+      "references": [
+        "<case-allegati-nascosti-7@cooperativa-casa.esempio.it>"
+      ],
+      "text": "Letta. All’articolo 7 la quota minima mi sembra alta per i soci giovani: si può fare una quota ridotta sotto i 30 anni?\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Bozza dello statuto"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-allegati-nascosti-statuto",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-23T06:40:00.000Z",
+      "from": {
+        "name": "Renato Fusco",
+        "address": "renato.fusco@cooperativa-casa.esempio.it",
+        "client": "outlook"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Bozza dello statuto",
+      "messageId": "<case-allegati-nascosti-9@cooperativa-casa.esempio.it>",
+      "inReplyTo": "<case-allegati-nascosti-8@esempio.it>",
+      "references": [
+        "<case-allegati-nascosti-7@cooperativa-casa.esempio.it>",
+        "<case-allegati-nascosti-8@esempio.it>"
+      ],
+      "text": "Ottima idea, la propongo al notaio. Ti rimando la bozza perché nell’altra email avevo allegato per sbaglio la versione di agosto: questa è quella giusta. Anzi no, era giusta anche quella, scusa.\n\nRenato Fusco\nPresidente – Cooperativa Casa Comune",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "Statuto cooperativa, bozza.pdf",
+          "mimeType": "application/pdf",
+          "size": 310000,
+          "inline": false,
+          "fileKey": "statuto-cooperativa"
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Re: Bozza dello statuto"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-allegati-nascosti-statuto",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-28T17:15:00.000Z",
+      "from": {
+        "name": "Renato Fusco",
+        "address": "renato.fusco@cooperativa-casa.esempio.it",
+        "client": "outlook"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        },
+        {
+          "name": "Nora Piras",
+          "address": "nora.piras@esempio.it",
+          "client": "gmail-it"
+        },
+        {
+          "name": "Walter Cuomo",
+          "address": "walter.cuomo@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Bozza dello statuto",
+      "messageId": "<case-allegati-nascosti-10@cooperativa-casa.esempio.it>",
+      "inReplyTo": "<case-allegati-nascosti-9@cooperativa-casa.esempio.it>",
+      "references": [
+        "<case-allegati-nascosti-7@cooperativa-casa.esempio.it>",
+        "<case-allegati-nascosti-8@esempio.it>",
+        "<case-allegati-nascosti-9@cooperativa-casa.esempio.it>"
+      ],
+      "text": "Cari tutti,\n\nper la riunione di giovedì vi rimetto qui la bozza dello statuto, così l’avete tutti sottomano. Alex ha proposto una quota ridotta sotto i 30 anni, ne parliamo lì.\n\nRenato Fusco\nPresidente – Cooperativa Casa Comune",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "Statuto cooperativa, bozza.pdf",
+          "mimeType": "application/pdf",
+          "size": 310000,
+          "inline": false,
+          "fileKey": "statuto-cooperativa"
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Re: Bozza dello statuto"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-allegati-nascosti-statuto",
+        "labels": [
+          "\\Inbox"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-09-29T16:00:00.000Z",
+      "from": {
+        "name": "Michela Rota",
+        "address": "michela.rota@esempio.it",
+        "client": "iphone"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Corso di ceramica, il modulo",
+      "messageId": "<case-allegati-nascosti-3@esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Ecco il modulo per il corso di ceramica, va firmato e riportato alla prima lezione.\n\nInviato da iPhone",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "documento.pdf",
+          "mimeType": "application/pdf",
+          "size": 96000,
+          "inline": false
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Corso di ceramica, il modulo"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-allegati-nascosti-modulo",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-09-30T13:10:00.000Z",
+      "from": {
+        "name": "Colori Ciampi",
+        "address": "preventivi@coloriciampi.esempio.it",
+        "client": "outlook"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Preventivo tinteggiatura soggiorno",
+      "messageId": "<case-allegati-nascosti-12@coloriciampi.esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Gentile cliente,\n\nin allegato il preventivo per la tinteggiatura del soggiorno e del corridoio, con stuccatura delle crepe e due mani di idropittura traspirante. Il preventivo è valido 60 giorni.\n\nCordiali saluti\n\nUfficio preventivi\nColori Ciampi – tinteggiature e decorazioni\nTel. 06 5553 0408",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "PREV_2026_0311.pdf",
+          "mimeType": "application/pdf",
+          "size": 188000,
+          "inline": false,
+          "fileKey": "tinteggiatura-0311",
+          "text": "Preventivo n. 2026/0311\nTinteggiatura del soggiorno (32 m²) e del corridoio (9 m²)\nStuccatura delle crepe del soffitto\nDue mani di idropittura traspirante, colore bianco latte\nProtezione di pavimenti e infissi, pulizia finale\nTotale: 1.480,00 € + IVA\nValidità: 60 giorni"
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Preventivo tinteggiatura soggiorno"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-allegati-nascosti-tinteggiatura",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-02T16:45:00.000Z",
+      "from": {
+        "name": "Sergio Alberti",
+        "address": "sergio.alberti@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Il preventivo dell’imbianchino",
+      "messageId": "<case-allegati-nascosti-13@esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Ciao Alex,\n\nti giro il preventivo che Ciampi ha fatto a mia sorella per il soggiorno, così vedi se è in linea con quello che ha fatto a te. Mi sembra caro.\n\n-- \nSergio",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "preventivo imbianchino soggiorno.pdf",
+          "mimeType": "application/pdf",
+          "size": 188000,
+          "inline": false,
+          "fileKey": "tinteggiatura-0311"
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Il preventivo dell’imbianchino"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-allegati-nascosti-imbianchino",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-03T07:20:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Sergio Alberti",
+          "address": "sergio.alberti@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Il preventivo dell’imbianchino",
+      "messageId": "<case-allegati-nascosti-14@esempio.it>",
+      "inReplyTo": "<case-allegati-nascosti-13@esempio.it>",
+      "references": [
+        "<case-allegati-nascosti-13@esempio.it>"
+      ],
+      "text": "È identico al mio, anche nei prezzi: direi che sono i loro prezzi standard.\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Il preventivo dell’imbianchino"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-allegati-nascosti-imbianchino",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-10-03T08:20:00.000Z",
+      "from": {
+        "name": "Renato Fusco",
+        "address": "renato.fusco@cooperativa-casa.esempio.it",
+        "client": "outlook"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        },
+        {
+          "name": "Nora Piras",
+          "address": "nora.piras@esempio.it",
+          "client": "gmail-it"
+        },
+        {
+          "name": "Walter Cuomo",
+          "address": "walter.cuomo@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Verbale della riunione di giovedì",
+      "messageId": "<case-allegati-nascosti-11@cooperativa-casa.esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Cari tutti,\n\nin allegato il verbale della riunione di giovedì, con la quota ridotta approvata. Se avete correzioni scrivetemi entro mercoledì.\n\nRenato Fusco\nPresidente – Cooperativa Casa Comune",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "documento.pdf",
+          "mimeType": "application/pdf",
+          "size": 142000,
+          "inline": false
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Verbale della riunione di giovedì"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-allegati-nascosti-verbale",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-06T20:05:00.000Z",
+      "from": {
+        "name": "Patrizia Fumagalli",
+        "address": "patrizia.fumagalli@esempio.it",
+        "client": "outlook"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Quota del coro",
+      "messageId": "<case-allegati-nascosti-6@esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Ciao Alex,\n\nper la quota del coro ti mando la scansione del codice a barre del bollettino: si paga anche dal tabaccaio, facendolo leggere alla cassa. Sono 90 euro e scade il 31 ottobre.\n\nGrazie!\n\nPatrizia Fumagalli\nTesoriera – Coro Voci del Quartiere",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "scansione.jpg",
+          "mimeType": "image/jpeg",
+          "size": 47000,
+          "inline": false,
+          "width": 900,
+          "height": 100,
+          "code": "EAN-13"
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Quota del coro"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-allegati-nascosti-bollettino",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-08T18:10:00.000Z",
+      "from": {
+        "name": "Michela Rota",
+        "address": "michela.rota@esempio.it",
+        "client": "iphone"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Fiera dell’artigianato, sabato",
+      "messageId": "<case-allegati-nascosti-1@esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Ciao Alex! In allegato il QR per l’ingresso di sabato, va mostrato all’entrata dal telefono. Ci vediamo alle 10 davanti alla biglietteria.\n\nInviato da iPhone",
+      "html": null,
+      "attachments": [
+        {
+          "filename": "qrcode.png",
+          "mimeType": "image/png",
+          "size": 3900,
+          "inline": false,
+          "width": 200,
+          "height": 200,
+          "code": "QR-Code"
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Fiera dell’artigianato, sabato"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-allegati-nascosti-qr",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-08T18:31:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Michela Rota",
+          "address": "michela.rota@esempio.it",
+          "client": "iphone"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Fiera dell’artigianato, sabato",
+      "messageId": "<case-allegati-nascosti-2@esempio.it>",
+      "inReplyTo": "<case-allegati-nascosti-1@esempio.it>",
+      "references": [
+        "<case-allegati-nascosti-1@esempio.it>"
+      ],
+      "text": "Grazie! A sabato, alle 10.\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Fiera dell’artigianato, sabato"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-allegati-nascosti-qr",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    },
+    {
+      "date": "2026-10-09T09:25:00.000Z",
+      "from": {
+        "name": "Ettore Bonfanti",
+        "address": "ettore.bonfanti@lavoro.esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Alex Moro",
+          "address": "alex.moro@esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Errore nel foglio dei rimborsi",
+      "messageId": "<case-allegati-nascosti-4@lavoro.esempio.it>",
+      "inReplyTo": null,
+      "references": [],
+      "text": "Ciao Alex,\n\nquando apro il secondo foglio dei rimborsi mi esce questo:\n\n[image: image.png]\n\nSuccede solo a me? Prima di chiamare l’assistenza volevo sentire te.\n\n-- \nEttore Bonfanti\nAmministrazione | Lavoro Esempio S.r.l.",
+      "html": "<div dir=\"ltr\">Ciao Alex,<div><br></div><div>quando apro il secondo foglio dei rimborsi mi esce questo:</div><div><br></div><div><img src=\"cid:ii_mg7k2x4a0\" alt=\"image.png\" width=\"280\" height=\"170\"><br></div><div><br></div><div>Succede solo a me? Prima di chiamare l’assistenza volevo sentire te.</div><div><br></div>-- <br><div dir=\"ltr\">Ettore Bonfanti<br>Amministrazione | Lavoro Esempio S.r.l.</div></div>",
+      "attachments": [
+        {
+          "filename": "image.png",
+          "mimeType": "image/png",
+          "size": 21500,
+          "inline": true,
+          "contentId": "ii_mg7k2x4a0",
+          "width": 280,
+          "height": 170
+        }
+      ],
+      "headers": [
+        [
+          "Subject",
+          "Errore nel foglio dei rimborsi"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-allegati-nascosti-schermata",
+        "labels": [
+          "\\Inbox"
+        ]
+      }
+    },
+    {
+      "date": "2026-10-09T10:02:00.000Z",
+      "from": {
+        "name": "Alex Moro",
+        "address": "alex.moro@esempio.it",
+        "client": "gmail-it"
+      },
+      "to": [
+        {
+          "name": "Ettore Bonfanti",
+          "address": "ettore.bonfanti@lavoro.esempio.it",
+          "client": "gmail-it"
+        }
+      ],
+      "cc": [],
+      "subject": "Re: Errore nel foglio dei rimborsi",
+      "messageId": "<case-allegati-nascosti-5@esempio.it>",
+      "inReplyTo": "<case-allegati-nascosti-4@lavoro.esempio.it>",
+      "references": [
+        "<case-allegati-nascosti-4@lavoro.esempio.it>"
+      ],
+      "text": "Succede anche a me, ma solo con il file vecchio: usa quello di ottobre, nella cartella condivisa.\n\nAlex",
+      "html": null,
+      "attachments": [],
+      "headers": [
+        [
+          "Subject",
+          "Re: Errore nel foglio dei rimborsi"
+        ]
+      ],
+      "flags": {
+        "seen": true,
+        "flagged": false
+      },
+      "gmail": {
+        "threadId": "case-allegati-nascosti-schermata",
+        "labels": [
+          "\\Sent"
+        ]
+      },
+      "quote": true
+    }
+  ]
+}

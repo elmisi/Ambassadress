@@ -17,7 +17,12 @@ Credentials for IMAP (one line each, never printed):
   ~/.secrets/gmail-app-password.txt   an app password (Google account > Security >
                                       2-Step Verification > App passwords)
 
-Only Python's standard library is used.
+--testi fills, without connecting, the text of the saved attachments (PDF with
+pdftotext, Office and OpenDocument files from their XML, plain text) and marks the
+images that are a QR code or a barcode (zbarimg), for the prototype's search and its
+«Codici». New attachments get them while they are downloaded.
+
+Only Python's standard library is used, plus pdftotext and zbarimg if installed.
 """
 import argparse
 import base64
@@ -31,8 +36,11 @@ import json
 import mailbox
 import os
 import re
+import shutil
+import subprocess
 import sys
 import time
+import zipfile
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_OUT = os.path.join(REPO, 'mockups', 'data', 'private', 'real.js')
@@ -354,6 +362,99 @@ def save_attachment(save_dir, msg_key, index, filename, payload):
     return os.path.relpath(path, DATA_DIR)
 
 
+TEXT_LIMIT = 10000
+OFFICE_XML = re.compile(r'^(word/document\.xml|word/(header|footer)\d*\.xml|xl/sharedStrings\.xml|ppt/slides/slide\d+\.xml|content\.xml)$')
+
+
+def run_quiet(args, timeout=20):
+    try:
+        out = subprocess.run(args, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=timeout)
+    except (OSError, subprocess.TimeoutExpired):
+        return None
+    return out
+
+
+def attachment_extras(path, filename, mime):
+    """The text inside a saved attachment ('text') and, for images, the kind of code ('code')."""
+    ext = (filename or '').rsplit('.', 1)[-1].lower() if '.' in (filename or '') else ''
+    mime = (mime or '').lower()
+    extras = {'scanned': True}
+    text = None
+    if ext == 'pdf' or mime == 'application/pdf':
+        if shutil.which('pdftotext'):
+            out = run_quiet(['pdftotext', '-l', '30', '-enc', 'UTF-8', '-q', path, '-'])
+            if out and out.returncode == 0:
+                text = out.stdout.decode('utf-8', 'replace')
+    elif ext in ('docx', 'xlsx', 'pptx', 'odt', 'ods', 'odp'):
+        try:
+            with zipfile.ZipFile(path) as z:
+                parts = []
+                for name in sorted(n for n in z.namelist() if OFFICE_XML.match(n)):
+                    xml = z.read(name).decode('utf-8', 'replace')
+                    xml = re.sub(r'</(w:p|a:p|text:p|text:h|si|row)>', '\n', xml)
+                    parts.append(re.sub(r'<[^>]+>', ' ', xml))
+                text = '\n'.join(parts)
+        except (OSError, zipfile.BadZipFile, KeyError, RuntimeError):
+            pass
+    elif ext in ('txt', 'csv', 'md', 'ics', 'json', 'xml', 'log') or mime.startswith('text/'):
+        try:
+            with open(path, 'rb') as f:
+                text = f.read(TEXT_LIMIT * 4).decode('utf-8', 'replace')
+        except OSError:
+            pass
+    elif mime.startswith('image/') or ext in ('png', 'jpg', 'jpeg', 'gif', 'webp', 'bmp'):
+        if shutil.which('zbarimg'):
+            out = run_quiet(['zbarimg', '-q', path], timeout=10)
+            if out and out.returncode == 0:
+                first = out.stdout.decode('utf-8', 'replace').split(':', 1)[0].strip()
+                if first:
+                    extras['code'] = first
+    if text:
+        text = re.sub(r'&(amp|lt|gt|quot|apos);', lambda m: {'amp': '&', 'lt': '<', 'gt': '>', 'quot': '"', 'apos': "'"}[m.group(1)], text)
+        text = re.sub(r'[ \t\r\f\v]+', ' ', text)
+        text = re.sub(r'\n\s*\n+', '\n\n', text).strip()
+        if text:
+            extras['text'] = text[:TEXT_LIMIT]
+    return extras
+
+
+def fill_texts(out):
+    """--testi: text and codes for the attachments already saved, without connecting."""
+    existing = load_existing(out)
+    if not existing:
+        sys.exit(f'{out} non c\'è: prima esporta le email.')
+    done = with_text = codes = missing = 0
+    for r in existing['messages']:
+        for a in r.get('attachments') or []:
+            if not a.get('path') or a.get('scanned'):
+                continue
+            path = os.path.join(DATA_DIR, a['path'])
+            if not os.path.exists(path):
+                missing += 1
+                continue
+            a.update(attachment_extras(path, a.get('filename'), a.get('mimeType')))
+            done += 1
+            with_text += 1 if a.get('text') else 0
+            codes += 1 if a.get('code') else 0
+    write_data(out, existing)
+    print(f'Allegati letti: {done}; con un testo: {with_text}; codici (QR, codici a barre): {codes}; file mancanti: {missing}.')
+    if not shutil.which('pdftotext'):
+        print('pdftotext non c\'è: senza, il testo dei PDF manca (pacchetto poppler-utils).')
+    if not shutil.which('zbarimg'):
+        print('zbarimg non c\'è: senza, i codici non si riconoscono (pacchetto zbar-tools).')
+
+
+def write_data(out, data):
+    os.makedirs(os.path.dirname(out), mode=0o700, exist_ok=True)
+    tmp = out + '.tmp'
+    fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+    with os.fdopen(fd, 'w', encoding='utf-8') as f:
+        f.write('window.AMB_DATA = ')
+        json.dump(data, f, ensure_ascii=False)
+        f.write(';\n')
+    os.replace(tmp, out)
+
+
 def convert(raw, meta, max_kb, save_dir=None):
     problems = []
     digest = hashlib.sha1(raw).hexdigest()[:16]
@@ -412,6 +513,7 @@ def convert(raw, meta, max_kb, save_dir=None):
             if save_dir:
                 try:
                     item['path'] = save_attachment(save_dir, msg_key, len(attachments), filename, payload)
+                    item.update(attachment_extras(os.path.join(DATA_DIR, item['path']), filename, ctype))
                 except OSError as e:
                     problems.append(f'allegato non salvato: {type(e).__name__}')
             attachments.append(item)
@@ -473,8 +575,12 @@ def main():
     ap.add_argument('--max-body-kb', type=int, default=512, help='tronca testo e HTML oltre questa misura')
     ap.add_argument('--out', default=DEFAULT_OUT, help='file di uscita (default mockups/data/private/real.js)')
     ap.add_argument('--no-attachments', action='store_true', help='non salvare gli allegati su disco (solo nome, tipo e dimensione)')
+    ap.add_argument('--testi', action='store_true', help='senza collegarsi: testo degli allegati già salvati e codici nelle immagini')
     args = ap.parse_args()
     out = os.path.abspath(args.out)
+    if args.testi:
+        fill_texts(out)
+        return
     save_dir = None if args.no_attachments else os.path.join(os.path.dirname(out), 'attachments')
 
     existing = None if args.full else load_existing(out)
@@ -519,14 +625,7 @@ def main():
         'messages': messages,
     }
 
-    os.makedirs(os.path.dirname(out), mode=0o700, exist_ok=True)
-    tmp = out + '.tmp'
-    fd = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
-    with os.fdopen(fd, 'w', encoding='utf-8') as f:
-        f.write('window.AMB_DATA = ')
-        json.dump(data, f, ensure_ascii=False)
-        f.write(';\n')
-    os.replace(tmp, out)
+    write_data(out, data)
 
     with_problems = sum(1 for r in added if r.get('problems'))
     size_mb = os.path.getsize(out) / 1024 / 1024

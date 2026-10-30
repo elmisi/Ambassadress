@@ -1,6 +1,6 @@
 # Ambassadress
 
-Un client di posta ripensato da zero. Ci sono i mockup navigabili (`mockups/v1` … `mockups/v14`), uno per giro di lavoro, il motore in Rust (`motore/`) e l'app desktop in sola lettura (`app/`, Tauri). Cosa vuole l'utente: `docs/desiderata.md`. Come si costruisce l'app vera: `docs/implementazione.md`. Le note di ogni giro: `docs/mockup_vN.md` (dalla v10 alla v13), poi `docs/app_giroN.md` (dal giro 1 dell'app, che contiene la v14); la mappa di stati ed eventi è in `docs/mockup_v10.md`.
+Un client di posta ripensato da zero. Ci sono i mockup navigabili (`mockups/v1` … `mockups/v15`), uno per giro di lavoro, il motore in Rust (`motore/`) e l'app desktop in sola lettura (`app/`, Tauri). Cosa vuole l'utente: `docs/desiderata.md`. Come si costruisce l'app vera: `docs/implementazione.md`. Le note di ogni giro: `docs/mockup_vN.md` (dalla v10 alla v13), poi `docs/app_giroN.md` (dal giro 1 dell'app, che contiene la v14); la mappa di stati ed eventi è in `docs/mockup_v10.md`.
 
 ## Regole fisse
 

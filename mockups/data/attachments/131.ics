@@ -1,0 +1,12 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Ambassadress//sintetico//IT
+METHOD:REQUEST
+BEGIN:VEVENT
+UID:131@esempio.it
+DTSTART:20260926T101000Z
+DTEND:20260926T111000Z
+SUMMARY:Lanterna | Giro delle consegne: dall’ordine al saldo
+ORGANIZER;CN=Lorenzo Bellini:mailto:lorenzo@bellini.esempio.it
+END:VEVENT
+END:VCALENDAR
