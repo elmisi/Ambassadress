@@ -791,6 +791,28 @@ impl Casella {
 
     /// Moltiplica la casella: ogni messaggio ricopiato `volte - 1` volte, con UID,
     /// X-GM-MSGID, thread e Message-ID nuovi. Serve a misurare il motore su migliaia di messaggi.
+    /// Come `moltiplica`, ma ogni copia va nel passato, una prima dell'altra, e gli UID seguono
+    /// le date come su Gmail: una casella con anni di storico (giro 2).
+    pub fn moltiplica_nel_passato(&mut self, volte: usize) {
+        let n = self.messaggi.len();
+        if n == 0 || volte < 2 {
+            return;
+        }
+        let min = self.messaggi.iter().map(|m| m.data_interna).min().unwrap_or(0);
+        let max = self.messaggi.iter().map(|m| m.data_interna).max().unwrap_or(0);
+        let passo = (max - min) + 30 * 86_400;
+        self.moltiplica(volte);
+        for (i, m) in self.messaggi.iter_mut().enumerate().skip(n) {
+            m.data_interna -= (i / n) as i64 * passo;
+            m.riscrivi("Date", &tempo::rfc5322(m.data_interna));
+        }
+        self.messaggi.sort_by_key(|m| (m.data_interna, m.uid));
+        for (i, m) in self.messaggi.iter_mut().enumerate() {
+            m.uid = i as u32 + 1;
+        }
+        self.prossimo_uid = n as u32 * volte as u32 + 1;
+    }
+
     pub fn moltiplica(&mut self, volte: usize) {
         let originali = self.messaggi.clone();
         for k in 1..volte {
@@ -841,6 +863,9 @@ pub struct Opzioni {
     /// Prima di rispondere a ogni comando aspetta tanto così: un server lento
     /// (anche il LOGOUT, per provare che la chiusura non lo aspetta).
     pub ritardo: Duration,
+    /// Chiude, con `* BYE` come Gmail, le connessioni senza comandi da tanto così
+    /// (anche quelle in IDLE da tanto così senza un IDLE nuovo).
+    pub chiudi_ferme: Option<Duration>,
 }
 
 impl Default for Opzioni {
@@ -854,6 +879,7 @@ impl Default for Opzioni {
             verboso: false,
             registra: true,
             ritardo: Duration::ZERO,
+            chiudi_ferme: None,
         }
     }
 }
@@ -1370,10 +1396,25 @@ fn servi(c: TcpStream, stato: &Mutex<Stato>, opz: &Opzioni) -> std::io::Result<(
     let mut aperta = false;
     let mut condstore = false;
     let mut conosciuti = 0usize;
+    r.get_ref().set_read_timeout(opz.chiudi_ferme)?;
+    let ferma = |w: &mut TcpStream| -> std::io::Result<()> {
+        let _ = write!(w, "* BYE Autologout; idle for too long\r\n");
+        println!(
+            "[{}] chiudo una connessione ferma da {} s",
+            ora(),
+            opz.chiudi_ferme.unwrap_or_default().as_secs()
+        );
+        w.shutdown(Shutdown::Both)
+    };
     loop {
         let mut riga = String::new();
-        if r.read_line(&mut riga)? == 0 {
-            return Ok(());
+        match r.read_line(&mut riga) {
+            Ok(0) => return Ok(()),
+            Ok(_) => {}
+            Err(e) if matches!(e.kind(), ErrorKind::WouldBlock | ErrorKind::TimedOut) => {
+                return ferma(&mut w);
+            }
+            Err(e) => return Err(e),
         }
         let riga = riga.trim_end_matches(['\r', '\n']).to_string();
         registra(stato, opz, &riga);
@@ -1487,7 +1528,11 @@ fn servi(c: TcpStream, stato: &Mutex<Stato>, opz: &Opzioni) -> std::io::Result<(
                 r.get_ref()
                     .set_read_timeout(Some(Duration::from_millis(50)))?;
                 let mut acc = String::new();
+                let inizio_idle = Instant::now();
                 loop {
+                    if opz.chiudi_ferme.is_some_and(|f| inizio_idle.elapsed() >= f) {
+                        return ferma(&mut w);
+                    }
                     match r.read_line(&mut acc) {
                         Ok(0) => return Ok(()),
                         Ok(_) => {
@@ -1511,7 +1556,7 @@ fn servi(c: TcpStream, stato: &Mutex<Stato>, opz: &Opzioni) -> std::io::Result<(
                         conosciuti = n;
                     }
                 }
-                r.get_ref().set_read_timeout(None)?;
+                r.get_ref().set_read_timeout(opz.chiudi_ferme)?;
                 write!(w, "{etichetta} OK IDLE terminated (Success)\r\n")?;
             }
             "LOGOUT" => {

@@ -11,6 +11,8 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod casella;
+#[macro_use]
+mod diario;
 mod motore_app;
 mod sistema;
 
@@ -71,13 +73,69 @@ fn avvio(stato: State<'_, Stato>) -> Value {
 
 /// Tutti i dati per l'interfaccia, nel formato `AMB_DATA` del prototipo.
 #[tauri::command]
-async fn dati(stato: State<'_, Stato>) -> Result<tauri::ipc::Response, String> {
+async fn dati(stato: State<'_, Stato>, dal: Option<i64>, generazione: Option<String>) -> Result<tauri::ipc::Response, String> {
     let c = stato.casella()?;
     let dati = stato.dati.clone();
-    let json = tauri::async_runtime::spawn_blocking(move || motore_app::dati(&dati, &c))
+    let da = da_dove(dal, generazione);
+    let json = tauri::async_runtime::spawn_blocking(move || motore_app::dati(&dati, &c, da))
         .await
         .map_err(|e| e.to_string())??;
     Ok(tauri::ipc::Response::new(json))
+}
+
+/// Giro 2: il testo dentro gli allegati, a parte, tutto o dopo una versione.
+#[tauri::command]
+async fn testi_allegati(stato: State<'_, Stato>, dal: Option<i64>, generazione: Option<String>) -> Result<tauri::ipc::Response, String> {
+    let c = stato.casella()?;
+    let dati = stato.dati.clone();
+    let da = da_dove(dal, generazione);
+    let json = tauri::async_runtime::spawn_blocking(move || motore_app::testi_allegati(&dati, &c, da))
+        .await
+        .map_err(|e| e.to_string())??;
+    Ok(tauri::ipc::Response::new(json))
+}
+
+/// Giro 2: i messaggi più vecchi di una persona, fuori dalla finestra, quando la si apre.
+#[tauri::command]
+async fn storia_persona(stato: State<'_, Stato>, indirizzo: String) -> Result<tauri::ipc::Response, String> {
+    let c = stato.casella()?;
+    let dati = stato.dati.clone();
+    let s = motore::vista::Storia::Persona(indirizzo);
+    let json = tauri::async_runtime::spawn_blocking(move || motore_app::storia(&dati, &c, &s))
+        .await
+        .map_err(|e| e.to_string())??;
+    Ok(tauri::ipc::Response::new(json))
+}
+
+/// Giro 2: i messaggi fuori dalla finestra che una ricerca potrebbe trovare. La pagina manda
+/// la ricerca già scomposta; i criteri esatti li applica lei.
+#[tauri::command]
+async fn cerca_storico(stato: State<'_, Stato>, domanda: Value) -> Result<tauri::ipc::Response, String> {
+    let c = stato.casella()?;
+    let dati = stato.dati.clone();
+    let testi = |k: &str| -> Vec<String> {
+        domanda[k].as_array().map(|v| v.iter().filter_map(|x| x.as_str().map(str::to_string)).collect()).unwrap_or_default()
+    };
+    let d = motore::vista::Domanda {
+        parole: testi("parole"),
+        almeno: domanda["almeno"].as_u64().unwrap_or(0) as usize,
+        da: testi("da"),
+        oggetto: testi("oggetto"),
+        persone: testi("persone"),
+        // la pagina manda millisecondi
+        prima: domanda["prima"].as_f64().map(|ms| (ms / 1000.0) as i64),
+        con_allegati: domanda["allegati"].as_bool().unwrap_or(false),
+        etichetta: domanda["etichetta"].as_str().map(str::to_string),
+    };
+    let s = motore::vista::Storia::Cerca(d);
+    let json = tauri::async_runtime::spawn_blocking(move || motore_app::storia(&dati, &c, &s))
+        .await
+        .map_err(|e| e.to_string())??;
+    Ok(tauri::ipc::Response::new(json))
+}
+
+fn da_dove(dal: Option<i64>, generazione: Option<String>) -> Option<motore::vista::Dal> {
+    Some(motore::vista::Dal { versione: dal?, generazione: generazione? })
 }
 
 /// Il primo avvio: prova a collegarsi e ad accedere, poi salva la casella e sincronizza.
@@ -127,7 +185,7 @@ fn server_di_prova() -> Option<(String, u16, bool)> {
     let v = std::env::var("A10S_SERVER").ok()?;
     let (h, p) = v.rsplit_once(':')?;
     if !matches!(h, "127.0.0.1" | "localhost" | "::1" | "[::1]") {
-        eprintln!("[prova] A10S_SERVER vale solo per 127.0.0.1 o localhost: lo ignoro");
+        diario!("[prova] A10S_SERVER vale solo per 127.0.0.1 o localhost: lo ignoro");
         return None;
     }
     Some((h.trim_matches(['[', ']']).to_string(), p.parse().ok()?, true))
@@ -170,12 +228,12 @@ async fn apri_allegato(stato: State<'_, Stato>, url: String, nome: String) -> Re
         let copia = sistema::copia_con_nome(&f.percorso, &cartella, if nome.is_empty() { &f.nome } else { &nome })
             .map_err(|e| format!("Non riesco a preparare il file: {e}"))?;
         sistema::apri(&copia.to_string_lossy()).map_err(|e| format!("Non riesco ad aprire il file: {e}"))?;
-        eprintln!("[allegati] passato a xdg-open: {url} ({})", f.tipo);
+        diario!("[allegati] passato a xdg-open: {url} ({})", f.tipo);
         Ok::<_, String>(true)
     })
     .await
     .map_err(|e| e.to_string())?
-    .inspect_err(|e| eprintln!("[allegati] «Apri» non riesce: {e}"))
+    .inspect_err(|e| diario!("[allegati] «Apri» non riesce: {e}"))
 }
 
 #[tauri::command]
@@ -263,7 +321,7 @@ fn apri_link(url: String) -> Result<bool, String> {
 /// Gli errori della pagina, sul terminale da cui si è lanciata l'app.
 #[tauri::command]
 fn diario(riga: String) {
-    eprintln!("[interfaccia] {}", riga.chars().take(2000).collect::<String>());
+    diario!("[interfaccia] {}", riga.chars().take(2000).collect::<String>());
 }
 
 #[tauri::command]
@@ -280,7 +338,7 @@ fn prova_chiusura(app: &tauri::AppHandle) {
     let app = app.clone();
     std::thread::spawn(move || {
         std::thread::sleep(std::time::Duration::from_secs_f64(secondi));
-        eprintln!("[prova] chiudo la finestra");
+        diario!("[prova] chiudo la finestra");
         if let Some(w) = app.get_webview_window("main") {
             let _ = w.close();
         }
@@ -290,7 +348,7 @@ fn prova_chiusura(app: &tauri::AppHandle) {
 fn prova_scriptata(app: &tauri::AppHandle) {
     let Some(file) = std::env::var_os("A10S_PROVA_JS") else { return };
     let Ok(js) = std::fs::read_to_string(&file) else {
-        eprintln!("[prova] non riesco a leggere lo script");
+        diario!("[prova] non riesco a leggere lo script");
         return;
     };
     let app = app.clone();
@@ -319,10 +377,10 @@ fn navigazione_ammessa(url: &tauri::Url) -> bool {
 
 fn fuori(url: &tauri::Url) {
     if matches!(url.scheme(), "http" | "https" | "mailto") {
-        eprintln!("[finestra] un indirizzo esterno va al programma del sistema");
+        diario!("[finestra] un indirizzo esterno va al programma del sistema");
         let _ = sistema::apri(url.as_str());
     } else {
-        eprintln!("[finestra] navigazione fermata ({})", url.scheme());
+        diario!("[finestra] navigazione fermata ({})", url.scheme());
     }
 }
 
@@ -340,7 +398,7 @@ fn ferma_processo_pagina() {
         let ppid = stat[b + 1..].split_whitespace().nth(1).and_then(|p| p.parse::<u32>().ok());
         if ppid == Some(io) && nome.starts_with("WebKitWebProces") {
             let ok = std::process::Command::new("kill").args(["-KILL", &pid.to_string()]).status().is_ok_and(|s| s.success());
-            eprintln!("[finestra] processo della pagina fermato alla chiusura: {}", if ok { "sì" } else { "no" });
+            diario!("[finestra] processo della pagina fermato alla chiusura: {}", if ok { "sì" } else { "no" });
         }
     }
 }
@@ -420,6 +478,8 @@ fn main() {
                 avvia_sincronia(app.handle(), &stato, c);
             }
             motore_app::avvia_scaricamento(app.handle().clone());
+            motore_app::avvia_storico(app.handle().clone());
+            motore_app::avvia_guardiano(app.handle().clone());
             prova_scriptata(app.handle());
             prova_chiusura(app.handle());
             Ok(())
@@ -427,6 +487,9 @@ fn main() {
         .invoke_handler(tauri::generate_handler![
             avvio,
             dati,
+            testi_allegati,
+            storia_persona,
+            cerca_storico,
             configura,
             cambia_password,
             togli_casella,

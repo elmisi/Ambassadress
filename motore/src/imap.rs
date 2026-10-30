@@ -274,6 +274,11 @@ impl Sessione {
         self.conn.tls.as_deref()
     }
 
+    /// Se il server ha chiuso o scritto qualcosa mentre la sessione era ferma (`rete::Segnale`).
+    pub fn segnale(&self) -> crate::rete::Segnale {
+        self.conn.segnale()
+    }
+
     pub fn capacita(&self) -> &[String] {
         &self.capacita
     }

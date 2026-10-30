@@ -1,7 +1,7 @@
 //! Il motore di Ambassadress: sincronizzazione IMAP in sola lettura verso un
 //! database SQLite locale, con misure, più quello che serve all'app (servizio in
-//! background con notizie, testi e allegati su richiesta, allegati in background,
-//! vista JSON). Vedi `README.md`.
+//! background con notizie, testi e allegati su richiesta, allegati e storico in
+//! background, vista JSON). Vedi `README.md`.
 
 pub mod ascolta;
 pub mod credenziali;
@@ -18,6 +18,7 @@ pub mod scaricamento;
 pub mod servizio;
 pub mod sincronizza;
 pub mod sistema;
+pub mod storico;
 pub mod su_richiesta;
 pub mod tempo;
 pub mod utf7;

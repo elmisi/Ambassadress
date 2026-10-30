@@ -56,6 +56,10 @@ pub struct OpzioniServizio {
     /// Attese fra un tentativo e l'altro quando la rete non c'è.
     pub attesa_minima: Option<Duration>,
     pub attesa_massima: Option<Duration>,
+    /// Un giro anche senza novità dal server, ogni tanto così (giro 2): non tutti i server
+    /// segnalano in IDLE i flag cambiati altrove (un «letto» dato dal web di Gmail). Con
+    /// CONDSTORE un giro senza cambi costa un EXAMINE.
+    pub giro_ogni: Option<Duration>,
 }
 
 impl Servizio {
@@ -214,6 +218,7 @@ fn ciclo(
             match &r.errore {
                 None => {
                     attese.azzera();
+                    prossimo = opz.giro_ogni.map(|o| Instant::now() + o);
                     contatto(&mut ultimo_contatto, &notizie);
                     if ascolto.is_none() {
                         let (cfg, contatori, stop, tx) = (

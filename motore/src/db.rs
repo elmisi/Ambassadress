@@ -12,7 +12,7 @@ use crate::imap::DatiFetch;
 use crate::mime::{self, Parte, Persona, Ruolo};
 use crate::tempo;
 
-const VERSIONE_SCHEMA: i64 = 3;
+const VERSIONE_SCHEMA: i64 = 6;
 
 const SCHEMA: &str = r#"
 CREATE TABLE IF NOT EXISTS meta (
@@ -66,6 +66,10 @@ CREATE TABLE IF NOT EXISTS messaggi (
 CREATE INDEX IF NOT EXISTS messaggi_thread ON messaggi(thread_id);
 CREATE INDEX IF NOT EXISTS messaggi_message_id ON messaggi(message_id);
 CREATE INDEX IF NOT EXISTS messaggi_data ON messaggi(data_interna);
+-- La finestra della vista (giro 2, dallo schema 6): i più recenti si leggono dall'indice, senza
+-- ordinare tutta la casella. L'espressione è la stessa di `vista`.
+CREATE INDEX IF NOT EXISTS messaggi_quando ON messaggi(COALESCE(data_interna, data) DESC, id DESC)
+    WHERE eliminato IS NULL;
 
 -- Dove sta un messaggio sul server: (cartella, UID). Cambia con UIDVALIDITY, il messaggio no.
 CREATE TABLE IF NOT EXISTS posizioni (
@@ -125,6 +129,13 @@ CREATE VIRTUAL TABLE IF NOT EXISTS ricerca USING fts5(
     tokenize = 'unicode61 remove_diacritics 2'
 );
 
+-- Il testo dentro gli allegati, per la ricerca nello storico (giro 2, dallo schema 6): una riga
+-- per contenuto, come `contenuti`; ai messaggi si arriva da `allegati.impronta`.
+CREATE VIRTUAL TABLE IF NOT EXISTS ricerca_allegati USING fts5(
+    impronta UNINDEXED, testo,
+    tokenize = 'unicode61 remove_diacritics 2'
+);
+
 -- UID chiesti e non arrivati (o arrivati malformati): si riprovano qualche volta.
 CREATE TABLE IF NOT EXISTS mancanti (
     cartella_id INTEGER NOT NULL,
@@ -160,6 +171,16 @@ CREATE TABLE IF NOT EXISTS allegati (
 ) WITHOUT ROWID;
 CREATE INDEX IF NOT EXISTS allegati_impronta ON allegati(impronta);
 
+-- Quello che c'è dentro un allegato scaricato, per contenuto (giro 2): il testo dei PDF, dei
+-- documenti e dei file di testo, al massimo 10.000 caratteri, per la ricerca; per le immagini
+-- il tipo di codice riconosciuto («QR-Code», «EAN-13»). Una riga vuol dire «guardato»: i due
+-- campi restano NULL se non c'è niente. Dallo schema 4.
+CREATE TABLE IF NOT EXISTS contenuti (
+    impronta TEXT PRIMARY KEY,
+    testo TEXT,
+    codice TEXT
+) WITHOUT ROWID;
+
 -- Parti che non sono arrivate: si riprovano dopo attese crescenti, non subito. Dallo schema 3.
 CREATE TABLE IF NOT EXISTS parti_fallite (
     messaggio_id INTEGER NOT NULL REFERENCES messaggi(id),
@@ -175,6 +196,17 @@ CREATE TABLE IF NOT EXISTS scaricati (
     byte INTEGER NOT NULL
 );
 
+-- Cosa è cambiato per la vista (giro 2, dallo schema 5): per ogni messaggio il numero del suo
+-- ultimo cambio, da un contatore che cresce. L'interfaccia chiede «dal numero N» e riceve solo
+-- quei messaggi (`vista::Dal`). I trigger qui sotto lo tengono aggiornato da soli: flag,
+-- etichette, testo, partecipanti, intestazioni, parti, allegati scaricati e misurati, testo
+-- degli allegati, thread, eliminazioni. Una riga per messaggio, quindi non cresce col tempo.
+CREATE TABLE IF NOT EXISTS cambi (
+    messaggio_id INTEGER PRIMARY KEY,
+    versione INTEGER NOT NULL
+);
+CREATE INDEX IF NOT EXISTS cambi_versione ON cambi(versione);
+
 CREATE TABLE IF NOT EXISTS sincronizzazioni (
     id INTEGER PRIMARY KEY,
     inizio INTEGER NOT NULL,
@@ -185,6 +217,84 @@ CREATE TABLE IF NOT EXISTS sincronizzazioni (
     riconnessioni INTEGER
 );
 "#;
+
+/// La versione dei trigger di `cambi`: va cambiata con `COLONNE_VISTE` o `CAMBI_PER_MESSAGGIO`,
+/// così i database che ci sono già li rifanno all'apertura.
+const TRIGGER_VERSIONE: i64 = 1;
+
+/// Il prossimo numero di `cambi`: l'indice su `versione` lo rende una sola lettura.
+const PROSSIMA_VERSIONE: &str = "(SELECT coalesce(max(versione), 0) + 1 FROM cambi)";
+/// Nei trigger UPSERT e non `INSERT OR REPLACE`: un `INSERT OR IGNORE` esterno impone la sua
+/// regola anche ai trigger, e il cambio si perderebbe in silenzio (provato con SQLite 3.46).
+const AGGIORNA_VERSIONE: &str = "ON CONFLICT(messaggio_id) DO UPDATE SET versione = excluded.versione";
+
+/// I trigger che riempiono `cambi`. Per le tabelle legate a un messaggio: (tabella, eventi).
+const CAMBI_PER_MESSAGGIO: &[(&str, &[&str])] = &[
+    ("corpi", &["INSERT", "UPDATE", "DELETE"]),
+    ("partecipanti", &["INSERT", "DELETE"]),
+    ("etichette", &["INSERT", "DELETE"]),
+    ("intestazioni", &["INSERT", "DELETE"]),
+    ("parti", &["INSERT", "UPDATE", "DELETE"]),
+    ("allegati", &["INSERT", "UPDATE", "DELETE"]),
+];
+
+/// Le colonne di `messaggi` che la vista mostra: un UPDATE che non le cambia non è un cambio
+/// (il MODSEQ cambia a ogni giro dei flag, per esempio).
+const COLONNE_VISTE: &[&str] = &[
+    "letto", "importante", "risposto", "bozza", "altre_flag", "thread_id", "corpo", "eliminato",
+    "oggetto", "data", "data_interna", "struttura", "message_id", "in_reply_to", "riferimenti",
+];
+
+fn trigger_dei_cambi() -> String {
+    let segna = |id: &str| {
+        format!("INSERT INTO cambi(messaggio_id, versione) VALUES ({id}, {PROSSIMA_VERSIONE}) {AGGIORNA_VERSIONE};")
+    };
+    let mut sql = String::new();
+    sql.push_str(&format!(
+        "CREATE TRIGGER IF NOT EXISTS cambi_messaggi_insert AFTER INSERT ON messaggi BEGIN {} END;\n",
+        segna("NEW.id")
+    ));
+    let quando = COLONNE_VISTE
+        .iter()
+        .map(|c| format!("OLD.{c} IS NOT NEW.{c}"))
+        .collect::<Vec<_>>()
+        .join(" OR ");
+    sql.push_str(&format!(
+        "CREATE TRIGGER IF NOT EXISTS cambi_messaggi_update AFTER UPDATE ON messaggi WHEN {quando} BEGIN {} END;\n",
+        segna("NEW.id")
+    ));
+    for (tabella, eventi) in CAMBI_PER_MESSAGGIO {
+        for e in *eventi {
+            let riga = if *e == "DELETE" { "OLD" } else { "NEW" };
+            sql.push_str(&format!(
+                "CREATE TRIGGER IF NOT EXISTS cambi_{tabella}_{} AFTER {e} ON {tabella} BEGIN {} END;\n",
+                e.to_ascii_lowercase(),
+                segna(&format!("{riga}.messaggio_id"))
+            ));
+        }
+    }
+    // il testo di un allegato vale per ogni messaggio che ha quel contenuto
+    for e in ["INSERT", "UPDATE"] {
+        sql.push_str(&format!(
+            "CREATE TRIGGER IF NOT EXISTS cambi_contenuti_{} AFTER {e} ON contenuti BEGIN
+               INSERT INTO cambi(messaggio_id, versione)
+                 SELECT messaggio_id, {PROSSIMA_VERSIONE} FROM allegati WHERE impronta = NEW.impronta
+                 {AGGIORNA_VERSIONE};
+             END;\n",
+            e.to_ascii_lowercase()
+        ));
+    }
+    // un thread che cambia chiave cambia tutti i suoi messaggi
+    sql.push_str(&format!(
+        "CREATE TRIGGER IF NOT EXISTS cambi_thread_update AFTER UPDATE ON thread
+           WHEN OLD.chiave IS NOT NEW.chiave OR OLD.gm_thrid IS NOT NEW.gm_thrid BEGIN
+             INSERT INTO cambi(messaggio_id, versione)
+               SELECT id, {PROSSIMA_VERSIONE} FROM messaggi WHERE thread_id = NEW.id
+               {AGGIORNA_VERSIONE};
+           END;\n"
+    ));
+    sql
+}
 
 pub struct Db {
     conn: Connection,
@@ -258,6 +368,18 @@ fn migra(conn: &Connection) -> Risultato<()> {
             conn.execute_batch(&format!("ALTER TABLE allegati ADD COLUMN {c} INTEGER"))?;
         }
     }
+    // schema 6: il testo degli allegati già letto entra nell'indice di ricerca, una volta sola
+    let schema: Option<String> = conn
+        .query_row("SELECT valore FROM meta WHERE chiave = 'schema'", [], |r| r.get(0))
+        .optional()?;
+    if schema.and_then(|v| v.parse::<i64>().ok()).is_some_and(|v| v < 6) {
+        conn.execute_batch(
+            "INSERT INTO ricerca_allegati(impronta, testo)
+               SELECT impronta, testo FROM contenuti
+               WHERE testo IS NOT NULL AND testo != ''
+                 AND impronta NOT IN (SELECT impronta FROM ricerca_allegati)",
+        )?;
+    }
     Ok(())
 }
 
@@ -322,11 +444,46 @@ impl Db {
         )?;
         conn.execute_batch(SCHEMA)?;
         migra(&conn)?;
-        conn.execute(
-            "INSERT INTO meta(chiave, valore) VALUES ('schema', ?1)
-             ON CONFLICT(chiave) DO UPDATE SET valore = excluded.valore",
-            params![VERSIONE_SCHEMA.to_string()],
-        )?;
+        // giro 2: si scrive in `meta` solo quando serve. Il database si apre a ogni lettura
+        // dell'interfaccia, e una scrittura aspetterebbe la sincronizzazione che sta scrivendo.
+        let meta = |chiave: &str| -> Risultato<Option<String>> {
+            Ok(conn
+                .query_row("SELECT valore FROM meta WHERE chiave = ?1", params![chiave], |r| r.get(0))
+                .optional()?)
+        };
+        let trigger = TRIGGER_VERSIONE.to_string();
+        if meta("trigger_cambi")?.as_deref() != Some(trigger.as_str()) {
+            // i trigger di una versione precedente si rifanno: una colonna nuova della vista
+            // deve diventare un cambio anche nei database che c'erano già
+            let vecchi: Vec<String> = conn
+                .prepare("SELECT name FROM sqlite_master WHERE type = 'trigger' AND name LIKE 'cambi\\_%' ESCAPE '\\'")?
+                .query_map([], |r| r.get(0))?
+                .collect::<Result<_, _>>()?;
+            let mut sql = String::from("BEGIN;\n");
+            for n in vecchi {
+                sql.push_str(&format!("DROP TRIGGER IF EXISTS \"{n}\";\n"));
+            }
+            sql.push_str(&trigger_dei_cambi());
+            sql.push_str(&format!(
+                "INSERT INTO meta(chiave, valore) VALUES ('trigger_cambi', '{trigger}')
+                 ON CONFLICT(chiave) DO UPDATE SET valore = excluded.valore;\nCOMMIT;"
+            ));
+            conn.execute_batch(&sql)?;
+        }
+        // la generazione del database: se la casella cambia, la vista lo sa e ricomincia da capo
+        if meta("generazione")?.is_none() {
+            conn.execute(
+                "INSERT OR IGNORE INTO meta(chiave, valore) VALUES ('generazione', ?1)",
+                params![format!("{}-{}", tempo::adesso(), std::process::id())],
+            )?;
+        }
+        if meta("schema")?.as_deref() != Some(VERSIONE_SCHEMA.to_string().as_str()) {
+            conn.execute(
+                "INSERT INTO meta(chiave, valore) VALUES ('schema', ?1)
+                 ON CONFLICT(chiave) DO UPDATE SET valore = excluded.valore",
+                params![VERSIONE_SCHEMA.to_string()],
+            )?;
+        }
         Ok(Db {
             conn,
             percorso: percorso.to_path_buf(),
@@ -793,6 +950,85 @@ impl Db {
         Ok(out)
     }
 
+    /// Lo storico (giro 2): i messaggi della cartella ancora senza testo, dal più recente
+    /// indietro, saltando `saltare` (quelli chiesti in questa sessione che non sono arrivati).
+    pub fn corpi_storico(
+        &self,
+        cartella_id: i64,
+        quanti: usize,
+        saltare: &HashSet<i64>,
+    ) -> Risultato<Vec<CorpoDaScaricare>> {
+        let mut st = self.conn.prepare_cached(
+            "SELECT m.id, p.uid FROM posizioni p JOIN messaggi m ON m.id = p.messaggio_id
+             WHERE p.cartella_id = ?1 AND m.corpo = 0 AND m.eliminato IS NULL
+             ORDER BY p.uid DESC LIMIT ?2",
+        )?;
+        let righe: Vec<(i64, u32)> = st
+            .query_map(params![cartella_id, (quanti + saltare.len()) as i64], |r| {
+                Ok((r.get(0)?, r.get::<_, i64>(1)? as u32))
+            })?
+            .collect::<Result<_, _>>()?;
+        let mut out = Vec::new();
+        for (id, uid) in righe {
+            if saltare.contains(&id) {
+                continue;
+            }
+            if let Some(scelte) = self.parti_di_testo(id)? {
+                out.push((id, uid, scelte));
+            }
+            if out.len() >= quanti {
+                break;
+            }
+        }
+        Ok(out)
+    }
+
+    /// La cartella che la sincronizzazione tiene (quella con `\All`, se c'è), se ha già fatto
+    /// almeno un giro: id, nome, UIDVALIDITY, messaggi sul server.
+    pub fn cartella_principale(&self) -> Risultato<Option<(i64, String, u32, u32)>> {
+        Ok(self
+            .conn
+            .query_row(
+                "SELECT id, nome, uidvalidity, coalesce(esistenti, 0) FROM cartelle
+                 WHERE uidvalidity IS NOT NULL ORDER BY (ruolo = '\\All') DESC, id LIMIT 1",
+                [],
+                |r| Ok((r.get(0)?, r.get(1)?, r.get::<_, i64>(2)? as u32, r.get::<_, i64>(3)? as u32)),
+            )
+            .optional()?)
+    }
+
+    /// Quali di questi messaggi sono ancora senza testo.
+    pub fn senza_corpo(&self, ids: &[i64]) -> Risultato<Vec<i64>> {
+        let lista = format!("[{}]", ids.iter().map(|u| u.to_string()).collect::<Vec<_>>().join(","));
+        let mut st = self.conn.prepare_cached(
+            "SELECT id FROM messaggi WHERE corpo = 0 AND id IN (SELECT value FROM json_each(?1))",
+        )?;
+        let v = st.query_map(params![lista], |r| r.get(0))?.collect::<Result<_, _>>()?;
+        Ok(v)
+    }
+
+    /// Per lo storico: i messaggi della cartella nel database, e quanti aspettano il testo.
+    pub fn conta_storico(&self, cartella_id: i64) -> Risultato<(u64, u64)> {
+        Ok(self.conn.query_row(
+            "SELECT count(*), coalesce(sum(m.corpo = 0 AND m.eliminato IS NULL), 0)
+             FROM posizioni p JOIN messaggi m ON m.id = p.messaggio_id WHERE p.cartella_id = ?1",
+            params![cartella_id],
+            |r| Ok((r.get::<_, i64>(0)? as u64, r.get::<_, i64>(1)? as u64)),
+        )?)
+    }
+
+    /// Quali di questi UID sono già nel database.
+    pub fn uid_presenti(&self, cartella_id: i64, uid: &[u32]) -> Risultato<HashSet<u32>> {
+        let lista = format!("[{}]", uid.iter().map(|u| u.to_string()).collect::<Vec<_>>().join(","));
+        let mut st = self.conn.prepare_cached(
+            "SELECT uid FROM posizioni WHERE cartella_id = ?1 AND uid IN (SELECT value FROM json_each(?2))",
+        )?;
+        let v = st
+            .query_map(params![cartella_id, lista], |r| Ok(r.get::<_, i64>(0)? as u32))?
+            .collect::<Result<_, _>>()?;
+        Ok(v)
+    }
+
     /// La prima parte di testo semplice e la prima HTML di un messaggio, in ordine di parte.
     /// Se non ne ha, lo segna come «niente da scaricare» e restituisce None.
     fn parti_di_testo(&self, id: i64) -> Risultato<Option<Vec<Parte>>> {
@@ -936,6 +1172,30 @@ impl Db {
                 m.pagine,
                 m.miniatura
             ])?;
+        Ok(())
+    }
+
+    /// Il testo e il codice letti dentro un contenuto dell'archivio (vedi `contenuti`).
+    pub fn salva_contenuto(
+        &self,
+        impronta: &str,
+        testo: Option<&str>,
+        codice: Option<&str>,
+    ) -> Risultato<()> {
+        self.conn
+            .prepare_cached(
+                "INSERT INTO contenuti(impronta, testo, codice) VALUES (?1, ?2, ?3)
+                 ON CONFLICT(impronta) DO UPDATE SET testo = excluded.testo, codice = excluded.codice",
+            )?
+            .execute(params![impronta, testo, codice])?;
+        self.conn
+            .prepare_cached("DELETE FROM ricerca_allegati WHERE impronta = ?1")?
+            .execute(params![impronta])?;
+        if let Some(t) = testo.filter(|t| !t.trim().is_empty()) {
+            self.conn
+                .prepare_cached("INSERT INTO ricerca_allegati(impronta, testo) VALUES (?1, ?2)")?
+                .execute(params![impronta, t])?;
+        }
         Ok(())
     }
 
@@ -1143,6 +1403,37 @@ mod prove {
     }
 
     #[test]
+    fn trigger_dei_cambi_rifatti_se_di_unaltra_versione() {
+        let dir = std::env::temp_dir().join(format!("motore-trigger-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).unwrap();
+        let p = dir.join("t.sqlite");
+        let conta = |c: &Connection| -> i64 {
+            c.query_row("SELECT count(*) FROM sqlite_master WHERE type = 'trigger' AND name LIKE 'cambi%'", [], |r| r.get(0))
+                .unwrap()
+        };
+        let quanti = {
+            let db = Db::apri(&p).unwrap();
+            conta(&db.conn)
+        };
+        assert!(quanti >= 16, "{quanti}");
+        {
+            // un database con i trigger di una versione vecchia: uno mancante, uno in più
+            let c = Connection::open(&p).unwrap();
+            c.execute_batch(
+                "DROP TRIGGER cambi_etichette_insert;
+                 CREATE TRIGGER cambi_vecchio AFTER INSERT ON meta BEGIN SELECT 1; END;
+                 UPDATE meta SET valore = '0' WHERE chiave = 'trigger_cambi';",
+            )
+            .unwrap();
+        }
+        let db = Db::apri(&p).unwrap();
+        assert_eq!(conta(&db.conn), quanti);
+        assert_eq!(db.meta("trigger_cambi").unwrap().as_deref(), Some(TRIGGER_VERSIONE.to_string().as_str()));
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    #[test]
     fn migrazione_dallo_schema_2() {
         let dir = std::env::temp_dir().join(format!("motore-migra-{}", std::process::id()));
         let _ = std::fs::remove_dir_all(&dir);
@@ -1162,7 +1453,11 @@ mod prove {
             .unwrap();
         }
         let db = Db::apri(&p).unwrap();
-        assert_eq!(db.meta("schema").unwrap().as_deref(), Some("3"));
+        assert_eq!(db.meta("schema").unwrap().as_deref(), Some("6"));
+        // gli schemi 4, 5 e 6 aggiungono solo tabelle (contenuti, cambi, ricerca negli allegati),
+        // trigger e un indice
+        db.salva_contenuto("abc", Some("testo"), None).unwrap();
+        assert_eq!(db.conta("SELECT count(*) FROM ricerca_allegati WHERE ricerca_allegati MATCH 'testo'").unwrap(), 1);
         assert_eq!(
             db.allegato_scaricato(7, "2").unwrap(),
             Some(("abc".into(), 10))

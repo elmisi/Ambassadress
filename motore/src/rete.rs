@@ -307,6 +307,39 @@ impl Connessione {
     pub fn chiudi(&mut self) {
         let _ = self.tcp.shutdown(Shutdown::Both);
     }
+
+    /// Guarda, senza aspettare e senza leggere, se su una connessione ferma è arrivato
+    /// qualcosa: la chiusura del server (dopo un'inattività lunga Gmail manda `* BYE` e
+    /// chiude, e il socket resta in CLOSE-WAIT finché non lo chiudiamo noi) o dei dati.
+    pub fn segnale(&self) -> Segnale {
+        if !self.buf.is_empty() {
+            return Segnale::Dati;
+        }
+        if self.tcp.set_nonblocking(true).is_err() {
+            return Segnale::Chiusa;
+        }
+        let mut b = [0u8; 1];
+        let esito = self.tcp.peek(&mut b);
+        let _ = self.tcp.set_nonblocking(false);
+        match esito {
+            Ok(0) => Segnale::Chiusa,
+            Ok(_) => Segnale::Dati,
+            Err(e) if e.kind() == std::io::ErrorKind::WouldBlock => Segnale::Niente,
+            Err(e) if e.kind() == std::io::ErrorKind::Interrupted => Segnale::Niente,
+            Err(_) => Segnale::Chiusa,
+        }
+    }
+}
+
+/// Cosa c'è su una connessione ferma (`Connessione::segnale`).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Segnale {
+    /// Niente di nuovo: la connessione sembra viva.
+    Niente,
+    /// Il server ha scritto qualcosa (con TLS può essere anche solo la chiusura cifrata).
+    Dati,
+    /// Il server ha chiuso, o il socket dà errore.
+    Chiusa,
 }
 
 /// Un socket nel registro di `Contatori`: esce dal registro quando la connessione finisce.

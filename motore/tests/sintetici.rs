@@ -166,6 +166,10 @@ fn opzioni_vista() -> OpzioniVista {
         prefisso_allegati: PREFISSO.into(),
         limite: None,
         solo: None,
+        dal: None,
+        html_solo_senza_testo: false,
+        testi_allegati: true,
+        finestra: None,
     }
 }
 
@@ -744,6 +748,7 @@ fn servizio_con_arrivi_cadute_e_password_sbagliata() {
         },
         attesa_minima: Some(Duration::from_millis(200)),
         attesa_massima: Some(Duration::from_secs(2)),
+        giro_ogni: None,
     };
     let servizio = Servizio::avvia(
         config(&server, finto::PASSWORD_PREDEFINITA),
@@ -964,6 +969,15 @@ fn pdf_e_immagini_pagine_miniature_e_misure() {
                 let (l, h) = motore::misure::misure_immagine(&jpeg).expect("miniatura JPEG");
                 assert_eq!(l.max(h), 360, "lato lungo della miniatura");
                 miniature.insert(p);
+                // giro 2: le pagine per l'anteprima, larghe 1600 pixel; oltre l'ultima niente
+                if pdf == 1 {
+                    let p1 = su_richiesta::pagina(&db, id, &a.parte, 1).unwrap().expect("pagina 1");
+                    let (l, _) = motore::misure::misure_immagine(&std::fs::read(&p1).unwrap()).unwrap();
+                    assert_eq!(l, 1600);
+                    assert!(su_richiesta::pagina(&db, id, &a.parte, *attese + 1).unwrap().is_none());
+                    assert!(su_richiesta::pagina(&db, id, &a.parte, 0).unwrap().is_none());
+                    std::fs::remove_file(p1).unwrap();
+                }
             } else if a.tipo.starts_with("image/") {
                 immagini += 1;
                 let (l, h) = (mis.larghezza.unwrap(), mis.altezza.unwrap());
@@ -1046,6 +1060,31 @@ fn pdf_e_immagini_pagine_miniature_e_misure() {
         0,
         "niente da rifare"
     );
+
+    // Giro 2: il testo dentro i PDF e i codici nelle immagini, per contenuto, senza rete.
+    let c_e = |p: &str| Command::new(p).arg("-h").output().is_ok();
+    if c_e("pdftotext") && c_e("zbarimg") {
+        let mut guardati = 0;
+        loop {
+            let n = su_richiesta::completa_contenuti(&db, 25).unwrap();
+            if n == 0 {
+                break;
+            }
+            guardati += n;
+        }
+        let contenuti = db.conta("SELECT count(DISTINCT impronta) FROM allegati").unwrap() as usize;
+        assert_eq!(guardati, contenuti, "ogni contenuto guardato una volta");
+        let json3 = vista::json(&db, &opzioni_vista()).unwrap();
+        assert!(json3.contains(r#""code":"QR-Code""#), "il QR della fiera");
+        assert!(json3.contains(r#""code":"EAN-13""#), "il codice a barre del bollettino");
+        assert_eq!(json3.matches(r#""code":"#).count(), 2, "solo i due codici veri");
+        assert!(json3.contains("polipropilene"), "il testo del preventivo delle sedie");
+        assert!(json3.contains("bianco latte"), "il testo del preventivo dell'imbianchino");
+        // ogni PDF sintetico ha la sua riga «Documento sintetico…»: tutti con il testo
+        assert_eq!(json3.matches("Documento sintetico creato per il prototipo.").count(), pdf);
+    } else {
+        eprintln!("pdftotext o zbarimg non c'è: salto il testo e i codici");
+    }
     drop(richieste);
     guardia_pulita(&server);
 }
@@ -1463,6 +1502,7 @@ fn servizio_contatto_aggiorna_in_idle_e_chiude_subito() {
         },
         attesa_minima: Some(Duration::from_millis(200)),
         attesa_massima: Some(Duration::from_secs(2)),
+        giro_ogni: None,
     };
     let prima = motore::tempo::adesso();
     let servizio = Servizio::avvia(
@@ -1604,4 +1644,324 @@ fn servizio_contatto_aggiorna_in_idle_e_chiude_subito() {
     assert!(lento.comandi().iter().any(|c| c.ends_with(" LOGOUT")));
     guardia_pulita(&server);
     guardia_pulita(&lento);
+}
+
+/// Giro 2: una connessione delle richieste ferma, chiusa dal server come fa Gmail, si
+/// chiude subito anche qui (niente CLOSE-WAIT) e si riapre prima del prossimo clic.
+#[test]
+fn connessione_ferma_chiusa_dal_server() {
+    let Some(dir) = sintetici() else { return };
+    let (casella, _) = Casella::carica(dir).unwrap();
+    let attesi = casella.messaggi.clone();
+    let server = avvia(
+        casella,
+        OpzioniServer {
+            chiudi_ferme: Some(Duration::from_secs(1)),
+            ..OpzioniServer::default()
+        },
+    );
+    let cartella = Cartella::nuova("ferme");
+    let mut db = Db::apri(&cartella.db()).unwrap();
+    sincronizza_tutto(&server, &mut db, &Opzioni { corpi: 0, ..tutto() });
+    let mut r = su_richiesta::Richieste::new(config(&server, finto::PASSWORD_PREDEFINITA));
+    assert_eq!(r.mantieni(Duration::from_secs(60)), su_richiesta::Mantenuta::Nessuna);
+    r.collega().unwrap();
+    assert!(r.collegata());
+    assert_eq!(r.mantieni(Duration::from_secs(60)), su_richiesta::Mantenuta::Viva);
+    // Il server la chiude dopo un secondo senza comandi.
+    let fine = Instant::now() + Duration::from_secs(5);
+    while server.connessioni_aperte() > 0 && Instant::now() < fine {
+        std::thread::sleep(Duration::from_millis(50));
+    }
+    assert_eq!(server.connessioni_aperte(), 0);
+    assert_eq!(
+        r.mantieni(Duration::from_secs(60)),
+        su_richiesta::Mantenuta::ChiusaDalServer
+    );
+    assert!(!r.collegata());
+    // Riaperta prima che serva; un NOOP la tiene viva.
+    r.collega().unwrap();
+    server.con(|s| s.comandi.clear());
+    std::thread::sleep(Duration::from_millis(300));
+    assert_eq!(r.mantieni(Duration::ZERO), su_richiesta::Mantenuta::Viva);
+    assert!(server.comandi().iter().any(|c| c.ends_with(" NOOP")), "{:?}", server.comandi());
+    // E serve davvero: un allegato arriva senza un accesso nuovo.
+    let (m, a) = attesi
+        .iter()
+        .find_map(|m| m.attese.allegati.first().map(|a| (m, a)))
+        .unwrap();
+    server.con(|s| s.comandi.clear());
+    let id = id_di(&db, m.msgid);
+    r.parte(&mut db, id, &a.parte).unwrap();
+    assert!(!server.comandi().iter().any(|c| c.contains(" LOGIN ")));
+    r.chiudi();
+    guardia_pulita(&server);
+}
+
+/// Giro 2: un «letto» dato altrove (dal web di Gmail) arriva anche se il server non lo
+/// segnala in IDLE (il finto server segnala solo i messaggi nuovi): c'è un giro ogni tanto.
+#[test]
+fn letto_altrove_senza_avviso_in_idle() {
+    let Some(dir) = sintetici() else { return };
+    let (casella, _) = Casella::carica(dir).unwrap();
+    let server = avvia(casella, OpzioniServer::default());
+    let cartella = Cartella::nuova("letto-altrove");
+    let (tx, rx) = mpsc::channel();
+    let opz = OpzioniServizio {
+        sincronizza: Opzioni { corpi: 0, ..tutto() },
+        giro_ogni: Some(Duration::from_secs(1)),
+        ..OpzioniServizio::default()
+    };
+    let servizio = Servizio::avvia(config(&server, finto::PASSWORD_PREDEFINITA), cartella.db(), opz, tx);
+    let mut viste = Vec::new();
+    let d = Duration::from_secs(20);
+    aspetta(&rx, &mut viste, d, |n| matches!(n, Notizia::Fine { .. }));
+    aspetta(&rx, &mut viste, d, |n| *n == Notizia::InLinea);
+    // un messaggio da leggere diventa letto sul server, senza avvisi
+    let uid = server.con(|s| {
+        s.casella.modseq += 1;
+        let modseq = s.casella.modseq;
+        let m = s
+            .casella
+            .messaggi
+            .iter_mut()
+            .rev()
+            .find(|m| !m.flags.iter().any(|f| f == "\\Seen"))
+            .unwrap();
+        m.flags.push("\\Seen".into());
+        m.modseq = modseq;
+        m.msgid
+    });
+    aspetta(&rx, &mut viste, d, |n| matches!(n, Notizia::Fine { aggiornati, .. } if *aggiornati >= 1));
+    servizio.ferma();
+    let db = Db::apri(&cartella.db()).unwrap();
+    let id = id_di(&db, uid);
+    let letto = db
+        .conta(&format!("SELECT letto FROM messaggi WHERE id = {id}"))
+        .unwrap();
+    assert_eq!(letto, 1, "il messaggio ora è letto anche nel database");
+    guardia_pulita(&server);
+}
+
+fn numero_in(json: &str, chiave: &str) -> i64 {
+    let k = format!("\"{chiave}\":");
+    let i = json.find(&k).unwrap_or_else(|| panic!("manca {chiave}")) + k.len();
+    json[i..].chars().take_while(|c| c.is_ascii_digit()).collect::<String>().parse().unwrap()
+}
+
+fn testo_in(json: &str, chiave: &str) -> String {
+    let k = format!("\"{chiave}\":\"");
+    let i = json.find(&k).unwrap_or_else(|| panic!("manca {chiave}")) + k.len();
+    json[i..].split('"').next().unwrap().to_string()
+}
+
+/// Giro 2: l'interfaccia riceve solo quello che è cambiato dall'ultima volta, non tutto.
+#[test]
+fn vista_solo_le_differenze() {
+    let Some(dir) = sintetici() else { return };
+    let (casella, _) = Casella::carica(dir).unwrap();
+    let server = avvia(casella, OpzioniServer::default());
+    let cartella = Cartella::nuova("differenze");
+    let mut db = Db::apri(&cartella.db()).unwrap();
+    let opz_sync = Opzioni { corpi: 600, ..tutto() };
+    sincronizza_tutto(&server, &mut db, &opz_sync);
+    let app = OpzioniVista { html_solo_senza_testo: true, testi_allegati: false, ..opzioni_vista() };
+    let tutto_ = vista::json(&db, &app).unwrap();
+    assert!(!tutto_.contains(r#""delta""#));
+    let (generazione, v0) = (testo_in(&tutto_, "generazione"), numero_in(&tutto_, "versione"));
+    assert!(v0 > 0);
+    let quanti = tutto_.matches(r#""localId":"#).count();
+    // L'HTML solo dove non c'è il testo semplice: molto meno peso, gli stessi messaggi.
+    let pieno = vista::json(&db, &opzioni_vista()).unwrap();
+    assert_eq!(pieno.matches(r#""localId":"#).count(), quanti);
+    assert!(tutto_.matches(r#""htmlBytes":"#).count() > 0);
+    assert!(tutto_.len() < pieno.len());
+    let dal = |v: i64| OpzioniVista {
+        dal: Some(vista::Dal { generazione: generazione.clone(), versione: v }),
+        ..app.clone()
+    };
+    // Niente di nuovo: una differenza vuota.
+    let vuota = vista::json(&db, &dal(v0)).unwrap();
+    assert!(vuota.contains(r#""delta":true"#) && vuota.contains(r#""tolti":[]"#));
+    assert_eq!(vuota.matches(r#""localId":"#).count(), 0);
+    assert_eq!(numero_in(&vuota, "versione"), v0);
+    // Un «letto» dato sul server: un messaggio solo.
+    let msgid = server.con(|s| {
+        s.casella.modseq += 1;
+        let modseq = s.casella.modseq;
+        let m = s.casella.messaggi.iter_mut().rev().find(|m| !m.flags.iter().any(|f| f == "\\Seen")).unwrap();
+        m.flags.push("\\Seen".into());
+        m.modseq = modseq;
+        m.msgid
+    });
+    sincronizza_tutto(&server, &mut db, &opz_sync);
+    let letto = vista::json(&db, &dal(v0)).unwrap();
+    assert_eq!(letto.matches(r#""localId":"#).count(), 1, "solo il messaggio letto");
+    assert!(letto.contains(&format!(r#""localId":{}"#, id_di(&db, msgid))));
+    assert!(letto.contains(r#""seen":true"#));
+    let v1 = numero_in(&letto, "versione");
+    assert!(v1 > v0);
+    // Un giro senza cambi non cambia la versione (il MODSEQ non conta).
+    sincronizza_tutto(&server, &mut db, &opz_sync);
+    assert_eq!(numero_in(&vista::json(&db, &dal(v1)).unwrap(), "versione"), v1);
+    // Un messaggio sparito dal server: tra i tolti, con la sua chiave.
+    let tolto = server.con(|s| s.casella.messaggi.remove(3).msgid);
+    sincronizza_tutto(&server, &mut db, &opz_sync);
+    let via = vista::json(&db, &dal(v1)).unwrap();
+    let chiave: String = rusqlite::Connection::open(cartella.db())
+        .unwrap()
+        .query_row("SELECT chiave FROM messaggi WHERE gm_msgid = ?1", [tolto as i64], |r| r.get(0))
+        .unwrap();
+    assert!(via.contains(&format!(r#""tolti":["{chiave}"]"#)), "{}", &via[..300.min(via.len())]);
+    assert_eq!(via.matches(r#""localId":"#).count(), 0);
+    let v2 = numero_in(&via, "versione");
+    // Il testo di un allegato: i messaggi con quel contenuto, e il testo a parte.
+    let mut richieste = su_richiesta::Richieste::new(config(&server, finto::PASSWORD_PREDEFINITA));
+    let (id, parte): (i64, String) = rusqlite::Connection::open(cartella.db())
+        .unwrap()
+        .query_row(
+            "SELECT p.messaggio_id, p.parte FROM parti p JOIN messaggi m ON m.id = p.messaggio_id
+             WHERE p.ruolo = 'allegato' AND m.eliminato IS NULL LIMIT 1",
+            [],
+            |r| Ok((r.get(0)?, r.get(1)?)),
+        )
+        .unwrap();
+    let al = richieste.parte(&mut db, id, &parte).unwrap();
+    let dopo_scarico = numero_in(&vista::json(&db, &dal(v2)).unwrap(), "versione");
+    assert!(dopo_scarico > v2, "scaricare un allegato è un cambio (misure, miniatura)");
+    db.salva_contenuto(&al.impronta, Some("parole dentro il file"), None).unwrap();
+    let col_testo = vista::json(&db, &dal(dopo_scarico)).unwrap();
+    assert!(col_testo.matches(r#""localId":"#).count() >= 1);
+    assert!(!col_testo.contains("parole dentro il file"), "il testo non viaggia coi messaggi");
+    let testi = vista::testi_allegati(&db, &dal(dopo_scarico)).unwrap();
+    assert!(testi.contains(&format!(r#""{PREFISSO}{id}/{parte}":"parole dentro il file""#)), "{testi}");
+    assert!(testi.contains(&format!(r#""{PREFISSO}{id}/""#)), "il messaggio tra i rifatti: {testi}");
+    assert!(vista::testi_allegati(&db, &app).unwrap().contains("parole dentro il file"));
+    // Un'altra generazione (la casella è cambiata): tutto da capo.
+    let altra = OpzioniVista {
+        dal: Some(vista::Dal { generazione: "altra".into(), versione: v0 }),
+        ..app.clone()
+    };
+    let da_capo = vista::json(&db, &altra).unwrap();
+    assert!(!da_capo.contains(r#""delta""#));
+    assert_eq!(da_capo.matches(r#""localId":"#).count(), quanti - 1);
+    drop(richieste);
+    guardia_pulita(&server);
+}
+
+/// Giro 2: lo storico a strati. La sincronizzazione tiene la finestra dei più recenti; lo
+/// storico, su una connessione sua, scarica il resto a lotti (prima le intestazioni, poi i
+/// testi), riparte da dov'era dopo una chiusura e non tocca la finestra. La pagina riceve
+/// solo la finestra, con differenze che non contano lo storico, e il resto a richiesta.
+#[test]
+fn storico_a_strati() {
+    use motore::storico::{self, Storico};
+    let Some(dir) = sintetici() else { return };
+    let (mut casella, _) = Casella::carica(dir).unwrap();
+    casella.moltiplica_nel_passato(4);
+    let n = casella.messaggi.len();
+    let server = avvia(casella, OpzioniServer { registra: false, ..OpzioniServer::default() });
+    let cartella = Cartella::nuova("storico");
+    let mut db = Db::apri(&cartella.db()).unwrap();
+    const FINESTRA: usize = 300;
+    let opz_sync = Opzioni { limite: Some(FINESTRA), corpi: FINESTRA, ..tutto() };
+    sincronizza_tutto(&server, &mut db, &opz_sync);
+    let conta = |db: &Db, sql: &str| db.conta(sql).unwrap();
+    assert_eq!(conta(&db, "SELECT count(*) FROM messaggi"), FINESTRA as i64);
+    let s0 = storico::stato(&db).unwrap().unwrap();
+    assert_eq!((s0.sul_server, s0.in_locale), (n as u64, FINESTRA as u64));
+
+    // La finestra per la pagina, prima dello storico.
+    let app = OpzioniVista { html_solo_senza_testo: true, testi_allegati: false, finestra: Some(FINESTRA), ..opzioni_vista() };
+    let prima = vista::json(&db, &app).unwrap();
+    let (generazione, v0) = (testo_in(&prima, "generazione"), numero_in(&prima, "versione"));
+
+    // Qualche passo, poi una chiusura: si riparte da quello che manca.
+    let cfg = config(&server, finto::PASSWORD_PREDEFINITA);
+    let mut st = Storico::new(cfg.clone(), FINESTRA);
+    let mut intestazioni = 0;
+    for _ in 0..3 {
+        let p = st.passo(&mut db, 200).unwrap();
+        assert!(!p.finito && p.byte > 0);
+        intestazioni += p.intestazioni;
+    }
+    st.chiudi();
+    drop(st);
+    let mut st = Storico::new(cfg, FINESTRA);
+    let (mut testi, mut passi) = (0, 0);
+    loop {
+        let p = st.passo(&mut db, 200).unwrap();
+        intestazioni += p.intestazioni;
+        testi += p.testi;
+        passi += 1;
+        assert!(passi < 200, "lo storico non finisce");
+        if p.finito {
+            break;
+        }
+    }
+    st.chiudi();
+    assert_eq!(intestazioni, n - FINESTRA, "ogni messaggio vecchio una volta sola");
+    assert_eq!(conta(&db, "SELECT count(*) FROM messaggi"), n as i64);
+    assert_eq!(conta(&db, "SELECT count(*) FROM messaggi WHERE corpo = 0"), 0, "tutti i testi");
+    assert!(testi > 0);
+    let s1 = storico::stato(&db).unwrap().unwrap();
+    assert_eq!((s1.in_locale, s1.senza_testo), (n as u64, 0));
+    // Un altro giro della sincronizzazione non riscarica niente.
+    let r = sincronizza_tutto(&server, &mut db, &opz_sync);
+    assert_eq!(r.nuovi + r.corpi, 0);
+
+    // La pagina: la finestra sola, e lo storico arrivato non è una differenza da rimandare tutta.
+    let finestra = vista::json(&db, &app).unwrap();
+    let in_finestra = finestra.matches(r#""localId":"#).count();
+    assert!(in_finestra >= FINESTRA && in_finestra < n, "{in_finestra} su {n}");
+    let delta = vista::json(&db, &OpzioniVista { dal: Some(vista::Dal { generazione, versione: v0 }), ..app.clone() }).unwrap();
+    assert!(delta.contains(r#""delta":true"#), "lo storico non fa rimandare tutto");
+    // A richiesta: una persona e una ricerca, solo fuori dalla finestra, coi thread interi.
+    let ids: HashSet<i64> = finestra
+        .match_indices(r#""localId":"#)
+        .map(|(i, k)| finestra[i + k.len()..].chars().take_while(|c| c.is_ascii_digit()).collect::<String>().parse().unwrap())
+        .collect();
+    let cambiati = delta.matches(r#""localId":"#).count();
+    eprintln!("storico: {n} messaggi, finestra {in_finestra}, differenza dopo lo storico {cambiati}, {passi} passi");
+    assert!(cambiati < in_finestra, "solo la finestra");
+    let (vecchio, indirizzo, oggetto): (i64, String, String) = rusqlite::Connection::open(cartella.db())
+        .unwrap()
+        .query_row(
+            "SELECT m.id, i.email, m.oggetto FROM messaggi m
+             JOIN partecipanti p ON p.messaggio_id = m.id AND p.ruolo = 'da'
+             JOIN indirizzi i ON i.id = p.indirizzo_id
+             WHERE m.oggetto IS NOT NULL ORDER BY COALESCE(m.data_interna, m.data) LIMIT 1",
+            [],
+            |r| Ok((r.get(0)?, r.get(1)?, r.get(2)?)),
+        )
+        .unwrap();
+    assert!(!ids.contains(&vecchio));
+    for (i, k) in delta.match_indices(r#""localId":"#) {
+        let id: i64 = delta[i + k.len()..].chars().take_while(|c| c.is_ascii_digit()).collect::<String>().parse().unwrap();
+        assert!(ids.contains(&id), "nella differenza solo messaggi della finestra");
+    }
+    let fuori = |json: &str| {
+        json.match_indices(r#""localId":"#)
+            .map(|(i, k)| json[i + k.len()..].chars().take_while(|c| c.is_ascii_digit()).collect::<String>().parse::<i64>().unwrap())
+            .collect::<Vec<_>>()
+    };
+    let persona = vista::storia(&db, &app, &vista::Storia::Persona(indirizzo.to_uppercase()), 1000).unwrap();
+    assert!(persona.starts_with(r#"{"storia":true,"#));
+    let trovati = fuori(&persona);
+    assert!(trovati.contains(&vecchio), "il messaggio più vecchio della persona");
+    assert!(trovati.iter().all(|id| !ids.contains(id)), "niente della finestra");
+    let parola: String = oggetto
+        .split(|c: char| !c.is_alphanumeric())
+        .filter(|w| w.chars().count() >= 5)
+        .max_by_key(|w| w.chars().count())
+        .unwrap()
+        .to_lowercase();
+    let radice: String = parola.chars().take(parola.chars().count() - 1).collect();
+    let cerca = |d: vista::Domanda| fuori(&vista::storia(&db, &app, &vista::Storia::Cerca(d), 300).unwrap());
+    assert!(cerca(vista::Domanda { parole: vec![radice.clone()], almeno: 1, ..Default::default() }).contains(&vecchio), "«{radice}» in «{oggetto}»");
+    assert!(cerca(vista::Domanda { parole: vec![radice.clone(), "zzzqqq".into(), parola.clone()], almeno: 2, ..Default::default() }).contains(&vecchio), "ne basta una in meno");
+    assert!(!cerca(vista::Domanda { parole: vec![radice.clone(), "zzzqqq".into()], almeno: 2, ..Default::default() }).contains(&vecchio));
+    assert!(cerca(vista::Domanda { parole: vec![radice], da: vec![indirizzo.split('@').next().unwrap().into()], ..Default::default() }).contains(&vecchio));
+    assert!(cerca(vista::Domanda::default()).is_empty(), "senza criteri niente");
+    guardia_pulita(&server);
 }

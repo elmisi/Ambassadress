@@ -1,7 +1,9 @@
 //! I programmi del sistema che il motore chiama, senza dipendenze nuove:
 //! `pdfinfo` e `pdftoppm` (poppler-utils) per le pagine e la miniatura dei PDF,
-//! `busctl` per sapere da NetworkManager se la connessione è a consumo, `df` per lo
-//! spazio libero sul disco.
+//! `pdftotext` per il loro testo, `unzip` per il testo dei documenti Office e
+//! OpenDocument, `zbarimg` (zbar-tools) per i QR code e i codici a barre, `busctl` per
+//! sapere da NetworkManager se la connessione è a consumo, `df` per lo spazio libero
+//! sul disco.
 //!
 //! Ogni chiamata ha un tempo massimo e non passa mai per una shell. Se il programma
 //! manca, fallisce o non risponde in tempo, la funzione restituisce «niente» senza
@@ -95,6 +97,19 @@ pub fn pagine_pdf(pdf: &Path) -> Option<u32> {
 /// il nome giusto). `Ok(true)` se c'è, `Ok(false)` se il PDF non si disegna,
 /// `Err(())` se `pdftoppm` non c'è.
 pub(crate) fn miniatura_pdf_esito(pdf: &Path, destinazione: &Path) -> Result<bool, ()> {
+    disegna_pagina(pdf, 1, &["-scale-to", "360", "-jpeg", "-jpegopt", "quality=72"], destinazione)
+}
+
+/// La pagina `n` del PDF in JPEG larga 1600 pixel, per l'anteprima da sfogliare (giro 2: il
+/// visore di WebKitGTK ha gli strumenti per scrivere sul PDF, e l'app legge soltanto).
+/// Come la miniatura: `Ok(false)` se non si disegna, `Err(())` se pdftoppm non c'è.
+pub(crate) fn pagina_pdf_esito(pdf: &Path, n: u32, destinazione: &Path) -> Result<bool, ()> {
+    let opzioni = ["-scale-to-x", "1600", "-scale-to-y", "-1", "-jpeg", "-jpegopt", "quality=82"];
+    disegna_pagina(pdf, n, &opzioni, destinazione)
+}
+
+/// Una pagina con `pdftoppm`, scritta in `destinazione` passando da un file temporaneo accanto.
+fn disegna_pagina(pdf: &Path, n: u32, opzioni: &[&str], destinazione: &Path) -> Result<bool, ()> {
     let cartella = destinazione.parent().unwrap_or_else(|| Path::new("."));
     let nome = destinazione
         .file_name()
@@ -109,23 +124,14 @@ pub(crate) fn miniatura_pdf_esito(pdf: &Path, destinazione: &Path) -> Result<boo
     let mut scritto = base.clone().into_os_string();
     scritto.push(".jpg");
     let scritto = std::path::PathBuf::from(scritto);
-    let argomenti: Vec<&std::ffi::OsStr> = [
-        "-f",
-        "1",
-        "-l",
-        "1",
-        "-singlefile",
-        "-scale-to",
-        "360",
-        "-jpeg",
-        "-jpegopt",
-        "quality=72",
-    ]
-    .iter()
-    .map(std::ffi::OsStr::new)
-    .chain([pdf.as_os_str(), base.as_os_str()])
-    .collect();
-    let esito = match esegui("pdftoppm", &argomenti, Duration::from_secs(20)) {
+    let pagina = n.to_string();
+    let argomenti: Vec<&std::ffi::OsStr> = ["-f", pagina.as_str(), "-l", pagina.as_str(), "-singlefile"]
+        .into_iter()
+        .chain(opzioni.iter().copied())
+        .map(std::ffi::OsStr::new)
+        .chain([pdf.as_os_str(), base.as_os_str()])
+        .collect();
+    let esito = match esegui("pdftoppm", &argomenti, Duration::from_secs(30)) {
         Uscita::Fatto(_) => {
             let buono = std::fs::metadata(&scritto).is_ok_and(|m| m.len() > 0);
             Ok(buono && std::fs::rename(&scritto, destinazione).is_ok())
@@ -140,6 +146,166 @@ pub(crate) fn miniatura_pdf_esito(pdf: &Path, destinazione: &Path) -> Result<boo
 /// La miniatura della prima pagina (vedi `miniatura_pdf_esito`); vero se è stata scritta.
 pub fn miniatura_pdf(pdf: &Path, destinazione: &Path) -> bool {
     miniatura_pdf_esito(pdf, destinazione).unwrap_or(false)
+}
+
+/// Quanti caratteri del testo di un allegato si tengono, per la ricerca.
+pub const LIMITE_TESTO: usize = 10_000;
+
+/// Il testo di un PDF con `pdftotext`, le prime 30 pagine. `Ok(None)` se il PDF non si
+/// legge, `Err(())` se pdftotext non c'è.
+pub(crate) fn testo_pdf(pdf: &Path) -> Result<Option<String>, ()> {
+    let argomenti: Vec<&std::ffi::OsStr> = ["-l", "30", "-enc", "UTF-8", "-q"]
+        .iter()
+        .map(std::ffi::OsStr::new)
+        .chain([pdf.as_os_str(), std::ffi::OsStr::new("-")])
+        .collect();
+    match esegui("pdftotext", &argomenti, Duration::from_secs(20)) {
+        Uscita::Fatto(o) => Ok(Some(normalizza_testo(&String::from_utf8_lossy(&o)))),
+        Uscita::Fallito => Ok(None),
+        Uscita::Assente => Err(()),
+    }
+}
+
+/// Le parti di un documento Office o OpenDocument che contengono il testo.
+pub(crate) fn parte_con_testo(nome: &str) -> bool {
+    let numerata = |prefisso: &str| {
+        nome.strip_prefix(prefisso)
+            .and_then(|r| r.strip_suffix(".xml"))
+            .is_some_and(|n| n.bytes().all(|b| b.is_ascii_digit()))
+    };
+    matches!(nome, "word/document.xml" | "xl/sharedStrings.xml" | "content.xml")
+        || numerata("word/header")
+        || numerata("word/footer")
+        || numerata("ppt/slides/slide")
+}
+
+/// Il testo di un documento Office (DOCX, XLSX, PPTX) o OpenDocument (ODT, ODS, ODP),
+/// che sono zip di XML, con `unzip`. `Ok(None)` se non è uno zip, `Err(())` se unzip non c'è.
+pub(crate) fn testo_documento(file: &Path) -> Result<Option<String>, ()> {
+    let entro = Duration::from_secs(10);
+    let elenco = match esegui("unzip", &[std::ffi::OsStr::new("-Z1"), file.as_os_str()], entro) {
+        Uscita::Fatto(o) => String::from_utf8_lossy(&o).into_owned(),
+        Uscita::Fallito => return Ok(None),
+        Uscita::Assente => return Err(()),
+    };
+    let mut nomi: Vec<&str> = elenco.lines().filter(|n| parte_con_testo(n)).collect();
+    // le slide nell'ordine giusto: slide2 prima di slide10
+    nomi.sort_by_key(|n| (n.len(), *n));
+    let mut testo = String::new();
+    for n in nomi.into_iter().take(80) {
+        // unzip legge i nomi come modelli: quelli delle parti di testo non hanno caratteri speciali
+        let argomenti = [std::ffi::OsStr::new("-p"), file.as_os_str(), std::ffi::OsStr::new(n)];
+        if let Uscita::Fatto(o) = esegui("unzip", &argomenti, entro) {
+            testo.push_str(&testo_da_xml(&String::from_utf8_lossy(&o)));
+            testo.push('\n');
+        }
+        if testo.len() > LIMITE_TESTO * 4 {
+            break;
+        }
+    }
+    Ok(Some(normalizza_testo(&testo)))
+}
+
+/// Il testo dentro un XML di Office: i paragrafi, le celle e le righe vanno a capo,
+/// gli altri tag diventano spazi, le entità tornano caratteri.
+pub(crate) fn testo_da_xml(xml: &str) -> String {
+    let mut out = String::with_capacity(xml.len() / 3);
+    let mut resto = xml;
+    while let Some(i) = resto.find('<') {
+        out.push_str(&entita(&resto[..i]));
+        let Some(j) = resto[i..].find('>') else {
+            resto = "";
+            break;
+        };
+        let tag = &resto[i + 1..i + j];
+        let a_capo = tag.strip_prefix('/').is_some_and(|n| {
+            matches!(n.trim(), "w:p" | "a:p" | "text:p" | "text:h" | "si" | "row")
+        });
+        out.push(if a_capo { '\n' } else { ' ' });
+        resto = &resto[i + j + 1..];
+    }
+    out.push_str(&entita(resto));
+    out
+}
+
+fn entita(s: &str) -> String {
+    if !s.contains('&') {
+        return s.to_string();
+    }
+    let mut out = String::with_capacity(s.len());
+    let mut resto = s;
+    while let Some(i) = resto.find('&') {
+        out.push_str(&resto[..i]);
+        let dopo = &resto[i + 1..];
+        let fine = dopo.find(';').filter(|&f| f <= 10);
+        let c = fine.and_then(|f| match &dopo[..f] {
+            "amp" => Some('&'),
+            "lt" => Some('<'),
+            "gt" => Some('>'),
+            "quot" => Some('"'),
+            "apos" => Some('\''),
+            n => n
+                .strip_prefix("#x")
+                .and_then(|h| u32::from_str_radix(h, 16).ok())
+                .or_else(|| n.strip_prefix('#').and_then(|d| d.parse().ok()))
+                .and_then(char::from_u32),
+        });
+        match (c, fine) {
+            (Some(c), Some(f)) => {
+                out.push(c);
+                resto = &dopo[f + 1..];
+            }
+            _ => {
+                out.push('&');
+                resto = dopo;
+            }
+        }
+    }
+    out.push_str(resto);
+    out
+}
+
+/// Spazi di fila ridotti a uno, righe vuote di fila a una, al massimo `LIMITE_TESTO` caratteri.
+pub(crate) fn normalizza_testo(s: &str) -> String {
+    let mut out = String::new();
+    let mut vuote = 0;
+    for riga in s.lines() {
+        let riga = riga.split_whitespace().collect::<Vec<_>>().join(" ");
+        if riga.is_empty() {
+            vuote += 1;
+            continue;
+        }
+        if !out.is_empty() {
+            out.push_str(if vuote > 0 { "\n\n" } else { "\n" });
+        }
+        vuote = 0;
+        out.push_str(&riga);
+        if out.len() > LIMITE_TESTO * 4 {
+            break;
+        }
+    }
+    match out.char_indices().nth(LIMITE_TESTO) {
+        Some((i, _)) => out[..i].to_string(),
+        None => out,
+    }
+}
+
+/// Il tipo del primo codice (QR-Code, EAN-13, CODE-128…) che `zbarimg` trova
+/// nell'immagine. `Ok(None)` se non ce n'è, `Err(())` se zbarimg non c'è.
+pub(crate) fn codice_immagine(file: &Path) -> Result<Option<String>, ()> {
+    let argomenti = [std::ffi::OsStr::new("-q"), file.as_os_str()];
+    match esegui("zbarimg", &argomenti, Duration::from_secs(10)) {
+        Uscita::Fatto(o) => Ok(leggi_codice(&String::from_utf8_lossy(&o))),
+        Uscita::Fallito => Ok(None),
+        Uscita::Assente => Err(()),
+    }
+}
+
+/// L'uscita di zbarimg è `TIPO:dati` per ogni codice: del primo si tiene solo il tipo.
+pub(crate) fn leggi_codice(uscita: &str) -> Option<String> {
+    let (tipo, _) = uscita.lines().next()?.split_once(':')?;
+    let tipo = tipo.trim();
+    (!tipo.is_empty() && tipo.len() <= 20 && !tipo.contains(' ')).then(|| tipo.to_string())
 }
 
 /// La risposta di `busctl get-property … Metered`: `u 4`. NetworkManager usa
@@ -214,6 +380,31 @@ mod prove {
         assert_eq!(leggi_a_consumo("s \"x\"\n"), None);
         assert_eq!(leggi_spazio("       Avail\n123456789\n"), Some(123456789));
         assert_eq!(leggi_spazio("Avail\n"), None);
+        assert_eq!(leggi_codice("QR-Code:https://esempio.it/x\n"), Some("QR-Code".into()));
+        assert_eq!(leggi_codice("EAN-13:8001234567890\nQR-Code:x\n"), Some("EAN-13".into()));
+        assert_eq!(leggi_codice(""), None);
+        assert_eq!(leggi_codice("scanned 0 barcode symbols"), None);
+    }
+
+    #[test]
+    fn testo_dei_documenti() {
+        assert!(parte_con_testo("word/document.xml"));
+        assert!(parte_con_testo("word/footer2.xml"));
+        assert!(parte_con_testo("ppt/slides/slide12.xml"));
+        assert!(parte_con_testo("xl/sharedStrings.xml"));
+        assert!(parte_con_testo("content.xml"));
+        assert!(!parte_con_testo("ppt/slides/_rels/slide1.xml.rels"));
+        assert!(!parte_con_testo("word/styles.xml"));
+        assert_eq!(
+            testo_da_xml("<w:p><w:r><w:t>Sedie &amp; tavoli</w:t></w:r></w:p><w:p><w:t>polipropilene &#232; ok</w:t></w:p>"),
+            "   Sedie & tavoli  \n  polipropilene è ok \n"
+        );
+        assert_eq!(
+            normalizza_testo("  Preventivo   n. 12 \n\n\n\n Totale\t 40 \n"),
+            "Preventivo n. 12\n\nTotale 40"
+        );
+        assert_eq!(normalizza_testo(&"a".repeat(LIMITE_TESTO + 50)).chars().count(), LIMITE_TESTO);
+        assert_eq!(entita("1 &lt; 2 &e; &amp"), "1 < 2 &e; &amp");
     }
 
     #[test]

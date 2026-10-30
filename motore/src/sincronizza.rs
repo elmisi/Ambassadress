@@ -718,7 +718,7 @@ fn rimappa(
 }
 
 #[allow(clippy::too_many_arguments)]
-fn scarica_intestazioni(
+pub(crate) fn scarica_intestazioni(
     s: &mut Sessione,
     db: &mut Db,
     cartella_id: i64,

@@ -12,6 +12,10 @@
 //! (`sistema`, con poppler-utils). La miniatura sta accanto al file, con lo stesso
 //! nome più `.miniatura.jpg`, e si fa una volta sola per contenuto.
 //!
+//! Più tardi, in background, `completa_contenuti` legge quello che c'è dentro: il testo
+//! dei PDF, dei documenti e dei file di testo (per la ricerca) e il tipo dei QR code e
+//! dei codici a barre nelle immagini (tabella `contenuti`, giro 2).
+//!
 //! Tutte le funzioni sono bloccanti, con il tempo massimo di `Config::timeout` su
 //! ogni lettura, e si possono chiamare da un thread qualunque con il suo `Db`.
 
@@ -114,6 +118,31 @@ pub fn miniatura(db: &Db, messaggio: i64, parte: &str) -> Risultato<Option<PathB
         .then_some(p))
 }
 
+/// Il nome della pagina `n` di un PDF disegnata per l'anteprima: accanto al file, stesso hash.
+pub fn nome_pagina(impronta: &str, n: u32) -> String {
+    format!("{impronta}.pagina-{n}.jpg")
+}
+
+/// La pagina `n` (da 1) di un PDF già scaricato, disegnata la prima volta che serve e poi
+/// tenuta nell'archivio. `None` se la parte non è nell'archivio, non è un PDF con quella
+/// pagina o non si disegna (anche senza poppler-utils). Niente rete.
+pub fn pagina(db: &Db, messaggio: i64, parte: &str, n: u32) -> Risultato<Option<PathBuf>> {
+    let Some(a) = parte_locale(db, messaggio, parte)? else {
+        return Ok(None);
+    };
+    let pagine = db.misure(messaggio, parte)?.and_then(|m| m.pagine).unwrap_or(0);
+    if n == 0 || n > pagine {
+        return Ok(None);
+    }
+    let dest = cartella_allegati(db).join(nome_pagina(&a.impronta, n));
+    if std::fs::metadata(&dest).is_ok_and(|m| m.is_file() && m.len() > 0) {
+        return Ok(Some(dest));
+    }
+    Ok(sistema::pagina_pdf_esito(&a.percorso, n, &dest)
+        .unwrap_or(false)
+        .then_some(dest))
+}
+
 /// Vero se il contenuto è un PDF: dal tipo, oppure dalla firma `%PDF-` nei primi
 /// 1024 byte (c'è chi manda i PDF come `application/octet-stream`).
 fn e_pdf(tipo: &str, dati: &[u8]) -> bool {
@@ -204,6 +233,146 @@ pub fn completa_archivio(db: &Db) -> Risultato<usize> {
         fatte += 1;
     }
     Ok(fatte)
+}
+
+/// Sopra questa dimensione un'immagine ha una miniatura (giro 2): sotto, l'immagine stessa
+/// pesa poco anche aperta (un logo, una firma, un'icona).
+pub const MINIATURA_DA: i64 = 150 * 1024;
+
+/// Un'immagine dell'archivio che aspetta la miniatura.
+#[derive(Debug, Clone)]
+pub struct ImmagineDaRidurre {
+    pub messaggio: i64,
+    pub parte: String,
+    /// Il file nell'archivio.
+    pub file: PathBuf,
+    /// Dove va la miniatura (`nome_miniatura`), accanto al file.
+    pub miniatura: PathBuf,
+}
+
+/// Le immagini dell'archivio più grandi di `MINIATURA_DA` senza miniatura, al massimo
+/// `quanti`, dalle più recenti. La miniatura la fa chi chiama (l'app la fa con gdk-pixbuf),
+/// poi lo dice con `miniatura_fatta`: nella vista l'allegato avrà `thumb`, come i PDF.
+pub fn immagini_da_ridurre(db: &Db, quanti: usize) -> Risultato<Vec<ImmagineDaRidurre>> {
+    let cartella = cartella_allegati(db);
+    let righe: Vec<(i64, String, String)> = db
+        .conn()
+        .prepare_cached(
+            "SELECT a.messaggio_id, a.parte, a.impronta FROM allegati a
+             JOIN parti p ON p.messaggio_id = a.messaggio_id AND p.parte = a.parte
+             WHERE a.miniatura IS NULL AND a.byte >= ?1
+               AND lower(p.tipo) LIKE 'image/%' AND lower(p.tipo) NOT LIKE '%svg%'
+             ORDER BY a.messaggio_id DESC LIMIT ?2",
+        )?
+        .query_map(params![MINIATURA_DA, quanti as i64], |r| Ok((r.get(0)?, r.get(1)?, r.get(2)?)))?
+        .collect::<Result<_, _>>()?;
+    Ok(righe
+        .into_iter()
+        .map(|(messaggio, parte, impronta)| ImmagineDaRidurre {
+            messaggio,
+            parte,
+            file: cartella.join(&impronta),
+            miniatura: cartella.join(nome_miniatura(&impronta)),
+        })
+        .collect())
+}
+
+/// Dopo `immagini_da_ridurre`: la miniatura c'è (`fatta`), oppure l'immagine non si riduce e
+/// non si riprova.
+pub fn miniatura_fatta(db: &Db, messaggio: i64, parte: &str, fatta: bool) -> Risultato<()> {
+    db.salva_misure(messaggio, parte, &MisureParte { miniatura: Some(fatta), ..MisureParte::default() })
+}
+
+/// Che cosa si legge dentro un allegato, dal tipo e dal nome del file.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum Dentro {
+    Pdf,
+    Documento,
+    Testo,
+    Immagine,
+    Niente,
+}
+
+fn dentro(tipo: &str, nome_file: Option<&str>) -> Dentro {
+    let tipo = tipo.trim().to_ascii_lowercase();
+    let est = nome_file
+        .and_then(|n| n.rsplit_once('.'))
+        .map(|(_, e)| e.to_ascii_lowercase())
+        .unwrap_or_default();
+    if tipo == "application/pdf" || est == "pdf" {
+        Dentro::Pdf
+    } else if tipo.contains("officedocument") || tipo.contains("opendocument")
+        || matches!(est.as_str(), "docx" | "xlsx" | "pptx" | "odt" | "ods" | "odp")
+    {
+        Dentro::Documento
+    } else if (tipo.starts_with("text/") && !tipo.contains("html"))
+        || matches!(est.as_str(), "txt" | "csv" | "md" | "ics" | "json" | "xml" | "log")
+    {
+        Dentro::Testo
+    } else if (tipo.starts_with("image/") && !tipo.contains("svg"))
+        || matches!(est.as_str(), "png" | "jpg" | "jpeg" | "gif" | "webp" | "bmp")
+    {
+        Dentro::Immagine
+    } else {
+        Dentro::Niente
+    }
+}
+
+/// Legge il testo e i codici di al massimo `quanti` contenuti dell'archivio che non sono
+/// ancora stati guardati, dal più recente. Niente rete; i programmi che mancano (pdftotext,
+/// unzip, zbarimg) fanno saltare quel tipo di file, che si riprova la volta dopo.
+/// Restituisce quanti ne ha guardati.
+pub fn completa_contenuti(db: &Db, quanti: usize) -> Risultato<usize> {
+    let righe: Vec<(String, String, Option<String>)> = db
+        .conn()
+        .prepare(
+            "SELECT a.impronta, max(p.tipo), max(p.nome_file) FROM allegati a
+             JOIN parti p ON p.messaggio_id = a.messaggio_id AND p.parte = a.parte
+             JOIN messaggi m ON m.id = a.messaggio_id
+             LEFT JOIN contenuti c ON c.impronta = a.impronta
+             WHERE c.impronta IS NULL
+             GROUP BY a.impronta ORDER BY max(m.data) DESC",
+        )?
+        .query_map([], |r| Ok((r.get(0)?, r.get(1)?, r.get(2)?)))?
+        .collect::<Result<_, _>>()?;
+    let cartella = cartella_allegati(db);
+    let mut assenti: Vec<Dentro> = Vec::new();
+    let mut fatti = 0;
+    for (impronta, tipo, nome) in righe {
+        if fatti >= quanti {
+            break;
+        }
+        let tipo_dentro = dentro(&tipo, nome.as_deref());
+        if assenti.contains(&tipo_dentro) {
+            continue;
+        }
+        let file = cartella.join(&impronta);
+        if !file.is_file() {
+            continue;
+        }
+        let esito: Result<(Option<String>, Option<String>), ()> = match tipo_dentro {
+            Dentro::Pdf => sistema::testo_pdf(&file).map(|t| (t, None)),
+            Dentro::Documento => sistema::testo_documento(&file).map(|t| (t, None)),
+            Dentro::Testo => {
+                use std::io::Read;
+                let mut v = Vec::new();
+                let letto = std::fs::File::open(&file)
+                    .and_then(|f| f.take((sistema::LIMITE_TESTO * 4) as u64).read_to_end(&mut v));
+                Ok((letto.ok().map(|_| sistema::normalizza_testo(&String::from_utf8_lossy(&v))), None))
+            }
+            Dentro::Immagine => sistema::codice_immagine(&file).map(|c| (None, c)),
+            Dentro::Niente => Ok((None, None)),
+        };
+        match esito {
+            Ok((testo, codice)) => {
+                let testo = testo.filter(|t| !t.is_empty());
+                db.salva_contenuto(&impronta, testo.as_deref(), codice.as_deref())?;
+                fatti += 1;
+            }
+            Err(()) => assenti.push(tipo_dentro),
+        }
+    }
+    Ok(fatti)
 }
 
 /// Toglie dall'archivio i file temporanei rimasti da un'interruzione brusca (il
@@ -306,12 +475,25 @@ const INATTIVITA: Duration = Duration::from_secs(120);
 /// errore e il file non entra nell'archivio. Dopo, quel `Richieste` non si collega
 /// più: per ricominciare se ne crea uno nuovo.
 #[derive(Clone, Debug)]
-pub struct Interruttore(Arc<Contatori>);
+pub struct Interruttore(pub(crate) Arc<Contatori>);
 
 impl Interruttore {
     pub fn chiudi(&self) {
         self.0.interrompi();
     }
+}
+
+/// Com'è andato `Richieste::mantieni`.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub enum Mantenuta {
+    /// Nessuna connessione aperta.
+    Nessuna,
+    /// Aperta e viva.
+    Viva,
+    /// Il server l'aveva chiusa: ora è chiusa anche qui.
+    ChiusaDalServer,
+    /// Il NOOP non ha avuto risposta (rete assente, sospensione): chiusa.
+    Caduta(String),
 }
 
 /// Le richieste dell'app su una connessione riusata: il primo allegato paga
@@ -358,6 +540,60 @@ impl Richieste {
             s.abbandona();
         }
         self.aperta = None;
+    }
+
+    /// Vero se c'è una connessione aperta.
+    pub fn collegata(&self) -> bool {
+        self.sessione.is_some()
+    }
+
+    /// Apre la connessione adesso (accesso compreso), se non c'è: così la prossima
+    /// richiesta non paga l'accesso.
+    pub fn collega(&mut self) -> Risultato<()> {
+        if self.sessione.is_none() {
+            self.sessione = Some(sincronizza::apri_sessione(&self.cfg, self.contatori.clone())?);
+            self.aperta = None;
+            self.usata = Instant::now();
+        }
+        Ok(())
+    }
+
+    /// Da chiamare ogni tanto mentre la connessione è ferma (giro 2): se il server l'ha
+    /// chiusa la chiude anche qui, subito, invece di lasciarla in CLOSE-WAIT fino al
+    /// prossimo clic; se il server ha scritto, o è ferma da più di `noop_dopo`, manda un
+    /// NOOP, che la tiene viva e dice se risponde ancora.
+    pub fn mantieni(&mut self, noop_dopo: Duration) -> Mantenuta {
+        let Some(s) = self.sessione.as_mut() else {
+            return Mantenuta::Nessuna;
+        };
+        let segnale = s.segnale();
+        if segnale == crate::rete::Segnale::Chiusa {
+            self.butta();
+            return Mantenuta::ChiusaDalServer;
+        }
+        if segnale == crate::rete::Segnale::Niente && self.usata.elapsed() < noop_dopo {
+            return Mantenuta::Viva;
+        }
+        // una risposta a un NOOP arriva subito: non si tiene ferma la connessione dei clic
+        let timeout = s.timeout;
+        s.timeout = timeout.min(Duration::from_secs(10));
+        let esito = s.noop();
+        s.timeout = timeout;
+        match esito {
+            Ok(_) => {
+                self.usata = Instant::now();
+                Mantenuta::Viva
+            }
+            Err(e) => {
+                self.butta();
+                if segnale == crate::rete::Segnale::Dati {
+                    // di solito il «* BYE» prima della chiusura
+                    Mantenuta::ChiusaDalServer
+                } else {
+                    Mantenuta::Caduta(e.to_string())
+                }
+            }
+        }
     }
 
     /// Esegue `f` con la cartella di `pos` aperta, riprovando una volta su una
@@ -682,6 +918,36 @@ pub fn scarica_testi(cfg: &Config, db: &mut Db, messaggi: &[i64]) -> Risultato<u
 #[cfg(test)]
 mod prove {
     use super::*;
+
+    /// Giro 2: le immagini grandi aspettano la miniatura, le piccole e gli SVG no; una volta
+    /// detto com'è andata non tornano più.
+    #[test]
+    fn immagini_da_ridurre_e_fatte() {
+        let dir = std::env::temp_dir().join(format!("motore-riduci-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        let db = Db::apri(&dir.join("prova.sqlite")).unwrap();
+        db.conn()
+            .execute_batch(
+                "INSERT INTO messaggi(id, chiave, aggiunto) VALUES (1, 'a', 0), (2, 'b', 0);
+                 INSERT INTO parti(messaggio_id, parte, tipo, ruolo) VALUES
+                   (1, '2', 'image/jpeg', 'allegato'), (1, '3', 'image/png', 'allegato'),
+                   (2, '2', 'image/svg+xml', 'allegato'), (2, '3', 'IMAGE/JPEG', 'allegato'),
+                   (2, '4', 'application/pdf', 'allegato');
+                 INSERT INTO allegati(messaggio_id, parte, impronta, byte, scaricato) VALUES
+                   (1, '2', 'grande', 2000000, 0), (1, '3', 'piccola', 20000, 0),
+                   (2, '2', 'svg', 900000, 0), (2, '3', 'grande', 2000000, 0),
+                   (2, '4', 'pdf', 900000, 0);",
+            )
+            .unwrap();
+        let v = immagini_da_ridurre(&db, 10).unwrap();
+        let chi: Vec<(i64, &str)> = v.iter().map(|i| (i.messaggio, i.parte.as_str())).collect();
+        assert_eq!(chi, vec![(2, "3"), (1, "2")], "le grandi, dalla più recente");
+        assert!(v[0].miniatura.ends_with(nome_miniatura("grande")) && v[0].file.ends_with("grande"));
+        miniatura_fatta(&db, 2, "3", true).unwrap();
+        miniatura_fatta(&db, 1, "2", false).unwrap();
+        assert!(immagini_da_ridurre(&db, 10).unwrap().is_empty());
+        let _ = std::fs::remove_dir_all(&dir);
+    }
 
     #[test]
     fn numeri_di_parte() {

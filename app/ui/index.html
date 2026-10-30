@@ -8,6 +8,20 @@
 <link rel="stylesheet" href="fonti/fonti.css">
 <script src="ponte.js"></script>
 <script src="support.js"></script>
+<!-- giro 2: prima che arrivino i dati la finestra non resta bianca. Statico: gli stili della
+     tavola arrivano col primo disegno, e la CSP non lascia girare script in linea -->
+<style>
+:root{--avvio-bg:#F2F4F7;--avvio-ink:#1B2233;--avvio-ink-2:#687185}
+@media (prefers-color-scheme: dark){:root{--avvio-bg:#141927;--avvio-ink:#E8EAF0;--avvio-ink-2:#8C94A6}}
+html,body{background:var(--avvio-bg)}
+.avvio{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:var(--avvio-bg);color:var(--avvio-ink);font-family:'Atkinson Hyperlegible Next',system-ui,sans-serif}
+.avvio-segno{width:88px;height:78px}
+.avvio-nome{font-size:22px;font-weight:600;letter-spacing:.01em}
+.avvio-nota{font-size:14px;color:var(--avvio-ink-2);animation:avvio-respiro 1.6s ease-in-out infinite alternate}
+@keyframes avvio-respiro{from{opacity:.45}to{opacity:1}}
+@media (prefers-reduced-motion: reduce){.avvio-nota{animation:none}}
+x-dc[data-ready] ~ .avvio{display:none}
+</style>
 </head>
 <body>
 <x-dc>
@@ -18,17 +32,17 @@
   --ink:#1B2233;--ink-2:#465064;--ink-3:#687185;
   --line:#E0E4EA;--line-2:#C9CFD9;
   --wax:#B3263E;--wax-soft:#FBE9EC;
-  --link:#2546B0;--mine:#EDF0F7;--mine-line:#D6DCEA;--mark:#F2C14E;
+  --link:#2546B0;--mine:#EDF0F7;--mine-line:#D6DCEA;--mark:#E9C21C;
   --barh:67px;
-  --sel:#E8EBFB;--sel-ink:#1E2E9E;--warn-bg:#FBEFD3;--warn-ink:#664608;--wax-ink:#7A1626;--wax-line:#E7BCC4;
-  --ok-bg:#DFEBD9;--ok-ink:#33602A;--info-bg:#E6EBF8;--info-ink:#1F3A8C;--info-line:#CFE0F5;--hl:#F7DE95;--ring:#D5DCEB;
+  --sel:#E8EBFB;--sel-ink:#1E2E9E;--warn-bg:#E9ECF1;--warn-ink:#3A4558;--wax-ink:#7A1626;--wax-line:#E7BCC4;
+  --ok-bg:#DFEBD9;--ok-ink:#33602A;--info-bg:#E6EBF8;--info-ink:#1F3A8C;--info-line:#CFE0F5;--hl:#FDE66B;--ring:#D5DCEB;
   --ink-hover:#2A3349;--toast-link:#AFC0FF;--frame:#FFFFFF;
-  --t0-bg:#DCEBEE;--t0-ink:#1D5963;--t1-bg:#F3E6CC;--t1-ink:#6A4A0C;--t2-bg:#E6DFF1;--t2-ink:#4E3478;--t3-bg:#DFEBD9;--t3-ink:#33602A;--t4-bg:#DFE7F8;--t4-ink:#2A4E9A;--t5-bg:#F2DEE8;--t5-ink:#7A3459;--t6-bg:#EAE2D6;--t6-ink:#5E4A2E;--t7-bg:#E3E7ED;--t7-ink:#3E4A5C;--t8-bg:#1B2233;--t8-ink:#FFFFFF;
-  --x-pdf-bg:#FBE3E0;--x-pdf-ink:#8A2618;--x-doc-bg:#DDE6FA;--x-doc-ink:#1E3E8A;--x-jpg-bg:#F3E6C8;--x-jpg-ink:#6B4A0E;--x-xls-bg:#DCEFE2;--x-xls-ink:#1F5A33;--x-zip-bg:#E4E0F2;--x-zip-ink:#3E2F7A;--x-ics-bg:#D7EEF0;--x-ics-ink:#145158;
+  --t0-bg:#DCEBEE;--t0-ink:#1D5963;--t1-bg:#EFE0DA;--t1-ink:#6E3B2C;--t2-bg:#E6DFF1;--t2-ink:#4E3478;--t3-bg:#DFEBD9;--t3-ink:#33602A;--t4-bg:#DFE7F8;--t4-ink:#2A4E9A;--t5-bg:#F2DEE8;--t5-ink:#7A3459;--t6-bg:#EAE2D6;--t6-ink:#5E4A2E;--t7-bg:#E3E7ED;--t7-ink:#3E4A5C;--t8-bg:#1B2233;--t8-ink:#FFFFFF;
+  --x-pdf-bg:#FBE3E0;--x-pdf-ink:#8A2618;--x-doc-bg:#DDE6FA;--x-doc-ink:#1E3E8A;--x-jpg-bg:#F6DDE9;--x-jpg-ink:#7A2E55;--x-xls-bg:#DCEFE2;--x-xls-ink:#1F5A33;--x-zip-bg:#E4E0F2;--x-zip-ink:#3E2F7A;--x-ics-bg:#D7EEF0;--x-ics-ink:#145158;--x-cod-bg:#D9E0E8;--x-cod-ink:#1F2D3D;
 }
 /* tema scuro: segue il sistema, oppure la scelta fatta nel pannello «Prototipo» */
-:root[data-theme="dark"]{color-scheme:dark;--paper:#141927;--sheet:#1B2131;--hover:#262D40;--ink:#E8EAF0;--ink-2:#B6BCCA;--ink-3:#8C94A6;--line:#2B3347;--line-2:#3B4559;--wax:#E0566C;--wax-soft:#3B1E28;--link:#93A9FF;--mine:#212A3D;--mine-line:#33405A;--mark:#C99A2E;--sel:#27314F;--sel-ink:#C3CEFF;--warn-bg:#3A311F;--warn-ink:#EBCB82;--wax-ink:#F4AEBB;--wax-line:#6E3040;--ok-bg:#1E3324;--ok-ink:#A3D295;--info-bg:#222C45;--info-ink:#B3C3FF;--info-line:#34426A;--hl:#5E4B1B;--ring:#3A4766;--ink-hover:#FFFFFF;--toast-link:#2546B0;--frame:#F4F5F8;--t0-bg:#1D5963;--t0-ink:#DCEBEE;--t1-bg:#6A4A0C;--t1-ink:#F3E6CC;--t2-bg:#4E3478;--t2-ink:#E6DFF1;--t3-bg:#33602A;--t3-ink:#DFEBD9;--t4-bg:#2A4E9A;--t4-ink:#DFE7F8;--t5-bg:#7A3459;--t5-ink:#F2DEE8;--t6-bg:#5E4A2E;--t6-ink:#EAE2D6;--t7-bg:#3E4A5C;--t7-ink:#E3E7ED;--t8-bg:#E6E8EE;--t8-ink:#1B2233;--x-pdf-bg:#8A2618;--x-pdf-ink:#FBE3E0;--x-doc-bg:#1E3E8A;--x-doc-ink:#DDE6FA;--x-jpg-bg:#6B4A0E;--x-jpg-ink:#F3E6C8;--x-xls-bg:#1F5A33;--x-xls-ink:#DCEFE2;--x-zip-bg:#3E2F7A;--x-zip-ink:#E4E0F2;--x-ics-bg:#145158;--x-ics-ink:#D7EEF0;}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){color-scheme:dark;--paper:#141927;--sheet:#1B2131;--hover:#262D40;--ink:#E8EAF0;--ink-2:#B6BCCA;--ink-3:#8C94A6;--line:#2B3347;--line-2:#3B4559;--wax:#E0566C;--wax-soft:#3B1E28;--link:#93A9FF;--mine:#212A3D;--mine-line:#33405A;--mark:#C99A2E;--sel:#27314F;--sel-ink:#C3CEFF;--warn-bg:#3A311F;--warn-ink:#EBCB82;--wax-ink:#F4AEBB;--wax-line:#6E3040;--ok-bg:#1E3324;--ok-ink:#A3D295;--info-bg:#222C45;--info-ink:#B3C3FF;--info-line:#34426A;--hl:#5E4B1B;--ring:#3A4766;--ink-hover:#FFFFFF;--toast-link:#2546B0;--frame:#F4F5F8;--t0-bg:#1D5963;--t0-ink:#DCEBEE;--t1-bg:#6A4A0C;--t1-ink:#F3E6CC;--t2-bg:#4E3478;--t2-ink:#E6DFF1;--t3-bg:#33602A;--t3-ink:#DFEBD9;--t4-bg:#2A4E9A;--t4-ink:#DFE7F8;--t5-bg:#7A3459;--t5-ink:#F2DEE8;--t6-bg:#5E4A2E;--t6-ink:#EAE2D6;--t7-bg:#3E4A5C;--t7-ink:#E3E7ED;--t8-bg:#E6E8EE;--t8-ink:#1B2233;--x-pdf-bg:#8A2618;--x-pdf-ink:#FBE3E0;--x-doc-bg:#1E3E8A;--x-doc-ink:#DDE6FA;--x-jpg-bg:#6B4A0E;--x-jpg-ink:#F3E6C8;--x-xls-bg:#1F5A33;--x-xls-ink:#DCEFE2;--x-zip-bg:#3E2F7A;--x-zip-ink:#E4E0F2;--x-ics-bg:#145158;--x-ics-ink:#D7EEF0;}}
+:root[data-theme="dark"]{color-scheme:dark;--paper:#141927;--sheet:#1B2131;--hover:#262D40;--ink:#E8EAF0;--ink-2:#B6BCCA;--ink-3:#8C94A6;--line:#2B3347;--line-2:#3B4559;--wax:#E0566C;--wax-soft:#3B1E28;--link:#93A9FF;--mine:#212A3D;--mine-line:#33405A;--mark:#E3C437;--sel:#27314F;--sel-ink:#C3CEFF;--warn-bg:#283043;--warn-ink:#D3D9E4;--wax-ink:#F4AEBB;--wax-line:#6E3040;--ok-bg:#1E3324;--ok-ink:#A3D295;--info-bg:#222C45;--info-ink:#B3C3FF;--info-line:#34426A;--hl:#6E5F10;--ring:#3A4766;--ink-hover:#FFFFFF;--toast-link:#2546B0;--frame:#F4F5F8;--t0-bg:#1D5963;--t0-ink:#DCEBEE;--t1-bg:#6E3B2C;--t1-ink:#EFE0DA;--t2-bg:#4E3478;--t2-ink:#E6DFF1;--t3-bg:#33602A;--t3-ink:#DFEBD9;--t4-bg:#2A4E9A;--t4-ink:#DFE7F8;--t5-bg:#7A3459;--t5-ink:#F2DEE8;--t6-bg:#5E4A2E;--t6-ink:#EAE2D6;--t7-bg:#3E4A5C;--t7-ink:#E3E7ED;--t8-bg:#E6E8EE;--t8-ink:#1B2233;--x-pdf-bg:#8A2618;--x-pdf-ink:#FBE3E0;--x-doc-bg:#1E3E8A;--x-doc-ink:#DDE6FA;--x-jpg-bg:#7A2E55;--x-jpg-ink:#F6DDE9;--x-xls-bg:#1F5A33;--x-xls-ink:#DCEFE2;--x-zip-bg:#3E2F7A;--x-zip-ink:#E4E0F2;--x-ics-bg:#145158;--x-ics-ink:#D7EEF0;--x-cod-bg:#2A3646;--x-cod-ink:#D9E0E8;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){color-scheme:dark;--paper:#141927;--sheet:#1B2131;--hover:#262D40;--ink:#E8EAF0;--ink-2:#B6BCCA;--ink-3:#8C94A6;--line:#2B3347;--line-2:#3B4559;--wax:#E0566C;--wax-soft:#3B1E28;--link:#93A9FF;--mine:#212A3D;--mine-line:#33405A;--mark:#E3C437;--sel:#27314F;--sel-ink:#C3CEFF;--warn-bg:#283043;--warn-ink:#D3D9E4;--wax-ink:#F4AEBB;--wax-line:#6E3040;--ok-bg:#1E3324;--ok-ink:#A3D295;--info-bg:#222C45;--info-ink:#B3C3FF;--info-line:#34426A;--hl:#6E5F10;--ring:#3A4766;--ink-hover:#FFFFFF;--toast-link:#2546B0;--frame:#F4F5F8;--t0-bg:#1D5963;--t0-ink:#DCEBEE;--t1-bg:#6E3B2C;--t1-ink:#EFE0DA;--t2-bg:#4E3478;--t2-ink:#E6DFF1;--t3-bg:#33602A;--t3-ink:#DFEBD9;--t4-bg:#2A4E9A;--t4-ink:#DFE7F8;--t5-bg:#7A3459;--t5-ink:#F2DEE8;--t6-bg:#5E4A2E;--t6-ink:#EAE2D6;--t7-bg:#3E4A5C;--t7-ink:#E3E7ED;--t8-bg:#E6E8EE;--t8-ink:#1B2233;--x-pdf-bg:#8A2618;--x-pdf-ink:#FBE3E0;--x-doc-bg:#1E3E8A;--x-doc-ink:#DDE6FA;--x-jpg-bg:#7A2E55;--x-jpg-ink:#F6DDE9;--x-xls-bg:#1F5A33;--x-xls-ink:#DCEFE2;--x-zip-bg:#3E2F7A;--x-zip-ink:#E4E0F2;--x-ics-bg:#145158;--x-ics-ink:#D7EEF0;--x-cod-bg:#2A3646;--x-cod-ink:#D9E0E8;}}
 body{margin:0;background:var(--paper)}
 a{color:var(--link)}
 button{font:inherit;color:inherit}
@@ -62,6 +76,8 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .btn-ink{background:var(--ink);border-color:var(--ink);color:var(--sheet);font-weight:700}
 .btn-ink:hover{background:var(--ink-hover)}
 .btn-big{min-height:44px;padding:0 20px;font-size:15px}
+.btn-big .ic{margin-left:-4px}
+.btn-icon{width:40px;padding:0}
 .link{min-height:32px;padding:0;border:0;background:transparent;color:var(--ink-2);font-size:13.5px;text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px;cursor:pointer}
 .link:hover{color:var(--ink);text-decoration-color:currentColor}
 .link-strong{color:var(--ink);font-weight:700;text-decoration:none}
@@ -90,16 +106,16 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .pfilter input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:14.5px;color:var(--ink);outline:none}
 .pcount{padding:0 4px;font-size:12.5px;color:var(--ink-3)}
 .plist-scroll{flex:1;min-height:0;overflow-y:auto;padding-bottom:12px}
-.phead{margin:16px 22px 4px;font-size:13px;font-weight:700;color:var(--ink-3)}
+.phead{margin:16px 22px 4px;font-size:13px;font-weight:600;color:var(--ink-3)}
 .person{position:relative;display:flex;gap:12px;width:100%;padding:10px 22px;border:0;background:transparent;text-align:left;cursor:pointer}
 .person:hover{background:var(--hover)}
 .person[aria-current="true"]{background:var(--sheet)}
 .person[aria-current="true"]::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:3px;border-radius:0 3px 3px 0;background:var(--ink)}
-.avatar{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:13.5px;font-weight:700}
+.avatar{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font-size:13px;font-weight:600}
 .pmain{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .pline{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
 .pname{font-size:15px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.person.unread .pname{font-weight:750}
+.person.unread .pname{font-weight:700}
 .ptime{flex:none;font-size:12.5px;color:var(--ink-3)}
 .pline2{display:flex;align-items:center;gap:8px}
 .ppreview{flex:1;min-width:0;font-size:13.5px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -122,8 +138,17 @@ button:disabled{opacity:.45;cursor:not-allowed}
 @media (max-width:760px){.col{padding:22px 16px 120px}}
 .hero{display:flex;flex-wrap:wrap;align-items:flex-end;gap:12px 20px}
 .hero-text{flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:4px}
-.hero h1{margin:0;font-size:34px;line-height:1.08;font-weight:750;letter-spacing:-0.025em;overflow-wrap:anywhere}
+.hero h1{margin:0;font-size:34px;line-height:1.08;font-weight:700;letter-spacing:-0.025em;overflow-wrap:anywhere}
 .hero-sub{font-size:14px;color:var(--ink-3);overflow-wrap:anywhere}
+.hero-person{position:sticky;top:var(--barh);z-index:6;flex-wrap:nowrap;align-items:center;margin:-30px -40px -8px;padding:14px 40px 12px;background:var(--paper);border-bottom:1px solid var(--line)}
+.hero-person .hero-text{flex:1 1 auto;flex-direction:row;align-items:baseline;gap:12px;min-width:0}
+.hero-person h1{flex:0 1 auto;min-width:0;font-size:22px;line-height:1.25;letter-spacing:-0.015em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hero-person .hero-sub{flex:0 100 auto;min-width:0;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hero-acts{flex:none;display:flex;align-items:center;gap:8px}
+.hero-arch{gap:6px;padding:0 12px;font-size:13.5px;color:var(--ink-2)}
+.hero-acts .btn[aria-expanded="true"],.hero-arch[aria-pressed="true"]{background:var(--hover);border-color:var(--ink-3);color:var(--ink)}
+.tblock,.sheet,.row{scroll-margin-top:calc(var(--barh) + var(--heroh, 64px) + 14px) !important}
+@media (max-width:760px){.hero-person{flex-wrap:wrap;margin:-22px -16px -8px;padding:10px 16px}.hero-person .hero-text{flex:1 1 100%;flex-direction:column;align-items:stretch;gap:0}.hero-person h1,.hero-person .hero-sub{max-width:100%}}
 .tools{display:flex;flex-wrap:wrap;align-items:center;gap:4px 18px;font-size:13.5px}
 .filterbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:10px 14px;border-radius:12px;background:var(--sheet);border:1px solid var(--line);font-size:14px}
 .swatch-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:baseline}
@@ -143,11 +168,11 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .tsummary .txt{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .tsummary .when{flex:none;font-size:12.5px;color:var(--ink-3)}
 @keyframes fold{from{opacity:0;transform:translateY(-14px) scaleY(1.6);background:var(--sheet)}to{opacity:1;transform:none}}
-.ttitle{margin:0;font-size:20px;line-height:1.3;font-weight:750;letter-spacing:-0.014em;overflow-wrap:anywhere}
+.ttitle{margin:0;font-size:19px;line-height:1.3;font-weight:650;letter-spacing:-0.012em;overflow-wrap:anywhere}
 /* accanto al titolo solo quello che serve: il titolo di prima, l'archivio, chi aspetti */
 .tprev{font-size:13px;color:var(--ink-3)}
-.tlabel{font-size:12px;font-weight:700;color:var(--ink-2);padding:1px 8px;border:1px dashed var(--line-2);border-radius:6px}
-.twait{display:inline-flex;align-items:center;gap:2px;font-size:12.5px;font-weight:700;color:var(--info-ink);background:var(--info-bg);border-radius:6px;padding:1px 2px 1px 8px}
+.tlabel{font-size:12px;font-weight:600;color:var(--ink-2);padding:1px 8px;border:1px dashed var(--line-2);border-radius:6px}
+.twait{display:inline-flex;align-items:center;gap:2px;font-size:12.5px;font-weight:600;color:var(--info-ink);background:var(--info-bg);border-radius:6px;padding:1px 2px 1px 8px}
 .twait-x{width:22px;height:22px;padding:0;border:0;border-radius:5px;background:transparent;color:inherit;font-size:15px;line-height:1;cursor:pointer}
 .twait-x:hover{background:var(--info-line)}
 .tsummary .who-draft{font-style:italic;color:var(--ink-2)}
@@ -171,7 +196,7 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .r-ev::before{content:"";position:absolute;left:-29px;top:24px;width:12px;height:12px;box-sizing:border-box;border-radius:3px;border:2px solid var(--c);background:var(--paper)}
 .tend{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;padding-top:2px}
 .tend::before{content:"";position:absolute;left:-23px;top:19px;width:15px;height:2px;border-radius:1px;background:var(--c)}
-.tbtn{display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:0 15px;border:1px solid var(--line-2);border-radius:19px;background:var(--sheet);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer}
+.tbtn{display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:0 16px 0 13px;border:1px solid var(--line-2);border-radius:19px;background:var(--sheet);color:var(--ink);font-size:14px;font-weight:600;cursor:pointer}
 .tbtn:hover{border-color:var(--ink-3)}
 .tbtn[aria-pressed="true"]{border-color:var(--c);box-shadow:inset 0 0 0 1px var(--c)}
 /* tre pulsanti fissi: larghezze fisse, così non si spostano quando cambia la scritta */
@@ -193,6 +218,31 @@ button:disabled{opacity:.45;cursor:not-allowed}
 .sheet.isnew{border-color:var(--wax-line)}
 .sheet.archived{opacity:.6;border-style:dashed}
 .sheet.focus{box-shadow:0 0 0 3px var(--mark)}
+/* v15: icone a linea (disegni di Lucide, licenza ISC), come maschere: prendono il colore del testo */
+.ic{flex:none;display:inline-block;width:16px;height:16px;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat}
+.ic-reply{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 17l-5-5 5-5'/%3E%3Cpath d='M20 18v-2a4 4 0 0 0-4-4H4'/%3E%3C/svg%3E")}
+.ic-check{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")}
+.ic-unread{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='20' height='16' x='2' y='4' rx='2'/%3E%3Cpath d='m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7'/%3E%3C/svg%3E")}
+.ic-archive{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='20' height='5' x='2' y='3' rx='1'/%3E%3Cpath d='M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8'/%3E%3Cpath d='M10 12h4'/%3E%3C/svg%3E")}
+.ic-restore{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect width='20' height='5' x='2' y='3' rx='1'/%3E%3Cpath d='M4 8v11a2 2 0 0 0 2 2h2'/%3E%3Cpath d='M20 8v11a2 2 0 0 1-2 2h-2'/%3E%3Cpath d='m9 15 3-3 3 3'/%3E%3Cpath d='M12 12v9'/%3E%3C/svg%3E")}
+.ic-plus{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='M12 5v14'/%3E%3C/svg%3E")}
+.ic-x{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 6 6 18'/%3E%3Cpath d='m6 6 12 12'/%3E%3C/svg%3E")}
+.ic-more{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='1.2'/%3E%3Ccircle cx='19' cy='12' r='1.2'/%3E%3Ccircle cx='5' cy='12' r='1.2'/%3E%3C/svg%3E")}
+.ic-download{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3Cpath d='M12 15V3'/%3E%3C/svg%3E")}
+.ic-external{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M15 3h6v6'/%3E%3Cpath d='M10 14 21 3'/%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'/%3E%3C/svg%3E")}
+.ic-forward{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m15 17 5-5-5-5'/%3E%3Cpath d='M4 18v-2a4 4 0 0 1 4-4h12'/%3E%3C/svg%3E")}
+.ic-trash{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 6h18'/%3E%3Cpath d='M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6'/%3E%3Cpath d='M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2'/%3E%3C/svg%3E")}
+.ic-flag{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z'/%3E%3Cpath d='M4 22v-7'/%3E%3C/svg%3E")}
+.ic-message{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z'/%3E%3C/svg%3E")}
+.ic-layers{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z'/%3E%3Cpath d='m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65'/%3E%3Cpath d='m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65'/%3E%3C/svg%3E")}
+.ic-broom{--i:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m13 11 9-9'/%3E%3Cpath d='M14.6 12.6c.8.8.9 2.1.2 3L10 22l-8-8 6.4-4.8c.9-.7 2.2-.6 3 .2Z'/%3E%3Cpath d='m6.8 10.4 6.8 6.8'/%3E%3C/svg%3E")}
+.tvia{font-size:12px;color:var(--ink-2);padding:0 7px;border:1px solid var(--line-2);border-radius:6px}
+.sline{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 18px}
+.slink{display:inline-flex;align-items:center;gap:6px;margin-left:auto}
+.nopv{display:flex;flex-direction:column;align-items:center;gap:10px;padding:56px 24px;text-align:center}
+.nopv-badge{display:inline-flex;align-items:center;justify-content:center;width:72px;height:88px;border-radius:10px;font-size:15px;font-weight:700}
+.nopv-kind{font-size:15px;color:var(--ink)}
+.nopv-note{font-size:13.5px;color:var(--ink-2);max-width:42ch}
 .mhead{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;font-size:13px;color:var(--ink-2)}
 .mfrom{font-weight:700;color:var(--ink)}
 .mfrom-link{display:inline-flex;align-items:center;gap:7px;min-height:24px;padding:0;border:0;background:transparent;font:inherit;font-weight:700;color:var(--ink);cursor:pointer}
@@ -244,10 +294,11 @@ button:disabled{opacity:.45;cursor:not-allowed}
 @media (hover:none){.acts{opacity:1}}
 .acts:has(.mpop){opacity:1}
 .mmenu{position:relative;display:inline-flex}
-.mdots{min-width:32px;min-height:28px;padding:0 6px;border:0;border-radius:8px;background:transparent;font:inherit;font-size:18px;line-height:1;color:var(--ink-2);cursor:pointer}
+.mdots{display:inline-flex;align-items:center;justify-content:center;min-width:32px;min-height:28px;padding:0 6px;border:0;border-radius:8px;background:transparent;font:inherit;line-height:1;color:var(--ink-2);cursor:pointer}
 .mdots:hover,.mdots[aria-expanded="true"]{background:var(--hover);color:var(--ink)}
 .mpop{position:absolute;right:0;bottom:calc(100% + 4px);z-index:40;display:flex;flex-direction:column;min-width:150px;padding:4px;border:1px solid var(--line-2);border-radius:10px;background:var(--sheet);box-shadow:0 8px 24px rgba(20,25,39,.14)}
-.mpop button{min-height:36px;padding:0 12px;border:0;border-radius:7px;background:transparent;font:inherit;font-size:14px;color:var(--ink);text-align:left;cursor:pointer}
+.mpop button{display:flex;align-items:center;gap:10px;min-height:36px;padding:0 12px;border:0;border-radius:7px;background:transparent;font:inherit;font-size:14px;color:var(--ink);text-align:left;cursor:pointer}
+.mpop button .ic{color:var(--ink-2)}
 .mpop button:hover,.mpop button:focus-visible{background:var(--hover)}
 .act{min-height:28px;padding:0;border:0;background:transparent;font-size:12.5px;color:var(--ink-2);text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px;cursor:pointer}
 .act:hover,.act:focus-visible{color:var(--ink);text-decoration-color:currentColor}
@@ -415,6 +466,10 @@ html.still,html.still body{overflow:hidden}
 .proto-index{font-size:13.5px;color:var(--ink-2);text-underline-offset:3px;padding-top:10px;border-top:1px solid var(--line)}
 .proto-index:hover{color:var(--ink)}
 .pdf-frame{display:block;width:min(820px,80vw);height:68vh;border:0;background:var(--sheet);overscroll-behavior:contain}
+/* giro 2: le pagine del PDF disegnate dal motore, da sfogliare, senza gli strumenti del visore */
+.pdf-pages{width:min(820px,80vw);height:68vh;overflow:auto;display:flex;flex-direction:column;align-items:center;gap:12px;overscroll-behavior:contain}
+.pdf-page{display:block;width:100%;height:auto;aspect-ratio:auto 1 / 1.414;border:1px solid var(--line);border-radius:2px;background:var(--sheet)}
+.pdf-more{margin:4px 0 8px;font-size:13px;color:var(--ink-2)}
 .sim{display:flex;flex-direction:column;gap:6px;padding-top:12px;border-top:1px solid var(--line)}
 .sim h3{margin:0;font-size:14px;overflow-wrap:anywhere}
 .sim-btns{display:flex;flex-wrap:wrap;gap:6px}
@@ -475,6 +530,9 @@ html.still,html.still body{overflow:hidden}
 .crow-open .t{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .crow-open .d{flex:none;color:var(--ink-3)}
 .crow.off .crow-open .w,.crow.off .crow-open .t{color:var(--ink-3);font-weight:400}
+.cwhy{flex:none;font-size:12px;color:var(--ink-2);padding:0 7px;border:1px solid var(--line-2);border-radius:6px}
+.ctag{align-self:flex-start;font-size:12px;color:var(--ink-2);padding:1px 8px;border:1px dashed var(--line-2);border-radius:6px}
+.cwarn{margin:0;font-size:13px;color:var(--warn-ink);background:var(--warn-bg);border-radius:8px;padding:5px 10px}
 .cfoot{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:auto;padding-top:4px}
 .switch{display:inline-flex;align-items:center;gap:8px;min-height:32px;font-size:13.5px;color:var(--ink-2);cursor:pointer}
 .switch input{width:18px;height:18px;margin:0;accent-color:var(--ink)}
@@ -498,7 +556,7 @@ html.still,html.still body{overflow:hidden}
     <div class="{{searchCls}}" role="search">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: none; color: var(--ink-3)"><circle cx="11" cy="11" r="7"></circle><path d="M16.5 16.5L21 21"></path></svg>
       <label for="q" class="sr-only">Cerca nella posta</label>
-      <input id="q" type="search" value="{{q}}" onChange="{{onQuery}}" onKeyDown="{{onSearchKey}}" autocomplete="off" placeholder="Cerca come lo diresti: «la delega di Lucia», «foto di Paolo»…">
+      <input id="q" type="search" value="{{q}}" onChange="{{onQuery}}" onKeyDown="{{onSearchKey}}" onFocus="{{onSearchFocus}}" onClick="{{onSearchFocus}}" autocomplete="off" placeholder="Cerca come lo diresti: «la delega di Lucia», «foto di Paolo»…">
       <span class="kbd" aria-hidden="true">/</span>
     </div>
     <div class="bar-end">
@@ -550,7 +608,7 @@ html.still,html.still body{overflow:hidden}
                 <span class="pline"><span class="pname">{{p.name}}</span><span class="ptime">{{p.time}}</span></span>
                 <span class="pline2">
                   <sc-if value="{{p.hasDraft}}" hint-placeholder-val="{{ false }}"><span class="pdraft">bozza</span></sc-if>
-                  <span class="ppreview">{{p.preview}}</span>
+                  <span class="ppreview" title="{{p.previewTitle}}">{{p.preview}}</span>
                   <sc-if value="{{p.hasAtt}}" hint-placeholder-val="{{ false }}">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#687185" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="con allegato"><path d="M21 11.5l-8.6 8.6a5.2 5.2 0 0 1-7.4-7.4l8.6-8.6a3.5 3.5 0 0 1 4.9 4.9l-8.6 8.6a1.7 1.7 0 0 1-2.5-2.5l7.9-7.9"></path></svg>
                   </sc-if>
@@ -657,15 +715,26 @@ html.still,html.still body{overflow:hidden}
 
       <sc-if value="{{isPerson}}" hint-placeholder-val="{{ true }}">
         <sc-if value="{{isRegular}}" hint-placeholder-val="{{ true }}">
-          <section aria-label="Persona" class="hero">
+          <!-- v15: l'intestazione resta in alto mentre si scorre, su una riga sola -->
+          <section aria-label="Persona" class="hero hero-person">
             <div class="hero-text">
-              <h1>{{cur.name}}</h1>
+              <h1 title="{{cur.name}}">{{cur.name}}</h1>
               <span class="hero-sub">{{cur.email}}</span>
             </div>
-            <div role="group" aria-label="Come mostrare lo scambio" class="seg">
-              <sc-for list="{{cur.views}}" as="v" hint-placeholder-count="2">
-                <button type="button" onClick="{{v.pick}}" aria-pressed="{{v.on}}">{{v.label}}</button>
-              </sc-for>
+            <div class="hero-acts">
+              <div role="group" aria-label="Come mostrare lo scambio" class="seg">
+                <sc-for list="{{cur.views}}" as="v" hint-placeholder-count="2">
+                  <button type="button" onClick="{{v.pick}}" aria-pressed="{{v.on}}">{{v.label}}</button>
+                </sc-for>
+              </div>
+              <sc-if value="{{isChatView}}" hint-placeholder-val="{{ true }}">
+                <sc-if value="{{thread.canStart}}" hint-placeholder-val="{{ true }}">
+                  <button type="button" class="btn btn-icon" onClick="{{thread.startTopic}}" aria-expanded="{{thread.startOpen}}" aria-label="{{thread.startTitle}}" title="{{thread.startTitle}}"><span class="ic ic-plus" aria-hidden="true"></span></button>
+                </sc-if>
+                <sc-if value="{{thread.hasArchived}}" hint-placeholder-val="{{ false }}">
+                  <button type="button" class="btn hero-arch" onClick="{{thread.toggleArchived}}" aria-pressed="{{thread.showArch}}" aria-label="{{thread.archivedLabel}}" title="{{thread.archivedLabel}}"><span class="ic ic-archive" aria-hidden="true"></span>{{thread.nArch}}</button>
+                </sc-if>
+              </sc-if>
             </div>
           </section>
         </sc-if>
@@ -715,7 +784,7 @@ html.still,html.still body{overflow:hidden}
                           <sc-if value="{{e.hasUnread}}" hint-placeholder-val="{{ false }}">
                             <button type="button" class="btn btn-ink" onClick="{{e.markRead}}">Segna come letto</button>
                           </sc-if>
-                          <button type="button" class="btn" onClick="{{e.archive}}">{{e.archiveLabel}}</button>
+                          <button type="button" class="btn" onClick="{{e.archive}}"><span class="{{e.archiveIcon}}" aria-hidden="true"></span>{{e.archiveLabel}}</button>
                         </div>
                         <sc-for list="{{e.msgs}}" as="n" hint-placeholder-count="2">
                           <div class="note">
@@ -731,7 +800,7 @@ html.still,html.still body{overflow:hidden}
                               <sc-for list="{{n.att}}" as="a" hint-placeholder-count="1">
                                 <button type="button" class="att" onClick="{{a.open}}" style="padding: 2px 10px 2px 2px"><span aria-hidden="true" style="{{a.badgeStyle}}">{{a.ext}}</span><span style="font-size: 13px">{{a.name}}</span></button>
                               </sc-for>
-                              <span class="mmenu" style="margin-left: auto"><button type="button" class="mdots" id="{{n.dotsId}}" onClick="{{n.toggleMenu}}" aria-haspopup="menu" aria-expanded="{{n.menuOpen}}" aria-label="Altro" title="Altro">⋯</button><sc-if value="{{n.menuOpen}}" hint-placeholder-val="{{ false }}"><span class="mpop" role="menu"><button type="button" role="menuitem" onClick="{{n.report}}">Segnala</button><button type="button" role="menuitem" onClick="{{n.saveEml}}">Salva</button></span></sc-if></span>
+                              <span class="mmenu" style="margin-left: auto"><button type="button" class="mdots" id="{{n.dotsId}}" onClick="{{n.toggleMenu}}" aria-haspopup="menu" aria-expanded="{{n.menuOpen}}" aria-label="Altro" title="Altro"><span class="ic ic-more" aria-hidden="true"></span></button><sc-if value="{{n.menuOpen}}" hint-placeholder-val="{{ false }}"><span class="mpop" role="menu"><button type="button" role="menuitem" onClick="{{n.report}}"><span class="ic ic-flag" aria-hidden="true"></span>Segnala</button><button type="button" role="menuitem" onClick="{{n.saveEml}}"><span class="ic ic-download" aria-hidden="true"></span>Salva</button><sc-if value="{{n.canDelete}}" hint-placeholder-val="{{ false }}"><button type="button" role="menuitem" class="mdel" onClick="{{n.deleteMsg}}"><span class="ic ic-trash" aria-hidden="true"></span>Elimina</button></sc-if></span></sc-if></span>
                             </div>
                           </div>
                         </sc-for>
@@ -792,14 +861,6 @@ html.still,html.still body{overflow:hidden}
               </div>
             </div>
           </sc-if>
-          <div class="tools">
-            <sc-if value="{{thread.canStart}}" hint-placeholder-val="{{ true }}">
-              <button type="button" class="{{thread.startCls}}" onClick="{{thread.startTopic}}" aria-expanded="{{thread.startOpen}}">Nuovo argomento con {{cur.first}}</button>
-            </sc-if>
-            <sc-if value="{{thread.hasArchived}}" hint-placeholder-val="{{ false }}">
-              <button type="button" class="link" onClick="{{thread.toggleArchived}}" style="margin-left: auto">{{thread.archivedLabel}}</button>
-            </sc-if>
-          </div>
 
           <sc-if value="{{thread.startOpen}}" hint-placeholder-val="{{ false }}">
             <section aria-label="Nuovo argomento" onDragOver="{{onDragOver}}" onDragLeave="{{onDragLeave}}" onDrop="{{onDrop}}" class="{{composerClass}}">
@@ -882,6 +943,8 @@ html.still,html.still body{overflow:hidden}
                         <span class="mhead">
                           <sc-if value="{{r.hasFrom}}" hint-placeholder-val="{{ false }}"><span class="mfrom">{{r.from}}</span></sc-if>
                           <sc-if value="{{r.hasFromLink}}" hint-placeholder-val="{{ false }}"><button type="button" class="mfrom mfrom-link" onClick="{{r.goFrom}}" title="{{r.fromTitle}}"><span class="mav" aria-hidden="true" style="{{r.fromAvStyle}}">{{r.fromInitials}}</span>{{r.from}}</button></sc-if>
+                          <sc-if value="{{r.hasAuthor}}" hint-placeholder-val="{{ false }}"><span class="mfrom">{{r.author}}</span></sc-if>
+                          <sc-if value="{{r.hasVia}}" hint-placeholder-val="{{ false }}"><span class="tvia" title="{{r.viaTitle}}">via {{r.via}}</span></sc-if>
                           <sc-if value="{{r.isNew}}" hint-placeholder-val="{{ false }}"><span class="new">nuovo</span></sc-if>
                           <sc-if value="{{r.hasRole}}" hint-placeholder-val="{{ false }}"><span class="{{r.roleCls}}">{{r.role}}</span></sc-if>
                         </span>
@@ -912,7 +975,7 @@ html.still,html.still body{overflow:hidden}
                       </sc-if>
                       <span class="mfoot">
                         <sc-for list="{{r.problems}}" as="w" hint-placeholder-count="1"><span class="warn">avviso: {{w.label}}</span></sc-for>
-                        <span class="acts"><span class="mmenu"><button type="button" class="mdots" id="{{r.dotsId}}" onClick="{{r.toggleMenu}}" aria-haspopup="menu" aria-expanded="{{r.menuOpen}}" aria-label="Altro" title="Altro">⋯</button><sc-if value="{{r.menuOpen}}" hint-placeholder-val="{{ false }}"><span class="mpop" role="menu"><button type="button" role="menuitem" onClick="{{r.report}}">Segnala</button><button type="button" role="menuitem" onClick="{{r.saveEml}}">Salva</button></span></sc-if></span></span>
+                        <span class="acts"><span class="mmenu"><button type="button" class="mdots" id="{{r.dotsId}}" onClick="{{r.toggleMenu}}" aria-haspopup="menu" aria-expanded="{{r.menuOpen}}" aria-label="Altro" title="Altro"><span class="ic ic-more" aria-hidden="true"></span></button><sc-if value="{{r.menuOpen}}" hint-placeholder-val="{{ false }}"><span class="mpop" role="menu"><button type="button" role="menuitem" onClick="{{r.report}}"><span class="ic ic-flag" aria-hidden="true"></span>Segnala</button><button type="button" role="menuitem" onClick="{{r.saveEml}}"><span class="ic ic-download" aria-hidden="true"></span>Salva</button><sc-if value="{{r.canDelete}}" hint-placeholder-val="{{ false }}"><button type="button" role="menuitem" class="mdel" onClick="{{r.deleteMsg}}"><span class="ic ic-trash" aria-hidden="true"></span>Elimina</button></sc-if></span></sc-if></span></span>
                         <span class="mtime">{{r.time}}</span>
                       </span>
                     </article>
@@ -968,10 +1031,10 @@ html.still,html.still body{overflow:hidden}
 
               <div class="tend">
                 <sc-if value="{{b.hasReply}}" hint-placeholder-val="{{ true }}">
-                  <button type="button" class="tbtn tbtn-reply" onClick="{{b.reply}}" aria-pressed="{{b.replyPressed}}" title="{{b.replyTitle}}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14L4 9l5-5"></path><path d="M4 9h10a6 6 0 0 1 6 6v5"></path></svg>{{b.replyLabel}}</button>
+                  <button type="button" class="tbtn tbtn-reply" onClick="{{b.reply}}" aria-pressed="{{b.replyPressed}}" title="{{b.replyTitle}}"><span class="ic ic-reply" aria-hidden="true"></span>{{b.replyLabel}}</button>
                 </sc-if>
-                <button type="button" class="{{b.midCls}}" onClick="{{b.mid}}" title="{{b.midTitle}}">{{b.midLabel}}</button>
-                <button type="button" class="{{b.archCls}}" onClick="{{b.archive}}" title="{{b.archTitle}}">{{b.archLabel}}</button>
+                <button type="button" class="{{b.midCls}}" onClick="{{b.mid}}" title="{{b.midTitle}}"><span class="{{b.midIcon}}" aria-hidden="true"></span>{{b.midLabel}}</button>
+                <button type="button" class="{{b.archCls}}" onClick="{{b.archive}}" title="{{b.archTitle}}"><span class="{{b.archIcon}}" aria-hidden="true"></span>{{b.archLabel}}</button>
               </div>
             </section>
           </sc-for>
@@ -1055,7 +1118,12 @@ html.still,html.still body{overflow:hidden}
           </sc-for>
           <span style="font-size: 13.5px; color: var(--ink-3)">Tocca un criterio per toglierlo.</span>
         </div>
-        <p class="lead" style="font-size: 14px">{{search.countLabel}}</p>
+        <div class="sline">
+          <p class="lead" style="font-size: 14px; margin: 0">{{search.countLabel}}</p>
+          <sc-if value="{{search.canClean}}" hint-placeholder-val="{{ false }}">
+            <button type="button" class="link slink" onClick="{{search.makeClean}}" title="{{search.cleanTitle}}"><span class="ic ic-broom" aria-hidden="true"></span>{{search.cleanLabel}}</button>
+          </sc-if>
+        </div>
         <sc-for list="{{search.results}}" as="r" hint-placeholder-count="4">
           <button type="button" class="card" onClick="{{r.open}}">
             <span style="display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline">
@@ -1176,7 +1244,7 @@ html.still,html.still body{overflow:hidden}
   <sc-if value="{{isArchive}}" hint-placeholder-val="{{ false }}">
     <main class="page">
       <h1>Archivio e pulizia</h1>
-      <p class="lead">Quello che archivi esce dalle conversazioni ma resta cercabile. Non c’è un pulsante «Elimina»: qui Ambassadress propone cosa togliere, solo tra le notifiche automatiche che hanno fatto il loro lavoro. I messaggi delle persone, le fatture, le ricevute e gli estratti conto non li tocca.</p>
+      <p class="lead">Quello che archivi esce dalle conversazioni ma resta cercabile. Qui Ambassadress propone cosa eliminare tra le notifiche che hanno fatto il loro lavoro, e prima di eliminare rivedi la lista. Non tocca ricevute, conferme e fatture, i messaggi con un allegato o con la stella, i thread dove hai scritto, né chi ti scrive e a cui rispondi. Un messaggio solo si elimina dal suo menu «⋯», dove non hai scritto.</p>
 
       <section aria-labelledby="clean-title" style="display: flex; flex-direction: column; gap: 10px">
         <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px">
@@ -1187,7 +1255,9 @@ html.still,html.still body{overflow:hidden}
           <sc-for list="{{arch.clean}}" as="c" hint-placeholder-count="3">
             <article class="{{c.cls}}">
               <h3>{{c.title}} <span class="gcount">{{c.count}}</span></h3>
+              <sc-if value="{{c.isLearned}}" hint-placeholder-val="{{ false }}"><span class="ctag">imparato da quello che hai eliminato</span></sc-if>
               <p class="why">{{c.why}}</p>
+              <sc-if value="{{c.hasBroad}}" hint-placeholder-val="{{ false }}"><p class="cwarn">Cerca anche tra i destinatari o nel testo: rivedi con attenzione.</p></sc-if>
               <sc-if value="{{c.hasItems}}" hint-placeholder-val="{{ true }}">
                 <sc-if value="{{c.closed}}" hint-placeholder-val="{{ true }}">
                   <ul>
@@ -1202,7 +1272,7 @@ html.still,html.still body{overflow:hidden}
                     <sc-for list="{{c.rows}}" as="x" hint-placeholder-count="4">
                       <div class="{{x.cls}}" role="listitem">
                         <input type="checkbox" id="{{x.id}}" checked="{{x.on}}" onChange="{{x.toggle}}" aria-label="{{x.aria}}">
-                        <button type="button" class="crow-open" onClick="{{x.open}}" title="Apri il messaggio"><span class="w">{{x.who}}</span><span class="t">{{x.what}}</span><span class="d">{{x.when}}</span></button>
+                        <button type="button" class="crow-open" onClick="{{x.open}}" title="Apri il messaggio"><span class="w">{{x.who}}</span><span class="t">{{x.what}}</span><sc-if value="{{x.hasWhy}}" hint-placeholder-val="{{ false }}"><span class="cwhy">{{x.whyLabel}}</span></sc-if><span class="d">{{x.when}}</span></button>
                       </div>
                     </sc-for>
                   </div>
@@ -1224,6 +1294,7 @@ html.still,html.still body{overflow:hidden}
                   <input id="{{c.autoId}}" type="checkbox" checked="{{c.auto}}" onChange="{{c.toggleAuto}}">
                   Da ora fallo da solo
                 </label>
+                <sc-if value="{{c.canRemove}}" hint-placeholder-val="{{ false }}"><button type="button" class="link" onClick="{{c.remove}}">{{c.removeLabel}}</button></sc-if>
               </div>
             </article>
           </sc-for>
@@ -1292,7 +1363,7 @@ html.still,html.still body{overflow:hidden}
             <h2 id="viewer-title" style="margin: 0; font-size: 20px; overflow-wrap: anywhere">{{viewer.name}}</h2>
             <span style="font-size: 13px; color: var(--ink-2)">{{viewer.meta}}</span>
           </div>
-          <button type="button" id="viewer-close" class="btn" onClick="{{viewer.close}}" aria-label="Chiudi" style="width: 44px; padding: 0; font-size: 20px">×</button>
+          <button type="button" id="viewer-close" class="btn btn-icon" onClick="{{viewer.close}}" aria-label="Chiudi" title="Chiudi (Esc)"><span class="ic ic-x" aria-hidden="true"></span></button>
         </div>
         <div style="background: var(--paper); border-radius: 12px; padding: 16px; display: flex; justify-content: center">
           <sc-if value="{{viewer.isImage}}" hint-placeholder-val="{{ false }}">
@@ -1304,22 +1375,35 @@ html.still,html.still body{overflow:hidden}
           <sc-if value="{{viewer.isFrame}}" hint-placeholder-val="{{ false }}">
             <iframe class="pdf-frame" data-src="{{viewer.frameSrc}}" title="{{viewer.name}}"></iframe>
           </sc-if>
+          <sc-if value="{{viewer.isPages}}" hint-placeholder-val="{{ false }}">
+            <div class="pdf-pages" id="pdf-pages">
+              <sc-for list="{{viewer.pages}}" as="pg" hint-placeholder-count="2"><img class="pdf-page" sc-src="{{pg.src}}" loading="lazy" alt="{{pg.alt}}"></sc-for>
+              <sc-if value="{{viewer.morePages}}" hint-placeholder-val="{{ false }}"><p class="pdf-more">{{viewer.morePages}}</p></sc-if>
+            </div>
+          </sc-if>
+          <sc-if value="{{viewer.noPreview}}" hint-placeholder-val="{{ false }}">
+            <div class="nopv">
+              <span class="nopv-badge" style="{{viewer.badgeStyle}}">{{viewer.ext}}</span>
+              <span class="nopv-kind">{{viewer.kind}}<sc-if value="{{viewer.sizeLabel}}" hint-placeholder-val="{{ true }}">, {{viewer.sizeLabel}}</sc-if></span>
+              <span class="nopv-note">L’anteprima di questo tipo di file non c’è ancora: si apre con il programma del sistema.</span>
+            </div>
+          </sc-if>
           <sc-if value="{{viewer.hasMissing}}" hint-placeholder-val="{{ false }}">
             <p style="margin: 24px 0; font-size: 15px; color: var(--ink-2); text-align: center">{{viewer.missing}}</p>
           </sc-if>
         </div>
         <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
           <sc-if value="{{viewer.inApp}}" hint-placeholder-val="{{ false }}">
-            <button type="button" class="btn btn-ink btn-big" onClick="{{viewer.openApp}}">{{viewer.openLabel}}</button>
-            <button type="button" class="btn btn-big" onClick="{{viewer.saveApp}}">Scarica</button>
+            <button type="button" class="btn btn-ink btn-big" onClick="{{viewer.openApp}}"><span class="ic ic-external" aria-hidden="true"></span>{{viewer.openLabel}}</button>
+            <button type="button" class="btn btn-big" onClick="{{viewer.saveApp}}"><span class="ic ic-download" aria-hidden="true"></span>Scarica</button>
           </sc-if>
           <sc-if value="{{viewer.onWeb}}" hint-placeholder-val="{{ true }}"><sc-if value="{{viewer.canOpen}}" hint-placeholder-val="{{ true }}">
-            <a href="{{viewer.href}}" target="_blank" rel="noopener" class="btn btn-ink btn-big">{{viewer.openLabel}}</a>
-            <button type="button" class="btn btn-big" onClick="{{viewer.save}}">Scarica</button>
+            <a href="{{viewer.href}}" target="_blank" rel="noopener" class="btn btn-ink btn-big"><span class="ic ic-external" aria-hidden="true"></span>{{viewer.openLabel}}</a>
+            <button type="button" class="btn btn-big" onClick="{{viewer.save}}"><span class="ic ic-download" aria-hidden="true"></span>Scarica</button>
           </sc-if></sc-if>
-          <button type="button" class="btn btn-big" onClick="{{viewer.forward}}">Inoltra</button>
-          <button type="button" class="btn btn-big" onClick="{{viewer.goMessage}}">Vai al messaggio</button>
-          <button type="button" class="btn btn-big" onClick="{{viewer.goFiles}}">Versioni e altri allegati</button>
+          <button type="button" class="btn btn-big" onClick="{{viewer.forward}}"><span class="ic ic-forward" aria-hidden="true"></span>Inoltra</button>
+          <button type="button" class="btn btn-big" onClick="{{viewer.goMessage}}"><span class="ic ic-message" aria-hidden="true"></span>Vai al messaggio</button>
+          <sc-if value="{{viewer.fromThread}}" hint-placeholder-val="{{ true }}"><button type="button" class="btn btn-big" onClick="{{viewer.goFiles}}"><span class="ic ic-layers" aria-hidden="true"></span>Versioni e altri allegati</button></sc-if>
         </div>
       </section>
     </div>
@@ -1431,6 +1515,7 @@ html.still,html.still body{overflow:hidden}
           <span class="acct-addr">{{a.address}}</span>
           <span class="{{a.metaCls}}">{{a.meta}}</span>
           <sc-if value="{{a.hasFiles}}" hint-placeholder-val="{{ false }}"><span class="acct-meta">{{a.filesLine}}</span></sc-if>
+          <sc-if value="{{a.hasHistory}}" hint-placeholder-val="{{ false }}"><span class="acct-meta">{{a.historyLine}}</span></sc-if>
           <sc-if value="{{a.editing}}" hint-placeholder-val="{{ false }}">
             <form class="acct-form">
               <input type="text" autocomplete="username" value="{{a.address}}" hidden>
@@ -1524,11 +1609,12 @@ html.still,html.still body{overflow:hidden}
 
 </div>
 </x-dc>
+<div class="avvio" aria-live="polite"><svg class="avvio-segno" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="94 112 324 288"><defs><mask id="seal-mask-avvio" maskUnits="userSpaceOnUse" x="-2" y="-2" width="4" height="4"><rect x="-2" y="-2" width="4" height="4" fill="#fff"/><path d="M-0.3 0.4 L0 -0.42 L0.3 0.4 M-0.18 0.13 H0.18" fill="none" stroke="#000" stroke-width="0.17" stroke-linecap="round" stroke-linejoin="round"/></mask></defs><rect x="104" y="155" width="304" height="202" rx="6" fill="#ECDDBC" stroke="#B89A63" stroke-width="10"/><g transform="translate(256 256) scale(130.435)"><path d="M1.008 -0.086 Q1.046 0.000 1.046 0.092 Q1.046 0.184 1.058 0.287 Q1.069 0.389 0.994 0.460 Q0.918 0.530 0.832 0.578 Q0.746 0.626 0.676 0.674 Q0.606 0.722 0.553 0.794 Q0.500 0.866 0.426 0.916 Q0.352 0.966 0.263 0.980 Q0.175 0.994 0.088 1.013 Q0.000 1.032 -0.089 1.021 Q-0.178 1.010 -0.254 0.957 Q-0.329 0.904 -0.420 0.894 Q-0.510 0.884 -0.605 0.858 Q-0.699 0.833 -0.737 0.742 Q-0.775 0.650 -0.825 0.578 Q-0.876 0.506 -0.933 0.433 Q-0.989 0.360 -0.994 0.268 Q-0.999 0.176 -0.977 0.088 Q-0.955 0.000 -0.959 -0.085 Q-0.962 -0.170 -0.947 -0.254 Q-0.932 -0.339 -0.890 -0.415 Q-0.848 -0.490 -0.822 -0.579 Q-0.795 -0.667 -0.774 -0.782 Q-0.752 -0.897 -0.654 -0.929 Q-0.555 -0.961 -0.445 -0.942 Q-0.336 -0.923 -0.254 -0.949 Q-0.172 -0.976 -0.086 -0.972 Q-0.000 -0.968 0.085 -0.964 Q0.169 -0.960 0.263 -0.970 Q0.357 -0.980 0.439 -0.942 Q0.522 -0.905 0.581 -0.834 Q0.640 -0.763 0.702 -0.702 Q0.765 -0.642 0.811 -0.568 Q0.856 -0.494 0.873 -0.409 Q0.890 -0.324 0.930 -0.247 Q0.970 -0.171 1.008 -0.086Z" fill="#B3263E" mask="url(#seal-mask-avvio)"/></g></svg><span class="avvio-nome">Ambassadress</span><span class="avvio-nota">Apro la posta…</span></div>
 <script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#B3263E","options":["#B3263E","#1B2233","#2546B0","#2A7F8E"]},"$preview":{"width":1440,"height":960}}'>
 class Component extends DCLogic {
   constructor(props) {
     super(props);
-    this.version = 'v14';
+    this.version = 'v15';
     this.toastSeq = 0;
     this.log = [];
     this.errors = [];
@@ -1546,7 +1632,7 @@ class Component extends DCLogic {
     if (this.sentRecords.length || Object.keys(this.gone).length) this.model = this.buildModel();
     const cd = saved.composeDraft || {};
     this.state = {
-      readKeys: saved.readKeys || {}, unreadKeys: saved.unreadKeys || {}, archived: saved.archived || {}, deleted: saved.deleted || {}, autoClean: saved.autoClean || {}, cleanKept: saved.cleanKept || {}, cleanOpen: '', cleanOff: {},
+      readKeys: saved.readKeys || {}, unreadKeys: saved.unreadKeys || {}, archived: saved.archived || {}, deleted: saved.deleted || {}, autoClean: saved.autoClean || {}, cleanKept: saved.cleanKept || {}, cleanGroups: saved.cleanGroups || [], cleanDismissed: saved.cleanDismissed || {}, cleanOpen: '', cleanOff: {},
       folded: saved.folded || {}, drafts: saved.drafts || {}, noWait: saved.noWait || {}, cutPref: saved.cutPref || {},
       showArchived: {}, svcGroup: 'sender', archOpen: false, archLimit: 50, readOpen: true, waitOpen: false, peek: {}, active: '',
       view: 'people', sel: '', pq: '', q: '', read: {}, expanded: {}, extra: {}, topicFilter: '', replyTo: '', flash: '',
@@ -1559,6 +1645,8 @@ class Component extends DCLogic {
       setup: { open: false, mode: 'first', email: '', pass: '', imap: '', smtp: '', step: 'form', error: '', done: [] }, osnotes: [],
       rep: { open: false, kind: 'visualizzazione', what: '', expected: '', rid: null, redact: false, status: '', server: '', saving: false }
     };
+    // all'apertura la persona in cima alla lista, scelta una volta: poi non cambia da sola
+    if (this.model.ok !== false) this.state.sel = this.firstListed(this.state);
     // nell'app: rete, casella e primo avvio vengono dal motore (ponte.js)
     this.app = !!window.A10S;
     this.textCache = {};
@@ -1621,6 +1709,13 @@ class Component extends DCLogic {
       this.barH = h;
       document.documentElement.style.setProperty('--barh', h + 'px');
     }
+    // v15: anche l'intestazione fissa della persona, così un messaggio raggiunto dalla ricerca non le finisce sotto
+    const hero = document.querySelector('.hero-person');
+    const hh = hero && getComputedStyle(hero).position === 'sticky' ? Math.round(hero.getBoundingClientRect().height) : 0;
+    if (hh !== this.heroH) {
+      this.heroH = hh;
+      document.documentElement.style.setProperty('--heroh', hh + 'px');
+    }
     if (!this.barObserver && typeof ResizeObserver !== 'undefined') {
       // la pagina viene ridisegnata da capo: si osserva il body, che resta lo stesso
       this.barObserver = new ResizeObserver(() => this.measureBar());
@@ -1655,7 +1750,7 @@ class Component extends DCLogic {
     const drafts = {};
     Object.keys(s.drafts).forEach((k) => { drafts[k] = Object.assign({}, s.drafts[k], { att: (s.drafts[k].att || []).map((a) => Object.assign({}, a, { url: '' })) }); });
     const snap = JSON.stringify({
-      readKeys: s.readKeys, unreadKeys: s.unreadKeys, archived: s.archived, deleted: s.deleted, autoClean: s.autoClean, cleanKept: s.cleanKept,
+      readKeys: s.readKeys, unreadKeys: s.unreadKeys, archived: s.archived, deleted: s.deleted, autoClean: s.autoClean, cleanKept: s.cleanKept, cleanGroups: s.cleanGroups, cleanDismissed: s.cleanDismissed,
       folded: s.folded, drafts: drafts, noWait: s.noWait, cutPref: s.cutPref, sim: sim, gone: this.gone,
       theme: s.theme, profile: s.profile, imgAllow: s.imgAllow,
       composeDraft: { draft: s.draft, topicDraft: s.topicDraft, toDraft: s.toDraft, toPick: s.toPick }
@@ -1715,7 +1810,7 @@ class Component extends DCLogic {
   }
   /* tutto quello che si salva e si annulla */
   persisted() {
-    return ['readKeys', 'unreadKeys', 'archived', 'deleted', 'autoClean', 'folded', 'drafts', 'noWait', 'cutPref', 'imgAllow', 'cleanKept'];
+    return ['readKeys', 'unreadKeys', 'archived', 'deleted', 'autoClean', 'folded', 'drafts', 'noWait', 'cutPref', 'imgAllow', 'cleanKept', 'cleanGroups', 'cleanDismissed'];
   }
   /* un avviso senza «Annulla» */
   notice(label) {
@@ -1789,7 +1884,7 @@ class Component extends DCLogic {
     this.gone = {};
     this.model = this.buildModel();
     this.change('Stato iniziale ripristinato' + (parts.length ? ': tolti ' + parts.join(', ') : ''), {
-      readKeys: {}, unreadKeys: {}, archived: {}, deleted: {}, autoClean: {}, cleanKept: {}, folded: {}, drafts: {}, noWait: {}, cutPref: {}, imgAllow: {},
+      readKeys: {}, unreadKeys: {}, archived: {}, deleted: {}, autoClean: {}, cleanKept: {}, cleanGroups: [], cleanDismissed: {}, folded: {}, drafts: {}, noWait: {}, cutPref: {}, imgAllow: {},
       goneCount: 0, profile: this.defaultProfile(),
       protoOpen: false, showArchived: {}, peek: {}, replyTo: '', active: '', sentCount: 0, draft: '', topicDraft: '', toDraft: '', toPick: ''
     }, {
@@ -1809,6 +1904,7 @@ class Component extends DCLogic {
       this.preSel = this.state.sel;
       if (Object.keys(this.state.preOpen).length) { this.setState({ preOpen: {} }); return; }
     }
+    if (this.app && window.A10S.storiaPersona) this.chiediStorico();
     // il PDF si carica qui: con un src nel modello il browser chiederebbe il buco del modello prima del disegno
     document.querySelectorAll('iframe.pdf-frame[data-src]').forEach((el) => { if (el.getAttribute('src') !== el.dataset.src) el.setAttribute('src', el.dataset.src); });
     this.saveStore();
@@ -1839,8 +1935,40 @@ class Component extends DCLogic {
     if (this.scrollToId) {
       const el = document.getElementById(this.scrollToId);
       this.scrollToId = '';
-      if (el) el.scrollIntoView({ block: el.classList.contains('tblock') ? 'start' : 'center' });
+      if (el) el.scrollIntoView({ block: el.classList.contains('tblock') || /^msg-/.test(el.id) ? 'start' : 'center' });
     }
+  }
+
+  /* giro 2, solo nell'app: la pagina ha i messaggi più recenti; quelli più vecchi li chiede al motore
+     quando apri una persona o cerchi qualcosa, e quando arrivano il modello si ricostruisce */
+  chiediStorico() {
+    const s = this.state;
+    const p = s.view !== 'search' && this.model.byId[s.sel];
+    if (p && p.address && p.id !== 'services' && !/^(via:|me$)/.test(p.address) && this.storiaSel !== p.address) {
+      this.storiaSel = p.address;
+      window.A10S.storiaPersona(p.address).then((nuovi) => { if (nuovi) this.datiNuovi(); });
+    }
+    const q = s.view === 'search' ? String(s.q || '').trim() : '';
+    const chiave = q + '|' + Object.keys(s.off || {}).sort().join(',');
+    if (!q || chiave === this.storiaQ) return;
+    this.storiaQ = chiave;
+    clearTimeout(this.storiaTimer);
+    // mentre si scrive si aspetta un attimo: una richiesta per ricerca, non una per lettera
+    this.storiaTimer = setTimeout(() => {
+      const active = this.queryChips(q).chips.filter((c) => !this.state.off[c.key]);
+      const texts = active.filter((c) => c.type === 'text');
+      const d = { parole: texts.map((c) => c.stem), almeno: texts.length >= 3 ? texts.length - 1 : texts.length, da: [], oggetto: [], persone: [] };
+      active.forEach((c) => {
+        if (c.type === 'from' && !c.neg) d.da.push(c.term);
+        else if (c.type === 'subj' && !c.neg) d.oggetto.push(c.term);
+        else if (c.type === 'who') d.persone = d.persone.concat(c.addrs);
+        else if (c.type === 'age') d.prima = Math.min(d.prima || Infinity, Date.now() - c.days * 86400000);
+        else if (c.type === 'before') d.prima = Math.min(d.prima || Infinity, c.ts);
+        else if (c.type === 'att') d.allegati = true;
+        else if (c.type === 'label' && !d.etichetta) d.etichetta = c.lab;
+      });
+      window.A10S.cercaStorico(d).then((nuovi) => { if (nuovi) this.datiNuovi(); });
+    }, 350);
   }
 
   act(a, extra) {
@@ -1886,9 +2014,131 @@ class Component extends DCLogic {
   lower(s) { return String(s || '').trim().toLowerCase(); }
 
   normSubject(s) {
-    return String(s || '').replace(/^\s*((re|r|ris|fw|fwd|i|inoltro|rif|aw|wg|sv|tr)\s*(\[\d+\])?\s*:\s*)+/i, '').replace(/\s+/g, ' ').trim();
+    return String(s || '').replace(/^\s*((re|r|ris|fw|fwd|i|inoltro|rif|aw|wg|sv|tr)\s*(\[\d+\])?\s*:\s*)+/i, '')
+      // v15: «[JIRA] (ACM-142) Errore nel login» → «ACM-142 · Errore nel login»
+      .replace(/^\s*\[jira\]\s*\(([A-Z][A-Z0-9]+-\d+)\)\s*/i, '$1 · ')
+      .replace(/\s+/g, ' ').trim();
   }
 
+  /* v15: un indirizzo condiviso (Jira, Drive, un servizio di codice) manda a nome di persone diverse:
+     «Sara Conti (Acme) <jira@acme-esempio.atlassian.net>». L'indirizzo non è una persona: il nome vale per il
+     messaggio. Quando ci sono parole di chi agisce (un commento, una menzione, una condivisione, una pull request)
+     il messaggio va da quella persona, «via Jira»; gli eventi senza parole restano tra i servizi.
+     Una casella condivisa da persone vere (info@, senza intestazioni automatiche) resta una conversazione sola. */
+  sharedSenders(records, me) {
+    const norm = (x) => String(x || '').trim().replace(/^"|"$/g, '').replace(/\s+/g, ' ');
+    const GENERIC = /^(no-?reply|notifications?|notifiche|jira|confluence|drive-shares[\w-]*|comments-noreply|[\w-]*-noreply)$/i;
+    const parse = (name) => {
+      const n = norm(name);
+      let m = n.match(/^(.+?)\s*\((?:via |tramite )?([^)]+)\)$/);
+      if (m) return { actor: norm(m[1]), org: norm(m[2]), form: true, svcByName: /^(via|tramite) /i.test(n.slice(n.indexOf('(') + 1)) };
+      // «via» minuscolo, come lo scrive Gmail: «Via Ostiense 12» è una strada
+      m = n.match(/^(.+?)\s+(?:via|tramite)\s+(\p{Lu}.+)$/u);
+      if (m) return { actor: norm(m[1]), org: '', svc: norm(m[2]), form: true };
+      return { actor: n, org: '', form: false };
+    };
+    const ORGW = /^(account|accessi|assistenza|banca|servizio|servizi|supporto|team|ufficio|studio|amministrazione|condominio|notifiche|rete|pro|esempio|info|news|shop|store)$/i;
+    const looksPerson = (n, addr) => {
+      if (!/^\p{Lu}[\p{L}'.-]*\.?(\s+\p{Lu}[\p{L}'-]+){1,3}$/u.test(n)) return false;
+      const dom = addr ? (addr.split('@')[1] || '').toLowerCase() : '';
+      return !n.toLowerCase().split(/\s+/).some((t) => ORGW.test(t.replace(/\.$/, '')) || (t.length >= 3 && dom.indexOf(t) >= 0));
+    };
+    const serviceOf = (addr, hint) => {
+      if (hint && /drive|docs|document|jira|confluence|trello|slack|github|gitlab|bitbucket|repohub|gruppo|group/i.test(hint)) return hint;
+      const [local, dom] = addr.split('@');
+      if (/atlassian\.net$/.test(dom)) return /confluence/i.test(local) ? 'Confluence' : 'Jira';
+      if (/docs\.google/.test(dom) || /comments-noreply/.test(local)) return 'Google Docs';
+      if (/drive/.test(local) && /google/.test(dom)) return 'Google Drive';
+      if (/googlegroups/.test(dom)) return 'Gruppi Google';
+      const lab = dom.split('.').slice(-2, -1)[0] || dom;
+      return { github: 'GitHub', gitlab: 'GitLab', bitbucket: 'Bitbucket', repohub: 'RepoHub', trello: 'Trello', slack: 'Slack' }[lab] || lab.charAt(0).toUpperCase() + lab.slice(1);
+    };
+    const byAddr = {};
+    const nameStats = {};
+    const lower = (a) => this.lower(a);
+    records.forEach((r) => {
+      [r.from].concat(r.to || [], r.cc || []).forEach((x) => {
+        if (!x || !x.address || !x.name) return;
+        const a = lower(x.address);
+        (nameStats[a] = nameStats[a] || {})[norm(x.name)] = ((nameStats[a] || {})[norm(x.name)] || 0) + 1;
+      });
+      const a = lower(r.from && r.from.address);
+      if (!a || me[a]) return;
+      const e = (byAddr[a] = byAddr[a] || { actors: {}, form: false, auto: false });
+      const pz = parse(r.from.name);
+      e.actors[pz.actor.toLowerCase()] = true;
+      if (pz.form) e.form = true;
+      if (this.isAutomated(r, a)) e.auto = true;
+      if (GENERIC.test(a.split('@')[0]) && looksPerson(pz.actor, a)) e.generic = true;
+      if (/\s[-–|·]\s/.test(norm(r.from.name))) e.sep = true;
+    });
+    const shared = {};
+    const human = {};
+    Object.keys(byAddr).forEach((a) => {
+      const e = byAddr[a];
+      const many = Object.keys(e.actors).length >= 2;
+      if (e.form || e.generic || (many && e.auto)) shared[a] = true;
+      // una casella condivisa da persone vere: nomi diversi con «Azienda - Nome», oppure un indirizzo di ufficio
+      else if (many && !e.auto && (e.sep || /^(info|amministrazione|segreteria|ufficio|contatti|office|hello|team|support|assistenza|ordini|vendite)$/i.test(a.split('@')[0]))) human[a] = true;
+    });
+    // le persone vere: indirizzi non condivisi con un nome; per l'unione serve un indizio dell'organizzazione
+    const tokens = (n) => n.toLowerCase().split(/[\s]+/).filter(Boolean);
+    const real = [];
+    Object.keys(nameStats).forEach((a) => {
+      if (shared[a] || human[a] || me[a]) return;
+      const st = nameStats[a];
+      const best = Object.keys(st).sort((x, y) => st[y] - st[x])[0];
+      if (best && looksPerson(best)) real.push({ addr: a, toks: tokens(best), dom: a.split('@')[1] || '' });
+    });
+    const sameName = (t1, t2) => {
+      if (t1.length < 2 || t2.length < 2) return false;
+      const n = Math.min(t1.length, t2.length);
+      for (let i = 0; i < n; i++) {
+        const x = t1[i].replace(/\.$/, '');
+        const y = t2[i].replace(/\.$/, '');
+        if (x === y) continue;
+        if (i === 0 && (t1[i].endsWith('.') || t2[i].endsWith('.')) && x.charAt(0) === y.charAt(0)) continue;
+        return false;
+      }
+      return true;
+    };
+    const orgToks = (org, addr) => {
+      const out = tokens(org.replace(/[-_.]/g, ' '));
+      const dom = addr.split('@')[1] || '';
+      if (/atlassian\.net$/.test(dom)) out.push(...dom.split('.')[0].split('-'));
+      return out.filter((t) => t.length >= 3 && !/^(esempio|example|team)$/.test(t));
+    };
+    const COMM = /ha commentato|ha aggiunto un commento|added a comment|commented|mentioned you|ti ha menzionat|ha menzionato|ha condiviso|shared .{0,80}with you|opened (a |this )?pull request|ha aperto (la |una )?pull request|requested your review|ha richiesto la tua revisione|replied|ha risposto|ha scritto|wrote:/i;
+    const info = {};
+    const byName = {};
+    const pending = [];
+    records.forEach((r, rid) => {
+      const a = lower(r.from && r.from.address);
+      if (!shared[a]) return;
+      const pz = parse(r.from.name);
+      const service = serviceOf(a, pz.svc || (pz.svcByName ? pz.org : ''));
+      const ot = orgToks(pz.svcByName ? '' : pz.org, a);
+      const at = tokens(pz.actor);
+      const hits = ot.length ? real.filter((x) => sameName(at, x.toks) && ot.some((t) => x.dom.indexOf(t) >= 0)) : [];
+      const text = String(r.subject || '') + '\n' + String(r.text || '').slice(0, 1500);
+      const comm = looksPerson(pz.actor, a) && COMM.test(text);
+      const it = { actor: pz.actor, service: service, comm: comm, key: '', at: at };
+      // Drive e Docs scrivono l'indirizzo di chi condivide nel testo: «Giulia Ferraro (giulia@…) ha condiviso»
+      const esc = pz.actor.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const said = text.match(new RegExp(esc + '\\s*[(<]([\\w.+-]+@[\\w.-]+\\w)[)>]', 'i'));
+      if (said && !me[lower(said[1])]) { it.key = lower(said[1]); byName[at.join(' ')] = it.key; }
+      else if (hits.length === 1) { it.key = hits[0].addr; byName[at.join(' ')] = hits[0].addr; }
+      info[rid] = it;
+      pending.push(it);
+    });
+    // senza indizio, lo stesso nome visto con un indizio altrove (la stessa persona su un altro servizio)
+    pending.forEach((it) => {
+      if (it.key) return;
+      const k = Object.keys(byName).find((n) => sameName(it.at, n.split(' ')));
+      it.key = k ? byName[k] : 'via:' + it.at.join(' ');
+    });
+    return { info: info, shared: shared, human: human, parse: parse };
+  }
   isAutomated(r, fromA) {
     const labels = (r.gmail && r.gmail.labels) || [];
     if (labels.some((l) => /^CATEGORY_(PROMOTIONS|UPDATES|SOCIAL|FORUMS)$/.test(l) || /^(Promozioni|Aggiornamenti|Social|Forum)$/i.test(l))) return true;
@@ -2243,6 +2493,9 @@ class Component extends DCLogic {
     model.synthetic = model.source === 'synthetic';
     model.exportedAt = (data.meta && (data.meta.exportedAt || data.meta.generatedAt)) || '';
     const records = data.messages.concat(this.sentRecords);
+    // v15, dopo le prove: su Gmail archiviare non è leggere. Un messaggio non letto fuori dalla Posta
+    // in arrivo (archiviato senza aprirlo, o mandato via da un filtro) Gmail non lo conta: qui nemmeno
+    this.gmailInbox = records.some((r) => ((r.gmail && r.gmail.labels) || []).indexOf('\\Inbox') >= 0);
     model.records = records;
     const me = {};
     [data.account && data.account.address].concat((data.account && data.account.aliases) || []).forEach((a) => { if (a) me[this.lower(a)] = true; });
@@ -2274,6 +2527,9 @@ class Component extends DCLogic {
       if (!people[addr]) people[addr] = { id: 'p:' + addr, address: addr, unread: 0, msgs: [] };
       return people[addr];
     };
+    const shared = this.sharedSenders(records, me);
+    model.shared = shared;
+    model.myThreads = {};
     const threadKeys = {};
     const tsByRid = {};
     const topicByRid = {};
@@ -2299,7 +2555,8 @@ class Component extends DCLogic {
     });
     const SIGNAME = /^(image\d{3}\.(png|jpe?g|gif)|outlook-.*)$|logo|firma|signature|banner|facebook|linkedin|instagram|twitter|youtube|whatsapp|social/i;
     const repeated = (fromA, a) => isImg(a) && a.size < 100 * 1024 && (sigSeen[sigKey(fromA, a)] > 1 || Object.keys(domSeen[domKey(fromA, a)] || {}).length > 1);
-    const isSigImg = (fromA, a) => isImg(a) && ((a.width && a.height ? pxSmall(a) : smallImg(a) && SIGNAME.test(String(a.filename || ''))) || repeated(fromA, a));
+    // v15: un QR code o un codice a barre non è mai una decorazione
+    const isSigImg = (fromA, a) => !a.code && isImg(a) && ((a.width && a.height ? pxSmall(a) : smallImg(a) && SIGNAME.test(String(a.filename || ''))) || repeated(fromA, a));
 
     const SPAM = /^(\\?Spam|\\?Junk|\[Gmail\]\/Spam|Posta indesiderata)$/i;
     model.spam = 0;
@@ -2337,19 +2594,30 @@ class Component extends DCLogic {
         const automated = this.isAutomated(r, fromA);
         const tos = (r.to || []).map((x) => this.lower(x && x.address)).filter(Boolean);
         const ccs = (r.cc || []).map((x) => this.lower(x && x.address)).filter(Boolean);
-        [from].concat(r.to || [], r.cc || []).forEach((p) => { if (p && p.address) noteName(this.lower(p.address), p.name); });
+        const via = shared.info[rid] || null;
+        [from].concat(r.to || [], r.cc || []).forEach((p) => {
+          if (!p || !p.address) return;
+          const a = this.lower(p.address);
+          if (shared.shared[a]) return;
+          // casella condivisa da persone vere: il nome è dell'azienda, non di chi firma
+          if (shared.human[a] && p === from) return;
+          noteName(a, p.name);
+        });
+        if (via) noteName(via.key, via.actor);
         const uniq = (arr) => arr.filter((x, i) => arr.indexOf(x) === i);
         let owners;
-        if (automated && !isMe) owners = ['services'];
+        if (via && via.comm && !isMe) owners = [via.key];
+        else if ((automated || via) && !isMe) owners = ['services'];
         else if (isMe) {
           owners = uniq(tos.concat(ccs).filter((a) => !me[a]));
           if (!owners.length) owners = ['me'];
           if (owners.length > 8) { probs.push('molti destinatari (' + owners.length + ')'); owners = owners.slice(0, 8); }
         } else owners = [fromA || 'sconosciuto'];
-        const participants = uniq([fromA].concat(tos, ccs)).filter((a) => a && !me[a]);
-        const unread = !isMe && r.flags && r.flags.seen === false;
+        const participants = uniq([via && via.comm ? via.key : fromA].concat(tos, ccs)).filter((a) => a && !me[a]);
+        const unread = !isMe && this.unreadOnServer(r);
         const threadKey = (r.gmail && r.gmail.threadId) || topic;
         threadKeys[threadKey] = true;
+        if (isMe) model.myThreads[threadKey] = true;
         tsByRid[rid] = ts;
         topicByRid[rid] = topic;
         const cal = this.calendarInfo(r, subjRaw, body);
@@ -2357,8 +2625,11 @@ class Component extends DCLogic {
         const att = atts.map((a, j) => {
           const sig = isSigImg(fromA, a);
           return {
-            id: rid + '-' + j, name: a.filename || '(senza nome)', ext: this.extOf(a.filename, a.mimeType), size: this.sizeOf(a.size), bytes: a.size || 0,
+            id: rid + '-' + j, name: a.filename || '(senza nome)', ext: a.code ? 'COD' : this.extOf(a.filename, a.mimeType), size: this.sizeOf(a.size), bytes: a.size || 0,
             mime: a.mimeType || '', path: a.path || '', preview: a.preview || '', url: a.url || '', sig: sig,
+            // v15: il testo dentro l'allegato, per la ricerca (nei dati veri lo mette tools/gmail-export.py --testi); il tipo di codice
+            // nell'app il testo degli allegati arriva a parte, dopo il primo disegno (giro 2: ponte.js)
+            text: a.text || (a.url && window.AMB_TESTI && window.AMB_TESTI[a.url]) || '', code: a.code || '',
             w: a.width || 0, h: a.height || 0, pages: a.pages || 0, thumb: a.thumb || '',
             doc: sig ? 'firma:' + sigKey(fromA, a) : this.extOf(a.filename, a.mimeType) === 'ICS' ? 'ics:' + rid + '-' + j : (this.docKey(a.filename) || ('n' + rid + '-' + j))
           };
@@ -2374,7 +2645,10 @@ class Component extends DCLogic {
             rid: rid, key: r.id ? String(r.id) : 'rid' + rid, ts: ts, me: isMe, topic: topic, threadKey: threadKey,
             text: split.main, quoted: split.quoted, quotedLines: split.quotedLines, signature: split.signature,
             inline: /intercalata/.test(split.rule) && /^\s*>/m.test(split.main),
-            fromAddr: fromA, fromRaw: from ? (from.name || from.address || '') : '',
+            fromAddr: via && via.comm ? via.key : fromA, fromRaw: from ? (from.name || from.address || '') : '',
+            // v15: chi ha agito attraverso un indirizzo condiviso, e attraverso cosa
+            viaAddr: via ? fromA : '', via: via ? via.service : '', actor: via ? via.actor : '',
+            flagged: !!(r.flags && r.flags.flagged) || ((r.gmail && r.gmail.labels) || []).indexOf('\\Starred') >= 0,
             toAddrs: tos, ccAddrs: ccs,
             cal: cal, svc: svc,
             att: att,
@@ -2422,17 +2696,34 @@ class Component extends DCLogic {
       });
     });
 
+    const humanName = (addr) => {
+      const n = Object.keys(names[addr] || {});
+      const raw = records.filter((r) => this.lower(r.from && r.from.address) === addr).map((r) => String((r.from && r.from.name) || ''));
+      let pre = raw.length ? raw.reduce((x, y) => { let i = 0; while (i < x.length && x[i] === y[i]) i++; return x.slice(0, i); }) : '';
+      pre = pre.replace(/[\s\-–·|,]+\S{0,2}$/, '').replace(/[\s\-–·|,]+$/, '').trim();
+      if (pre.length >= 3) return pre;
+      const dom = (addr.split('@')[1] || '').split('.')[0];
+      return n[0] || dom.charAt(0).toUpperCase() + dom.slice(1).replace(/-/g, ' ');
+    };
     const nameOf = (addr) => {
       if (addr === 'me') return 'Note a te stesso';
+      if (shared.human[addr]) return humanName(addr);
       const n = names[addr];
       if (n) return Object.keys(n).sort((a, b) => n[b] - n[a])[0];
-      return addr.split('@')[0] || addr;
+      // v15, dopo le prove: senza nome, l'indirizzo intero (dalla parte prima della @ non si capisce da dove scrive)
+      return addr;
     };
     model.nameOf = nameOf;
     Object.keys(people).forEach((addr) => {
       const p = people[addr];
       p.name = nameOf(addr);
       p.email = addr === 'me' ? 'messaggi mandati solo a te' : addr;
+      if (addr.indexOf('via:') === 0) {
+        const svcs = [];
+        p.msgs.forEach((m) => { if (m.via && svcs.indexOf(m.via) < 0) svcs.push(m.via); });
+        p.email = 'via ' + svcs.join(', ');
+        p.viaOnly = true;
+      }
       p.initials = this.initialsOf(p.name);
       const t = this.tintFor(addr);
       p.tint = t[0];
@@ -2444,6 +2735,9 @@ class Component extends DCLogic {
     services.msgs.sort((a, b) => a.ts - b.ts);
     Object.keys(people).map((k) => people[k]).concat([services]).forEach((p) => p.msgs.forEach((m) => {
       m.from = names[m.fromAddr] ? nameOf(m.fromAddr) : (m.fromRaw || m.fromAddr);
+      if (m.via && m.viaAddr === m.fromAddr) m.from = m.actor + ', via ' + m.via;
+      // casella condivisa da persone vere: ogni messaggio dice chi l'ha scritto
+      if (shared.human[m.fromAddr]) m.author = String(m.fromRaw || '').split(/\s+[-–·|]\s+/).pop();
     }));
     services.lastTs = services.msgs.length ? services.msgs[services.msgs.length - 1].ts : 0;
     model.byId.services = services;
@@ -2451,7 +2745,7 @@ class Component extends DCLogic {
     model.people.forEach((p) => { p.meetings = this.groupMeetings(p); this.assignColors(p); });
     services.meetings = [];
     model.svc = this.servicesModel(services.msgs);
-    model.initialUnread = records.filter((r) => r.flags && r.flags.seen === false && !(r.from && me[this.lower(r.from.address)]) && !((r.gmail && r.gmail.labels) || []).some((l) => SPAM.test(l)) && !this.gone[r.id]).length;
+    model.initialUnread = records.filter((r) => this.unreadOnServer(r) && !(r.from && me[this.lower(r.from.address)]) && !((r.gmail && r.gmail.labels) || []).some((l) => SPAM.test(l)) && !this.gone[r.id]).length;
     const labs = {};
     Object.keys(model.parsed).forEach((rid) => { const pr = protos[rid]; if (pr) pr.base.labels.forEach((l) => { labs[l] = (labs[l] || 0) + 1; }); });
     model.labels = Object.keys(labs).sort((a, b) => labs[b] - labs[a]);
@@ -2509,7 +2803,8 @@ class Component extends DCLogic {
 
   /* ---------- il filo: un colore per argomento, stabile per persona ---------- */
   topicPalette() {
-    return ['#2A7F8E', '#B7801A', '#7550A8', '#4E8A3C', '#3D6FD0', '#A34C7D', '#8A6A3F', '#5B6B7F'];
+    // v15: niente giallo né ambra, il giallo è solo dell'evidenziazione
+    return ['#2A7F8E', '#7550A8', '#4E8A3C', '#3D6FD0', '#A34C7D', '#8A5244', '#5B6B7F'];
   }
   laneKey(m, p) {
     if (m.cal) {
@@ -2549,6 +2844,7 @@ class Component extends DCLogic {
       XLS: 'background: var(--x-xls-bg); color: var(--x-xls-ink);',
       ZIP: 'background: var(--x-zip-bg); color: var(--x-zip-ink);',
       ICS: 'background: var(--x-ics-bg); color: var(--x-ics-ink);',
+      COD: 'background: var(--x-cod-bg); color: var(--x-cod-ink);',
       FILE: 'background: var(--line); color: var(--ink-2);'
     }[ext] || 'background: var(--line); color: var(--ink-2);';
   }
@@ -2556,12 +2852,32 @@ class Component extends DCLogic {
     return 'flex: none; width: 30px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; ' + this.tint(ext);
   }
   go(patch) {
+    // v15: se il ridisegno ha portato a un messaggio (dalla ricerca, dagli allegati), non si torna in cima
+    const target = this.scrollToId;
     this.setState(patch);
-    if (typeof window !== 'undefined' && window.scrollTo) window.scrollTo(0, 0);
+    if (!target && typeof window !== 'undefined' && window.scrollTo) window.scrollTo(0, 0);
+  }
+  /* non letto sul server; su Gmail solo se è anche nella Posta in arrivo (vedi buildModel) */
+  unreadOnServer(r) {
+    if (!(r.flags && r.flags.seen === false)) return false;
+    return !this.gmailInbox || ((r.gmail && r.gmail.labels) || []).indexOf('\\Inbox') >= 0;
   }
   currentId(s) {
     if (s.sel && this.model.byId[s.sel]) return s.sel;
-    return this.model.people.length ? this.model.people[0].id : 'services';
+    return this.firstListed(s) || 'services';
+  }
+  /* v15, dopo le prove: chi sta in cima alla colonna delle persone, con la stessa regola della
+     lista (prima chi ha da leggere, poi gli altri, dal più recente). All'apertura si vede lui, non
+     l'ultimo messaggio in assoluto, che può essere uno mio */
+  firstListed(s) {
+    let best = null, bestUnread = false, bestTs = -1;
+    this.model.people.forEach((p) => {
+      const v = this.visibleMsgs(p, s);
+      if (!v.length) return;
+      const unread = this.unreadOf(p, s) > 0, ts = v[v.length - 1].ts;
+      if ((unread && !bestUnread) || (unread === bestUnread && ts > bestTs)) { best = p; bestUnread = unread; bestTs = ts; }
+    });
+    return best ? best.id : (this.model.people.length ? this.model.people[0].id : '');
   }
   openMsg(pid, id) {
     const s = this.state;
@@ -2862,7 +3178,8 @@ class Component extends DCLogic {
       emptyLabel: nArch ? 'Hai archiviato tutto. Lo ritrovi in Archivio e nella ricerca.' : 'Ancora nessun messaggio.',
       hasEndNote: !!d && !meeting && !s.topicFilter && blocks.length > 1,
       endNote: d ? 'Primo messaggio con ' + p.name + ': ' + d.getDate() + ' ' + this.months()[d.getMonth()] + ' ' + d.getFullYear() + '.' : '',
-      canStart: p.id !== 'services' && !meeting,
+      // v15: chi scrive solo attraverso un servizio (Jira…) non ha un indirizzo a cui scrivere
+      canStart: p.id !== 'services' && !meeting && !p.viaOnly,
       startOpen: isNew,
       startCls: 'pill' + (isNew ? ' pill-on' : ''),
       startTopic: () => (isNew ? this.setState({ replyTo: '' }) : this.openReply(p, '__new__')),
@@ -2874,6 +3191,9 @@ class Component extends DCLogic {
       meeting: meeting ? this.meetingPanel(meeting) : { history: [] },
       hasArchived: nArch > 0,
       archivedLabel: showArch ? 'Nascondi gli archiviati' : nArch === 1 ? 'Mostra 1 argomento archiviato' : 'Mostra ' + nArch + ' argomenti archiviati',
+      nArch: String(nArch),
+      showArch: !!showArch,
+      startTitle: 'Nuovo argomento con ' + (p.first || p.name),
       toggleArchived: () => this.setState({ showArchived: Object.assign({}, this.state.showArchived, { [p.id]: !showArch }) })
     };
   }
@@ -2991,7 +3311,7 @@ class Component extends DCLogic {
       noWait: () => wait && this.change('Non aspetti più una risposta su ' + q, { noWait: this.flagged('noWait', [wait.key], true) }, { what: 'non aspetto' }),
       hasNew: unread.length > 0,
       rows: shown.map((m) => (m.cal ? this.eventRow(p, s, m) : this.msgRow(p, s, m))),
-      hasReply: isTopic && p.id !== 'services',
+      hasReply: isTopic && p.id !== 'services' && !p.viaOnly,
       replying: replying,
       replyPressed: replying,
       reply: reply,
@@ -2999,9 +3319,11 @@ class Component extends DCLogic {
       replyTitle: replyLabel + ' (R)',
       mid: unread.length ? markRead : markUnread,
       midLabel: midLabel,
+      midIcon: 'ic ' + (unread.length ? 'ic-check' : 'ic-unread'),
       midTitle: midLabel + ' (L)',
       midCls: 'tbtn tbtn-mid' + (unread.length ? ' tbtn-read pv-read' : ''),
       archLabel: archLabel,
+      archIcon: 'ic ' + (archived ? 'ic-restore' : 'ic-archive'),
       archTitle: archLabel + ' (A)',
       archCls: 'tbtn tbtn-arch' + (archived ? '' : ' pv-arch'),
       archive: archive,
@@ -3053,7 +3375,7 @@ class Component extends DCLogic {
     const who = (a) => {
       if (me[a]) return { name: 'te', email: '' };
       const n = this.model.nameOf(a);
-      return n === a.split('@')[0] ? { name: '', email: a } : { name: n, email: a };
+      return n === a || n === a.split('@')[0] ? { name: '', email: a } : { name: n, email: a };
     };
     const toList = (rcptOpen ? toAll : toAll.slice(0, LIM)).map(who);
     const ccList = (rcptOpen ? ccAll : ccAll.slice(0, Math.max(0, LIM - toList.length))).map(who);
@@ -3099,7 +3421,7 @@ class Component extends DCLogic {
       toggleExtra: () => { this.act('citazione', { rid: m.rid }); this.setState({ extra: Object.assign({}, this.state.extra, { [m.id]: !extraOpen }) }); },
       problems: m.problems.map((x) => ({ label: x })),
       report: () => this.openReport(m.rid),
-      ...this.menuVals('m:' + m.id, m.rid),
+      ...this.menuVals('m:' + m.id, m.rid, m),
       time: this.whenLabel(m.ts),
       from: m.me ? '' : (m.from || ''),
       hasFrom: hasFrom && !fp,
@@ -3109,7 +3431,13 @@ class Component extends DCLogic {
       fromTitle: fp ? 'Apri la conversazione con ' + fp.name : '',
       goFrom: () => { if (!fp) return; this.act('apri chi scrive', { rid: m.rid }); this.openMsg(fp.id, m.rid + '@' + fp.id); },
       isNew: isNew,
-      hasHead: hasRole || isNew || hasFrom,
+      hasHead: hasRole || isNew || hasFrom || !!m.via || (!!m.author && m.fromAddr === p.address),
+      // v15: scritto attraverso un servizio (Jira, Drive…), o da chi firma una casella condivisa
+      hasVia: !!m.via && !!m.viaAddr && m.fromAddr !== m.viaAddr,
+      via: m.via || '',
+      viaTitle: m.viaAddr ? 'Arrivato da ' + m.viaAddr : '',
+      hasAuthor: !!m.author && m.fromAddr === p.address && !m.me,
+      author: m.author || '',
       hasRole: hasRole,
       role: role,
       roleCls: ROLE[role] || 'role',
@@ -3180,7 +3508,7 @@ class Component extends DCLogic {
     const nameOf = (a) => this.model.nameOf(a);
     const chip = (a, field) => {
       const n = nameOf(a);
-      const hasName = n !== a.split('@')[0];
+      const hasName = n !== a && n !== a.split('@')[0];
       return {
         name: hasName ? n : a, email: hasName ? a : '', label: hasName ? n : a,
         remove: () => this.setDraft(key, (d) => ({ [field]: (d[field] || []).filter((x) => x !== a) }))
@@ -3509,7 +3837,7 @@ class Component extends DCLogic {
     const seen = {};
     // v14: un messaggio tenuto nella revisione non si ripropone più, neanche con «Da ora fallo da solo»
     const kept = s.cleanKept || {};
-    this.cleanPid = {};
+    this.cleanPid = this.cleanPid || {};
     const add = (id, m, pid) => { if (!seen[m.key] && !kept[m.key]) { seen[m.key] = true; out[id].push(m); this.cleanPid[m.key] = pid || 'services'; } };
     const svc = this.model.services.msgs.filter((m) => m.svc && !s.deleted[m.key]);
     const done = {};
@@ -3533,6 +3861,183 @@ class Component extends DCLogic {
     }));
     return out;
   }
+
+  /* ---------- v15: gruppi di pulizia fatti con una ricerca, imparati, esclusioni ---------- */
+  /* ogni messaggio una volta sola, con la persona a cui appartiene (i servizi per ultimi) */
+  allMsgs() {
+    if (this.allMsgsCache && this.allMsgsCache.model === this.model) return this.allMsgsCache.list;
+    const seen = {};
+    const list = [];
+    this.model.people.concat([this.model.services]).forEach((p) => p.msgs.forEach((m) => {
+      if (seen[m.key]) return;
+      seen[m.key] = true;
+      list.push({ p: p, m: m });
+    }));
+    this.allMsgsCache = { model: this.model, list: list };
+    return list;
+  }
+  /* l'oggetto senza la parte che cambia: «Fattura n. 1234 del 3 ottobre» → «Fattura n.» */
+  subjectPattern(topic) {
+    const t = String(topic || '').replace(/[\u200b-\u200d\ufeff]/g, '').replace(/^\s*((re|r|i|fw|fwd|inoltro)\s*:\s*)+/i, '').trim();
+    const cut = t.search(/[#\d]/);
+    const head = (cut > 0 ? t.slice(0, cut) : t).replace(/[\s,:;(\[-]+$/, '').trim();
+    return head.length >= 5 ? head : '';
+  }
+  /* i motivi per cui un messaggio non si elimina mai da solo (proposta 3); `pattern` sono i tenuti del gruppo */
+  cleanExcluded(m, keptPats, keptFrom, gid, learned) {
+    const addr = m.viaAddr || m.fromAddr;
+    if (m.att.some((a) => !a.sig && a.ext !== 'ICS')) return 'ha un allegato';
+    if (this.model.myThreads[m.threadKey]) return 'hai scritto in questo thread';
+    if (m.flagged) return 'con la stella';
+    // v15, dopo le prove: ricevute, conferme d'ordine, rinnovi, prenotazioni, anche fatte solo di testo;
+    // non nelle spedizioni concluse, dove codici di ritiro e numeri d'ordine hanno finito il loro lavoro, né nei
+    // gruppi imparati: se ho eliminato io due fatture uguali, le altre le propongo
+    if (gid !== 'consegne' && !learned && this.isReceipt(m)) return 'è una ricevuta o una conferma';
+    // v15, dopo le prove: con chi ho una relazione, la pulizia non tocca niente; gli inviti passati sì,
+    // che arrivano proprio dalle persone con cui lavoro
+    const rel = gid === 'inviti' ? '' : this.relationOf(addr);
+    if (rel) return rel;
+    if (keptFrom && keptFrom[addr] && m.ts > keptFrom[addr]) return 'ne hai già tenuti altri';
+    if (keptPats && keptPats[addr + '|' + this.subjectPattern(m.subject || m.topic)]) return 'simile a quelli che hai tenuto';
+    return '';
+  }
+  isReceipt(m) {
+    const s = String(m.subject || m.topic || '') + '\n' + String(m.text || '').slice(0, 3000);
+    return /ricevut[ao]\s+(n\.?|nr\.?|numero|di pagamento|del pagamento)|abbiamo ricevuto (il (tuo |suo )?pagamento|la (tua |sua )?quota)|conferma (d[’']|dell[’'])?ordine|ordine (n\.?|nr\.?|numero)\s*[\w-]*\d|numero d[’']ordine|order (#|number|no\.|confirmation)|fattura (n\.?|nr\.?|numero)\s*[\w/-]*\d|documento contabile|importo( pagato| addebitato)?:?\s*(€|eur)?\s*\d|totale (pagato|addebitato)|pagato con|amount (paid|charged)|\breceipt\b|\binvoice\b|codice di ritiro|\bpin:|prenotazione (n\.?|nr\.?|numero|confermata)|la (tua|sua) prenotazione|appuntamento (confermato|del|di)|rinnovo (del|della|annuale|automatico)|rinnovat[oa] (il|la|per)|\brenewal\b|grazie per (il tuo |l[’'])acquisto/i.test(s);
+  }
+  /* v15: la relazione con un indirizzo: gli ho scritto almeno due volte, o ho risposto a un suo messaggio;
+     con un dominio aziendale vale per tutto il dominio. Mai per la posta pubblica, mai per gli indirizzi condivisi dei servizi. */
+  relations() {
+    if (this.relCache && this.relCache.model === this.model && this.relCache.sent === this.sentRecords.length) return this.relCache;
+    const sent = {};
+    const replied = {};
+    const viaAddrs = {};
+    const byThread = {};
+    this.allMsgs().forEach((x) => {
+      const m = x.m;
+      if (m.viaAddr) viaAddrs[m.viaAddr] = true;
+      (byThread[m.threadKey] = byThread[m.threadKey] || []).push(m);
+    });
+    this.allMsgs().forEach((x) => {
+      const m = x.m;
+      if (!m.me) return;
+      (m.toAddrs || []).concat(m.ccAddrs || []).forEach((a) => { sent[a] = (sent[a] || 0) + 1; });
+      (byThread[m.threadKey] || []).forEach((o) => { if (!o.me && o.ts < m.ts) replied[o.viaAddr || o.fromAddr] = true; });
+    });
+    const PUBLIC = /^(gmail\.com|googlemail\.com|libero\.it|outlook\.(com|it)|hotmail\.(com|it)|live\.(com|it)|msn\.com|yahoo\.(com|it)|ymail\.com|icloud\.com|me\.com|mac\.com|tiscali\.it|virgilio\.it|alice\.it|tim\.it|tin\.it|fastwebnet\.it|email\.it|inwind\.it|aruba\.it|pec\.it|legalmail\.it|proton\.me|protonmail\.com|gmx\.(com|it|de|net)|aol\.com|esempio\.it)$/i;
+    const addr = {};
+    const dom = {};
+    Object.keys(sent).concat(Object.keys(replied)).forEach((a) => {
+      if (viaAddrs[a] || a.indexOf('@') < 0 || this.model.me[a]) return;
+      if (!(sent[a] >= 2 || replied[a])) return;
+      addr[a] = true;
+      const d = a.split('@')[1].toLowerCase();
+      if (!PUBLIC.test(d)) dom[d] = true;
+    });
+    this.relCache = { model: this.model, sent: this.sentRecords.length, addr: addr, dom: dom };
+    return this.relCache;
+  }
+  relationOf(a) {
+    if (!a || a.indexOf('@') < 0) return '';
+    const r = this.relations();
+    if (r.addr[a]) return 'ci scrivi';
+    const d = a.split('@')[1].toLowerCase();
+    const hit = Object.keys(r.dom).find((x) => d === x || d.slice(-x.length - 1) === '.' + x);
+    return hit ? 'scrivi a qualcuno di ' + hit : '';
+  }
+  /* la descrizione in chiaro di una ricerca, e se è larga (persona tra i destinatari, parola nel testo) */
+  describeChips(chips) {
+    const parts = chips.map((c) => c.desc || ({ who: 'con ', text: 'contiene ', att: 'allegato ', label: 'etichetta ', date: '' }[c.type] || '') + c.label);
+    const broad = chips.some((c) => (c.type === 'who' || c.type === 'text') && !c.neg);
+    return { text: parts.join(' · '), broad: broad };
+  }
+  /* i gruppi imparati: due eliminazioni a mano dallo stesso mittente con oggetto simile, o tre dallo stesso servizio */
+  learnedGroups(s) {
+    const del = s.deleted || {};
+    const pats = {};
+    const snd = {};
+    this.allMsgs().forEach((x) => {
+      if (del[x.m.key] !== 'mano') return;
+      const addr = x.m.viaAddr || x.m.fromAddr;
+      if (!addr || x.m.me) return;
+      const service = x.p.id === 'services' || !!x.m.viaAddr;
+      const pat = this.subjectPattern(x.m.subject || x.m.topic);
+      if (pat) {
+        const k = 'pat:' + addr + '|' + pat.toLowerCase();
+        (pats[k] = pats[k] || { addr: addr, pat: pat, n: 0, name: x.m.from, whole: pat.length >= String(x.m.subject || x.m.topic).replace(/[\u200b-\u200d\ufeff]/g, '').trim().length - 1 }).n++;
+      }
+      if (service) {
+        const k = 'snd:' + addr;
+        (snd[k] = snd[k] || { addr: addr, n: 0, pats: {}, name: x.m.from }).n++;
+        snd[k].pats[pat.toLowerCase()] = true;
+      }
+    });
+    const out = [];
+    Object.keys(pats).forEach((k) => {
+      const g = pats[k];
+      if (g.n < 2) return;
+      out.push({ id: 'L:' + k, q: 'da ' + g.addr + ' oggetto "' + g.pat + '"', title: '«' + g.pat + (g.whole ? '' : ' …') + '» da ' + g.name, learned: true });
+    });
+    Object.keys(snd).forEach((k) => {
+      const g = snd[k];
+      if (g.n < 3 || Object.keys(g.pats).length < 2) return;
+      out.push({ id: 'L:' + k, q: 'da ' + g.addr, title: 'Tutto da ' + g.name, learned: true });
+    });
+    return out.filter((g) => !(s.cleanDismissed || {})[g.id]);
+  }
+  /* tutti i gruppi: quelli dell'app, quelli fatti con una ricerca, quelli imparati */
+  cleanGroupsAll(s) {
+    const mine = (s.cleanGroups || []).map((g) => Object.assign({ learned: false }, g));
+    const have = {};
+    mine.forEach((g) => { have[g.q.toLowerCase()] = true; });
+    const learned = this.learnedGroups(s).filter((g) => !have[g.q.toLowerCase()]);
+    // v15, dopo le prove: i gruppi fatti con una ricerca in cima, il più recente per primo
+    mine.sort((a, b) => (b.at || 0) - (a.at || 0));
+    return mine.concat(this.cleanRules().map((r) => Object.assign({ builtin: true }, r)), learned);
+  }
+  /* i messaggi di un gruppo: { list: da eliminare, excluded: [{ m, why }] } */
+  groupMembers(g, s, base) {
+    const kept = s.cleanKept || {};
+    const keptPats = {};
+    // v15, dopo le prove: tenuti due dello stesso mittente, quelli che arrivano dopo non si propongono più
+    const keptTs = {};
+    Object.keys(kept).forEach((k) => {
+      const x = this.allMsgs().find((y) => y.m.key === k);
+      if (!x) return;
+      const a = x.m.viaAddr || x.m.fromAddr;
+      (keptTs[a] = keptTs[a] || []).push(x.m.ts);
+      if (kept[k] !== g.id) return;
+      const pk = (x.m.viaAddr || x.m.fromAddr) + '|' + this.subjectPattern(x.m.subject || x.m.topic);
+      keptPats[pk] = (keptPats[pk] || 0) + 1;
+    });
+    Object.keys(keptPats).forEach((k) => { if (keptPats[k] < 2) delete keptPats[k]; });
+    const keptFrom = {};
+    Object.keys(keptTs).forEach((a) => { if (keptTs[a].length >= 2) keptFrom[a] = Math.max.apply(null, keptTs[a]); });
+    let cands;
+    if (g.builtin) cands = (base[g.id] || []).map((m) => ({ m: m, p: { id: this.cleanPid[m.key] || 'services' } }));
+    else {
+      const chips = this.queryChips(g.q).chips;
+      cands = this.allMsgs().filter((x) => !s.deleted[x.m.key] && !kept[x.m.key] && !x.m.me && this.matchMsg(x.m, x.p, chips, s));
+      cands.forEach((x) => { this.cleanPid[x.m.key] = x.p.id; });
+    }
+    const list = [];
+    const excluded = [];
+    cands.forEach((x) => {
+      const why = this.cleanExcluded(x.m, keptPats, keptFrom, g.id, !!g.learned);
+      if (why) excluded.push({ m: x.m, why: why });
+      else list.push(x.m);
+    });
+    const chips = g.builtin ? [] : this.queryChips(g.q).chips;
+    return { list: list.sort((a, b) => b.ts - a.ts), excluded: excluded.sort((a, b) => b.m.ts - a.m.ts), chips: chips };
+  }
+  /* «Da ora fallo da solo»: senza età, quello che arriva dopo l'accensione; con l'età (proposta 2),
+     quello che supera l'età dopo l'accensione. Gli esclusi mai. */
+  autoDue(m, chips, since) {
+    const age = chips.find((c) => c.type === 'age' && !c.neg);
+    if (!age) return m.ts > since;
+    const cross = m.ts + age.days * 86400000;
+    return cross > since && cross <= Date.now();
+  }
   deletePatch(keys, rule) {
     const d = Object.assign({}, this.state.deleted);
     keys.forEach((k) => { d[k] = 'pulizia:' + rule; });
@@ -3542,43 +4047,81 @@ class Component extends DCLogic {
   runAutoClean() {
     const on = Object.keys(this.state.autoClean || {});
     if (!on.length || !this.model.ok) return;
-    const c = this.cleanCandidates(this.state);
-    let deleted = Object.assign({}, this.state.deleted);
+    const s = this.state;
+    this.cleanPid = {};
+    const base = this.cleanCandidates(s);
+    let deleted = Object.assign({}, s.deleted);
     let n = 0;
-    // v14: solo i messaggi arrivati dopo l'accensione
-    on.forEach((id) => (c[id] || []).forEach((m) => { if (m.ts > this.state.autoClean[id]) { deleted[m.key] = 'pulizia:' + id; n++; } }));
-    if (n) this.change('Pulizia automatica: ' + this.n(n, '1 notifica eliminata', 'notifiche eliminate'), { deleted: deleted }, { what: 'pulizia automatica', ms: 12000 });
+    this.cleanGroupsAll(s).forEach((g) => {
+      const since = s.autoClean[g.id];
+      if (!since) return;
+      const mem = this.groupMembers(g, s, base);
+      mem.list.forEach((m) => { if (!deleted[m.key] && this.autoDue(m, mem.chips, since)) { deleted[m.key] = 'pulizia:' + g.id; n++; } });
+    });
+    if (n) this.change('Pulizia automatica: ' + this.n(n, '1 messaggio eliminato', 'messaggi eliminati'), { deleted: deleted }, { what: 'pulizia automatica', ms: 12000 });
+  }
+  /* «Pulisci con questa ricerca» (proposta 1) */
+  addCleanGroup(q) {
+    const t = String(q || '').trim();
+    if (!t) return;
+    const have = (this.state.cleanGroups || []).find((g) => g.q.toLowerCase() === t.toLowerCase());
+    const id = have ? have.id : 'g:' + Date.now().toString(36);
+    if (!have) this.change('Gruppo di pulizia: «' + t + '»', { cleanGroups: (this.state.cleanGroups || []).concat([{ id: id, q: t, title: '«' + t + '»', at: Date.now() }]) }, { what: 'nuovo gruppo di pulizia' });
+    this.go({ view: 'archive', cleanOpen: id, cleanOff: {} });
+  }
+  /* «Elimina» dal menu «⋯», solo nei thread in cui non ho scritto (proposta 4) */
+  canDeleteMsg(m) {
+    return !!m && !m.me && !this.model.myThreads[m.threadKey];
+  }
+  deleteMsg(m) {
+    if (!this.canDeleteMsg(m)) return;
+    const before = this.learnedGroups(this.state).map((g) => g.id);
+    const deleted = Object.assign({}, this.state.deleted, { [m.key]: 'mano' });
+    const after = this.learnedGroups(Object.assign({}, this.state, { deleted: deleted })).filter((g) => before.indexOf(g.id) < 0);
+    this.change('Eliminato: ' + (m.topic || 'messaggio') + (after.length ? '. In Archivio e pulizia ti propongo un gruppo per quelli simili.' : ''), { deleted: deleted, msgMenu: '' }, { what: 'elimina messaggio', ms: after.length ? 12000 : undefined });
   }
   cleanVals(s) {
-    const c = this.cleanCandidates(s);
+    this.cleanPid = {};
+    const base = this.cleanCandidates(s);
     let total = 0;
-    const cards = this.cleanRules().map((r) => {
-      const list = c[r.id].slice().sort((a, b) => b.ts - a.ts);
+    const cards = this.cleanGroupsAll(s).map((r) => {
+      const mem = this.groupMembers(r, s, base);
+      const list = mem.list;
+      const exc = mem.excluded;
+      const all = list.map((m) => ({ m: m, why: '' })).concat(exc);
       const keys = list.map((m) => m.key);
       const auto = !!s.autoClean[r.id];
-      const open = s.cleanOpen === r.id && list.length > 0;
+      const open = s.cleanOpen === r.id && all.length > 0;
       const off = open ? (s.cleanOff || {}) : {};
-      const nOn = keys.filter((k) => !off[k]).length;
+      // spunta: i normali spuntati, gli esclusi no; un clic cambia (cleanOff true = tenuto, false = eliminato)
+      const isOn = (x) => (off[x.m.key] === undefined ? !x.why : off[x.m.key] === false);
+      const nOn = all.filter(isOn).length;
       total += list.length;
+      const desc = r.builtin ? null : this.describeChips(mem.chips);
+      const age = mem.chips.find((c) => c.type === 'age' && !c.neg);
       return {
-        title: r.title, why: r.why,
-        count: list.length ? this.n(list.length, '1 messaggio', 'messaggi') : 'niente adesso',
-        hasItems: list.length > 0,
-        cls: 'clean' + (list.length ? '' : ' none') + (auto ? ' auto' : '') + (s.cleanOpen === r.id && list.length ? ' open' : ''),
+        title: r.title, why: r.builtin ? r.why : desc.text,
+        isLearned: !!r.learned, isMine: !r.builtin,
+        hasBroad: !!desc && desc.broad,
+        count: list.length ? this.n(list.length, '1 messaggio', 'messaggi') + (exc.length ? ' · ' + this.n(exc.length, '1 escluso', 'esclusi') : '') : exc.length ? 'niente adesso · ' + this.n(exc.length, '1 escluso', 'esclusi') : 'niente adesso',
+        hasItems: all.length > 0,
+        cls: 'clean' + (list.length ? '' : ' none') + (auto ? ' auto' : '') + (open ? ' open' : ''),
         examples: list.slice(0, 3).map((m) => ({ who: m.from || this.model.nameOf(m.fromAddr), what: m.cal ? (m.cal.title || m.topic) : (m.svc && m.svc.label) || m.topic, when: this.shortDate(m.ts) })),
         hasMore: list.length > 3,
         moreLabel: 'e altri ' + (list.length - 3),
         // v14: prima di eliminare si rivede la lista intera, tutta spuntata; si tolgono quelli da tenere
         open: open, closed: !open,
-        reviewLabel: 'Rivedi ed elimina ' + list.length,
+        reviewLabel: 'Rivedi ed elimina ' + list.length + (exc.length ? ' · ' + this.n(exc.length, '1 escluso', 'esclusi') : ''),
         review: () => { this.act('rivedi pulizia ' + r.id); this.setState({ cleanOpen: r.id, cleanOff: {} }); },
         closeReview: () => this.setState({ cleanOpen: '', cleanOff: {} }),
-        rows: open ? list.map((m) => {
-          const on = !off[m.key];
+        rows: open ? all.map((x) => {
+          const m = x.m;
+          const on = isOn(x);
           const who = m.from || this.model.nameOf(m.fromAddr);
           return {
-            id: 'cl-' + m.key.replace(/[^A-Za-z0-9_-]/g, '_'), on: on, cls: 'crow' + (on ? '' : ' off'),
+            id: 'cl-' + m.key.replace(/[^A-Za-z0-9_-]/g, '_'), on: on, cls: 'crow' + (on ? '' : ' off') + (x.why ? ' excl' : ''),
             who: who, what: m.cal ? (m.cal.title || m.topic) : (m.svc && m.svc.label) || m.topic, when: this.shortDate(m.ts),
+            hasWhy: !!x.why, whyLabel: x.why,
             aria: (on ? 'Da eliminare: ' : 'Da tenere: ') + who,
             toggle: () => this.setState({ cleanOff: Object.assign({}, this.state.cleanOff, { [m.key]: on }) }),
             open: () => this.openMsg(this.cleanPid[m.key] || 'services', m.id)
@@ -3586,20 +4129,22 @@ class Component extends DCLogic {
         }) : [],
         delLabel: nOn ? 'Elimina ' + (nOn === 1 ? '1 messaggio' : nOn + ' messaggi') : 'Niente da eliminare',
         delOff: !nOn,
-        keepNote: open && nOn < list.length ? (list.length - nOn === 1 ? 'Quello che togli resta e non te lo ripropongo più.' : 'Quelli che togli restano e non te li ripropongo più.') : '',
-        hasKeepNote: open && nOn < list.length,
+        keepNote: open && list.some((m) => !isOn({ m: m, why: '' })) ? 'Quelli che togli restano. Se ne togli due dello stesso mittente, i suoi successivi non te li propongo più.' : '',
+        hasKeepNote: open && list.some((m) => !isOn({ m: m, why: '' })),
         del: () => {
-          const del = keys.filter((k) => !off[k]);
-          const keep = keys.filter((k) => off[k]);
+          const del = all.filter(isOn).map((x) => x.m.key);
+          const keep = list.filter((m) => !isOn({ m: m, why: '' })).map((m) => m.key);
           if (!del.length) return;
           const keptNext = Object.assign({}, this.state.cleanKept);
-          keep.forEach((k) => { keptNext[k] = true; });
+          keep.forEach((k) => { keptNext[k] = r.id; });
           this.change(r.title + ': ' + this.n(del.length, '1 messaggio eliminato', 'messaggi eliminati') + (keep.length ? ', ' + this.n(keep.length, '1 tenuto', 'tenuti') : ''),
             Object.assign({ deleted: this.deletePatch(del, r.id), cleanOpen: '', cleanOff: {} }, keep.length ? { cleanKept: keptNext } : {}), { what: 'pulizia ' + r.id });
         },
         auto: auto,
-        autoId: 'auto-' + r.id,
-        autoNote: !auto ? '' : list.length ? 'Attiva: elimino da solo quelli che arrivano da ora; questi li rivedi tu.' : 'Attiva: quando ne arrivano altri li elimino da solo.',
+        autoId: 'auto-' + r.id.replace(/[^A-Za-z0-9_-]/g, '_'),
+        autoNote: !auto ? '' : age
+          ? 'Attiva: elimino da solo quelli che superano ' + age.label.replace(/^più vecchi\S* di /, 'i ').replace(/^i 1 settimana/, 'una settimana').replace(/^i 1 /, 'un ') + ' da ora' + (list.length ? '; questi ' + list.length + ' li rivedi tu.' : '.')
+          : list.length ? 'Attiva: elimino da solo quelli che arrivano da ora; questi li rivedi tu.' : 'Attiva: quando ne arrivano altri li elimino da solo.',
         toggleAuto: () => {
           const next = Object.assign({}, this.state.autoClean);
           const patch = { autoClean: next };
@@ -3607,6 +4152,17 @@ class Component extends DCLogic {
           if (auto) delete next[r.id];
           else next[r.id] = Date.now();
           this.change(auto ? 'Pulizia automatica spenta: ' + r.title : 'Pulizia automatica accesa: ' + r.title + ', da ora in poi', patch, { what: auto ? 'pulizia automatica spenta' : 'pulizia automatica accesa' });
+        },
+        // v15: un gruppo mio o imparato si toglie; non elimina niente, toglie la regola
+        canRemove: !r.builtin,
+        removeLabel: r.learned ? 'Non propormelo più' : 'Togli questo gruppo',
+        remove: () => {
+          const next = Object.assign({}, this.state.autoClean);
+          delete next[r.id];
+          const patch = { autoClean: next, cleanOpen: '' };
+          if (r.learned) patch.cleanDismissed = Object.assign({}, this.state.cleanDismissed, { [r.id]: true });
+          else patch.cleanGroups = (this.state.cleanGroups || []).filter((g) => g.id !== r.id);
+          this.change('Gruppo di pulizia tolto: ' + r.title, patch, { what: 'togli gruppo di pulizia' });
         }
       };
     });
@@ -3624,10 +4180,11 @@ class Component extends DCLogic {
       rows[kind].push({ p: p, m: m });
     }));
     const rules = {};
-    this.cleanRules().forEach((r) => { rules[r.id] = r.title; });
+    this.cleanGroupsAll(s).forEach((r) => { rules[r.id] = r.title; });
     const why = (v) => {
+      if (v === 'mano') return 'eliminato da te';
       const id = typeof v === 'string' && v.indexOf('pulizia:') === 0 ? v.slice(8) : '';
-      return id && rules[id] ? 'pulizia: ' + rules[id].toLowerCase() : 'eliminato a mano in una versione precedente';
+      return id && rules[id] ? 'pulizia: ' + (rules[id].charAt(0) === '«' ? rules[id] : rules[id].toLowerCase()) : id ? 'pulizia: un gruppo tolto' : 'eliminato a mano in una versione precedente';
     };
     const fmt = (list, kind) => list.sort((a, b) => b.m.ts - a.m.ts).slice(0, s.archLimit).map((x) => ({
       who: x.p.id === 'services' ? x.m.from : (x.m.me ? 'tu → ' + x.p.name : (x.m.from || x.p.name)),
@@ -3687,7 +4244,8 @@ class Component extends DCLogic {
   thumbOf(a) {
     // v14: per i PDF la prima pagina, disegnata dal motore con pdftoppm (qui dal generatore dei dati)
     if (this.hasPdfThumb(a)) return ' background-image: url("' + this.pathSrc(a.thumb) + '"); background-size: cover; background-position: center top; background-color: #fff; box-shadow: inset 0 0 0 1px var(--line);';
-    return this.isImageAtt(a) ? ' background-image: url("' + this.attSrc(a) + '"); background-size: cover; background-position: center; color: transparent;' : '';
+    // giro 2: un'immagine grande ha la sua miniatura, fatta dal motore: il quadratino non apre la foto intera
+    return this.isImageAtt(a) ? ' background-image: url("' + (a.thumb ? this.pathSrc(a.thumb) : this.attSrc(a)) + '"); background-size: cover; background-position: center; color: transparent;' : '';
   }
   hasPdfThumb(a) {
     return a.ext === 'PDF' && !!a.thumb;
@@ -3724,7 +4282,10 @@ class Component extends DCLogic {
   }
   /* il programma esterno ha un nome: nell'app lo dà xdg-mime; qui un esempio per i PDF */
   openWithLabel(a) {
-    if (!this.app) return a.ext === 'PDF' ? 'Apri con Papers' : 'Apri fuori dall’app';
+    if (!this.app) {
+      const prog = { PDF: 'Papers', DOC: 'LibreOffice Writer', XLS: 'LibreOffice Calc', PPT: 'LibreOffice Impress', ZIP: 'Gestore di archivi', JPG: 'Visualizzatore di immagini' }[a.ext];
+      return prog ? 'Apri con ' + prog : 'Apri fuori dall’app';
+    }
     // nell'app il nome del programma predefinito per quel tipo, da xdg-mime e dal suo .desktop
     const tipo = a.mime || 'application/octet-stream';
     const cache = this.progCache || (this.progCache = {});
@@ -3733,6 +4294,9 @@ class Component extends DCLogic {
       window.A10S.invoca('programma_per', { tipo: tipo }).then((nome) => { cache[tipo] = nome || ''; if (nome) this.forceUpdate(); }).catch(() => {});
     }
     return cache[tipo] ? 'Apri con ' + cache[tipo] : 'Apri fuori dall’app';
+  }
+  kindOf(a) {
+    return { PDF: 'Documento PDF', DOC: 'Documento di testo', XLS: 'Foglio di calcolo', PPT: 'Presentazione', ZIP: 'Archivio compresso', JPG: 'Immagine', ICS: 'Invito di calendario', TXT: 'Testo' }[a.ext] || 'File ' + (a.ext || '');
   }
   /* «Inoltra»: un nuovo messaggio con il file già allegato */
   forwardAtt(a) {
@@ -3749,7 +4313,7 @@ class Component extends DCLogic {
     const isImage = this.isImageAtt(a);
     const sender = r.from ? (this.model.me[this.lower(r.from.address)] ? 'te' : this.model.nameOf(this.lower(r.from.address))) : '';
     let missing = '';
-    const textual = /^text\/|calendar|json|xml|csv/i.test(a.mime || '') || /^(TXT|ICS|CSV|JSON|XML|MD|LOG|EML)$/.test(a.ext || '');
+    const textual = /^text\/|^application\/(json|xml)$|\+xml$|\+json$|calendar/i.test(a.mime || '') || /^(TXT|ICS|CSV|JSON|XML|MD|LOG|EML)$/.test(a.ext || '');
     const isPdf = a.ext === 'PDF' || /pdf/i.test(a.mime || '');
     let preview = a.preview;
     if (this.app && src && !isImage && textual && !preview) {
@@ -3761,7 +4325,14 @@ class Component extends DCLogic {
         preview = this.textCache[src];
       }
     }
-    const frame = this.app && !!src && isPdf;
+    // giro 2: nell'app le pagine le disegna il motore (pdftoppm): il visore di WebKitGTK porta gli
+    // strumenti per scrivere sul PDF e ignora #toolbar=0. Finché le pagine non si sanno, il visore.
+    const MAX_PAGINE = 50;
+    const nPages = this.app && isPdf && /^a10s:\/\/localhost\/allegato\//.test(src || '') ? (a.pages || 0) : 0;
+    const pages = Array.from({ length: Math.min(nPages, MAX_PAGINE) }, (_, i) => ({
+      src: src.replace('/allegato/', '/pagina/') + '/' + (i + 1), alt: 'Pagina ' + (i + 1) + ' di ' + nPages
+    }));
+    const frame = this.app && !!src && isPdf && !pages.length;
     if (!src && !a.preview) missing = this.model.synthetic ? 'Nei dati sintetici questo file non ha contenuto.' : 'L’export non ha salvato questo file. Rilancia tools/gmail-export.py: ora salva anche gli allegati.';
     return {
       open: true,
@@ -3770,10 +4341,15 @@ class Component extends DCLogic {
       isImage: isImage,
       src: src,
       imgStyle: 'display: block; width: min(820px, 80vw); height: 68vh; background: url("' + src + '") center / contain no-repeat',
-      hasPreview: !isImage && !frame && !!preview,
+      // v15: il testo solo per i file davvero di testo; un DOCX è uno zip (il tipo contiene «xml», ma non è testo)
+      hasPreview: !isImage && !frame && !!preview && textual,
       preview: preview,
+      // il PDF lo disegna il visore di WebKitGTK; v15: senza strumenti (disegno, testo, evidenziatore)
       isFrame: frame,
-      frameSrc: src,
+      isPages: pages.length > 0,
+      pages: pages,
+      morePages: nPages > MAX_PAGINE ? 'Le altre ' + (nPages - MAX_PAGINE) + ' pagine con «' + this.openWithLabel(a) + '».' : '',
+      frameSrc: src ? src + '#toolbar=0&navpanes=0&view=FitH' : '',
       inApp: this.app && !!src,
       onWeb: !this.app,
       openApp: () => window.A10S.invoca('apri_allegato', { url: src, nome: a.name }).catch((e) => this.notice(String((e && e.message) || e))),
@@ -3789,6 +4365,13 @@ class Component extends DCLogic {
       forward: () => this.forwardAtt(a),
       hasMissing: !!missing,
       missing: missing,
+      // v15: senza anteprima, un riquadro con tipo e misura, e il programma che lo apre
+      noPreview: !missing && !isImage && !frame && !pages.length && !(a.ext === 'PDF' && src) && !(preview && textual),
+      kind: this.kindOf(a),
+      badgeStyle: this.tint(a.ext),
+      ext: a.ext,
+      sizeLabel: a.size || '',
+      fromThread: s.view !== 'files',
       goMessage: () => { this.setState({ viewer: '' }); this.openMsg(reg.pid, reg.msgId); },
       goFiles: () => { this.setState({ viewer: '' }); this.go({ view: 'files', fsel: a.doc, fperson: '', fext: a.ext === 'ICS' ? 'ICS' : 'all' }); },
       close: () => this.setState({ viewer: '' }),
@@ -3854,6 +4437,7 @@ class Component extends DCLogic {
           this.change((e.archivedAll ? 'Ripristinato: ' : 'Archiviato: ') + e.label, patch, { what: e.archivedAll ? 'ripristina servizio' : 'archivia servizio' });
         },
         archiveLabel: e.archivedAll ? 'Ripristina' : 'Archivia',
+        archiveIcon: 'ic ' + (e.archivedAll ? 'ic-restore' : 'ic-archive'),
         isArchived: e.archivedAll,
         rowStyle: 'display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; width: 100%; padding: 12px 16px; border: 0; background: ' + (open ? 'var(--paper)' : 'var(--sheet)') + '; font: inherit; text-align: left; color: inherit; cursor: pointer',
         msgs: e.msgs.slice().reverse().map((m) => {
@@ -3877,7 +4461,7 @@ class Component extends DCLogic {
               hideImages: () => { const a = Object.assign({}, this.state.imgAllow); delete a[sender]; this.change('Immagini di nuovo bloccate per ' + who, { imgAllow: a }, { what: 'blocca immagini' }); },
               fit: (ev) => { try { const f = ev.target; const d = f.contentDocument; if (d && d.body) f.style.height = Math.min(900, d.documentElement.scrollHeight + 4) + 'px'; } catch (err) { /* il riquadro resta alto com'è */ } },
               segs: [], att: [], isLong: false,
-              ...this.menuVals('n:' + m.id, m.rid)
+              ...this.menuVals('n:' + m.id, m.rid, m)
             };
           }
           const isLong = m.text.length > 300;
@@ -3891,7 +4475,7 @@ class Component extends DCLogic {
             isLong: isLong, moreLabel: ex ? 'Riduci' : 'Leggi tutto',
             toggle: () => this.setState({ expanded: Object.assign({}, this.state.expanded, { [m.id]: !ex }) }),
             att: m.att.map((a) => ({ name: a.name, ext: a.ext, badgeStyle: this.badgeStyle(a.ext), open: () => this.openViewer(a.id) })),
-            ...this.menuVals('n:' + m.id, m.rid)
+            ...this.menuVals('n:' + m.id, m.rid, m)
           };
         })
       };
@@ -4012,19 +4596,61 @@ class Component extends DCLogic {
   }
 
   /* ---------- ricerca ---------- */
-  search(s) {
-    const q = s.q.trim();
-    const examples = ['la convocazione dell’assemblea con la delega', 'preventivo cucina pdf', 'foto di Paolo', 'Elena computo', 'bolletta settembre', 'colloqui'].map((x) => ({ label: x, pick: () => this.setState({ q: x, off: {} }) }));
-    const labels = (this.model.labels || []).map((l) => ({ label: l, pick: () => this.setState({ q: 'etichetta ' + l.toLowerCase(), off: {} }) }));
-    if (!q) return { empty: true, active: false, examples: examples, labels: labels, hasLabels: labels.length > 0, chips: [], results: [], none: false, countLabel: '' };
-    const all = this.model.people.concat([this.model.services]);
-    const STOP = { il: 1, lo: 1, la: 1, i: 1, gli: 1, le: 1, di: 1, del: 1, dello: 1, della: 1, dei: 1, delle: 1, dell: 1, con: 1, che: 1, per: 1, a: 1, al: 1, all: 1, alla: 1, da: 1, dal: 1, in: 1, un: 1, una: 1, e: 1, mi: 1, ha: 1, ho: 1, mandato: 1, mandata: 1, quella: 1, quello: 1, email: 1, mail: 1, messaggio: 1, sul: 1, sulla: 1, su: 1, tra: 1, l: 1, cosa: 1 };
+  /* v15: i criteri di una ricerca. Prima quelli stretti, scritti come si direbbero (servono anche alla pulizia):
+     «da Nome» o «da indirizzo» (solo il mittente), «oggetto …» (solo l'oggetto, parole intere; tra virgolette
+     una frase), «senza allegati», «più vecchi di 12 mesi», «prima del 2024», «non da …», «non oggetto …».
+     Il resto come prima: persone, date, etichette, tipi di allegato, parole. */
+  queryChips(q) {
     const MONTHS = this.months();
-    const ATT = { allegato: 'any', allegati: 'any', allegata: 'any', allegate: 'any', pdf: 'PDF', foto: 'JPG', immagine: 'JPG', immagini: 'JPG', jpg: 'JPG', doc: 'DOC', docx: 'DOC', word: 'DOC', excel: 'XLS', xls: 'XLS', xlsx: 'XLS', foglio: 'XLS', zip: 'ZIP' };
-    const ATT_LABEL = { any: 'qualsiasi', PDF: 'PDF', JPG: 'foto', DOC: 'documento', XLS: 'foglio di calcolo', ZIP: 'archivio' };
-    const words = q.toLowerCase().replace(/[’']/g, ' ').replace(/[^\p{L}\p{N}\s]/gu, ' ').split(/\s+/).filter(Boolean);
     const chips = [];
     const addChip = (c) => { if (!chips.some((x) => x.key === c.key)) chips.push(c); };
+    let rest = ' ' + String(q || '') + ' ';
+    // fn può rifiutare (restituisce false): il testo resta per i criteri sotto
+    const take = (re, fn) => { rest = rest.replace(re, (...a) => (fn(a) === false ? a[0] : ' ')); };
+    const MONTHS_ = this.months();
+    const knownSender = (w) => {
+      if (/^\d/.test(w) || MONTHS_.indexOf(w) >= 0 || w.length < 3) return false;
+      return this.allMsgs().some((x) => {
+        const names = [x.m.from, x.m.actor, x.p.name].filter(Boolean).join(' ').toLowerCase().split(/[\s,.()–-]+/);
+        return names.some((t) => t === w || (w.length >= 4 && t.indexOf(w) === 0)) || (x.m.fromAddr || '').split('@')[0].split(/[._-]/).indexOf(w) >= 0;
+      });
+    };
+    const quoted = (a, i) => a[i] || a[i + 1] || a[i + 2];
+    take(/\s(non\s+)?da\s+(?:"([^"]+)"|«([^»]+)»|“([^”]+)”|([\w.+-]+@[\w.-]+\w)|([\p{L}\p{N}][\p{L}\p{N}.'-]*))(?=\s)/giu, (a) => {
+      const term = (quoted(a, 2) || a[5] || a[6]).trim();
+      const neg = !!a[1];
+      // «da dicembre», «da 8 kW»: non è un mittente
+      if (a[6] && !knownSender(a[6].toLowerCase())) return false;
+      addChip({ key: 'from:' + (neg ? '!' : '') + term.toLowerCase(), type: 'from', neg: neg, term: term.toLowerCase(), kind: 'mittente', label: (neg ? 'non ' : '') + term, desc: (neg ? 'non da ' : 'da ') + term });
+    });
+    take(/\s(non\s+)?oggetto\s+(?:"([^"]+)"|«([^»]+)»|“([^”]+)”|([\p{L}\p{N}][\p{L}\p{N}.'-]*))(?=\s)/giu, (a) => {
+      const q2 = quoted(a, 2);
+      const term = (q2 || a[5]).trim();
+      const neg = !!a[1];
+      addChip({ key: 'subj:' + (neg ? '!' : '') + term.toLowerCase(), type: 'subj', neg: neg, term: term.toLowerCase(), phrase: !!q2, kind: 'oggetto', label: (neg ? 'non ' : '') + (q2 ? '«' + term + '»' : term), desc: (neg ? 'non oggetto ' : 'oggetto ') + (q2 ? '«' + term + '»' : term) });
+    });
+    take(/\s(?:senza|non\s+con)\s+allegat\p{L}*(?=\s)/giu, () => addChip({ key: 'noatt', type: 'noatt', kind: 'allegati', label: 'senza allegati' }));
+    take(/\s(?:più|piu)\s+vecch\p{L}*\s+di\s+(\d+)\s+(giorn\p{L}*|settiman\p{L}*|mes\p{L}*|ann\p{L}*)(?=\s)/giu, (a) => {
+      const n = Number(a[1]);
+      const u = a[2].toLowerCase();
+      const per = /^g/.test(u) ? 1 : /^s/.test(u) ? 7 : /^m/.test(u) ? 30 : 365;
+      const unit = /^g/.test(u) ? (n === 1 ? 'giorno' : 'giorni') : /^s/.test(u) ? (n === 1 ? 'settimana' : 'settimane') : /^m/.test(u) ? (n === 1 ? 'mese' : 'mesi') : (n === 1 ? 'anno' : 'anni');
+      addChip({ key: 'age:' + n * per, type: 'age', days: n * per, kind: 'età', label: 'più vecchi di ' + n + ' ' + unit });
+    });
+    const MRE = MONTHS.join('|');
+    take(new RegExp('\\sprima\\s+(?:del|di|dell[\'’]|dal)?\\s*(?:(\\d{1,2})\\s+)?(' + MRE + ')?\\s*(\\d{4})?(?=\\s)', 'giu'), (a) => {
+      if (!a[2] && !a[3]) return;
+      const now = new Date();
+      const y = a[3] ? Number(a[3]) : now.getFullYear();
+      const mi = a[2] ? MONTHS.indexOf(a[2].toLowerCase()) : 0;
+      const d = a[1] ? Number(a[1]) : 1;
+      const ts = new Date(y, mi, d).getTime();
+      addChip({ key: 'before:' + ts, type: 'before', ts: ts, kind: 'data', label: 'prima ' + (a[1] ? 'del ' + d + ' ' + MONTHS[mi] + ' ' + y : a[2] ? 'di ' + MONTHS[mi] + ' ' + y : 'del ' + y) });
+    });
+    const STOP = { il: 1, lo: 1, la: 1, i: 1, gli: 1, le: 1, di: 1, del: 1, dello: 1, della: 1, dei: 1, delle: 1, dell: 1, con: 1, che: 1, per: 1, a: 1, al: 1, all: 1, alla: 1, da: 1, dal: 1, in: 1, un: 1, una: 1, e: 1, mi: 1, ha: 1, ho: 1, mandato: 1, mandata: 1, quella: 1, quello: 1, email: 1, mail: 1, messaggio: 1, sul: 1, sulla: 1, su: 1, tra: 1, l: 1, cosa: 1, quando: 1, abbiamo: 1, avete: 1, hanno: 1, sono: 1, come: 1, dove: 1, perché: 1, perche: 1, quelli: 1, prima: 1, dopo: 1, ultimo: 1, ultima: 1, nostro: 1, nostra: 1, mio: 1, mia: 1, tuo: 1, tua: 1, suo: 1, sua: 1, cui: 1, non: 1, anche: 1, solo: 1, era: 1, fatto: 1, detto: 1, nel: 1, nella: 1, nei: 1, nelle: 1 };
+    const ATT = { allegato: 'any', allegati: 'any', allegata: 'any', allegate: 'any', pdf: 'PDF', foto: 'JPG', immagine: 'JPG', immagini: 'JPG', jpg: 'JPG', qr: 'COD', qrcode: 'COD', barcode: 'COD', codici: 'COD', doc: 'DOC', docx: 'DOC', word: 'DOC', excel: 'XLS', xls: 'XLS', xlsx: 'XLS', foglio: 'XLS', zip: 'ZIP' };
+    const ATT_LABEL = { any: 'qualsiasi', PDF: 'PDF', JPG: 'immagine', COD: 'codice', DOC: 'documento', XLS: 'foglio di calcolo', ZIP: 'archivio' };
+    const words = rest.toLowerCase().replace(/[’']/g, ' ').replace(/[^\p{L}\p{N}\s]/gu, ' ').split(/\s+/).filter(Boolean);
     for (let i = 0; i < words.length; i++) {
       const w = words[i];
       const mi = MONTHS.indexOf(w);
@@ -4045,8 +4671,119 @@ class Component extends DCLogic {
         addChip({ key: 'who:' + w, kind: 'persona', label: who.map((p) => p.name).join(', '), addrs: who.map((p) => p.address), type: 'who' });
         continue;
       }
-      addChip({ key: 'text:' + w, kind: 'parola', label: w, stem: w.slice(0, Math.max(4, Math.ceil(w.length * 0.55))), type: 'text' });
+      addChip({ key: 'text:' + w, kind: 'parola', label: w, stem: this.stemOf(w), type: 'text' });
     }
+    return { chips: chips, words: words };
+  }
+  // v15: la radice di una parola cercata: si toglie solo la vocale finale (fattura, fatture → fattur), e si cerca
+  // a inizio parola: «fattura» non trova più «fatto», «preventivo» trova «preventivi»
+  stemOf(w) {
+    if (w.length <= 4 || /\d/.test(w)) return w;
+    // i verbi all'infinito perdono la desinenza (chiudere → chiud, trova «chiudiamo»); non i nomi in -iere (cantiere)
+    const verb = w.length >= 7 && !/iere$/.test(w) ? w.replace(/(are|ere|ire)$/, '') : w;
+    if (verb !== w && verb.length >= 4) return verb;
+    const s = w.replace(/[aeiouàèéìòù]+$/u, '');
+    return s.length >= 4 ? s : w;
+  }
+  stemHit(hay, stem) {
+    let i = hay.indexOf(stem);
+    while (i >= 0) {
+      if (i === 0 || !/[\p{L}\p{N}]/u.test(hay.charAt(i - 1))) return true;
+      i = hay.indexOf(stem, i + 1);
+    }
+    return false;
+  }
+  chipQuery(c) {
+    if (c.type === 'from') return (c.neg ? 'non ' : '') + 'da ' + (/\s/.test(c.term) ? '"' + c.term + '"' : c.term);
+    if (c.type === 'subj') return (c.neg ? 'non ' : '') + 'oggetto ' + (c.phrase ? '"' + c.term + '"' : c.term);
+    if (c.type === 'noatt' || c.type === 'age') return c.label;
+    if (c.type === 'before') return c.label;
+    if (c.type === 'who') return c.key.slice(4);
+    if (c.type === 'text') return c.label;
+    if (c.type === 'att') return { any: 'allegato', PDF: 'pdf', JPG: 'immagini', COD: 'qr', DOC: 'doc', XLS: 'excel', ZIP: 'zip' }[c.ext] || '';
+    if (c.type === 'label') return 'etichetta ' + c.lab;
+    if (c.type === 'date') return (c.day ? c.day + ' ' : '') + this.months()[c.month];
+    return '';
+  }
+  /* un messaggio corrisponde ai criteri attivi? null se no, altrimenti i motivi e le parole trovate */
+  matchMsg(m, p, active, s) {
+    const MONTHS = this.months();
+    const why = [];
+    const wordIn = (hay, w) => new RegExp('(^|[^\\p{L}\\p{N}])' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^\\p{L}\\p{N}])', 'iu').test(hay);
+    for (const c of active) {
+      let ok = true;
+      if (c.type === 'who') {
+        const direct = c.addrs.indexOf(p.address) >= 0 && (m.me || m.fromAddr === p.address);
+        const copied = c.addrs.some((a) => (m.others || []).indexOf(a) >= 0 || m.fromAddr === a);
+        if (!direct && !copied) return null;
+        why.push(direct ? 'scambio con ' + p.name : c.label + ' tra i partecipanti');
+        continue;
+      } else if (c.type === 'from') {
+        if (m.me) ok = false;
+        else {
+          const addrs = [m.fromAddr, m.viaAddr].filter(Boolean);
+          const names = [m.from, m.actor, this.model.nameOf(m.fromAddr)].filter(Boolean).join(' ').toLowerCase();
+          ok = c.term.indexOf('@') >= 0 || c.term.indexOf('.') > 0
+            ? addrs.some((a) => a === c.term || a.endsWith('@' + c.term) || a.endsWith('.' + c.term))
+            : addrs.some((a) => a.split('@')[0].split(/[._-]/).indexOf(c.term) >= 0) || names.split(/[\s,.()]+/).some((x) => x === c.term || (c.term.length >= 4 && x.indexOf(c.term) === 0));
+        }
+        if (!c.neg && ok) why.push('scritto da ' + (m.from || m.fromAddr));
+      } else if (c.type === 'subj') {
+        const hay = String(m.subject || m.topic || '').toLowerCase();
+        ok = c.phrase ? hay.indexOf(c.term) >= 0 : wordIn(hay, c.term);
+        if (!c.neg && ok) why.push('nell’oggetto');
+      } else if (c.type === 'noatt') {
+        ok = !m.att.some((a) => !a.sig);
+      } else if (c.type === 'age') {
+        ok = this.ago(m.ts) > c.days;
+      } else if (c.type === 'before') {
+        ok = m.ts < c.ts;
+      } else if (c.type === 'date') {
+        const d = new Date(m.ts);
+        const said = (c.day ? c.day + ' ' : '') + MONTHS[c.month];
+        const inText = m.text.toLowerCase().indexOf(said) >= 0;
+        const onDate = m.ts && d.getMonth() === c.month && (!c.day || d.getDate() === c.day);
+        if (!inText && !onDate) return null;
+        why.push(onDate ? 'scritto a ' + said : 'cita ' + said);
+        continue;
+      } else if (c.type === 'label') {
+        if ((m.labels || []).indexOf(c.lab) < 0) return null;
+        why.push('etichetta ' + c.lab);
+        continue;
+      } else if (c.type === 'att') {
+        const hit = m.att.filter((a) => !a.sig && (c.ext === 'any' || a.ext === c.ext));
+        if (!hit.length) return null;
+        why.push('allegato ' + hit.map((a) => a.name).join(', '));
+        continue;
+      } else continue;
+      if (c.neg ? ok : !ok) return null;
+    }
+    const texts = active.filter((c) => c.type === 'text');
+    const hay = (m.text + ' ' + m.topic + ' ' + m.att.map((a) => a.name).join(' ')).toLowerCase();
+    // v15: anche dentro gli allegati; si dice quale, se la parola sta solo lì
+    const inside = m.att.filter((a) => !a.sig && a.text).map((a) => ({ a: a, hay: a.text.toLowerCase() }));
+    const inMsg = texts.filter((c) => this.stemHit(hay, c.stem));
+    const inAtt = texts.filter((c) => inMsg.indexOf(c) < 0 && inside.some((x) => this.stemHit(x.hay, c.stem)));
+    const hits = inMsg.concat(inAtt);
+    const need = texts.length >= 3 ? texts.length - 1 : texts.length;
+    if (hits.length < need) return null;
+    if (inMsg.length) why.push('contiene ' + inMsg.map((c) => c.label).join(', '));
+    let attHit = null;
+    if (inAtt.length) {
+      attHit = inside.find((x) => inAtt.every((c) => this.stemHit(x.hay, c.stem))) || inside.find((x) => inAtt.some((c) => this.stemHit(x.hay, c.stem)));
+      why.push(inAtt.map((c) => c.label).join(', ') + ' nell’allegato «' + attHit.a.name + '»');
+    }
+    return { why: why, hits: hits.length, attHit: attHit && attHit.a };
+  }
+  search(s) {
+    const q = s.q.trim();
+    const examples = ['la convocazione dell’assemblea con la delega', 'preventivo cucina pdf', 'foto di Paolo', 'Elena computo', 'bolletta settembre', 'colloqui'].map((x) => ({ label: x, pick: () => this.setState({ q: x, off: {} }) }));
+    const labels = (this.model.labels || []).map((l) => ({ label: l, pick: () => this.setState({ q: 'etichetta ' + l.toLowerCase(), off: {} }) }));
+    if (!q) return { empty: true, active: false, examples: examples, labels: labels, hasLabels: labels.length > 0, chips: [], results: [], none: false, countLabel: '' };
+    const all = this.model.people.concat([this.model.services]);
+    const parsed = this.queryChips(q);
+    const chips = parsed.chips;
+    const words = parsed.words;
     this.lastSearch = { parole: words.length, criteri: chips.map((c) => c.type).join(',') };
     const active = chips.filter((c) => !s.off[c.key]);
     const texts = active.filter((c) => c.type === 'text');
@@ -4054,44 +4791,34 @@ class Component extends DCLogic {
     const seen = {};
     all.forEach((p) => p.msgs.forEach((m) => {
       if (seen[m.rid] || s.deleted[m.key]) return;
-      const why = [];
-      for (const c of active) {
-        if (c.type === 'who') {
-          const direct = c.addrs.indexOf(p.address) >= 0 && (m.me || m.fromAddr === p.address);
-          const copied = c.addrs.some((a) => m.others.indexOf(a) >= 0 || m.fromAddr === a);
-          if (!direct && !copied) return;
-          why.push(direct ? 'scambio con ' + p.name : c.label + ' tra i partecipanti');
-        } else if (c.type === 'date') {
-          const d = new Date(m.ts);
-          const said = (c.day ? c.day + ' ' : '') + MONTHS[c.month];
-          const inText = m.text.toLowerCase().indexOf(said) >= 0;
-          const onDate = m.ts && d.getMonth() === c.month && (!c.day || d.getDate() === c.day);
-          if (!inText && !onDate) return;
-          why.push(onDate ? 'scritto a ' + said : 'cita ' + said);
-        } else if (c.type === 'label') {
-          if ((m.labels || []).indexOf(c.lab) < 0) return;
-          why.push('etichetta ' + c.lab);
-        } else if (c.type === 'att') {
-          const hit = m.att.filter((a) => !a.sig && (c.ext === 'any' || a.ext === c.ext));
-          if (!hit.length) return;
-          why.push('allegato ' + hit.map((a) => a.name).join(', '));
-        }
-      }
-      const hay = (m.text + ' ' + m.topic + ' ' + m.att.map((a) => a.name).join(' ')).toLowerCase();
-      const hits = texts.filter((c) => hay.indexOf(c.stem) >= 0);
-      const need = texts.length >= 3 ? texts.length - 1 : texts.length;
-      if (hits.length < need) return;
-      if (hits.length) why.push('contiene ' + hits.map((c) => c.label).join(', '));
+      const r = this.matchMsg(m, p, active, s);
+      if (!r) return;
+      const why = r.why;
+      const hits = { length: r.hits };
       if (s.archived[m.key]) why.push('è in archivio');
       seen[m.rid] = true;
-      results.push({ p: p, m: m, why: why, score: hits.length * 10 + why.length });
+      results.push({ p: p, m: m, why: why, score: hits.length * 10 + why.length, attHit: r.attHit });
     }));
+    // v15: «sala consiliare» non è Pietro Sala: se con le persone riconosciute non esce niente, valgono come parole
+    if (!results.length && active.some((c) => c.type === 'who')) {
+      const soft = active.map((c) => (c.type === 'who' ? { key: 'text:' + c.key.slice(4), type: 'text', kind: 'parola', label: c.key.slice(4), stem: this.stemOf(c.key.slice(4)) } : c));
+      all.forEach((p) => p.msgs.forEach((m) => {
+        if (seen[m.rid] || s.deleted[m.key]) return;
+        const r = this.matchMsg(m, p, soft, s);
+        if (!r) return;
+        seen[m.rid] = true;
+        results.push({ p: p, m: m, why: r.why, score: r.hits * 10 + r.why.length, attHit: r.attHit });
+      }));
+      texts.push(...soft.filter((c) => c.type === 'text' && texts.indexOf(c) < 0));
+    }
     results.sort((a, b) => b.score - a.score || b.m.ts - a.m.ts);
     const stems = texts.map((c) => c.stem.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
-    const re = stems.length ? new RegExp('(' + stems.map((x) => x + '\\p{L}*').join('|') + ')', 'giu') : null;
+    const re = stems.length ? new RegExp('((?<![\\p{L}\\p{N}])(?:' + stems.map((x) => x + '\\p{L}*').join('|') + '))', 'giu') : null;
     const reOne = stems.length ? new RegExp('^(' + stems.map((y) => y + '\\p{L}*').join('|') + ')$', 'iu') : null;
     const shownResults = results.slice(0, 25).map((r) => {
-      const t = r.m.text.replace(/\n+/g, ' ');
+      // v15: se qualche parola sta solo nell'allegato, il pezzo mostrato viene da lì
+      const fromAtt = !!r.attHit;
+      const t = fromAtt ? '«' + r.attHit.name + '»: ' + r.attHit.text.replace(/\s+/g, ' ') : r.m.text.replace(/\n+/g, ' ');
       let start = 0;
       if (re) {
         re.lastIndex = 0;
@@ -4126,6 +4853,11 @@ class Component extends DCLogic {
         };
       }),
       results: shownResults,
+      // v15: «Pulisci con questa ricerca» crea un gruppo in Archivio e pulizia (proposta 1)
+      canClean: results.length > 0 && active.length > 0,
+      cleanLabel: (s.cleanGroups || []).some((g) => g.q.toLowerCase() === q.toLowerCase()) ? 'Vai al gruppo di pulizia' : 'Pulisci con questa ricerca',
+      cleanTitle: 'Un gruppo in Archivio e pulizia con questa ricerca: prima lo rivedi, niente si elimina da solo',
+      makeClean: () => { this.act('pulisci con la ricerca'); this.addCleanGroup(active.length === chips.length ? q : active.map((c) => this.chipQuery(c)).join(' ')); },
       none: results.length === 0,
       countLabel: results.length === 0 ? '' : results.length > 25 ? results.length + ' messaggi, i primi 25 in ordine di pertinenza' : results.length + (results.length === 1 ? ' messaggio' : ' messaggi') + ', in ordine di pertinenza'
     };
@@ -4169,7 +4901,7 @@ class Component extends DCLogic {
       if (d.last.a.sig) return 'Immagini piccole e delle firme';
       if (s.fmode === 'person') return who(d.last);
       if (s.fmode === 'topic') return d.last.m.topic;
-      if (s.fmode === 'type') return { PDF: 'PDF', JPG: 'Foto e immagini', DOC: 'Documenti', XLS: 'Fogli di calcolo', ZIP: 'Archivi', ICS: 'Inviti di calendario', FILE: 'Altri file' }[d.last.a.ext];
+      if (s.fmode === 'type') return { PDF: 'PDF', JPG: 'Immagini', COD: 'Codici: QR e codici a barre', DOC: 'Documenti', XLS: 'Fogli di calcolo', ZIP: 'Archivi', ICS: 'Inviti di calendario', FILE: 'Altri file' }[d.last.a.ext];
       const a = this.ago(d.last.m.ts);
       return a < 7 ? 'Questa settimana' : a < 31 ? 'Questo mese' : a < 92 ? 'Ultimi tre mesi' : 'Prima';
     };
@@ -4184,7 +4916,15 @@ class Component extends DCLogic {
         name: d.last.a.name, ext: d.last.a.ext,
         meta: d.last.a.sig ? 'di ' + who(d.last) + (v > 1 ? ', in ' + v + ' messaggi' : '') : (d.last.m.me ? 'tu' : who(d.last)) + ' · ' + this.shortDate(d.last.m.ts),
         hasVersions: v > 1 && !d.last.a.sig, versions: String(v), selected: sel,
-        select: () => { this.act('scegli allegato'); this.setState({ fsel: d.doc }); },
+        // v15: il doppio clic apre l'anteprima grande (due clic sulla stessa scheda entro 450 ms:
+        // tra un clic e l'altro la pagina si ridisegna, quindi dblclick non arriverebbe)
+        select: () => {
+          const now = Date.now();
+          const twice = this.lastCard && this.lastCard.doc === d.doc && now - this.lastCard.at < 450;
+          this.lastCard = twice ? null : { doc: d.doc, at: now };
+          if (twice) { this.openViewer(d.last.a.id); return; }
+          this.act('scegli allegato'); this.setState({ fsel: d.doc });
+        },
         cardStyle: 'display: flex; flex-direction: column; gap: 6px; padding: 12px; border-radius: 12px; background: var(--sheet); font: inherit; text-align: left; color: inherit; cursor: pointer; min-width: 0; ' + (sel ? 'border: 2px solid ' + accent + ';' : 'border: 1px solid var(--line);'),
         badge: this.thumbBadge(d.last.a).badge, badgeCls: this.thumbBadge(d.last.a).badgeCls,
         thumbStyle: 'height: ' + (this.isImageAtt(d.last.a) || this.hasPdfThumb(d.last.a) ? '132px' : '84px') + '; border-radius: 8px; display: flex; align-items: flex-end; padding: 8px 10px; box-sizing: border-box; font-size: 12px; font-weight: 700; ' + this.tint(d.last.a.ext) + this.thumbOf(d.last.a) + (d.last.a.sig ? ' background-size: contain; background-repeat: no-repeat; background-color: var(--sheet); height: 84px;' : '')
@@ -4206,7 +4946,7 @@ class Component extends DCLogic {
     const seg = (on) => 'min-height: 36px; padding: 0 14px; border: 0; border-radius: 8px; font: inherit; font-size: 14px; cursor: pointer; ' + (on ? 'background: var(--sheet); color: var(--ink); font-weight: 600;' : 'background: transparent; color: var(--ink-2);');
     const pill = (on) => 'min-height: 36px; padding: 0 12px; border-radius: 999px; font: inherit; font-size: 13px; cursor: pointer; ' + (on ? 'border: 1px solid ' + accent + '; background: var(--sel); color: var(--sel-ink); font-weight: 600;' : 'border: 1px solid var(--line-2); background: var(--sheet); color: var(--ink-2);');
     const modes = [['recent', 'Recenti'], ['person', 'Persona'], ['topic', 'Argomento'], ['type', 'Tipo']].map((m) => ({ label: m[1], on: s.fmode === m[0], style: seg(s.fmode === m[0]), pick: () => this.setState({ fmode: m[0] }) }));
-    const exts = [['all', 'Tutti'], ['PDF', 'PDF'], ['JPG', 'Foto'], ['DOC', 'Documenti'], ['XLS', 'Fogli'], ['ZIP', 'Archivi'], ['ICS', 'Inviti']].map((x) => ({ label: x[1], on: s.fext === x[0], style: pill(s.fext === x[0]), pick: () => this.setState({ fext: x[0] }) }));
+    const exts = [['all', 'Tutti'], ['PDF', 'PDF'], ['JPG', 'Immagini'], ['COD', 'Codici'], ['DOC', 'Documenti'], ['XLS', 'Fogli'], ['ZIP', 'Archivi'], ['ICS', 'Inviti']].map((x) => ({ label: x[1], on: s.fext === x[0], style: pill(s.fext === x[0]), pick: () => this.setState({ fext: x[0] }) }));
 
     const selDoc = docs[s.fsel];
     let sel = null;
@@ -4251,9 +4991,12 @@ class Component extends DCLogic {
 
   /* ---------- segnalazioni ---------- */
   /* ---------- v14: il menu «⋯» di un messaggio, con «Segnala» e «Salva» ---------- */
-  menuVals(menuId, rid) {
+  menuVals(menuId, rid, m) {
     const open = this.state.msgMenu === menuId;
     return {
+      // v15: «Elimina» solo nei thread in cui non ho mai scritto
+      canDelete: this.canDeleteMsg(m),
+      deleteMsg: () => { this.setState({ msgMenu: '' }); this.deleteMsg(m); },
       menuOpen: open,
       dotsId: 'dots-' + menuId.replace(/[^A-Za-z0-9_-]/g, '_'),
       toggleMenu: () => this.setState({ msgMenu: open ? '' : menuId }),
@@ -4739,6 +5482,8 @@ class Component extends DCLogic {
     const t0 = performance.now();
     this.model = this.buildModel();
     this.timing.modelMs = Math.round(performance.now() - t0);
+    // i primi dati (primo avvio) o la persona scelta che non c'è più: quella in cima alla lista
+    if (!this.state.sel || !this.model.byId[this.state.sel]) this.state = Object.assign({}, this.state, { sel: this.firstListed(this.state) });
     const st = this.state.setup;
     if (st.open && st.step === 'checking' && this.model.records.length) this.tappaPrimoAvvio({ tappa: 'posta' });
     if (Object.keys(prima).length && this.state.net !== 'sync') this.notificaArrivi(prima);
@@ -4753,7 +5498,7 @@ class Component extends DCLogic {
   notificaArrivi(prima) {
     const ora = Date.now();
     const nuovi = this.model.records.filter((r) => !prima[r.id] && r.from && !this.model.me[this.lower(r.from.address)]
-      && !(r.flags && r.flags.seen) && ora - Date.parse(r.date) < 3600000);
+      && this.unreadOnServer(r) && ora - Date.parse(r.date) < 3600000);
     const daPersone = nuovi.map((r) => {
       const a = this.lower(r.from.address);
       const p = this.model.byId['p:' + a];
@@ -4861,6 +5606,12 @@ class Component extends DCLogic {
     const st = this.allegatiStato;
     const PAUSA = { quota: 'in pausa: la quota di oggi è finita, riprendo domani', consumo: 'in pausa: connessione a consumo', disco: 'in pausa: il disco è quasi pieno' };
     const filesLine = !st ? '' : 'Allegati: ' + (st.daScaricare ? this.sizeOf(st.byteScaricati) + ' scaricati, ' + this.sizeOf(st.byteDaScaricare) + ' ancora da scaricare' : 'tutti scaricati, ' + this.sizeOf(st.byteScaricati)) + (st.pausa && st.daScaricare ? ' (' + PAUSA[st.pausa] + ')' : '');
+    // giro 2: lo storico, finché non è arrivato tutto
+    const sto = st && st.storico;
+    const num = (x) => Number(x || 0).toLocaleString('it-IT');
+    const historyLine = !sto ? '' : (sto.inLocale < sto.sulServer
+      ? 'Storico: ' + num(sto.inLocale) + ' di ' + num(sto.sulServer) + ' messaggi, poi i testi'
+      : sto.senzaTesto ? 'Storico: tutti i messaggi, mancano ancora ' + num(sto.senzaTesto) + ' testi' : '') + (st.pausa && sto && (sto.inLocale < sto.sulServer || sto.senzaTesto) ? ' (' + PAUSA[st.pausa] + ')' : '');
     const items = list.map((a, i) => {
       const bad = authBad && i === 0;
       const isNew = !!a.at;
@@ -4869,6 +5620,7 @@ class Component extends DCLogic {
       return {
         address: a.address, meta: kind + ' · ' + when, bad: bad,
         hasFiles: i === 0 && !!filesLine, filesLine: filesLine,
+        hasHistory: i === 0 && !!historyLine, historyLine: historyLine,
         metaCls: 'acct-meta' + (bad ? ' bad' : ''),
         editing: s.acctEdit === a.address, notEditing: s.acctEdit !== a.address,
         dropping: s.acctDrop === a.address, notDropping: s.acctDrop !== a.address,
@@ -5077,6 +5829,10 @@ class Component extends DCLogic {
       onSearchKey: (e) => {
         if (e.key === 'Escape') { e.preventDefault(); e.target.blur(); if (this.state.view === 'search') this.go({ view: 'people' }); }
       },
+      // v15, dopo le prove: con una ricerca già scritta, il riquadro riporta ai suoi risultati
+      onSearchFocus: () => {
+        if (String(this.state.q || '').trim() && this.state.view !== 'search') this.go({ view: 'search' });
+      },
       onQuery: (e) => {
         clearTimeout(this.searchLogTimer);
         this.searchLogTimer = setTimeout(() => this.act('cerca', this.lastSearch || {}), 800);
@@ -5105,7 +5861,10 @@ class Component extends DCLogic {
           hasDraft: Object.keys(s.drafts).some((k) => s.drafts[k].pid === p.id && this.hasDraft(s.drafts[k])),
           name: p.name, initials: p.initials,
           time: last ? this.shortDate(last.ts) : '',
-          preview: last ? (last.me ? 'tu: ' : last.fromAddr !== p.address ? (last.from || last.fromAddr) + ': ' : '') + (last.text || (last.att.some((a) => !a.sig) ? 'allegato: ' + last.att.filter((a) => !a.sig)[0].name : '(vuoto)')).replace(/\n+/g, ' ') : (p.msgs.length ? 'tutto archiviato' : 'nessun messaggio'),
+          // v15, dopo le prove: sotto il nome l'indirizzo intero, non l'inizio dell'ultimo messaggio; chi non ha un nome
+          // ha già l'indirizzo al posto del nome, e sotto l'oggetto dell'ultimo argomento
+          preview: p.name !== p.email ? p.email : last ? last.topic : (p.msgs.length ? 'tutto archiviato' : 'nessun messaggio'),
+          previewTitle: last ? (last.me ? 'tu: ' : '') + last.topic : '',
           hasAtt: !!(last && last.att.some((a) => !a.sig)),
           hasUnread: unread > 0, unread: String(unread), current: isSel, select: pick(p.id),
           cls: 'person' + (unread > 0 ? ' unread' : ''),
@@ -5218,7 +5977,7 @@ class Component extends DCLogic {
     const cur = {
       name: p.name,
       first: String(p.name).replace(/^(Arch|Dott|Ing|Avv|Prof|Maestra|Maestro)\.?\s+/i, '').split(' ')[0],
-      email: p.email, initials: p.initials,
+      email: p.email === p.name ? '' : p.email, initials: p.initials,
       hasUnread: unreadHere > 0,
       stats: (unreadHere > 0 ? unreadHere + ' da leggere · ' : '') + vis.length + (vis.length === 1 ? ' messaggio' : ' messaggi') + (nArch ? ' (+' + nArch + ' archiviati)' : '') + ' · ' + topicOrder.length + (topicOrder.length === 1 ? ' argomento' : ' argomenti') + (meetingsAll.length ? ' · ' + meetingsAll.length + (meetingsAll.length === 1 ? ' riunione' : ' riunioni') : ''),
       topics: topics, manyTopics: topicOrder.length > 0,

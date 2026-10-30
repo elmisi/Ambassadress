@@ -538,7 +538,7 @@ html.still,html.still body{overflow:hidden}
     <div class="{{searchCls}}" role="search">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" style="flex: none; color: var(--ink-3)"><circle cx="11" cy="11" r="7"></circle><path d="M16.5 16.5L21 21"></path></svg>
       <label for="q" class="sr-only">Cerca nella posta</label>
-      <input id="q" type="search" value="{{q}}" onChange="{{onQuery}}" onKeyDown="{{onSearchKey}}" autocomplete="off" placeholder="Cerca come lo diresti: «la delega di Lucia», «foto di Paolo»…">
+      <input id="q" type="search" value="{{q}}" onChange="{{onQuery}}" onKeyDown="{{onSearchKey}}" onFocus="{{onSearchFocus}}" onClick="{{onSearchFocus}}" autocomplete="off" placeholder="Cerca come lo diresti: «la delega di Lucia», «foto di Paolo»…">
       <span class="kbd" aria-hidden="true">/</span>
     </div>
     <div class="bar-end">
@@ -1613,6 +1613,8 @@ class Component extends DCLogic {
       setup: { open: false, mode: 'first', email: '', pass: '', imap: '', smtp: '', step: 'form', error: '', done: [] }, osnotes: [],
       rep: { open: false, kind: 'visualizzazione', what: '', expected: '', rid: null, redact: false, status: '', server: '', saving: false }
     };
+    // all'apertura la persona in cima alla lista, scelta una volta: poi non cambia da sola
+    if (this.model.ok !== false) this.state.sel = this.firstListed(this.state);
   }
 
   componentDidMount() {
@@ -2403,6 +2405,9 @@ class Component extends DCLogic {
     model.synthetic = model.source === 'synthetic';
     model.exportedAt = (data.meta && (data.meta.exportedAt || data.meta.generatedAt)) || '';
     const records = data.messages.concat(this.sentRecords);
+    // v15, dopo le prove: su Gmail archiviare non è leggere. Un messaggio non letto fuori dalla Posta
+    // in arrivo (archiviato senza aprirlo, o mandato via da un filtro) Gmail non lo conta: qui nemmeno
+    this.gmailInbox = records.some((r) => ((r.gmail && r.gmail.labels) || []).indexOf('\\Inbox') >= 0);
     model.records = records;
     const me = {};
     [data.account && data.account.address].concat((data.account && data.account.aliases) || []).forEach((a) => { if (a) me[this.lower(a)] = true; });
@@ -2521,7 +2526,7 @@ class Component extends DCLogic {
           if (owners.length > 8) { probs.push('molti destinatari (' + owners.length + ')'); owners = owners.slice(0, 8); }
         } else owners = [fromA || 'sconosciuto'];
         const participants = uniq([via && via.comm ? via.key : fromA].concat(tos, ccs)).filter((a) => a && !me[a]);
-        const unread = !isMe && r.flags && r.flags.seen === false;
+        const unread = !isMe && this.unreadOnServer(r);
         const threadKey = (r.gmail && r.gmail.threadId) || topic;
         threadKeys[threadKey] = true;
         if (isMe) model.myThreads[threadKey] = true;
@@ -2651,7 +2656,7 @@ class Component extends DCLogic {
     model.people.forEach((p) => { p.meetings = this.groupMeetings(p); this.assignColors(p); });
     services.meetings = [];
     model.svc = this.servicesModel(services.msgs);
-    model.initialUnread = records.filter((r) => r.flags && r.flags.seen === false && !(r.from && me[this.lower(r.from.address)]) && !((r.gmail && r.gmail.labels) || []).some((l) => SPAM.test(l)) && !this.gone[r.id]).length;
+    model.initialUnread = records.filter((r) => this.unreadOnServer(r) && !(r.from && me[this.lower(r.from.address)]) && !((r.gmail && r.gmail.labels) || []).some((l) => SPAM.test(l)) && !this.gone[r.id]).length;
     const labs = {};
     Object.keys(model.parsed).forEach((rid) => { const pr = protos[rid]; if (pr) pr.base.labels.forEach((l) => { labs[l] = (labs[l] || 0) + 1; }); });
     model.labels = Object.keys(labs).sort((a, b) => labs[b] - labs[a]);
@@ -2763,9 +2768,27 @@ class Component extends DCLogic {
     this.setState(patch);
     if (!target && typeof window !== 'undefined' && window.scrollTo) window.scrollTo(0, 0);
   }
+  /* non letto sul server; su Gmail solo se è anche nella Posta in arrivo (vedi buildModel) */
+  unreadOnServer(r) {
+    if (!(r.flags && r.flags.seen === false)) return false;
+    return !this.gmailInbox || ((r.gmail && r.gmail.labels) || []).indexOf('\\Inbox') >= 0;
+  }
   currentId(s) {
     if (s.sel && this.model.byId[s.sel]) return s.sel;
-    return this.model.people.length ? this.model.people[0].id : 'services';
+    return this.firstListed(s) || 'services';
+  }
+  /* v15, dopo le prove: chi sta in cima alla colonna delle persone, con la stessa regola della
+     lista (prima chi ha da leggere, poi gli altri, dal più recente). All'apertura si vede lui, non
+     l'ultimo messaggio in assoluto, che può essere uno mio */
+  firstListed(s) {
+    let best = null, bestUnread = false, bestTs = -1;
+    this.model.people.forEach((p) => {
+      const v = this.visibleMsgs(p, s);
+      if (!v.length) return;
+      const unread = this.unreadOf(p, s) > 0, ts = v[v.length - 1].ts;
+      if ((unread && !bestUnread) || (unread === bestUnread && ts > bestTs)) { best = p; bestUnread = unread; bestTs = ts; }
+    });
+    return best ? best.id : (this.model.people.length ? this.model.people[0].id : '');
   }
   openMsg(pid, id) {
     const s = this.state;
@@ -3860,7 +3883,9 @@ class Component extends DCLogic {
     const have = {};
     mine.forEach((g) => { have[g.q.toLowerCase()] = true; });
     const learned = this.learnedGroups(s).filter((g) => !have[g.q.toLowerCase()]);
-    return this.cleanRules().map((r) => Object.assign({ builtin: true }, r)).concat(mine, learned);
+    // v15, dopo le prove: i gruppi fatti con una ricerca in cima, il più recente per primo
+    mine.sort((a, b) => (b.at || 0) - (a.at || 0));
+    return mine.concat(this.cleanRules().map((r) => Object.assign({ builtin: true }, r)), learned);
   }
   /* i messaggi di un gruppo: { list: da eliminare, excluded: [{ m, why }] } */
   groupMembers(g, s, base) {
@@ -4107,7 +4132,8 @@ class Component extends DCLogic {
   thumbOf(a) {
     // v14: per i PDF la prima pagina, disegnata dal motore con pdftoppm (qui dal generatore dei dati)
     if (this.hasPdfThumb(a)) return ' background-image: url("' + this.pathSrc(a.thumb) + '"); background-size: cover; background-position: center top; background-color: #fff; box-shadow: inset 0 0 0 1px var(--line);';
-    return this.isImageAtt(a) ? ' background-image: url("' + this.attSrc(a) + '"); background-size: cover; background-position: center; color: transparent;' : '';
+    // giro 2: un'immagine grande ha la sua miniatura, fatta dal motore: il quadratino non apre la foto intera
+    return this.isImageAtt(a) ? ' background-image: url("' + (a.thumb ? this.pathSrc(a.thumb) : this.attSrc(a)) + '"); background-size: cover; background-position: center; color: transparent;' : '';
   }
   hasPdfThumb(a) {
     return a.ext === 'PDF' && !!a.thumb;
@@ -5504,6 +5530,10 @@ class Component extends DCLogic {
       searchCls: 'search' + (s.view === 'search' ? ' on' : ''),
       onSearchKey: (e) => {
         if (e.key === 'Escape') { e.preventDefault(); e.target.blur(); if (this.state.view === 'search') this.go({ view: 'people' }); }
+      },
+      // v15, dopo le prove: con una ricerca già scritta, il riquadro riporta ai suoi risultati
+      onSearchFocus: () => {
+        if (String(this.state.q || '').trim() && this.state.view !== 'search') this.go({ view: 'search' });
       },
       onQuery: (e) => {
         clearTimeout(this.searchLogTimer);

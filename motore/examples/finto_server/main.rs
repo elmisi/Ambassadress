@@ -32,7 +32,11 @@ Opzioni:
   --cadute SECONDI    ogni SECONDI fa cadere tutte le connessioni
   --pausa SECONDI     dopo una caduta rifiuta le connessioni per SECONDI (predefinito 5)
   --copie N           moltiplica la casella per N (per misure su migliaia di messaggi)
+  --nel-passato       con --copie: le copie vanno indietro negli anni, con gli UID in ordine
+                      di data (una casella con lo storico)
   --lento MS          aspetta MS millisecondi prima di rispondere a ogni comando
+  --chiudi-ferme SECONDI  chiude con «* BYE», come Gmail, le connessioni senza comandi
+                      da SECONDI (anche quelle in IDLE da SECONDI senza un IDLE nuovo)
   --verboso           stampa ogni comando ricevuto (la password di LOGIN no)
 ";
 
@@ -59,6 +63,7 @@ fn avvia() -> Result<(), String> {
     let mut utente: Option<String> = None;
     let mut riserva = 5usize;
     let mut copie = 1usize;
+    let mut nel_passato = false;
     let mut it = std::env::args().skip(1);
     while let Some(a) = it.next() {
         match a.as_str() {
@@ -80,7 +85,12 @@ fn avvia() -> Result<(), String> {
             }
             "--pausa" => opz.pausa = Duration::from_secs(numero(it.next(), "--pausa")?),
             "--copie" => copie = numero(it.next(), "--copie")?.max(1) as usize,
+            "--nel-passato" => nel_passato = true,
             "--lento" => opz.ritardo = Duration::from_millis(numero(it.next(), "--lento")?),
+            "--chiudi-ferme" => {
+                opz.chiudi_ferme =
+                    Some(Duration::from_secs(numero(it.next(), "--chiudi-ferme")?.max(1)))
+            }
             "--verboso" => opz.verboso = true,
             "--aiuto" | "--help" | "-h" => {
                 print!("{AIUTO}");
@@ -90,7 +100,9 @@ fn avvia() -> Result<(), String> {
         }
     }
     let (mut casella, account) = Casella::carica(&cartella)?;
-    if copie > 1 {
+    if copie > 1 && nel_passato {
+        casella.moltiplica_nel_passato(copie);
+    } else if copie > 1 {
         casella.moltiplica(copie);
     }
     if opz.arrivi.is_some() {
@@ -146,6 +158,9 @@ fn avvia() -> Result<(), String> {
             c.as_secs(),
             opz.pausa.as_secs()
         );
+    }
+    if let Some(f) = opz.chiudi_ferme {
+        println!("  ferme     chiuse dopo {} s senza comandi", f.as_secs());
     }
     println!(
         "Per il motore: --server 127.0.0.1:{} --in-chiaro --credenziali FILE (due righe: utente e password)",

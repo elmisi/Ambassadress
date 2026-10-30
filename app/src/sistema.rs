@@ -249,3 +249,71 @@ mod prove {
         assert_eq!(nome_dal_desktop("[Altro]\nName=X\n"), None);
     }
 }
+
+/// Il lato più lungo delle miniature delle immagini, in pixel: basta per i quadratini di Allegati
+/// anche su uno schermo ad alta densità.
+const LATO_MINIATURA: i32 = 480;
+
+/// La miniatura di un'immagine, in JPEG, con gdk-pixbuf (giro 2): ridotta mentre si legge, girata
+/// come dice la foto (EXIF), le parti trasparenti su bianco. Scritta in un file temporaneo e poi
+/// rinominata, così una miniatura a metà non c'è mai. Falso se l'immagine non si legge.
+#[cfg(target_os = "linux")]
+pub fn miniatura_immagine(file: &Path, dest: &Path) -> bool {
+    use gdk_pixbuf::{Colorspace, InterpType, Pixbuf};
+    let Ok(p) = Pixbuf::from_file_at_scale(file, LATO_MINIATURA, LATO_MINIATURA, true) else {
+        return false;
+    };
+    let p = p.apply_embedded_orientation().unwrap_or(p);
+    let p = if p.has_alpha() {
+        let (w, h) = (p.width(), p.height());
+        let Some(fondo) = Pixbuf::new(Colorspace::Rgb, false, 8, w, h) else { return false };
+        fondo.fill(0xffff_ffff);
+        p.composite(&fondo, 0, 0, w, h, 0.0, 0.0, 1.0, 1.0, InterpType::Bilinear, 255);
+        fondo
+    } else {
+        p
+    };
+    let nome = dest.file_name().map(|n| n.to_string_lossy().into_owned()).unwrap_or_default();
+    // il punto davanti: `pulisci_temporanei` del motore toglie quelli rimasti da un'interruzione
+    let tmp = dest.with_file_name(format!(".{nome}.tmp"));
+    if p.savev(&tmp, "jpeg", &[("quality", "82")]).is_err() {
+        let _ = fs::remove_file(&tmp);
+        return false;
+    }
+    fs::rename(&tmp, dest).is_ok()
+}
+
+#[cfg(not(target_os = "linux"))]
+pub fn miniatura_immagine(_file: &Path, _dest: &Path) -> bool {
+    false
+}
+
+#[cfg(all(test, target_os = "linux"))]
+mod prove_miniature {
+    use super::*;
+    use gdk_pixbuf::{Colorspace, Pixbuf};
+
+    /// Una foto grande (PNG con trasparenza, 3000×2000) diventa un JPEG di al massimo 480 px.
+    #[test]
+    fn miniatura_di_unimmagine_grande() {
+        let dir = std::env::temp_dir().join(format!("a10s-miniatura-{}", std::process::id()));
+        fs::create_dir_all(&dir).unwrap();
+        let grande = Pixbuf::new(Colorspace::Rgb, true, 8, 3000, 2000).unwrap();
+        grande.fill(0x3366_9980);
+        let file = dir.join("foto");
+        grande.savev(&file, "png", &[]).unwrap();
+        let dest = dir.join("foto.miniatura.jpg");
+        assert!(miniatura_immagine(&file, &dest));
+        let m = Pixbuf::from_file(&dest).unwrap();
+        assert_eq!((m.width(), m.height()), (480, 320));
+        assert!(!m.has_alpha());
+        let byte = fs::metadata(&dest).unwrap().len();
+        assert!(byte < 60_000, "{byte} byte");
+        assert!(fs::read(&dest).unwrap().starts_with(&[0xff, 0xd8]), "un JPEG");
+        // un file che non è un'immagine: niente miniatura, niente file a metà
+        fs::write(dir.join("rotto"), b"non sono un'immagine").unwrap();
+        assert!(!miniatura_immagine(&dir.join("rotto"), &dir.join("rotto.miniatura.jpg")));
+        assert!(!dir.join("rotto.miniatura.jpg").exists() && !dir.join(".rotto.miniatura.jpg.tmp").exists());
+        let _ = fs::remove_dir_all(&dir);
+    }
+}

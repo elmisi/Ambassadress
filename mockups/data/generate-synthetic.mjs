@@ -600,20 +600,39 @@ function svg(name, i) {
 <text x="48" y="128" font-family="sans-serif" font-size="24" fill="hsl(${h},${s}%,25%)">immagine sintetica</text>
 </svg>\n`;
 }
+const QR_FIERA = '1111111011011001101111111,1000001000111110101000001,1011101010001011101011101,1011101001101010001011101,1011101001011111001011101,1000001011010001001000001,1111111010101010101111111,0000000001111011100000000,1010001100011110000100101,0000010111100110010110001,0011011011001001000111011,0000010001111100000101010,1000001101001101111110001,0110010011101000100100110,1111001100101110111110101,0010110101011011101000111,1111011001000110111110110,0000000010100110100011001,1111111010110001101011011,1000001001000100100010010,1011101001111101111110110,1011101000101000000001000,1011101011001111111110011,1000001000111011100110001,1111111010100110010010011';
+
+// The 95 modules of an EAN-13 for the first 12 digits (the check digit is computed).
+function ean13(d12) {
+  const L = ['0001101', '0011001', '0010011', '0111101', '0100011', '0110001', '0101111', '0111011', '0110111', '0001011'];
+  const R = L.map((c) => [...c].map((b) => (b === '1' ? '0' : '1')).join(''));
+  const G = R.map((c) => [...c].reverse().join(''));
+  const PAR = ['LLLLLL', 'LLGLGG', 'LLGGLG', 'LLGGGL', 'LGLLGG', 'LGGLLG', 'LGGGLL', 'LGLGLG', 'LGLGGL', 'LGGLGL'];
+  const d = [...d12].map(Number);
+  const sum = d.reduce((s, x, i) => s + x * (i % 2 ? 3 : 1), 0);
+  d.push((10 - (sum % 10)) % 10);
+  const left = d.slice(1, 7).map((x, i) => (PAR[d[0]][i] === 'L' ? L : G)[x]).join('');
+  const right = d.slice(7).map((x) => R[x]).join('');
+  return '101' + left + '01010' + right + '101';
+}
+
 // An image with the declared pixel size: a logo strip, a small icon or a screenshot-like picture.
 function sizedSvg(name, from, w, h, i) {
   const who = (from && (from.name || from.address)) || '?';
-  // v15: a QR code and a barcode strip, drawn with plain rects so the PNG for the engine looks the same
+  // v15: a QR code and a barcode strip, drawn with plain rects so the PNG for the engine looks the same.
+  // Giro 2: they are real codes (zbarimg reads them in the app): the QR matrix comes once from
+  // `qrencode -v 2 -l M -m 0 -t ASCII 'FIERA FV-2026-0412'`, the barcode is an EAN-13.
   if (/qr/i.test(name)) {
-    const n = 25, u = w / (n + 4), cells = [];
-    let s = name.length * 7 + i;
-    const finder = (x, y) => (x < 7 && y < 7) || (x >= n - 7 && y < 7) || (x < 7 && y >= n - 7);
-    for (let y = 0; y < n; y++) for (let x = 0; x < n; x++) {
-      s = (s * 1103515245 + 12345) & 0x7fffffff;
-      if (!finder(x, y) && (s >> 16) % 2) cells.push(`<rect x="${((x + 2) * u).toFixed(1)}" y="${((y + 2) * u).toFixed(1)}" width="${u.toFixed(1)}" height="${u.toFixed(1)}" fill="#111111"/>`);
-    }
-    const eye = (x, y) => [[0, 7, '#111111'], [1, 5, '#ffffff'], [2, 3, '#111111']].map(([o, k, f]) => `<rect x="${((x + 2 + o) * u).toFixed(1)}" y="${((y + 2 + o) * u).toFixed(1)}" width="${(k * u).toFixed(1)}" height="${(k * u).toFixed(1)}" fill="${f}"/>`).join('');
-    return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect x="0" y="0" width="${w}" height="${h}" fill="#ffffff"/>${eye(0, 0)}${eye(n - 7, 0)}${eye(0, n - 7)}${cells.join('')}</svg>\n`;
+    const rows = QR_FIERA.split(','), n = rows.length, u = Math.floor(w / (n + 4)), o = Math.floor((w - n * u) / 2), cells = [];
+    rows.forEach((row, y) => [...row].forEach((c, x) => {
+      if (c === '1') cells.push(`<rect x="${o + x * u}" y="${o + y * u}" width="${u}" height="${u}" fill="#111111"/>`);
+    }));
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect x="0" y="0" width="${w}" height="${h}" fill="#ffffff"/>${cells.join('')}</svg>\n`;
+  }
+  if (h < 120 && w >= 3 * h && /scansion|barcode|codice/i.test(name)) {
+    const mods = ean13('800123456789'), u = Math.floor(w / (mods.length + 22)), x0 = Math.floor((w - mods.length * u) / 2), bars = [];
+    [...mods].forEach((c, k) => { if (c === '1') bars.push(`<rect x="${x0 + k * u}" y="${Math.round(h * 0.1)}" width="${u}" height="${Math.round(h * 0.8)}" fill="#1a1a1a"/>`); });
+    return `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect x="0" y="0" width="${w}" height="${h}" fill="#ffffff"/>${bars.join('')}</svg>\n`;
   }
   if (h < 120 && w >= 3 * h) {
     const bars = [];

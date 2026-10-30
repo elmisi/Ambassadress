@@ -55,6 +55,7 @@ pub struct OpzioniServizio {           // Default
     pub ascolto: ascolta::OpzioniAscolto,    // controllo dell'IDLE, rinnovo, attese
     pub attesa_minima: Option<Duration>,     // fra un tentativo e l'altro offline (1 s)
     pub attesa_massima: Option<Duration>,    // (5 min)
+    pub giro_ogni: Option<Duration>,         // giro 2: un giro anche senza novità (l'app: 3 min)
 }
 impl Servizio {
     pub fn avvia(cfg: Config, percorso_db: PathBuf, opz: OpzioniServizio, notizie: Sender<Notizia>) -> Servizio;
@@ -101,18 +102,25 @@ impl Richieste {                    // una connessione riusata, una per thread
     pub fn messaggio_intero(&mut self, db: &mut Db, messaggio: i64) -> Risultato<Vec<u8>>;   // per «Salva»
     pub fn interruttore(&self) -> Interruttore;  // per chiudere da un altro thread
     pub fn chiudi(&mut self);                     // LOGOUT, risposta attesa al massimo 300 ms
+    pub fn collegata(&self) -> bool;              // giro 2: c'è una connessione aperta
+    pub fn collega(&mut self) -> Risultato<()>;   // giro 2: la apre adesso, accesso compreso
+    pub fn mantieni(&mut self, noop_dopo: Duration) -> Mantenuta;   // giro 2: per le connessioni ferme
 }
+pub enum Mantenuta { Nessuna, Viva, ChiusaDalServer, Caduta(String) }
 impl Interruttore { pub fn chiudi(&self); }       // Clone + Send: interrompe anche un download in corso
 pub fn parte(cfg: &Config, db: &mut Db, messaggio: i64, parte: &str) -> Risultato<Allegato>;   // connessione usa e getta
 pub fn scarica_testi(cfg: &Config, db: &mut Db, messaggi: &[i64]) -> Risultato<usize>;
 pub fn parte_locale(db: &Db, messaggio: i64, parte: &str) -> Risultato<Option<Allegato>>;     // senza rete
 pub fn miniatura(db: &Db, messaggio: i64, parte: &str) -> Risultato<Option<PathBuf>>;         // senza rete
+pub fn pagina(db: &Db, messaggio: i64, parte: &str, n: u32) -> Risultato<Option<PathBuf>>;   // giro 2: la pagina n di un PDF, senza rete
+pub fn completa_contenuti(db: &Db, quanti: usize) -> Risultato<usize>;   // giro 2: testo e codici, senza rete
 pub fn nome_eml(message_id: Option<&str>, data: Option<&str>, mittente: Option<&str>, oggetto: Option<&str>) -> String;
 pub fn nome_eml_messaggio(db: &Db, messaggio: i64) -> Risultato<String>;
 pub fn completa_archivio(db: &Db) -> Risultato<usize>;   // misure delle parti scaricate prima, senza rete
 pub fn pulisci_temporanei(db: &Db) -> usize;             // file temporanei rimasti da un'interruzione brusca
 pub fn cartella_allegati(db: &Db) -> PathBuf;            // <cartella del db>/allegati
 pub fn nome_miniatura(impronta: &str) -> String;         // <impronta>.miniatura.jpg
+pub fn nome_pagina(impronta: &str, n: u32) -> String;    // <impronta>.pagina-<n>.jpg
 pub fn nome_di_contenuto(nome: &str) -> bool;            // 64 cifre esadecimali: i file di contenuto
 ```
 
@@ -123,10 +131,29 @@ pub fn nome_di_contenuto(nome: &str) -> bool;            // 64 cifre esadecimali
 - **Testi**: la prima parte `text/plain` e la prima `text/html` dei messaggi indicati che non li hanno ancora (gli altri si saltano), come durante la sincronizzazione.
 - **Misure delle immagini** (proposta 5): appena una parte è nell'archivio, `misure::misure_immagine` legge larghezza e altezza dalle prime righe del file, senza librerie: PNG (IHDR), GIF, JPEG (il primo SOF0..SOF15, saltando DHT, JPG e DAC), WebP (VP8, VP8L, VP8X), BMP (anche OS/2 e con l'altezza negativa). Si guarda il contenuto, non il tipo dichiarato (nei sintetici ci sono PNG dichiarati `image/jpeg`). Vanno in `allegati.larghezza/altezza`; un'immagine che non si legge (SVG, formati rari) ha 0.
 - **PDF** (proposta 7): `pdfinfo` per le pagine (`allegati.pagine`) e `pdftoppm -f 1 -l 1 -singlefile -scale-to 360 -jpeg -jpegopt quality=72` per la miniatura della prima pagina, scritta una volta per contenuto accanto al file, `<impronta>.miniatura.jpg`, passando da un file temporaneo. Un PDF protetto o rotto ha 0 pagine e niente miniatura, senza errori; se poppler-utils manca i campi restano vuoti e `completa_archivio` li riprova. Ogni programma ha un tempo massimo (10 s pdfinfo, 20 s pdftoppm) e non passa da una shell. Sul finto server, in debug, 63 PDF e 28 immagini si scaricano e si misurano in 2,7 s.
+- **Pagine per l'anteprima** (giro 2): il visore di WebKitGTK porta gli strumenti per scrivere sul PDF e ignora `#toolbar=0`, quindi l'app mostra le pagine come immagini. `pagina` disegna la pagina `n` con `pdftoppm -f n -l n -singlefile -scale-to-x 1600 -scale-to-y -1 -jpeg -jpegopt quality=82` la prima volta che serve, accanto al file (`<impronta>.pagina-<n>.jpg`); oltre l'ultima pagina, o senza poppler, niente.
+- **Testo e codici** (giro 2, tabella `contenuti`): `completa_contenuti` guarda i contenuti dell'archivio non ancora guardati, dal messaggio più recente: il testo dei PDF (`pdftotext -l 30 -enc UTF-8`), dei documenti DOCX, XLSX, PPTX, ODT, ODS, ODP (`unzip -p` delle parti con il testo: `word/document.xml`, intestazioni e piè di pagina, `xl/sharedStrings.xml`, le slide, `content.xml`; i tag diventano spazi, i paragrafi righe) e dei file di testo, al massimo 10.000 caratteri con gli spazi ridotti; per le immagini il tipo del primo codice che trova `zbarimg -q` («QR-Code», «EAN-13»), senza il contenuto. Una riga per contenuto anche quando non c'è niente; se un programma manca quel tipo si salta e si riprova la volta dopo. La vista li dà come `text` e `code` dell'allegato.
+- **Connessioni ferme** (giro 2): dopo un po' di inattività Gmail manda `* BYE` e chiude; il socket restava in CLOSE-WAIT finché un clic non lo usava. `mantieni` guarda il socket senza leggere e senza aspettare (`peek` non bloccante): se il server ha chiuso, chiude anche qui (`ChiusaDalServer`); se ha scritto qualcosa, o la connessione è ferma da più di `noop_dopo`, manda un NOOP con al massimo 10 s di attesa, che la tiene viva o dice che non risponde (`Caduta`). `collega` la riapre prima che serva.
 - **Fallimenti e quota**: una parte che non arriva va in `parti_fallite` e la coda del background la ripropone dopo 1 minuto, 2, 4… fino a 6 ore; quando arriva ne esce. I byte presi dal server (parti e messaggi interi, anche aperti a mano) vanno in `scaricati`, per giorno UTC.
 - **`Interruttore`**: chiude la connessione di un `Richieste` da un altro thread, anche nel mezzo di un download (provato: il thread torna in 0,4 ms, l'archivio resta vuoto, la parte va fra quelle da riprovare). Dopo, quel `Richieste` non si collega più.
 - **Messaggio intero** (proposta 8): `UID FETCH <uid> (UID BODY.PEEK[])`, che la guardia ammetteva già; sopra i 4 MiB (o se la misura non si sa) a pezzi, `BODY.PEEK[]<inizio.4194304>`. Non lo segna come letto e non lo salva nell'archivio: i byte vanno all'app.
 - **Nome del file per «Salva»**: `nome_eml` fa come il prototipo: i primi 6 caratteri esadecimali dell'MD5 del Message-ID senza parentesi angolari e senza spazi intorno (senza Message-ID: data ISO come `date` della vista, indirizzo del mittente e oggetto uniti da `\n`), un trattino, l'oggetto con `/ \ : * ? " < > |` e i controlli cambiati in spazi, gli spazi di fila ridotti a uno, accorciato a 60 caratteri a fine parola; vuoto: `senza oggetto`. `<case-inoltro-0@esempio.it>` → `4f6f3f-…`. L'MD5 è in `src/impronta.rs`, provato con gli esempi della RFC 1321 e con testo UTF-8.
+
+### Storico (`motore::storico`)
+
+```rust
+pub struct Storico;   // una connessione sua
+impl Storico {
+    pub fn new(cfg: Config, finestra: usize) -> Self;
+    pub fn passo(&mut self, db: &mut Db, lotto: usize) -> Risultato<Passo>;
+    pub fn chiudi(&mut self);
+    pub fn interruttore(&self) -> Interruttore;
+}
+pub struct Passo { pub intestazioni: usize, pub testi: usize, pub restano: usize, pub byte: u64, pub finito: bool, pub aspetta: bool }
+pub fn stato(db: &Db) -> Risultato<Option<StatoStorico>>;   // sul server, in locale, senza testo
+```
+
+Giro 2: i messaggi più vecchi della finestra della sincronizzazione, a lotti, su una connessione a parte. Prima le intestazioni e la struttura di tutta la casella, dal più recente indietro, poi i testi, sempre dal più recente; gli allegati li prende già il background degli allegati. Ogni `passo` fa un lotto e torna, così chi lo chiama decide le pause (quota, connessione a consumo, disco) e la posta nuova passa davanti. Prende solo gli UID più vecchi dei `finestra` più recenti: la sincronizzazione e lo storico non scaricano mai lo stesso messaggio. La lista degli UID mancanti si fa una volta per sessione (un `UID SEARCH ALL`); lo stato sta nel database, quindi dopo una chiusura si riparte da quello che manca. Se UIDVALIDITY è cambiata si ferma finché la sincronizzazione non ha ricollegato i messaggi. I byte contano nella quota del giorno. Un testo che non arriva non si richiede a ogni passo: si riprova alla sessione dopo.
 
 ### Allegati in background (`motore::scaricamento`, `motore::sistema`)
 
@@ -152,6 +179,8 @@ pub fn connessione_a_consumo() -> bool;              // busctl … NetworkManage
 pub fn spazio_libero(cartella: &Path) -> Option<u64>;   // df -B1 --output=avail
 pub fn pagine_pdf(pdf: &Path) -> Option<u32>;        // pdfinfo
 pub fn miniatura_pdf(pdf: &Path, destinazione: &Path) -> bool;   // pdftoppm
+pub const LIMITE_TESTO: usize;                      // 10.000 caratteri del testo di un allegato
+// e per `completa_contenuti`, dentro il crate: pdftotext, unzip, zbarimg
 ```
 
 - **`coda`**: allegati e immagini incorporate (non i testi, non le «altre» parti come il calendario), dei messaggi ancora sul server, non nell'archivio, non falliti da poco; dal messaggio più recente al più vecchio. Prima quelle di `in_testa`, nell'ordine dato (l'interfaccia ci mette quelle che ha sullo schermo), se servono ancora; doppioni e parti sconosciute si saltano. Una parte fallita non torna prima della sua attesa, neanche in testa: un clic chiama comunque `Richieste::parte`.
@@ -188,11 +217,29 @@ pub struct OpzioniVista {
     pub prefisso_allegati: String,      // es. "a10s://localhost/allegato/"
     pub limite: Option<usize>,          // solo gli N più recenti
     pub solo: Option<Vec<i64>>,         // solo questi id locali (dopo scarica_testi)
+    pub dal: Option<Dal>,               // giro 2: solo i cambi dopo questa versione
+    pub html_solo_senza_testo: bool,    // giro 2: l'HTML solo dove non c'è il testo semplice
+    pub testi_allegati: bool,           // giro 2: falso = il testo degli allegati a parte
+    pub finestra: Option<usize>,        // giro 2, storico: solo gli N più recenti e i loro thread
 }
+pub struct Dal { pub generazione: String, pub versione: i64 }
 impl Account { pub fn da_config(cfg: &Config, nome: &str, alias: &[String]) -> Account; }
 impl Casella { pub fn da_config(cfg: &Config, db: &Db) -> Risultato<Casella>; }   // "gmail" se il server ha X-GM-EXT-1
 pub fn json(db: &Db, opz: &OpzioniVista) -> Risultato<String>;
+pub fn testi_allegati(db: &Db, opz: &OpzioniVista) -> Risultato<String>;   // {"generazione","versione","delta","texts":{url: testo}}
+pub enum Storia { Persona(String), Cerca(Domanda) }
+pub struct Domanda { pub parole: Vec<String>, pub almeno: usize, pub da: Vec<String>, pub oggetto: Vec<String>,
+                     pub persone: Vec<String>, pub prima: Option<i64>, pub con_allegati: bool, pub etichetta: Option<String> }
+pub fn storia(db: &Db, opz: &OpzioniVista, s: &Storia, quanti: usize) -> Risultato<String>;   // {"storia":true,…}
 ```
+
+**La finestra e lo storico a richiesta** (giro 2). Con tutta la casella nel database la pagina non riceve tutto: con `finestra` arrivano gli N messaggi più recenti e gli altri dei loro thread (al massimo 200 per thread), così un thread resta intero; l'indice `messaggi_quando` li legge senza ordinare la casella. Le differenze contano solo i cambi dentro la finestra, quindi lo storico che arriva non fa rimandare tutto. Il resto lo dà `storia`, fuori dalla finestra e con gli altri messaggi dei loro thread: i messaggi di una persona (un indirizzo fra i partecipanti), o quelli che una ricerca potrebbe trovare. La ricerca usa l'indice FTS5 `ricerca` (oggetto, persone, testo) e `ricerca_allegati` (il testo dentro gli allegati, dallo schema 6), con le parole come inizio di parola e «almeno N di queste»; poi «da», «oggetto», persone, «prima di», con allegati, etichetta. Trova più del giusto: i criteri esatti li applica la pagina. Senza nessun criterio non manda niente.
+
+**Solo le differenze** (giro 2). Rifare tutta la vista a ogni cambio non scala: sulla casella vera di 3.000 messaggi erano 77 MB e quasi due secondi, a ogni messaggio nuovo e a ogni «letto». Ora:
+- la tabella `cambi` ha, per ogni messaggio, il numero del suo ultimo cambio, da un contatore che cresce. La riempiono **trigger di SQLite**, così nessun punto del motore che scrive se la può dimenticare: messaggi (solo le colonne che la vista mostra, quindi il MODSEQ di un giro senza cambi non conta), testi, partecipanti, etichette, intestazioni, parti, allegati (scaricati, misurati), testo degli allegati (per contenuto: tutti i messaggi con quel file), thread, eliminazioni. Nei trigger si usa l'UPSERT e non `INSERT OR REPLACE`: un `INSERT OR IGNORE` esterno imporrebbe la sua regola al trigger e il cambio si perderebbe (provato);
+- la radice della vista ha `generazione` (scritta in `meta` alla creazione del database) e `versione`; con `dal` arrivano solo i messaggi cambiati dopo, con `"delta": true` e `tolti` (le chiavi dei messaggi spariti); se la generazione è un'altra (casella cambiata) o i cambi sono più di 2.000, tutto;
+- la vista legge in una transazione sola, così versione e messaggi sono dello stesso istante mentre la sincronizzazione scrive da un'altra connessione;
+- con `html_solo_senza_testo` l'HTML viaggia solo per i messaggi senza testo semplice, gli unici dove l'interfaccia lo usa (gli altri hanno `"html": null` e `htmlBytes`); con `testi_allegati` falso il testo dentro gli allegati arriva a parte, con `testi_allegati`, anche lui tutto o per differenze.
 
 Restituisce una stringa nel formato di `window.AMB_DATA` (`mockups/data/README.md`): `{"schema":1,"meta":{"source":"imap","exportedAt":…,"count":N},"account":…,"accounts":[…],"messages":[…]}`, messaggi dal più vecchio al più recente. Per ogni messaggio:
 
@@ -229,7 +276,9 @@ All'avvio stampa utente e password, finti: **`alex.moro@esempio.it`** e **`finta
 | `--cadute SECONDI` | fa cadere tutte le connessioni ogni SECONDI |
 | `--pausa SECONDI` | dopo una caduta chiude subito le connessioni nuove per SECONDI (5): così si vede «Offline» |
 | `--copie N` | moltiplica la casella per N, per le misure |
+| `--nel-passato` | giro 2, con `--copie`: le copie vanno indietro negli anni, una prima dell'altra, e gli UID seguono le date come su Gmail: una casella con lo storico |
 | `--lento MS` | aspetta MS millisecondi prima di rispondere a ogni comando (server lento) |
+| `--chiudi-ferme SECONDI` | giro 2: chiude con `* BYE Autologout`, come Gmail, le connessioni senza comandi da SECONDI, anche quelle in IDLE da SECONDI senza un IDLE nuovo |
 | `--verboso` | stampa ogni comando ricevuto (la password di LOGIN no) |
 
 **Il server** (`examples/finto_server/`, in `examples` così non finisce nell'eseguibile dell'app) è in chiaro e solo su 127.0.0.1. Risponde a CAPABILITY (con X-GM-EXT-1, CONDSTORE, IDLE, ENABLE, ID), ID, LOGIN, ENABLE, NAMESPACE, LIST (con `\All` su «[Gmail]/Tutti i messaggi»), EXAMINE (UIDVALIDITY, UIDNEXT, HIGHESTMODSEQ, `[READ-ONLY]`), SEARCH e UID SEARCH, FETCH e UID FETCH con UID, FLAGS, INTERNALDATE, RFC822.SIZE, RFC822.HEADER, MODSEQ, X-GM-MSGID/THRID/LABELS, BODYSTRUCTURE, `BODY[…]`/`BODY.PEEK[…]` (`HEADER.FIELDS (…)`, `HEADER.FIELDS.NOT`, `HEADER`, `TEXT`, parti annidate come `1.2.1`, `n.MIME`, `<inizio.quanti>`), CHANGEDSINCE, IDLE/DONE, NOOP, LOGOUT. La **BODYSTRUCTURE è calcolata dal messaggio**: multipart annidati con i parametri, disposizione e nome del file, Content-ID, descrizione, codifica, byte e righe. Spam e cestino restano fuori da «Tutti i messaggi», come su Gmail. I comandi che scrivono ricevono NO e restano registrati, così le prove possono dire che non ne è arrivato nessuno. `BODY.PEEK[]` (anche a pezzi) dà il messaggio intero così com'è nel `.eml`. Per le prove ci sono anche `finto::messaggio_con_allegati` (un messaggio con allegati veri in base64, per esempio i PDF di più pagine e i JPEG di `mockups/data/attachments/`), `Opzioni::ritardo` (lo stesso di `--lento`) e `Server::connessioni_aperte`.
@@ -288,12 +337,13 @@ Le prove: `src/guardia.rs` (31 comandi ammessi, 34 rifiutati, righe multiple, ID
 | `corpi` | testo e HTML scaricati |
 | `intestazioni` | Sender, Reply-To, List-*, Precedence, Auto-Submitted così come sono, per la vista (dallo schema 2) |
 | `allegati` | messaggio e parte → SHA-256 e byte del contenuto decodificato nell'archivio `allegati/` (dallo schema 2); `larghezza`, `altezza`, `pagine`, `miniatura` (dallo schema 3: NULL non ancora guardato, 0 guardato ma illeggibile) |
+| `contenuti` | impronta → testo letto dentro l'allegato e tipo di codice (dallo schema 4; una riga vuol dire «guardato») |
 | `parti_fallite` | messaggio e parte → tentativi e prossimo tentativo (secondi Unix), per il background (dallo schema 3) |
 | `scaricati` | giorno UTC → byte presi dal server per parti e messaggi interi: la quota (dallo schema 3) |
 | `ricerca` | FTS5 su oggetto, persone e testo (`unicode61`, senza accenti) |
 | `cartelle`, `mancanti`, `sincronizzazioni`, `meta` | stato per cartella, UID da riprovare, registro dei giri, capacità del server |
 
-Lo schema 2 aggiunge solo tabelle, quindi un database vecchio si aggiorna da solo all'apertura. I messaggi scaricati prima però non hanno le righe di `intestazioni`: per averle serve un database nuovo. Lo schema 3 aggiunge due tabelle e quattro colonne ad `allegati` (`ALTER TABLE … ADD COLUMN` all'apertura, se mancano): un database dello schema 2 si apre e resta com'era; le misure degli allegati già scaricati le aggiunge `su_richiesta::completa_archivio`.
+Lo schema 2 aggiunge solo tabelle, quindi un database vecchio si aggiorna da solo all'apertura. I messaggi scaricati prima però non hanno le righe di `intestazioni`: per averle serve un database nuovo. Lo schema 3 aggiunge due tabelle e quattro colonne ad `allegati` (`ALTER TABLE … ADD COLUMN` all'apertura, se mancano): un database dello schema 2 si apre e resta com'era; le misure degli allegati già scaricati le aggiunge `su_richiesta::completa_archivio`. Lo schema 4 aggiunge solo la tabella `contenuti`, che si riempie in background. Lo schema 5 aggiunge `cambi` e i suoi trigger: un database di prima parte da zero (la prima vista è comunque intera).
 
 ## Dipendenze
 
@@ -315,9 +365,9 @@ Cinque dirette, come deciso: MIME, protocollo IMAP, TLS (due crate) e SQLite. Ne
 
 ## Prove
 
-`cargo test` (69 prove, nessuna rete) e `cargo clippy --all-targets -- -D warnings` sono puliti. Le prove sulla casella sintetica vogliono `node` per generare i `.eml`; senza, si saltano.
+`cargo test` (76 prove, nessuna rete) e `cargo clippy --all-targets -- -D warnings` sono puliti. Le prove sulla casella sintetica vogliono `node` per generare i `.eml`; senza, si saltano.
 
-- `src/`: guardia, divisione in risposte e letterali, date, UTF-7, intestazioni MIME inventate (anche rotte), quoted-printable, RFC 2231, insiemi di UID; MD5 (RFC 1321 e UTF-8); misure di PNG, GIF, JPEG, WebP (tre varianti) e BMP costruiti nelle prove; nomi dei file `.eml`; uscite di `pdfinfo`, `busctl` e `df`, programmi assenti, falliti o lenti, PDF rotto; categorie degli allegati; attese dopo i fallimenti; migrazione da un database dello schema 2.
+- `src/`: guardia, divisione in risposte e letterali, date, UTF-7, intestazioni MIME inventate (anche rotte), quoted-printable, RFC 2231, insiemi di UID; MD5 (RFC 1321 e UTF-8); misure di PNG, GIF, JPEG, WebP (tre varianti) e BMP costruiti nelle prove; nomi dei file `.eml`; uscite di `pdfinfo`, `busctl`, `df` e `zbarimg`, testo dagli XML di Office (entità, paragrafi, limite), programmi assenti, falliti o lenti, PDF rotto; categorie degli allegati; attese dopo i fallimenti; migrazione da un database dello schema 2.
 - `tests/common/mod.rs`: un finto server IMAP su localhost, in Rust, con dati inventati, che risponde ai comandi del motore e registra ogni comando ricevuto. Si può guastare a comando.
 - `tests/sincronizzazione.rs`: prima sincronizzazione (finestra, testi, allegati, thread, etichette, ricerca); differenze con CONDSTORE (3 nuovi, 2 flag cambiati, 1 eliminato, poi un giro senza novità che non manda né SEARCH né FETCH); differenze con QRESYNC; UIDVALIDITY cambiata su Gmail e su un server senza X-GM-EXT-1 (ricollegati, zero duplicati, niente riscaricato); connessione che cade a metà FETCH (ripresa automatica senza duplicati); interruzione fra due giri; risposte malformate (contate, riprovate senza struttura, recuperate); EXAMINE che risponde READ-WRITE; LOGIN rifiutato (un tentativo solo); server che non saluta (tempo scaduto); limite che cresce.
 - `tests/ascolto.rs`: posta nuova durante IDLE e controllo periodico; IDLE che muore in silenzio (DONE senza risposta → caduta → riconnessione → la posta nuova arriva di nuovo); attese crescenti con un massimo.
@@ -329,11 +379,14 @@ Cinque dirette, come deciso: MIME, protocollo IMAP, TLS (due crate) e SQLite. Ne
   - un messaggio scritto a mano con parti annidate su tre livelli, un'immagine incorporata (il `cid:` riscritto nell'HTML), un nome RFC 2231 spezzato e un allegato di 5 MB che arriva in due pezzi;
   - il servizio: sincronizzazione, `InLinea`, posta nuova notificata in IDLE, connessioni che cadono (`Offline`, poi di nuovo `InLinea` e un giro), password sbagliata (una notizia sola e un solo LOGIN);
   - la vista su 3.240 messaggi (la casella moltiplicata per 8), con i tempi;
-  - PDF e immagini: i 63 PDF hanno le pagine di `synthetic.js` e una miniatura JPEG con il lato lungo di 360 pixel, una per contenuto; le 28 immagini hanno le misure; la vista ha `pages`, `thumb`, `width` e `height`; tolte misure e miniature, `completa_archivio` le rifà senza rete;
+  - PDF e immagini: i 63 PDF hanno le pagine di `synthetic.js` e una miniatura JPEG con il lato lungo di 360 pixel, una per contenuto; le 28 immagini hanno le misure; la vista ha `pages`, `thumb`, `width` e `height`; tolte misure e miniature, `completa_archivio` le rifà senza rete; la pagina 1 larga 1600 pixel, niente oltre l'ultima; `completa_contenuti` guarda ogni contenuto una volta, il testo di tutti i PDF (anche «bianco latte» e «polipropilene» dei preventivi) e solo i due codici veri, il QR della fiera e l'EAN-13 del bollettino;
   - un messaggio scritto a mano con un PDF di 5 pagine, un JPEG 255×360, un PDF rotto (0 pagine, niente miniatura, nessun errore) e 5 MB di dati: il messaggio intero arriva in due pezzi identico all'originale e resta da leggere, quello piccolo in una richiesta sola; nomi dei file `.eml`; quota;
   - coda, quota, pausa e totali: ordine dal più recente, `in_testa`, parti scaricate che escono, una parte fallita che sparisce dalla coda per un minuto e poi la seconda volta per due, il sottocomando `allegati` che non stampa nomi, oggetti o indirizzi;
   - un download di 6 MB interrotto con `Interruttore` a metà (server lento): niente nell'archivio, niente file temporanei, la parte fra quelle da riprovare; un clic dopo lo scarica intero;
   - il servizio: un solo `Contatto` in un minuto nonostante i controlli dell'IDLE, `sincronizza_ora` durante l'IDLE, `ferma` sotto il mezzo secondo con l'IDLE aperto e a metà sincronizzazione su un server lento, `Richieste::chiudi` che non aspetta il LOGOUT del server lento oltre 0,3 s;
+  - la connessione delle richieste chiusa dal server dopo un secondo (`--chiudi-ferme`): `mantieni` la trova chiusa, `collega` la riapre, un NOOP la tiene viva, e l'allegato dopo arriva senza un accesso nuovo;
+  - solo le differenze: una differenza vuota senza messaggi, un «letto» che porta un messaggio solo, un giro senza cambi che non cambia la versione, un messaggio sparito tra i tolti con la sua chiave, un allegato scaricato e il suo testo che cambiano i messaggi giusti (il testo non viaggia coi messaggi ma con `testi_allegati`), un'altra generazione che dà tutto; l'HTML ridotto con gli stessi messaggi;
+  - un «letto» dato sul server senza avviso in IDLE (il finto server avvisa solo dei messaggi nuovi): con `giro_ogni` arriva al giro dopo e finisce nel database;
   - in ogni prova, ogni comando arrivato al server passa di nuovo dalla guardia, e nessuno contiene `BODY[` senza PEEK, SELECT, STORE, APPEND, EXPUNGE, COPY o MOVE.
 
 ## Prova su Gmail (28 ottobre 2026)
@@ -357,7 +410,7 @@ Sotto PTY, con `script -qec "…" /dev/null`, sulla casella dell'utente.
 - COMPRESS=DEFLATE: Gmail lo offre e ridurrebbe i byte delle intestazioni di alcune volte, ma serve `flate2`/`miniz_oxide` (Rust puro): da decidere.
 - AUTHENTICATE (XOAUTH2): solo LOGIN con la password per le app.
 - Una sola cartella, quella con `\All`. Su Gmail le etichette dicono il resto; Cestino e Spam non ci sono.
-- Il ciclo che scarica gli allegati in background lo fa l'app: il motore dà coda, quota e pausa. Del testo si prendono solo la prima parte semplice e la prima HTML, fino a 1 MiB ciascuna.
+- Il ciclo che scarica gli allegati e lo storico in background lo fa l'app: il motore dà coda, passi, quota e pausa. Le miniature delle immagini le fa l'app (gdk-pixbuf): il motore dice quali mancano (`su_richiesta::immagini_da_ridurre`, sopra i 150 KB) e le segna fatte. Del testo si prendono solo la prima parte semplice e la prima HTML, fino a 1 MiB ciascuna.
 - Le misure delle immagini non guardano l'orientamento EXIF dei JPEG (una foto girata ha larghezza e altezza scambiate).
 - Il finto server non descrive le parti `message/rfc822` (manca l'ENVELOPE nella struttura): nei dati sintetici non ci sono. Non ha QRESYNC, apre solo «[Gmail]/Tutti i messaggi» e SEARCH restituisce sempre tutto.
 - Nei dati sintetici, dalla v15, c'è un'immagine incorporata (lo screenshot del caso `allegati-nascosti`, in `multipart/related` con il suo Content-ID); le immagini della firma di Outlook restano allegati normali. Il percorso delle immagini incorporate è provato anche con il messaggio scritto a mano in `tests/sintetici.rs`.
@@ -368,7 +421,7 @@ Sotto PTY, con `script -qec "…" /dev/null`, sulla casella dell'utente.
 ## Domande aperte
 
 - **Dove salvare «chiuso» su Gmail.** Con EXAMINE Gmail risponde `PERMANENTFLAGS ()`, come prevede la sola lettura: quali parole chiave accetta si vedrà solo con SELECT. Le strade: una parola chiave IMAP (`$Chiuso`), da provare al primo passo di scrittura su un messaggio di prova; un'etichetta nascosta via X-GM-LABELS, che però resta visibile sui messaggi nell'interfaccia di Gmail; oppure solo in locale, perdendo la sincronizzazione fra dispositivi.
-- **Quanto scaricare.** Intestazioni di tutto (poco: 25 MB) e testi solo degli ultimi mesi, o tutto?
+- **Quanto scaricare.** Deciso nel giro 2: tutto, a strati (intestazioni, poi testi, poi allegati), con la quota del giorno.
 - **COMPRESS**: vale una dipendenza in più?
 - **IDLE su «Tutti i messaggi» o su INBOX**: ora è su «Tutti i messaggi», che vede anche la posta inviata da altri dispositivi.
 - **Accesso per distribuire l'app**: OAuth con la verifica di Google (vedi `docs/implementazione.md`).
